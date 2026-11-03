@@ -1,0 +1,64 @@
+{
+  "version": "0.1.0",
+  "status": "engineering-starter",
+  "project": "malang-ui",
+  "repository": "https://github.com/MaLaNg116/malang-ui",
+  "confirmed": {
+    "purpose": "组件库自己的文档与展示站作为首个验证项目",
+    "framework": "Vue 3 + TypeScript，后续支持 React",
+    "visualDirection": "水墨与科技融合、几何构形、GSAP 与 MG 编排",
+    "visualDirectionStatus": "正在研究功夫朋克与水墨科技的原创转译，现有工作台仍为前一版主题",
+    "colorAndDetail": "后续优化",
+    "productScope": ["UI 组件", "动效", "MG 编排", "实用工具", "场景组合"],
+    "audience": "先自用，验证后开源"
+  },
+  "site": {
+    "navigation": ["开始", "基础组件", "交互动效", "MG 编排", "实用工具", "主题与规范"],
+    "home": ["可跳过和重播的品牌 MG", "安装与最小使用示例", "可操作的组件与动效预览", "实用工具体验", "文档入口"],
+    "exampleContract": "站内示例与控件从组件库公开入口引用，避免复制实现"
+  },
+  "componentWorkbench": {
+    "preferredTool": "Storybook",
+    "decisionStatus": "installed-and-verified",
+    "alternative": "Histoire，结合实际选定版本核对能力",
+    "purpose": ["隔离开发组件", "展示完整状态", "调节 Props", "验证键盘与交互", "检查明暗主题和不同密度"],
+    "distribution": "开发依赖与独立构建产物，不随组件运行时入口发布",
+    "frameworkExpansion": "Vue 与 React 分别编写示例适配，共享状态清单与验收规则"
+  },
+  "firstReleaseProposal": {
+    "ui": ["Button", "Input", "Switch", "Tabs", "Card", "Dialog", "Popover", "Toast"],
+    "motion": ["按压与状态反馈", "列表错峰出现", "形态与位置过渡"],
+    "mg": ["品牌开场", "加载与等待", "成功与完成"],
+    "utils": ["debounce", "throttle", "asyncLock"],
+    "vueAdapters": ["防抖和节流的生命周期清理", "异步操作状态", "减少动态效果偏好"]
+  },
+  "mgExpansion": {
+    "futureFamilies": ["品牌开场", "功能演示", "加载等待", "空状态", "成功反馈", "数据与流程叙事"],
+    "controls": ["播放", "暂停", "定位", "重播", "销毁"],
+    "reuse": "图形资源、编排数据与框架生命周期适配分离",
+    "reducedMotion": "提供静态或低运动替代，保留必要信息"
+  },
+  "acceptance": [
+    "公开入口可以在独立 Vue 示例项目中使用",
+    "文档、工作台与实际示例引用同一份实现",
+    "每个首发组件展示常用状态、主题和密度",
+    "GSAP 和 MG 在卸载时停止并清理，不产生残留订阅",
+    "防抖支持取消和立即执行，并正确处理中文组合输入",
+    "异步锁在成功和失败后均释放",
+    "工具基础层不依赖 Vue 或 React",
+    "按需入口的生产构建不引入无关的动效和工作台依赖"
+  ],
+  "engineeringMilestone": {
+    "project": "malang-ui",
+    "delivered": ["UiButton", "UiInput", "UiSwitch", "debounce", "throttle", "asyncLock", "useReducedMotion", "GSAP 轨道构形编排"],
+    "verified": ["类型检查", "19 项工具测试", "22 个 Story 渲染与浏览器交互", "中文输入重渲染", "全局减少动态效果", "MG 终点定位与 BFCache 生命周期", "组件库构建", "Storybook 构建", "公开入口导入与工具依赖隔离"],
+    "localPreview": "http://127.0.0.1:6006/",
+    "packageName": "malang-ui",
+    "package": "malang-ui-0.1.0.tgz",
+    "packageStatus": "private，尚未发布到 npm；构建后通过 pnpm pack 生成本地安装包",
+    "validationStatus": "已验证的工程原型迁入正式仓库，迁移后的检查由仓库命令复验"
+  },
+  "designTokens": "design/tokens.json",
+  "designReferences": "design/skill-references.json",
+  "deferred": ["正式包名", "最终独立包数量", "品牌色与阴影精调", "高级表格引擎", "完整 MG 数量", "React 组件实现"]
+}

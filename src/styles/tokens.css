@@ -1,0 +1,142 @@
+/* Generated from design/tokens.json. Run pnpm tokens after editing tokens. */
+
+/* Draft prototype colors; values remain adjustable. Defines variables only. */
+
+:root {
+  --ui-space-0: 0px;
+  --ui-space-1: 4px;
+  --ui-space-2: 8px;
+  --ui-space-3: 12px;
+  --ui-space-4: 16px;
+  --ui-space-5: 20px;
+  --ui-space-6: 24px;
+  --ui-space-8: 32px;
+  --ui-space-10: 40px;
+  --ui-space-12: 48px;
+  --ui-space-16: 64px;
+  --ui-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+  --ui-font-family-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+  --ui-font-size-caption: 12px;
+  --ui-font-size-body: 14px;
+  --ui-font-size-body-large: 16px;
+  --ui-font-size-heading: 18px;
+  --ui-font-size-title: 24px;
+  --ui-font-size-display: 40px;
+  --ui-font-weight-body: 400;
+  --ui-font-weight-emphasis: 500;
+  --ui-line-height-body: 1.5;
+  --ui-line-height-heading: 1.25;
+  --ui-radius-control: 8px;
+  --ui-radius-overlay: 16px;
+  --ui-radius-panel: 20px;
+  --ui-radius-pill: 999px;
+  --ui-border-width: 1px;
+  --ui-focus-width: 2px;
+  --ui-focus-offset: 3px;
+  --ui-motion-duration-feedback: 120ms;
+  --ui-motion-duration-transition: 220ms;
+  --ui-motion-duration-layout: 360ms;
+  --ui-motion-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ui-motion-ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+  --ui-motion-distance-enter: 8px;
+  --ui-motion-scale-press: 0.97;
+  --ui-motion-expressive-enabled: 1;
+  --ui-color-canvas: #f1f0f7;
+  --ui-color-surface: #faf9ff;
+  --ui-color-text: #1b1730;
+  --ui-color-text-secondary: #706b86;
+  --ui-color-border: #d7d3e6;
+  --ui-color-accent: #6340db;
+  --ui-color-on-accent: #ffffff;
+  --ui-color-accent-soft: #e7e0fc;
+  --ui-color-secondary-accent: #057d77;
+  --ui-color-success: #08745f;
+  --ui-color-danger: #b42318;
+  --ui-color-focus: #6340db;
+  --ui-control-height: 40px;
+  --ui-control-padding-inline: 16px;
+  --ui-field-gap: 20px;
+}
+
+[data-ui-theme="light"] {
+  --ui-color-canvas: #f1f0f7;
+  --ui-color-surface: #faf9ff;
+  --ui-color-text: #1b1730;
+  --ui-color-text-secondary: #706b86;
+  --ui-color-border: #d7d3e6;
+  --ui-color-accent: #6340db;
+  --ui-color-on-accent: #ffffff;
+  --ui-color-accent-soft: #e7e0fc;
+  --ui-color-secondary-accent: #057d77;
+  --ui-color-success: #08745f;
+  --ui-color-danger: #b42318;
+  --ui-color-focus: #6340db;
+}
+
+[data-ui-theme="dark"] {
+  --ui-color-canvas: #101017;
+  --ui-color-surface: #191921;
+  --ui-color-text: #f1efff;
+  --ui-color-text-secondary: #a7a3b9;
+  --ui-color-border: #353343;
+  --ui-color-accent: #b7a0ff;
+  --ui-color-on-accent: #21163c;
+  --ui-color-accent-soft: #312847;
+  --ui-color-secondary-accent: #91ead5;
+  --ui-color-success: #8de5bc;
+  --ui-color-danger: #ffb4ab;
+  --ui-color-focus: #b7a0ff;
+}
+
+@media (prefers-color-scheme: dark) {
+:root:not([data-ui-theme="light"]) {
+  --ui-color-canvas: #101017;
+  --ui-color-surface: #191921;
+  --ui-color-text: #f1efff;
+  --ui-color-text-secondary: #a7a3b9;
+  --ui-color-border: #353343;
+  --ui-color-accent: #b7a0ff;
+  --ui-color-on-accent: #21163c;
+  --ui-color-accent-soft: #312847;
+  --ui-color-secondary-accent: #91ead5;
+  --ui-color-success: #8de5bc;
+  --ui-color-danger: #ffb4ab;
+  --ui-color-focus: #b7a0ff;
+}
+}
+
+[data-ui-density="comfortable"] {
+  --ui-control-height: 40px;
+  --ui-control-padding-inline: 16px;
+  --ui-field-gap: 20px;
+}
+
+[data-ui-density="compact"] {
+  --ui-control-height: 32px;
+  --ui-control-padding-inline: 12px;
+  --ui-field-gap: 12px;
+}
+
+[data-ui-motion="reduced"] {
+  --ui-motion-duration-feedback: 0ms;
+  --ui-motion-duration-transition: 0ms;
+  --ui-motion-duration-layout: 0ms;
+  --ui-motion-distance-enter: 0px;
+  --ui-motion-scale-press: 1;
+  --ui-motion-expressive-enabled: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+:root, [data-ui-motion] {
+  --ui-motion-duration-feedback: 0ms;
+  --ui-motion-duration-transition: 0ms;
+  --ui-motion-duration-layout: 0ms;
+  --ui-motion-distance-enter: 0px;
+  --ui-motion-scale-press: 1;
+  --ui-motion-expressive-enabled: 0;
+}
+}
+
+/* JS-driven animations must honor reduced motion in their own controllers. */
+
+/* MG durations belong to each composition rather than the UI timings above. */

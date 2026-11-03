@@ -1,0 +1,49 @@
+{
+  "name": "malang-ui",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Vue component library exploring ink and technology, with GSAP motion and framework-independent utilities",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "git+https://github.com/MaLaNg116/malang-ui.git" },
+  "type": "module",
+  "packageManager": "pnpm@11.25.0",
+  "engines": { "node": ">=24" },
+  "files": ["dist"],
+  "sideEffects": ["**/*.css"],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./utils": { "types": "./dist/utils/index.d.ts", "import": "./dist/utils.js" },
+    "./motion": { "types": "./dist/motion/index.d.ts", "import": "./dist/motion.js" },
+    "./all": { "types": "./dist/all.d.ts", "import": "./dist/all.js" },
+    "./style.css": "./dist/style.css",
+    "./tokens.css": "./dist/tokens.css"
+  },
+  "scripts": {
+    "dev": "storybook dev -p 6006 --no-open",
+    "storybook": "storybook dev -p 6006 --no-open",
+    "build:storybook": "storybook build",
+    "typecheck": "vue-tsc --noEmit",
+    "test": "vitest run",
+    "tokens": "node scripts/generate-tokens.mjs",
+    "build": "pnpm tokens && vite build && vue-tsc -p tsconfig.build.json && node scripts/copy-tokens.mjs",
+    "check": "pnpm typecheck && pnpm test && pnpm build && pnpm build:storybook"
+  },
+  "peerDependencies": { "vue": "^3.5.0", "gsap": "^3.15.0" },
+  "peerDependenciesMeta": { "gsap": { "optional": true } },
+  "devDependencies": {
+    "@storybook/addon-docs": "10.6.5",
+    "@storybook/vue3-vite": "10.6.5",
+    "@types/node": "^24.0.0",
+    "@vitejs/plugin-vue": "6.0.10",
+    "gsap": "3.15.0",
+    "storybook": "10.6.5",
+    "typescript": "~5.9.3",
+    "vite": "8.3.5",
+    "vitest": "5.1.0",
+    "vue": "3.5.44",
+    "vue-tsc": "3.3.14"
+  }
+}

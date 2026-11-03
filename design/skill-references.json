@@ -1,0 +1,73 @@
+{
+  "checkedDate": "2026-11-03",
+  "timezone": "Asia/Shanghai",
+  "starScope": "所有星标均为仓库累计数，不是单个技能的评价或评分",
+  "purpose": "研究水墨与科技融合的组件库配色、视觉与动效方法",
+  "researchOnly": true,
+  "references": [
+    {
+      "name": "UI UX Pro Max",
+      "repository": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+      "stars": 144325,
+      "skills": [
+        "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/main/.claude/skills/ui-ux-pro-max/SKILL.md",
+        "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/main/.claude/skills/design-system/SKILL.md"
+      ],
+      "resourcesRead": [
+        "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/main/.claude/skills/brand/references/color-palette-management.md",
+        "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/main/src/ui-ux-pro-max/data/colors.csv",
+        "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/main/src/ui-ux-pro-max/data/motion.csv"
+      ],
+      "adopt": ["原始、语义、组件三级 Token", "成对的前景与背景色", "依据场景检索配色与 GSAP 预设"],
+      "boundary": "使用其方法定制水墨科技主题，具体视觉仍由项目意图与真实页面验证决定"
+    },
+    {
+      "name": "Impeccable",
+      "repository": "https://github.com/pbakaus/impeccable",
+      "stars": 100583,
+      "skills": ["https://github.com/pbakaus/impeccable/blob/main/.agents/skills/impeccable/SKILL.md"],
+      "resourcesRead": [
+        "https://github.com/pbakaus/impeccable/blob/main/skill/reference/colorize.md",
+        "https://github.com/pbakaus/impeccable/blob/main/skill/reference/animate.md",
+        "https://github.com/pbakaus/impeccable/blob/main/skill/reference/craft-floor.md"
+      ],
+      "adopt": ["按用途定义颜色角色，明暗主题分别设计", "将主要 MG 编排作为视觉重点", "依据真实状态、文字与对比度评审细节"],
+      "boundary": "本次阅读设计方法，未引入其 CLI、hooks 或执行设施"
+    },
+    {
+      "name": "Anthropic Frontend Design / Theme Factory",
+      "repository": "https://github.com/anthropics/skills",
+      "stars": 186799,
+      "skills": [
+        "https://github.com/anthropics/skills/blob/main/skills/frontend-design/SKILL.md",
+        "https://github.com/anthropics/skills/blob/main/skills/theme-factory/SKILL.md"
+      ],
+      "resourcesRead": [
+        "https://github.com/anthropics/skills/blob/main/skills/theme-factory/themes/forest-canopy.md",
+        "https://github.com/anthropics/skills/blob/main/skills/theme-factory/themes/modern-minimalist.md",
+        "https://github.com/anthropics/skills/blob/main/skills/theme-factory/themes/golden-hour.md"
+      ],
+      "adopt": ["从具体题材、材质与用户任务形成视觉选择", "用小而连贯的配色、字体和排版系统表达个性", "将文字、状态反馈与布局一起评审"],
+      "boundary": "星标覆盖整个技能仓库，Theme Factory 偏通用主题与文档产物，并非水墨主题成品"
+    },
+    {
+      "name": "UI Skills",
+      "repository": "https://github.com/ibelick/ui-skills",
+      "stars": 10528,
+      "skills": [
+        "https://github.com/ibelick/ui-skills/blob/main/skills/fixing-motion-performance/SKILL.md",
+        "https://github.com/ibelick/ui-skills/blob/main/skills/improve-ui/SKILL.md"
+      ],
+      "resourcesRead": ["https://github.com/ibelick/ui-skills/blob/main/skills/baseline-ui/SKILL.md"],
+      "adopt": ["保留现有 GSAP 技术栈", "测量绘制成本并限制昂贵效果范围", "从真实运行路径和组件状态证明改动价值"],
+      "boundary": "baseline-ui 含 Tailwind 与 motion/react 倾向规则，项目只选择适配 Vue 与 GSAP 的部分"
+    }
+  ],
+  "proposedDirection": {
+    "materials": ["墨色层次", "纸感留白", "磨损金属的精密结构"],
+    "paletteRoles": ["墨黑与纸白作为阅读底色", "朱砂作为主要交互强调的候选", "青玉或冷金属色作为辅助候选", "焦点、错误与成功有独立语义"],
+    "typography": "展示标题可体现书写骨力；正文、表单与数值使用清晰稳定的字形",
+    "motion": ["墨迹聚散", "笔画构形", "切面展开", "机械归位"],
+    "usage": "官网与 MG 展示强化材质和运动；高密度表单与文档保持平整底色和稳定阅读节奏"
+  }
+}
