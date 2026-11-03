@@ -1,2 +1,2 @@
 export * from './index';
-export * from './motion';
+export * from './motion/index';

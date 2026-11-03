@@ -15,6 +15,6 @@ export default defineConfig({
       fileName: (_format, name) => `${name}.js`,
       cssFileName: 'style'
     },
-    rolldownOptions: { external: ['vue', 'gsap'] }
+    rolldownOptions: { external: ['vue', 'gsap', '@floating-ui/dom'] }
   }
 });

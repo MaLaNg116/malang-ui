@@ -54,6 +54,7 @@
   --ui-color-secondary-accent: #3f7168;
   --ui-color-success: #28634e;
   --ui-color-danger: #b32620;
+  --ui-color-warning: #8a5b13;
   --ui-color-focus: #315f57;
   --ui-color-surface-raised: #fffcf3;
   --ui-color-overlay: rgba(5, 10, 8, 0.62);
@@ -82,6 +83,7 @@
   --ui-color-secondary-accent: #3f7168;
   --ui-color-success: #28634e;
   --ui-color-danger: #b32620;
+  --ui-color-warning: #8a5b13;
   --ui-color-focus: #315f57;
   --ui-color-surface-raised: #fffcf3;
   --ui-color-overlay: rgba(5, 10, 8, 0.62);
@@ -107,6 +109,7 @@
   --ui-color-secondary-accent: #8bb9aa;
   --ui-color-success: #a4c5a0;
   --ui-color-danger: #ffa38f;
+  --ui-color-warning: #e0b56e;
   --ui-color-focus: #92bab0;
   --ui-color-surface-raised: #243129;
   --ui-color-overlay: rgba(5, 10, 8, 0.62);
@@ -133,6 +136,7 @@
   --ui-color-secondary-accent: #8bb9aa;
   --ui-color-success: #a4c5a0;
   --ui-color-danger: #ffa38f;
+  --ui-color-warning: #e0b56e;
   --ui-color-focus: #92bab0;
   --ui-color-surface-raised: #243129;
   --ui-color-overlay: rgba(5, 10, 8, 0.62);

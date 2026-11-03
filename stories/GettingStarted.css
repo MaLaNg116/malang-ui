@@ -1,0 +1,18 @@
+.getting-started { max-width: 1080px; margin-inline: auto; font: var(--ui-font-size-body)/1.8 var(--ui-font-family); }
+.getting-started header { padding-block: 16px 32px; }
+.getting-started__eyebrow { color: var(--ui-color-accent); font: 11px/1.5 var(--ui-font-family-mono); letter-spacing: 2px; }
+.getting-started h1 { margin-block: 22px 12px; font: 500 clamp(30px, 5vw, 52px)/1.5 var(--ui-font-family-display); }
+.getting-started__intro { max-width: 600px; color: var(--ui-color-text-secondary); }
+.getting-started__badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.getting-started section { margin-block: 36px; }
+.getting-started h2 { font: 500 26px/1.5 var(--ui-font-family-display); margin-block: 0 16px; }
+.getting-started section > p { color: var(--ui-color-text-secondary); max-width: 800px; }
+.getting-started__route { padding-left: 24px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.getting-started__route p { color: var(--ui-color-text-secondary); font-size: 12px; }
+.getting-started__catalog { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.getting-started__catalog > :last-child { grid-column: 1 / -1; }
+.getting-started__catalog p { overflow-wrap: anywhere; font: 12px/2 var(--ui-font-family-mono); }
+.getting-started pre { max-width: 100%; overflow: auto; box-sizing: border-box; padding: 24px; border: 1px solid var(--ui-color-border); border-left: 3px solid var(--ui-color-accent); background: var(--ui-color-surface); font: 12px/1.9 var(--ui-font-family-mono); tab-size: 2; }
+.getting-started pre:focus-visible { outline: 2px solid var(--ui-color-focus); outline-offset: 3px; }
+.getting-started footer { border-top: 1px solid var(--ui-color-text); margin-top: 36px; padding-block: 20px; color: var(--ui-color-text-secondary); font-size: 12px; }
+@media (max-width: 640px) { .getting-started__catalog, .getting-started__route { grid-template-columns: 1fr; } .getting-started__route { gap: 8px; } .getting-started pre { padding: 16px; } }

@@ -26,11 +26,12 @@
     "storybook": "storybook dev -p 6006 --no-open",
     "build:storybook": "storybook build",
     "typecheck": "vue-tsc --noEmit",
+    "typecheck:package": "vue-tsc -p tests/consumer/tsconfig.json",
     "test": "vitest run",
     "test:browser": "playwright test",
     "tokens": "node scripts/generate-tokens.mjs",
     "build": "pnpm tokens && vite build && vue-tsc -p tsconfig.build.json && node scripts/copy-tokens.mjs",
-    "check": "pnpm typecheck && pnpm test && pnpm build && pnpm build:storybook"
+    "check": "pnpm typecheck && pnpm test && pnpm build && pnpm typecheck:package && pnpm build:storybook"
   },
   "peerDependencies": { "vue": "^3.5.0", "gsap": "^3.15.0" },
   "peerDependenciesMeta": { "gsap": { "optional": true } },
@@ -47,5 +48,8 @@
     "vitest": "5.1.0",
     "vue": "3.5.44",
     "vue-tsc": "3.3.14"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "1.8.0"
   }
 }

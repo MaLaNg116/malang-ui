@@ -1,13 +1,13 @@
 {
   "version": "0.1.0",
-  "status": "feedback-foundation",
+  "status": "basic-v1-foundation",
   "project": "malang-ui",
   "repository": "https://github.com/MaLaNg116/malang-ui",
   "confirmed": {
     "purpose": "组件库自己的文档与展示站作为首个验证项目",
     "framework": "Vue 3 + TypeScript，后续支持 React",
     "visualDirection": "水墨与科技融合、几何构形、GSAP 与 MG 编排",
-    "visualDirectionStatus": "首轮水墨科技样板与组件语言已落地，正在通过导航、弹层和真实组合流程继续验证",
+    "visualDirectionStatus": "水墨科技组件语言已覆盖基础版，继续通过真实项目优化配色、细节与MG",
     "colorAndDetail": "后续优化",
     "productScope": ["UI 组件", "动效", "MG 编排", "实用工具", "场景组合"],
     "audience": "先自用，验证后开源"
@@ -32,6 +32,14 @@
     "utils": ["debounce", "throttle", "asyncLock"],
     "vueAdapters": ["防抖和节流的生命周期清理", "异步操作状态", "减少动态效果偏好"]
   },
+  "basicV1Target": {
+    "status": "implemented",
+    "componentCount": 23,
+    "components": ["Button", "Input", "Switch", "Card", "Tabs", "Dialog", "Toast", "ToastViewport", "Popover", "Tooltip", "Checkbox", "RadioGroup", "Select", "Textarea", "Pagination", "Breadcrumb", "Badge", "Alert", "Spinner", "Skeleton", "Empty", "Divider", "Table"],
+    "scenario": "列表筛选、分页、编辑、保存反馈，全部从公开入口组合",
+    "acceptance": ["原生表单与中文输入", "导航、弹层与通知键盘和生命周期", "明暗、紧凑、减少动态效果和360px", "Storybook文档和最小用法", "组件库构建与类型消费", "工具入口依赖隔离", "浏览器回归和main分支CI"],
+    "deferred": ["高级表格与虚拟滚动", "日期与树形选择器", "React实现", "npm发布", "更多MG与独立包拆分"]
+  },
   "mgExpansion": {
     "futureFamilies": ["品牌开场", "功能演示", "加载等待", "空状态", "成功反馈", "数据与流程叙事"],
     "controls": ["播放", "暂停", "定位", "重播", "销毁"],
@@ -50,13 +58,13 @@
   ],
   "engineeringMilestone": {
     "project": "malang-ui",
-    "delivered": ["UiButton", "UiInput", "UiSwitch", "UiCard", "UiTabs", "UiDialog", "UiToast", "UiToastViewport", "debounce", "throttle", "asyncLock", "useReducedMotion", "GSAP 轨道构形与墨迹切面编排", "水墨科技、导航弹层与保存反馈组合样板"],
-    "verified": ["类型检查", "19 项工具测试", "58 个 Story 的渲染与浏览器交互", "28 项内容、导航、弹层与通知的持久化浏览器回归", "中文输入重渲染", "明暗主题、紧凑密度与减少动态效果", "MG 终点定位与 BFCache 生命周期", "Dialog 嵌套焦点与滚动锁清理", "Toast 重叠暂停、剩余计时、消息替换、单一播报与卸载清理", "组件库构建", "Storybook 构建", "公开入口导入与工具依赖隔离"],
+    "delivered": ["23个公开Vue组件，完整清单见basicV1Target", "debounce", "throttle", "asyncLock", "useReducedMotion", "GSAP 轨道构形与墨迹切面编排", "水墨科技、导航弹层与保存反馈组合样板", "筛选、分页、新建、编辑与通知业务组合工作台", "基础版使用指南、组件索引和API文档"],
+    "verified": ["类型检查", "19 项工具测试", "125 个构建后 Story 的浏览器渲染", "55 项表单、数据、导航、浮层、反馈与业务流程浏览器回归", "中文输入重渲染与原生表单验证", "明暗主题、紧凑密度、减少动态效果与360px", "MG 终点定位与 BFCache 生命周期", "Dialog 嵌套焦点与滚动锁清理", "Popover受控请求与异步定位焦点", "Toast 重叠暂停、剩余计时、消息替换、单一播报与卸载清理", "组件库构建", "Storybook 构建与文档页加载", "全部23个公开组件入口", "独立Vue消费项目声明与泛型Table类型", "SSR导入和基础渲染", "工具与UI入口依赖隔离"],
     "localPreview": "http://127.0.0.1:6006/",
     "packageName": "malang-ui",
     "package": "malang-ui-0.1.0.tgz",
     "packageStatus": "private，尚未发布到 npm；构建后通过 pnpm pack 生成本地安装包",
-    "validationStatus": "工程起点、水墨科技组件与 MG 样板已验证；内容卡片、导航弹层与保存反馈通过公开入口接入组合页，并由仓库浏览器测试持续回归"
+    "validationStatus": "基础版已实现；通过公开入口组合业务工作台，由main分支CI持续执行类型、工具、构建和浏览器回归；下一步在自己的真实项目验证"
   },
   "designTokens": "design/tokens.json",
   "designReferences": "design/skill-references.json",

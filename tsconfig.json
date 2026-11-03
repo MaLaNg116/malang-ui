@@ -15,5 +15,6 @@
     "types": ["node"],
     "noEmit": true
   },
-  "include": ["src/**/*.ts", "src/**/*.vue", "stories/**/*.ts", "tests/**/*.ts", ".storybook/**/*.ts", "vite.config.ts", "vitest.config.ts", "playwright.config.ts"]
+  "include": ["src/**/*.ts", "src/**/*.vue", "stories/**/*.ts", "tests/**/*.ts", ".storybook/**/*.ts", "vite.config.ts", "vitest.config.ts", "playwright.config.ts"],
+  "exclude": ["tests/consumer"]
 }
