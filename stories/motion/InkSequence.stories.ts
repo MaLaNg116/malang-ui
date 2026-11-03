@@ -13,6 +13,7 @@ const InkSequenceDemo = defineComponent({
     reducedMotion: { type: [Boolean, String] as PropType<boolean | 'system'>, default: 'system' },
     amplitude: { type: Number, default: 1 },
     speed: { type: Number, default: 1 },
+    initialTime: { type: Number, default: 0 },
   },
   setup(props) {
     const canvas = ref<HTMLCanvasElement>();
@@ -23,7 +24,7 @@ const InkSequenceDemo = defineComponent({
 
     function create() {
       if (!canvas.value) return;
-      const position = controller?.state.time ?? 0;
+      const position = controller?.state.time ?? props.initialTime;
       const wasPlaying = controller?.state.playing ?? false;
       controller?.dispose();
       controller = createInkSequence(canvas.value, {
@@ -39,12 +40,13 @@ const InkSequenceDemo = defineComponent({
     onMounted(() => { mounted = true; create(); });
     onBeforeUnmount(() => { mounted = false; controller?.dispose(); });
     watch(() => [props.amplitude, props.speed, props.reducedMotion], () => { if (mounted) create(); });
+    watch(() => props.initialTime, time => { controller?.pause(); controller?.seek(time); });
 
     return () => h('section', { class: 'ink-demo', 'aria-label': '墨迹切面 GSAP 动画编排' }, [
       h('header', { class: 'ink-demo__heading' }, [
         h('p', { class: 'ink-demo__eyebrow' }, 'MOTION STUDY / 02'),
         h('div', { class: 'ink-demo__title' }, [h('h2', '墨起，锋至。'), h('span', { 'aria-hidden': 'true' }, '墨 / 锋 / 印')]),
-        h('p', { class: 'ink-demo__intro' }, '干刷的飞白，切面的秩序。五秒，从蓄势到归位。'),
+        h('p', { class: 'ink-demo__intro' }, '按笔有浓淡，行笔见飞白。五秒，从蓄势到归位。'),
       ]),
       h('div', { class: 'ink-demo__stage' }, [
         h('canvas', {
@@ -94,6 +96,7 @@ const meta = {
     reducedMotion: { control: 'inline-radio', options: ['system', true, false], description: '遵循系统或显式选择减少动态效果。' },
     amplitude: { control: { type: 'range', min: 0.6, max: 1.8, step: 0.1 }, description: '笔触分离与碎片的展开幅度。' },
     speed: { control: { type: 'range', min: 0.6, max: 1.6, step: 0.1 }, description: '播放倍速，进度条仍使用原始时间。' },
+    initialTime: { control: { type: 'range', min: 0, max: 5, step: 0.01 }, description: '静态检查笔触或阶段，单位为秒。' },
   },
   args: { reducedMotion: 'system', amplitude: 1, speed: 1 },
   render: (args, context) => ({
@@ -108,3 +111,4 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 export const ReducedMotion: Story = { args: { reducedMotion: true } };
+export const BrushDetail: Story = { name: '笔触细节', args: { initialTime: 1.2 } };

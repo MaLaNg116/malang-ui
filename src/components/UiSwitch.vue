@@ -60,6 +60,7 @@ function handleChange(event: Event) {
   align-items: center;
   gap: var(--ui-space-3);
   min-width: 0;
+  min-height: var(--ui-control-height);
   font-family: var(--ui-font-family);
   color: var(--ui-color-text);
   font-size: var(--ui-font-size-body);
@@ -72,16 +73,27 @@ function handleChange(event: Event) {
   box-sizing: border-box;
   position: relative;
   flex: none;
-  width: 38px;
-  height: 22px;
+  width: 44px;
+  height: 24px;
   margin: 0;
   border: var(--ui-border-width) solid var(--ui-color-border);
-  border-radius: var(--ui-radius-pill);
-  background: var(--ui-color-border);
+  border-radius: 1px;
+  background: var(--ui-color-surface);
   cursor: inherit;
   transition:
     background-color var(--ui-motion-duration-transition) var(--ui-motion-ease-standard),
     border-color var(--ui-motion-duration-transition) var(--ui-motion-ease-standard);
+}
+
+.ui-switch__input::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 6px;
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--ui-color-text-secondary);
+  border-radius: 50%;
 }
 
 .ui-switch__input::after {
@@ -90,10 +102,14 @@ function handleChange(event: Event) {
   position: absolute;
   top: 3px;
   left: 3px;
-  height: 14px;
+  height: 16px;
   width: 14px;
-  border-radius: var(--ui-radius-pill);
-  background: var(--ui-color-surface);
+  clip-path: polygon(0 0, calc(100% - 3px) 0, 100% 3px, 100% 100%, 0 100%);
+  background-color: var(--ui-color-text-secondary);
+  background-image: linear-gradient(90deg, var(--ui-color-surface) 1px, transparent 1px, transparent 3px, var(--ui-color-surface) 3px, var(--ui-color-surface) 4px, transparent 4px);
+  background-size: 4px 6px;
+  background-position: center;
+  background-repeat: no-repeat;
   transition:
     transform var(--ui-motion-duration-transition) var(--ui-motion-ease-emphasized),
     background-color var(--ui-motion-duration-transition) var(--ui-motion-ease-standard);
@@ -101,12 +117,28 @@ function handleChange(event: Event) {
 
 .ui-switch__input:checked {
   border-color: var(--ui-color-accent);
+  background: var(--ui-color-accent-soft);
+}
+
+.ui-switch__input:hover:not(:disabled) {
+  border-color: var(--ui-color-accent);
+}
+
+.ui-switch__input:checked::before {
+  top: 7px;
+  right: auto;
+  left: 7px;
+  width: 2px;
+  height: 8px;
+  border: 0;
+  border-radius: 0;
   background: var(--ui-color-accent);
 }
 
 .ui-switch__input:checked::after {
-  transform: translateX(16px);
-  background: var(--ui-color-on-accent);
+  transform: translateX(22px);
+  background-color: var(--ui-color-accent);
+  background-image: linear-gradient(90deg, var(--ui-color-on-accent) 1px, transparent 1px, transparent 3px, var(--ui-color-on-accent) 3px, var(--ui-color-on-accent) 4px, transparent 4px);
 }
 
 .ui-switch__input:focus-visible {
@@ -130,6 +162,16 @@ function handleChange(event: Event) {
 .ui-switch--disabled {
   opacity: 0.55;
   cursor: not-allowed;
+}
+
+:global([data-ui-motion='reduced'] .ui-switch__input),
+:global([data-ui-motion='reduced'] .ui-switch__input::after) {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-switch__input,
+  .ui-switch__input::after { transition: none; }
 }
 
 @media (pointer: coarse) {

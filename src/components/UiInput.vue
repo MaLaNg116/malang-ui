@@ -41,19 +41,22 @@ const value = computed({
 </script>
 
 <template>
-  <div class="ui-field" :class="{ 'ui-field--disabled': disabled }">
+  <div class="ui-field" :class="{ 'ui-field--disabled': disabled, 'ui-field--error': Boolean(error) }">
     <label v-if="label" class="ui-field__label" :for="inputId">{{ label }}</label>
-    <input
-      v-bind="attrs"
-      :id="inputId"
-      class="ui-input"
-      :class="{ 'ui-input--error': Boolean(error) }"
-      :type="type"
-      v-model="value"
-      :disabled="disabled"
-      :aria-invalid="error ? true : attrs['aria-invalid'] as boolean | 'true' | 'false' | 'grammar' | 'spelling' | undefined"
-      :aria-describedby="describedBy()"
-    >
+    <div class="ui-field__control">
+      <input
+        v-bind="attrs"
+        :id="inputId"
+        class="ui-input"
+        :class="{ 'ui-input--error': Boolean(error) }"
+        :type="type"
+        v-model="value"
+        :disabled="disabled"
+        :aria-invalid="error ? true : attrs['aria-invalid'] as boolean | 'true' | 'false' | 'grammar' | 'spelling' | undefined"
+        :aria-describedby="describedBy()"
+      >
+      <span class="ui-field__registration" aria-hidden="true" />
+    </div>
     <p v-if="hint" :id="hintId" class="ui-field__hint">{{ hint }}</p>
     <p v-if="error" :id="errorId" class="ui-field__error" role="alert">{{ error }}</p>
   </div>
@@ -73,6 +76,46 @@ const value = computed({
 .ui-field__label {
   font-weight: var(--ui-font-weight-emphasis);
   width: fit-content;
+  font-size: var(--ui-font-size-caption);
+  letter-spacing: 0.04em;
+}
+
+.ui-field__control {
+  position: relative;
+  min-width: 0;
+  --ui-field-frame: var(--ui-color-text-secondary);
+}
+
+.ui-field__registration {
+  position: absolute;
+  inset: -2px;
+  pointer-events: none;
+  color: var(--ui-field-frame);
+}
+
+.ui-field__registration::before,
+.ui-field__registration::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 7px;
+  border-color: currentColor;
+  border-style: solid;
+  transition:
+    width var(--ui-motion-duration-transition) var(--ui-motion-ease-emphasized),
+    color var(--ui-motion-duration-transition) var(--ui-motion-ease-standard);
+}
+
+.ui-field__registration::before {
+  top: 0;
+  left: 0;
+  border-width: 2px 0 0 2px;
+}
+
+.ui-field__registration::after {
+  right: 0;
+  bottom: 0;
+  border-width: 0 2px 2px 0;
 }
 
 .ui-input {
@@ -80,10 +123,12 @@ const value = computed({
   display: block;
   width: 100%;
   min-width: 0;
+  height: var(--ui-control-height);
   min-height: var(--ui-control-height);
-  padding: var(--ui-space-2) var(--ui-control-padding-inline);
-  border: var(--ui-border-width) solid var(--ui-color-border);
-  border-radius: var(--ui-radius-control);
+  padding: var(--ui-space-1) var(--ui-control-padding-inline);
+  border: var(--ui-border-width) solid transparent;
+  border-bottom-color: var(--ui-color-border);
+  border-radius: 0;
   background: var(--ui-color-surface);
   color: var(--ui-color-text);
   font: inherit;
@@ -98,28 +143,45 @@ const value = computed({
 }
 
 .ui-input:hover:not(:disabled) {
-  border-color: color-mix(in srgb, var(--ui-color-accent) 48%, var(--ui-color-border));
+  border-bottom-color: color-mix(in srgb, var(--ui-color-accent) 48%, var(--ui-color-border));
 }
 
 .ui-input:focus-visible {
   outline: var(--ui-focus-width) solid var(--ui-color-focus);
-  outline-offset: var(--ui-focus-offset);
-  border-color: var(--ui-color-accent);
+  outline-offset: calc(var(--ui-focus-offset) + 2px);
+  border-bottom-color: var(--ui-color-accent);
+  box-shadow: inset 0 -2px 0 var(--ui-color-accent);
+}
+
+.ui-field__control:focus-within {
+  --ui-field-frame: var(--ui-color-accent);
+}
+
+.ui-field__control:focus-within .ui-field__registration::before,
+.ui-field__control:focus-within .ui-field__registration::after {
+  width: 22px;
+}
+
+.ui-field--error .ui-field__control {
+  --ui-field-frame: var(--ui-color-danger);
 }
 
 .ui-input--error,
 .ui-input--error:hover:not(:disabled) {
-  border-color: var(--ui-color-danger);
+  border-bottom-color: var(--ui-color-danger);
 }
 
 .ui-input--error:focus-visible {
   outline-color: var(--ui-color-danger);
+  box-shadow: inset 0 -2px 0 var(--ui-color-danger);
 }
 
 .ui-input:disabled {
   cursor: not-allowed;
   opacity: 0.55;
 }
+
+.ui-field--disabled .ui-field__registration { opacity: 0.45; }
 
 .ui-field__hint,
 .ui-field__error {
@@ -132,5 +194,16 @@ const value = computed({
 
 @media (pointer: coarse) {
   .ui-input { min-height: 44px; font-size: 16px; }
+}
+
+:global([data-ui-motion='reduced'] .ui-field__registration::before),
+:global([data-ui-motion='reduced'] .ui-field__registration::after) {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-input,
+  .ui-field__registration::before,
+  .ui-field__registration::after { transition: none; }
 }
 </style>

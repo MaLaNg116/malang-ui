@@ -1,4 +1,5 @@
 import { gsap } from 'gsap';
+import { createInkBrush } from './inkBrush';
 
 const DURATION = 5;
 const TAU = Math.PI * 2;
@@ -63,7 +64,7 @@ const random = (seed: number) => {
 };
 
 /**
- * An original ink / cut-plane / seal composition. No raster assets or autoplay.
+ * An original ink / cut-plane / seal composition. No external assets or autoplay.
  * Browser state, GSAP ownership and subscriptions are isolated per instance.
  */
 export function createInkSequence(
@@ -94,6 +95,7 @@ export function createInkSequence(
   const playhead = { value: 0 };
   let timeline: gsap.core.Timeline | undefined;
   let palette: InkPalette;
+  const inkBrush = createInkBrush(document);
 
   function state(): InkSequenceState {
     const time = playhead.value;
@@ -175,46 +177,14 @@ export function createInkSequence(
     const reveal = 0.13 + 0.87 * smooth(time / 1.45);
     const split = smooth((time - 1.5) / 0.55);
     const release = smooth((time - 2.4) / 1.05);
-    const opacity = (1 - release) * 0.92;
+    const opacity = (1 - release) * 0.98;
     if (opacity < 0.001) return;
     context!.save();
     context!.rotate(-0.17);
     context!.translate(-12, 8);
 
-    for (let bristle = 0; bristle < 62; bristle++) {
-      const seed = bristle + 10;
-      const offset = (bristle / 61 - 0.5) * 93;
-      const side = offset < 0 ? -1 : 1;
-      const travel = side * split * (12 + random(seed) * 18) * amplitude;
-      const width = 1 + random(seed + 40) * 4.7;
-      const start = -240 + random(seed + 20) * 60;
-      const length = 360 + random(seed + 30) * 100;
-      const delay = random(seed + 50) * 0.14;
-      const front = clamp((reveal - delay) / (1 - delay));
-      for (let segment = 0; segment < 26; segment++) {
-        const portion = segment / 26;
-        if (portion > front || random(seed * 41 + segment) < 0.19) continue;
-        const next = Math.min((segment + 1.2) / 26, front);
-        const x = start + portion * length;
-        const nextX = start + next * length;
-        const envelope = Math.sin(portion * Math.PI) * 0.62 + 0.38;
-        const y = offset * envelope + Math.sin(portion * 8 + bristle * 0.3) * 4 + travel;
-        const nextY = offset * (Math.sin(next * Math.PI) * 0.62 + 0.38) + Math.sin(next * 8 + bristle * 0.3) * 4 + travel;
-        const color = bristle % 17 === 0 ? palette.secondary : bristle % 13 === 0 ? palette.accent : palette.ink;
-        line([x, y, nextX, nextY], color, opacity * (0.35 + random(seed + 70) * 0.55), width * envelope);
-      }
-    }
-
-    // Small disconnected beads leave genuine negative space between the fibres.
-    for (let index = 0; index < 54; index++) {
-      const seed = index + 390;
-      const localReveal = smooth((reveal - random(seed) * 0.7) / 0.25);
-      const x = -247 + random(seed + 1) * 493;
-      const y = (random(seed + 2) - 0.5) * 148 + (random(seed + 2) < 0.5 ? -1 : 1) * split * 28 * amplitude;
-      context!.globalAlpha = opacity * localReveal * (0.2 + random(seed + 3) * 0.5);
-      context!.fillStyle = index % 9 === 0 ? palette.accent : palette.ink;
-      context!.fillRect(x + release * (x * 0.35), y, 0.8 + random(seed + 4) * 2.2, 0.5 + random(seed + 5) * 1.3);
-    }
+    context!.globalAlpha = 1;
+    inkBrush.draw(context!, { reveal, split, opacity, amplitude, ink: palette.ink });
     context!.restore();
   }
 
@@ -413,6 +383,7 @@ export function createInkSequence(
     disposed = true;
     playing = false;
     timeline?.kill();
+    inkBrush.dispose();
     resizeObserver?.disconnect();
     themeObserver?.disconnect();
     browser!.removeEventListener('resize', resize);
