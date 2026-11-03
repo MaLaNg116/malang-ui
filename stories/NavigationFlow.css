@@ -8,9 +8,9 @@
 .flow-study__meta i { font-style: normal; color: var(--ui-color-accent); margin-inline: 10px; }
 .flow-study__preview { display: grid; grid-template-columns: 1.3fr 1fr; gap: 50px; padding-block: 30px; }
 .flow-study__index { font: 9px var(--ui-font-family-mono); color: var(--ui-color-accent); letter-spacing: 1px; }
-.flow-study__workspace { min-width: 0; padding: 26px; border-left: 2px solid var(--ui-color-accent); background: var(--ui-color-surface); }
+.flow-study__workspace { min-width: 0; border-left: 2px solid var(--ui-color-accent); }
 .flow-study__workspace h2 { font: 500 clamp(26px, 4vw, 38px)/1.4 var(--ui-font-family-display); margin: 20px 0 12px; overflow-wrap: anywhere; }
-.flow-study__workspace > p:not(:first-child) { font-size: 12px; line-height: 1.8; color: var(--ui-color-text-secondary); }
+.flow-study__workspace-copy { font-size: 12px; line-height: 1.8; color: var(--ui-color-text-secondary); }
 .flow-study__actions { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 28px; }
 .flow-study__facts { display: grid; gap: 22px; margin: 0; align-content: center; }
 .flow-study__facts > div { padding-bottom: 16px; border-bottom: 1px solid var(--ui-color-rule); }
@@ -36,5 +36,5 @@
 .flow-study__feedback > p { min-width: 0; flex: 1; overflow-wrap: anywhere; font-size: 12px; line-height: 1.7; }
 .flow-study__feedback > span:last-child { color: var(--ui-color-text-secondary); font: 9px var(--ui-font-family-mono); white-space: nowrap; }
 .flow-study__form { display: grid; gap: 26px; }
-@media (max-width: 760px) { .flow-study__preview, .flow-study__notes { gap: 28px; } .flow-study__feedback > span:last-child { display: none; } .flow-study__workspace { padding: 20px; } }
+@media (max-width: 760px) { .flow-study__preview, .flow-study__notes { gap: 28px; } .flow-study__feedback > span:last-child { display: none; } }
 @media (max-width: 600px) { .flow-study__preview, .flow-study__notes { grid-template-columns: 1fr; } .flow-study__header { gap: 16px; } .flow-study__stamp { font-size: 20px; } .flow-study__intro { font-size: 12px; } .flow-study__meta { letter-spacing: 0; font-size: 9px; } .flow-study__notes { gap: 20px; } .flow-study__code { padding: 16px; } }

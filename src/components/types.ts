@@ -52,3 +52,28 @@ export interface UiDialogProps {
   closeOnBackdrop?: boolean;
   closeLabel?: string;
 }
+
+export interface UiCardProps {
+  as?: 'article' | 'section' | 'div';
+  title?: string;
+  description?: string;
+  headingTag?: 'h2' | 'h3' | 'h4';
+}
+
+export type UiToastVariant = 'info' | 'success' | 'error';
+
+export interface UiToastProps {
+  modelValue: boolean;
+  title: string;
+  description?: string;
+  variant?: UiToastVariant;
+  duration?: number;
+  closeLabel?: string;
+}
+
+export type UiToastPlacement = 'top-end' | 'bottom-end';
+
+export interface UiToastViewportProps {
+  placement?: UiToastPlacement;
+  label?: string;
+}

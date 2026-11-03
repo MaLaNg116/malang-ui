@@ -42,6 +42,7 @@
   --ui-motion-distance-enter: 8px;
   --ui-motion-scale-press: 0.97;
   --ui-motion-expressive-enabled: 1;
+  --ui-z-index-toast: 1000;
   --ui-color-canvas: #eee9dd;
   --ui-color-surface: #f8f4e9;
   --ui-color-text: #242c29;

@@ -8,6 +8,8 @@
 
 「开始 / 导航与弹层」把 Tabs 和 Dialog 组合成一个可操作的工作空间：切换示例、用法与参数，打开编辑窗口，校验并保存设置，再回到原先的触发按钮。
 
+工作空间现由 `UiCard` 承载，保存后由 Toast 提供轻提示，结果文字仍会保留。提示不会抢走焦点；悬停、键盘聚焦或页面隐藏时会暂停计时。
+
 ## 本地开发
 
 使用 Node.js 24 或更高版本、pnpm 11.25。
@@ -25,7 +27,7 @@ pnpm dev
 pnpm tokens           # 从 design/tokens.json 生成 CSS 变量
 pnpm typecheck        # Vue 与 TypeScript 类型检查
 pnpm test             # 工具行为测试
-pnpm test:browser     # Tabs / Dialog 真实浏览器交互测试
+pnpm test:browser     # 导航、弹层、内容与通知的真实浏览器交互测试
 pnpm build            # 构建组件库与类型声明
 pnpm build:storybook  # 构建可独立托管的工作台
 pnpm check            # 依次执行类型、测试和两类构建
@@ -40,7 +42,7 @@ pnpm check            # 依次执行类型、测试和两类构建
 当前包尚未发布到 npm，`package.json` 保持 `private: true`。以下导入方式用于构建后的本地安装包：
 
 ```ts
-import { UiButton, UiInput, UiSwitch, UiTabs, UiDialog } from 'malang-ui';
+import { UiButton, UiInput, UiSwitch, UiCard, UiTabs, UiDialog, UiToast, UiToastViewport } from 'malang-ui';
 import 'malang-ui/style.css';
 
 // 纯工具入口不依赖 Vue 或 GSAP。
@@ -66,7 +68,8 @@ pnpm pack
 
 | 模块 | 当前内容 |
 | --- | --- |
-| UI | `UiButton`、`UiInput`、`UiSwitch`、`UiTabs`、`UiDialog`，含常用状态、键盘操作与组合流程 |
+| UI | `UiButton`、`UiInput`、`UiSwitch`、`UiCard`、`UiTabs`、`UiDialog`，含常用状态、键盘操作与组合流程 |
+| 通知 | `UiToast` 与 `UiToastViewport`，含计时、暂停、持久消息和多实例示例 |
 | 工具 | `debounce`、`throttle`、`asyncLock` |
 | 动效与 MG | 轨道构形与墨迹切面编排，支持播放、暂停、定位、重播与销毁 |
 | Vue 适配 | `useReducedMotion`，以及示例中的生命周期清理 |
@@ -78,6 +81,12 @@ pnpm pack
 `UiTabs` 使用 `v-model`、`items` 和必填的 `label`。每个 item 提供同组唯一的 `value`、`label` 与可选 `disabled`，同名插槽承载面板，默认插槽可读取 `{ item, active }`。面板切换时保留挂载；方向键、Home/End 会跳过禁用项。默认聚焦即激活，`activationMode="manual"` 改为回车或空格确认。传入值不可用时显示首个可用面板，兜底不会主动修改父模型；全禁用或空列表时不显示活动面板。
 
 `UiDialog` 使用 `v-model`、必填的 `title` 与可选 `description`，`#footer="{ close }"` 提供自定义操作区。默认允许 Escape 关闭，点击遮罩保持打开；可通过 `closeOnEscape`、`closeOnBackdrop` 调整，关闭按钮始终可用。它基于原生 `dialog.showModal()`，面向支持该 API 的现代浏览器，未附带 polyfill。打开时背景不可交互并锁定滚动，关闭后恢复焦点；嵌套实例和卸载会清理各自的滚动锁。对话框保留原有 DOM 位置，因此可继承所在区域的主题与减少动态效果设置。
+
+`UiCard` 默认渲染 `article` 与 `h3` 标题，支持 `as`、`headingTag`、`title`、`description` 和 `header/default/footer` 插槽。卡片本身保持静态，内部按钮、链接和表单各自操作；自定义头部接管标题与说明，必要时由调用方提供 `aria-labelledby`。
+
+`UiToast` 使用 `v-model`、`title`、`description` 与 `variant`（`info/success/error`）。普通和成功消息默认显示 5000ms，错误消息默认持续显示；显式 `duration` 优先，`:duration="0"` 表示手动关闭。暂停原因可以叠加，全部解除后按剩余时间继续；消息替换会重新计时，每个实例独立清理。提示的播报区常驻，并与关闭按钮分开；同一消息由一个播报区负责，组合页保留的结果文字不重复自动播报。
+
+`UiToastViewport` 管理通知布局，可放在应用主题容器内，通过 `placement="top-end"` 或 `bottom-end` 选择位置，`label` 提供通知区域名称。调用方管理消息列表与每条消息的 `v-model`，容器保留主题继承，不引入全局队列。
 
 ## 目录
 
@@ -102,7 +111,7 @@ scripts/         Token 生成与构建辅助脚本
 
 - 用组件库自己的文档与展示站检验公开入口和组合能力。
 - 根据首轮水墨科技样板继续优化颜色与细节，扩充笔画构形、切面展开、机械归位等 MG 场景。
-- 逐步加入 Card、Popover、Toast，并扩充现有组件的真实场景。
+- 继续加入 Popover，并扩充现有组件的真实场景。
 - 保持工具、设计数据和编排规范可复用，后续增加 React 适配。
 
 完整范围见 [design/roadmap.json](design/roadmap.json)，设计参考见 [design/skill-references.json](design/skill-references.json)。
