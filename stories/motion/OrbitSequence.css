@@ -1,0 +1,17 @@
+.orbit-demo { color:var(--ui-color-text); font-family:var(--ui-font-family); background:var(--ui-color-canvas); border:1px solid var(--ui-color-border); border-radius:var(--ui-radius-panel); overflow:hidden; width:min(100%,740px); margin:0 auto; }
+.orbit-demo * { box-sizing:border-box; }
+.orbit-demo__heading { padding:24px 28px 0; }
+.orbit-demo__eyebrow { margin:0 0 12px; color:var(--ui-color-accent); font:400 11px/1.5 var(--ui-font-family-mono); letter-spacing:1.5px; }
+.orbit-demo h2 { font-size:28px; font-weight:500; line-height:1.25; margin:0; letter-spacing:-1px; }
+.orbit-demo__canvas { display:block; width:100%; height:320px; }
+.orbit-demo__controls { padding:18px 28px 24px; border-top:1px solid var(--ui-color-border); }
+.orbit-demo__status { display:flex; justify-content:space-between; gap:16px; font-size:12px; margin-bottom:12px; }
+.orbit-demo__time { color:var(--ui-color-text-secondary); font-family:var(--ui-font-family-mono); font-variant-numeric:tabular-nums; }
+.orbit-demo__timeline { display:block; width:100%; margin:0 0 18px; accent-color:var(--ui-color-accent); }
+.orbit-demo__buttons { display:flex; flex-wrap:wrap; gap:10px; }
+.orbit-demo__button { font:400 13px/1.5 var(--ui-font-family); border:1px solid var(--ui-color-border); color:var(--ui-color-text); background:var(--ui-color-surface); border-radius:var(--ui-radius-control); padding:8px 14px; min-height:38px; cursor:pointer; }
+.orbit-demo__button--primary { border-color:transparent; background:var(--ui-color-accent); color:var(--ui-color-on-accent); }
+.orbit-demo__button:focus-visible, .orbit-demo__timeline:focus-visible { outline:var(--ui-focus-width) solid var(--ui-color-focus); outline-offset:var(--ui-focus-offset); }
+.orbit-demo__note { margin:14px 0 0; color:var(--ui-color-text-secondary); font-size:12px; line-height:1.5; }
+@media(max-width:480px) { .orbit-demo__heading { padding:21px 20px 0; } .orbit-demo__controls { padding:18px 20px 21px; } .orbit-demo__canvas { height:270px; } .orbit-demo h2 { font-size:25px; } }
+@media(pointer:coarse) { .orbit-demo__button { min-height:44px; } .orbit-demo__timeline { min-height:32px; } }
