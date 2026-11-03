@@ -2,7 +2,7 @@
 
 一套以水墨与科技融合为视觉方向的前端组件库，包含 UI 组件、GSAP 动效、MG 编排和实用工具。首发使用 Vue 3 + TypeScript，先在自己的项目中验证，再逐步扩展与开源。
 
-当前交付的是可运行的工程起点和 Storybook 开发工作台。界面仍沿用前一版科技主题；下一步会用组件与 MG 样板验证水墨科技、功夫朋克的原创视觉转译。
+当前包含可运行的工程起点与首轮水墨科技样板。在 Storybook 的「开始 / 水墨科技样板」中，可以体验暖纸、浓墨、朱砂与青玉主题，试用工作空间配置、防抖搜索和四段 MG 编排。视觉方向正在通过实际组件验证，尚未定稿。
 
 ## 本地开发
 
@@ -40,7 +40,7 @@ import 'malang-ui/style.css';
 import { debounce, throttle, asyncLock } from 'malang-ui/utils';
 
 // 动效入口单独使用 GSAP，消费方需要安装 gsap。
-import { createOrbitSequence } from 'malang-ui/motion';
+import { createInkSequence, createOrbitSequence } from 'malang-ui/motion';
 
 // 聚合入口包含 UI、工具与 GSAP 动效。
 import * as MalangUI from 'malang-ui/all';
@@ -61,7 +61,7 @@ pnpm pack
 | --- | --- |
 | UI | `UiButton`、`UiInput`、`UiSwitch`，含常用状态、键盘操作与中文输入示例 |
 | 工具 | `debounce`、`throttle`、`asyncLock` |
-| 动效与 MG | 轨道构形编排，支持播放、暂停、定位、重播与销毁 |
+| 动效与 MG | 轨道构形与墨迹切面编排，支持播放、暂停、定位、重播与销毁 |
 | Vue 适配 | `useReducedMotion`，以及示例中的生命周期清理 |
 | 设计基础 | 明暗主题、密度、排版、间距与动效变量 |
 | 开发工作台 | Storybook 的组件状态、组合界面和工具交互示例 |
@@ -83,12 +83,14 @@ tests/           工具行为测试
 scripts/         Token 生成与构建辅助脚本
 ```
 
-设计变量以 [design/tokens.json](design/tokens.json) 为真源，通过 `pnpm tokens` 更新生成的 CSS。当前颜色仍为临时值，水墨科技方案将先在样板中验证。
+设计变量以 [design/tokens.json](design/tokens.json) 为真源，通过 `pnpm tokens` 更新生成的 CSS。样板使用同一套变量；明暗主题与减少动态效果可在 Storybook 顶部切换。
+
+`createInkSequence(canvas, options)` 是独立的五秒 MG 编排，按「蓄势、疾出、收锋、归位」组织墨迹与几何切面。控制器默认不自动播放；使用 `play()`、`pause()`、`seek(seconds)`、`replay()` 与 `dispose()` 控制。默认遵循系统减少动态效果偏好，此时播放直接显示落印状态；仍可使用 `seek()` 静态查看各阶段。实例会在页面隐藏时暂停，卸载时应调用 `dispose()`。
 
 ## 后续方向
 
 - 用组件库自己的文档与展示站检验公开入口和组合能力。
-- 完成水墨科技组件样板，并扩充墨迹聚散、笔画构形、切面展开、机械归位等 MG 场景。
+- 根据首轮水墨科技样板继续优化颜色与细节，扩充笔画构形、切面展开、机械归位等 MG 场景。
 - 逐步加入 Tabs、Card、Dialog、Popover、Toast 等组件。
 - 保持工具、设计数据和编排规范可复用，后续增加 React 适配。
 

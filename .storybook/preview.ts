@@ -3,7 +3,7 @@ import '../src/styles/tokens.css';
 import './preview.css';
 
 const preview: Preview = {
-  initialGlobals: { theme: 'dark', density: 'comfortable', motion: 'standard' },
+  initialGlobals: { theme: 'light', density: 'comfortable', motion: 'standard' },
   globalTypes: {
     theme: { description: '主题', toolbar: { title: '主题', icon: 'circlehollow', items: [{ value: 'dark', title: '深色' }, { value: 'light', title: '浅色' }], dynamicTitle: true } },
     density: { description: '密度', toolbar: { title: '密度', icon: 'sidebar', items: [{ value: 'comfortable', title: '舒适' }, { value: 'compact', title: '紧凑' }], dynamicTitle: true } },
@@ -19,7 +19,7 @@ const preview: Preview = {
   parameters: {
     layout: 'fullscreen',
     controls: { expanded: true },
-    options: { storySort: { order: ['开始', '基础组件', '动效与 MG', '实用工具'] } }
+    options: { storySort: { order: ['开始', ['水墨科技样板', '工程起点'], '基础组件', '动效', '实用工具'] } }
   }
 };
 

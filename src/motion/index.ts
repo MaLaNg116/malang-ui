@@ -6,3 +6,12 @@ export type {
   OrbitSequenceOptions,
   OrbitSequenceState,
 } from './orbitSequence';
+
+export { createInkSequence } from './inkSequence';
+export type {
+  InkPalette,
+  InkPhase,
+  InkSequenceController,
+  InkSequenceOptions,
+  InkSequenceState,
+} from './inkSequence';

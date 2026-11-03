@@ -1,0 +1,35 @@
+.ink-demo { width:min(100%,780px); margin:0 auto; overflow:hidden; color:var(--ui-color-text); background:var(--ui-color-canvas); border:1px solid var(--ui-color-border); border-radius:var(--ui-radius-panel); font-family:var(--ui-font-family); }
+.ink-demo * { box-sizing:border-box; }
+.ink-demo__heading { padding:30px 32px 0; }
+.ink-demo__eyebrow { margin:0 0 18px; color:var(--ui-color-accent); font:400 10px/1.5 var(--ui-font-family-mono); letter-spacing:2px; }
+.ink-demo__title { display:flex; align-items:center; justify-content:space-between; gap:20px; }
+.ink-demo h2 { margin:0; font:500 clamp(30px,5vw,42px)/1.3 var(--ui-font-family-display,var(--ui-font-family)); letter-spacing:1px; }
+.ink-demo__title > span { color:var(--ui-color-text-secondary); font-size:11px; letter-spacing:3px; white-space:nowrap; }
+.ink-demo__intro { margin:12px 0 0; color:var(--ui-color-text-secondary); font-size:12px; line-height:1.7; }
+.ink-demo__stage { position:relative; }
+.ink-demo__canvas { display:block; width:100%; height:360px; }
+.ink-demo__stage-label { position:absolute; left:32px; bottom:20px; color:var(--ui-color-text-secondary); font:400 9px/1.5 var(--ui-font-family-mono); letter-spacing:2px; pointer-events:none; }
+.ink-demo__controls { padding:20px 32px 26px; border-top:1px solid var(--ui-color-border); background:var(--ui-color-surface); }
+.ink-demo__status { display:flex; justify-content:space-between; gap:14px; margin-bottom:14px; font-size:12px; line-height:1.5; }
+.ink-demo__time { color:var(--ui-color-text-secondary); font-family:var(--ui-font-family-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.ink-demo__timeline { display:block; width:100%; margin:0 0 20px; accent-color:var(--ui-color-accent); cursor:ew-resize; }
+.ink-demo__buttons { display:flex; flex-wrap:wrap; gap:10px; }
+.ink-demo__button { min-height:40px; padding:9px 16px; border:1px solid var(--ui-color-border); border-radius:var(--ui-radius-control); color:var(--ui-color-text); background:var(--ui-color-canvas); font:400 12px/1.5 var(--ui-font-family); cursor:pointer; }
+.ink-demo__button:hover { border-color:var(--ui-color-accent); }
+.ink-demo__button--primary { color:var(--ui-color-on-accent); background:var(--ui-color-accent); border-color:var(--ui-color-accent); }
+.ink-demo__button:focus-visible, .ink-demo__timeline:focus-visible { outline:var(--ui-focus-width) solid var(--ui-color-focus); outline-offset:var(--ui-focus-offset); }
+.ink-demo__note { margin:14px 0 0; color:var(--ui-color-text-secondary); font-size:11px; line-height:1.7; }
+@media(max-width:480px) {
+  .ink-demo__heading { padding:23px 20px 0; }
+  .ink-demo__eyebrow { margin-bottom:13px; }
+  .ink-demo__title > span { font-size:9px; letter-spacing:1px; }
+  .ink-demo__intro { max-width:220px; }
+  .ink-demo__canvas { height:280px; }
+  .ink-demo__stage-label { left:20px; bottom:22px; font-size:8px; }
+  .ink-demo__controls { padding:18px 20px 23px; }
+  .ink-demo__button { padding:9px 12px; }
+}
+@media(pointer:coarse) {
+  .ink-demo__button { min-height:44px; }
+  .ink-demo__timeline { min-height:32px; }
+}
