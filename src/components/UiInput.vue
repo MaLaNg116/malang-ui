@@ -88,7 +88,7 @@ const value = computed({
 
 .ui-field__registration {
   position: absolute;
-  inset: -2px;
+  inset: 0;
   pointer-events: none;
   color: var(--ui-field-frame);
 }
@@ -97,6 +97,7 @@ const value = computed({
 .ui-field__registration::after {
   content: '';
   position: absolute;
+  box-sizing: border-box;
   width: 10px;
   height: 7px;
   border-color: currentColor;
@@ -147,10 +148,9 @@ const value = computed({
 }
 
 .ui-input:focus-visible {
-  outline: var(--ui-focus-width) solid var(--ui-color-focus);
-  outline-offset: calc(var(--ui-focus-offset) + 2px);
+  outline: none;
   border-bottom-color: var(--ui-color-accent);
-  box-shadow: inset 0 -2px 0 var(--ui-color-accent);
+  box-shadow: inset 0 -1px 0 var(--ui-color-accent);
 }
 
 .ui-field__control:focus-within {
@@ -172,8 +172,8 @@ const value = computed({
 }
 
 .ui-input--error:focus-visible {
-  outline-color: var(--ui-color-danger);
-  box-shadow: inset 0 -2px 0 var(--ui-color-danger);
+  border-bottom-color: var(--ui-color-danger);
+  box-shadow: inset 0 -1px 0 var(--ui-color-danger);
 }
 
 .ui-input:disabled {
@@ -205,5 +205,13 @@ const value = computed({
   .ui-input,
   .ui-field__registration::before,
   .ui-field__registration::after { transition: none; }
+}
+
+@media (forced-colors: active) {
+  .ui-input:focus-visible {
+    outline: var(--ui-focus-width) solid Highlight;
+    outline-offset: var(--ui-focus-offset);
+    box-shadow: none;
+  }
 }
 </style>
