@@ -280,6 +280,27 @@ test.describe('Tooltip', () => {
     expect(await surface.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
     await expectNoPageOverflow(page);
     await expect(trigger).toBeFocused();
+
+    // Both sources of reduced motion stop the plaque and its decorative seating line.
+    for (const source of ['container', 'system']) {
+      await page.emulateMedia({ reducedMotion: source === 'system' ? 'reduce' : 'no-preference' });
+      await openStory(page, tooltipTitle, 'LongContent', `theme:dark;motion:${source === 'container' ? 'reduced' : 'standard'}`);
+      await trigger.focus();
+      await expect(surface).toBeVisible();
+      expect(await surface.evaluate(element => getComputedStyle(element).animationName)).toBe('none');
+      expect(await surface.locator('.ui-tooltip__seam').evaluate(element => getComputedStyle(element).animationName)).toBe('none');
+    }
+
+    // Short viewports scroll the text within the cut frame and keep the last line reachable.
+    await page.setViewportSize({ width: 360, height: 240 });
+    await expectInsideViewport(surface);
+    const copy = surface.locator('.ui-tooltip__content');
+    expect(await copy.evaluate(element => element.scrollHeight > element.clientHeight)).toBe(true);
+    await copy.evaluate(element => { element.scrollTop = element.scrollHeight; });
+    expect(await copy.evaluate(element => element.scrollTop)).toBeGreaterThan(0);
+    await expectNoPageOverflow(page);
+    await page.emulateMedia({ forcedColors: 'active' });
+    expect(await surface.evaluate(element => getComputedStyle(element).borderTopStyle)).toBe('solid');
   });
 
   test('cleans pending timers and open positioning when unmounted, then mounts a usable fresh instance', async ({ page }) => {
