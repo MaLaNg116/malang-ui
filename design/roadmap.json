@@ -1,13 +1,13 @@
 {
   "version": "0.1.0",
-  "status": "engineering-starter",
+  "status": "interaction-foundation",
   "project": "malang-ui",
   "repository": "https://github.com/MaLaNg116/malang-ui",
   "confirmed": {
     "purpose": "组件库自己的文档与展示站作为首个验证项目",
     "framework": "Vue 3 + TypeScript，后续支持 React",
     "visualDirection": "水墨与科技融合、几何构形、GSAP 与 MG 编排",
-    "visualDirectionStatus": "正在研究功夫朋克与水墨科技的原创转译，现有工作台仍为前一版主题",
+    "visualDirectionStatus": "首轮水墨科技样板与组件语言已落地，正在通过导航、弹层和真实组合流程继续验证",
     "colorAndDetail": "后续优化",
     "productScope": ["UI 组件", "动效", "MG 编排", "实用工具", "场景组合"],
     "audience": "先自用，验证后开源"
@@ -50,13 +50,13 @@
   ],
   "engineeringMilestone": {
     "project": "malang-ui",
-    "delivered": ["UiButton", "UiInput", "UiSwitch", "debounce", "throttle", "asyncLock", "useReducedMotion", "GSAP 轨道构形编排"],
-    "verified": ["类型检查", "19 项工具测试", "22 个 Story 渲染与浏览器交互", "中文输入重渲染", "全局减少动态效果", "MG 终点定位与 BFCache 生命周期", "组件库构建", "Storybook 构建", "公开入口导入与工具依赖隔离"],
+    "delivered": ["UiButton", "UiInput", "UiSwitch", "UiTabs", "UiDialog", "debounce", "throttle", "asyncLock", "useReducedMotion", "GSAP 轨道构形与墨迹切面编排", "水墨科技与导航弹层组合样板"],
+    "verified": ["类型检查", "19 项工具测试", "44 个 Story 的渲染与浏览器交互", "16 项导航与弹层的持久化浏览器回归", "中文输入重渲染", "明暗主题、紧凑密度与减少动态效果", "MG 终点定位与 BFCache 生命周期", "Dialog 嵌套焦点与滚动锁清理", "组件库构建", "Storybook 构建", "公开入口导入与工具依赖隔离"],
     "localPreview": "http://127.0.0.1:6006/",
     "packageName": "malang-ui",
     "package": "malang-ui-0.1.0.tgz",
     "packageStatus": "private，尚未发布到 npm；构建后通过 pnpm pack 生成本地安装包",
-    "validationStatus": "已验证的工程原型迁入正式仓库，迁移后的检查由仓库命令复验"
+    "validationStatus": "工程起点、水墨科技组件与 MG 样板已验证；导航弹层通过公开入口接入组合页，并由仓库浏览器测试持续回归"
   },
   "designTokens": "design/tokens.json",
   "designReferences": "design/skill-references.json",

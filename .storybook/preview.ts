@@ -19,7 +19,7 @@ const preview: Preview = {
   parameters: {
     layout: 'fullscreen',
     controls: { expanded: true },
-    options: { storySort: { order: ['开始', ['水墨科技样板', '工程起点'], '基础组件', ['交互语言', 'Button 按钮', 'Input 输入框', 'Switch 开关'], '动效', '实用工具'] } }
+    options: { storySort: { order: ['开始', ['水墨科技样板', '导航与弹层', '工程起点'], '基础组件', ['交互语言', 'Button 按钮', 'Input 输入框', 'Switch 开关', 'Tabs 标签页', 'Dialog 对话框'], '动效', '实用工具'] } }
   }
 };
 

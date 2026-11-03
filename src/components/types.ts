@@ -28,3 +28,27 @@ export interface UiSwitchProps {
   hint?: string;
   disabled?: boolean;
 }
+
+export interface UiTabItem {
+  value: string;
+  label: string;
+  disabled?: boolean;
+}
+
+export type UiTabsActivationMode = 'automatic' | 'manual';
+
+export interface UiTabsProps {
+  modelValue: string;
+  items: readonly UiTabItem[];
+  label: string;
+  activationMode?: UiTabsActivationMode;
+}
+
+export interface UiDialogProps {
+  modelValue: boolean;
+  title: string;
+  description?: string;
+  closeOnEscape?: boolean;
+  closeOnBackdrop?: boolean;
+  closeLabel?: string;
+}

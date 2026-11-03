@@ -55,6 +55,7 @@
   --ui-color-danger: #b32620;
   --ui-color-focus: #315f57;
   --ui-color-surface-raised: #fffcf3;
+  --ui-color-overlay: rgba(5, 10, 8, 0.62);
   --ui-color-ink: #242c29;
   --ui-color-paper: #eee9dd;
   --ui-color-metal: #68746b;
@@ -82,6 +83,7 @@
   --ui-color-danger: #b32620;
   --ui-color-focus: #315f57;
   --ui-color-surface-raised: #fffcf3;
+  --ui-color-overlay: rgba(5, 10, 8, 0.62);
   --ui-color-ink: #242c29;
   --ui-color-paper: #eee9dd;
   --ui-color-metal: #68746b;
@@ -106,6 +108,7 @@
   --ui-color-danger: #ffa38f;
   --ui-color-focus: #92bab0;
   --ui-color-surface-raised: #243129;
+  --ui-color-overlay: rgba(5, 10, 8, 0.62);
   --ui-color-ink: #d9d7c9;
   --ui-color-paper: #202c25;
   --ui-color-metal: #86998a;
@@ -131,6 +134,7 @@
   --ui-color-danger: #ffa38f;
   --ui-color-focus: #92bab0;
   --ui-color-surface-raised: #243129;
+  --ui-color-overlay: rgba(5, 10, 8, 0.62);
   --ui-color-ink: #d9d7c9;
   --ui-color-paper: #202c25;
   --ui-color-metal: #86998a;
