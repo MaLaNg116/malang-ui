@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { defineComponent, ref } from 'vue';
-import { UiButton } from '../../src/components';
+import { MButton } from '../../src/components';
 
 const meta = {
   title: '基础组件/Button 按钮',
-  component: UiButton,
+  component: MButton,
   tags: ['autodocs'],
   args: { variant: 'primary', size: 'md', disabled: false, loading: false },
   argTypes: {
@@ -13,11 +13,11 @@ const meta = {
     type: { control: 'select', options: ['button', 'submit', 'reset'] },
   },
   render: (args) => defineComponent({
-    components: { UiButton },
+    components: { MButton },
     setup: () => ({ args }),
-    template: '<UiButton v-bind="args">创建空间 ↗</UiButton>',
+    template: '<MButton v-bind="args">创建空间 ↗</MButton>',
   }),
-} satisfies Meta<typeof UiButton>;
+} satisfies Meta<typeof MButton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -30,11 +30,11 @@ export const Ghost: Story = { args: { variant: 'ghost' } };
 
 export const VariantsAndSizes: Story = {
   render: () => defineComponent({
-    components: { UiButton },
+    components: { MButton },
     setup: () => ({ variants: ['primary', 'secondary', 'ghost'], sizes: ['sm', 'md', 'lg'] }),
     template: `<div style="display:grid;gap:24px">
       <div v-for="size in sizes" :key="size" style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
-        <UiButton v-for="variant in variants" :key="variant" :variant="variant" :size="size">{{ variant }} ↗</UiButton>
+        <MButton v-for="variant in variants" :key="variant" :variant="variant" :size="size">{{ variant }} ↗</MButton>
       </div>
     </div>`,
   }),
@@ -42,7 +42,7 @@ export const VariantsAndSizes: Story = {
 
 export const AsyncAction: Story = {
   render: () => defineComponent({
-    components: { UiButton },
+    components: { MButton },
     setup() {
       const loading = ref(false);
       const saved = ref(false);
@@ -59,7 +59,7 @@ export const AsyncAction: Story = {
       return { loading, saved, save };
     },
     template: `<div style="display:grid;gap:12px;justify-items:start">
-      <UiButton :loading="loading" @click="save">{{ loading ? '正在保存…' : '保存草稿 ↗' }}</UiButton>
+      <MButton :loading="loading" @click="save">{{ loading ? '正在保存…' : '保存草稿 ↗' }}</MButton>
       <span role="status" style="font-size:12px;color:var(--ui-color-success)">{{ saved ? '草稿已保存' : '' }}</span>
     </div>`,
   }),

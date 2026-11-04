@@ -1,17 +1,17 @@
 import type { ButtonHTMLAttributes, InputTypeHTMLAttribute } from 'vue';
 
-export type UiButtonVariant = 'primary' | 'secondary' | 'ghost';
-export type UiControlSize = 'sm' | 'md' | 'lg';
+export type MButtonVariant = 'primary' | 'secondary' | 'ghost';
+export type MControlSize = 'sm' | 'md' | 'lg';
 
-export interface UiButtonProps {
-  variant?: UiButtonVariant;
-  size?: UiControlSize;
+export interface MButtonProps {
+  variant?: MButtonVariant;
+  size?: MControlSize;
   type?: ButtonHTMLAttributes['type'];
   disabled?: boolean;
   loading?: boolean;
 }
 
-export interface UiInputProps {
+export interface MInputProps {
   modelValue?: string;
   id?: string;
   label?: string;
@@ -21,7 +21,7 @@ export interface UiInputProps {
   disabled?: boolean;
 }
 
-export interface UiSwitchProps {
+export interface MSwitchProps {
   modelValue?: boolean;
   id?: string;
   label?: string;
@@ -29,22 +29,22 @@ export interface UiSwitchProps {
   disabled?: boolean;
 }
 
-export interface UiTabItem {
+export interface MTabItem {
   value: string;
   label: string;
   disabled?: boolean;
 }
 
-export type UiTabsActivationMode = 'automatic' | 'manual';
+export type MTabsActivationMode = 'automatic' | 'manual';
 
-export interface UiTabsProps {
+export interface MTabsProps {
   modelValue: string;
-  items: readonly UiTabItem[];
+  items: readonly MTabItem[];
   label: string;
-  activationMode?: UiTabsActivationMode;
+  activationMode?: MTabsActivationMode;
 }
 
-export interface UiDialogProps {
+export interface MDialogProps {
   modelValue: boolean;
   title: string;
   description?: string;
@@ -53,50 +53,50 @@ export interface UiDialogProps {
   closeLabel?: string;
 }
 
-export interface UiCardProps {
+export interface MCardProps {
   as?: 'article' | 'section' | 'div';
   title?: string;
   description?: string;
   headingTag?: 'h2' | 'h3' | 'h4';
 }
 
-export type UiToastVariant = 'info' | 'success' | 'error';
+export type MToastVariant = 'info' | 'success' | 'error';
 
-export interface UiToastProps {
+export interface MToastProps {
   modelValue: boolean;
   title: string;
   description?: string;
-  variant?: UiToastVariant;
+  variant?: MToastVariant;
   duration?: number;
   closeLabel?: string;
 }
 
-export type UiToastPlacement = 'top-end' | 'bottom-end';
+export type MToastPlacement = 'top-end' | 'bottom-end';
 
-export interface UiToastViewportProps {
-  placement?: UiToastPlacement;
+export interface MToastViewportProps {
+  placement?: MToastPlacement;
   label?: string;
 }
 
-export type UiFloatingPlacement = 'top' | 'bottom' | 'left' | 'right';
+export type MFloatingPlacement = 'top' | 'bottom' | 'left' | 'right';
 
-export interface UiPopoverProps {
+export interface MPopoverProps {
   modelValue: boolean;
   label: string;
   triggerLabel?: string;
-  placement?: UiFloatingPlacement;
+  placement?: MFloatingPlacement;
   disabled?: boolean;
 }
 
-export interface UiTooltipProps {
+export interface MTooltipProps {
   text: string;
   label: string;
-  placement?: UiFloatingPlacement;
+  placement?: MFloatingPlacement;
   delay?: number;
   disabled?: boolean;
 }
 
-export interface UiCheckboxProps {
+export interface MCheckboxProps {
   modelValue: boolean;
   indeterminate?: boolean;
   id?: string;
@@ -106,16 +106,16 @@ export interface UiCheckboxProps {
   disabled?: boolean;
 }
 
-export interface UiChoiceOption {
+export interface MChoiceOption {
   value: string;
   label: string;
   disabled?: boolean;
   description?: string;
 }
 
-export interface UiRadioGroupProps {
+export interface MRadioGroupProps {
   modelValue: string;
-  options: readonly UiChoiceOption[];
+  options: readonly MChoiceOption[];
   label: string;
   name?: string;
   hint?: string;
@@ -123,9 +123,9 @@ export interface UiRadioGroupProps {
   disabled?: boolean;
 }
 
-export interface UiSelectProps {
+export interface MSelectProps {
   modelValue: string;
-  options: readonly UiChoiceOption[];
+  options: readonly MChoiceOption[];
   id?: string;
   label?: string;
   placeholder?: string;
@@ -134,7 +134,7 @@ export interface UiSelectProps {
   disabled?: boolean;
 }
 
-export interface UiTextareaProps {
+export interface MTextareaProps {
   modelValue: string;
   id?: string;
   label?: string;
@@ -144,38 +144,38 @@ export interface UiTextareaProps {
   disabled?: boolean;
 }
 
-export type UiStatusTone = 'neutral' | 'info' | 'success' | 'warning' | 'error';
+export type MStatusTone = 'neutral' | 'info' | 'success' | 'warning' | 'error';
 
-export interface UiBadgeProps {
-  tone?: UiStatusTone;
+export interface MBadgeProps {
+  tone?: MStatusTone;
 }
 
-export interface UiAlertProps {
+export interface MAlertProps {
   title: string;
   description?: string;
-  tone?: UiStatusTone;
+  tone?: MStatusTone;
   announce?: boolean;
 }
 
-export interface UiSpinnerProps {
+export interface MSpinnerProps {
   label?: string;
-  size?: UiControlSize;
+  size?: MControlSize;
 }
 
-export interface UiSkeletonProps {
+export interface MSkeletonProps {
   lines?: number;
 }
 
-export interface UiEmptyProps {
+export interface MEmptyProps {
   title?: string;
   description?: string;
 }
 
-export interface UiDividerProps {
+export interface MDividerProps {
   label?: string;
 }
 
-export interface UiPaginationProps {
+export interface MPaginationProps {
   modelValue: number;
   total: number;
   pageSize?: number;
@@ -183,30 +183,108 @@ export interface UiPaginationProps {
   label?: string;
 }
 
-export interface UiBreadcrumbItem {
+export interface MBreadcrumbItem {
   label: string;
   href?: string;
 }
 
-export interface UiBreadcrumbProps {
-  items: readonly UiBreadcrumbItem[];
+export interface MBreadcrumbProps {
+  items: readonly MBreadcrumbItem[];
   label?: string;
 }
 
-export interface UiTableColumn {
+export interface MTableColumn {
   key: string;
   label: string;
   align?: 'start' | 'center' | 'end';
 }
 
-export type UiTableRow = Record<string, unknown>;
+export type MTableRow = Record<string, unknown>;
 
-export interface UiTableProps<Row extends object = UiTableRow> {
-  columns: readonly UiTableColumn[];
+export interface MTableProps<Row extends object = MTableRow> {
+  columns: readonly MTableColumn[];
   rows: readonly Row[];
   caption: string;
   rowKey?: string;
   loading?: boolean;
   emptyTitle?: string;
   emptyDescription?: string;
+}
+
+export interface MDrawerProps extends MDialogProps {
+  side?: 'left' | 'right' | 'bottom';
+  size?: MControlSize;
+}
+
+export interface MMenuAction {
+  type?: 'item';
+  value: string;
+  label: string;
+  disabled?: boolean;
+  danger?: boolean;
+  shortcut?: string;
+}
+
+export interface MMenuSeparator { type: 'separator'; key: string }
+export type MDropdownMenuItem = MMenuAction | MMenuSeparator;
+export interface MDropdownMenuProps {
+  modelValue: boolean;
+  items: readonly MDropdownMenuItem[];
+  label: string;
+  triggerLabel?: string;
+  placement?: MFloatingPlacement;
+  disabled?: boolean;
+}
+
+export interface MAccordionItem {
+  value: string;
+  label: string;
+  description?: string;
+  disabled?: boolean;
+}
+export interface MAccordionProps {
+  modelValue: readonly string[];
+  items: readonly MAccordionItem[];
+  label: string;
+  multiple?: boolean;
+  headingTag?: 'h2' | 'h3' | 'h4';
+}
+
+export interface MStepItem {
+  value: string;
+  label: string;
+  description?: string;
+  disabled?: boolean;
+}
+export interface MStepsProps {
+  modelValue: string;
+  items: readonly MStepItem[];
+  label: string;
+  interactive?: boolean;
+  orientation?: 'horizontal' | 'vertical';
+  status?: 'process' | 'error' | 'success';
+}
+
+export interface MProgressProps {
+  value?: number;
+  max?: number;
+  label: string;
+  indeterminate?: boolean;
+  status?: 'default' | 'success' | 'error';
+  showValue?: boolean;
+}
+
+export type MTimelineStatus = 'neutral' | 'pending' | 'active' | 'success' | 'error';
+export interface MTimelineItem {
+  value: string;
+  title: string;
+  description?: string;
+  time?: string;
+  datetime?: string;
+  status?: MTimelineStatus;
+}
+export interface MTimelineProps {
+  items: readonly MTimelineItem[];
+  label: string;
+  headingTag?: 'h3' | 'h4';
 }

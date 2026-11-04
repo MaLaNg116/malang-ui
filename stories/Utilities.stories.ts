@@ -1,10 +1,10 @@
 import { defineComponent, onBeforeUnmount, ref, watch } from 'vue';
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
-import { UiButton, UiInput } from '../src';
+import { MButton, MInput } from '../src';
 import { asyncLock, debounce } from '../src/utils';
 
 const UtilityPlayground = defineComponent({
-  components: { UiButton, UiInput },
+  components: { MButton, MInput },
   setup() {
     const query = ref('');
     const inputCount = ref(0);
@@ -46,15 +46,15 @@ const UtilityPlayground = defineComponent({
       <p class="kit-muted">这里调用的是工具层的公开函数。工具本身不依赖 Vue，Vue 负责界面与生命周期。</p>
       <section class="kit-panel kit-stack" aria-label="防抖搜索">
         <h2 style="font-size:18px">防抖搜索 · 350ms</h2>
-        <UiInput v-model="query" label="搜索组件或工具" placeholder="连续输入 button、mg 或 debounce" />
-        <div class="kit-row"><UiButton size="sm" :disabled="!pending" @click="flush">立即执行</UiButton><UiButton size="sm" variant="secondary" :disabled="!pending" @click="cancel">取消等待</UiButton></div>
+        <MInput v-model="query" label="搜索组件或工具" placeholder="连续输入 button、mg 或 debounce" />
+        <div class="kit-row"><MButton size="sm" :disabled="!pending" @click="flush">立即执行</MButton><MButton size="sm" variant="secondary" :disabled="!pending" @click="cancel">取消等待</MButton></div>
         <p class="kit-muted kit-mono">输入 {{ inputCount }} 次 · 执行搜索 {{ searchCount }} 次</p>
         <p role="status" aria-live="polite">{{ status }}</p>
         <div class="kit-row"><code v-for="item in matches" :key="item" style="padding:6px 9px;border-radius:6px;background:var(--ui-color-accent-soft);color:var(--ui-color-text)">{{ item }}</code></div>
       </section>
       <section class="kit-panel kit-stack" aria-label="异步锁">
         <h2 style="font-size:18px">异步锁 · 共享进行中的操作</h2>
-        <div class="kit-row"><UiButton @click="requestSave">连续点击保存 ↗</UiButton><span class="kit-muted">实际执行 {{ lockCalls }} 次</span></div>
+        <div class="kit-row"><MButton @click="requestSave">连续点击保存 ↗</MButton><span class="kit-muted">实际执行 {{ lockCalls }} 次</span></div>
         <p role="status" aria-live="polite">{{ lockStatus }}</p>
       </section>
     </main>`

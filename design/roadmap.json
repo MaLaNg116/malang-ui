@@ -1,7 +1,22 @@
 {
   "version": "0.1.0",
-  "status": "basic-v1-foundation",
+  "status": "continuous-kungfu-refinement",
   "project": "malang-ui",
+  "continuousRefinement": {
+    "status": "active",
+    "objective": "持续优化并制作二级组件，保持功夫朋克主题，同时提升美观度、华丽度、炫酷度、区分度、舒适度、易用度、流畅度，持续迭代直到组件库趋于完善。",
+    "publicNaming": {"component": "MInput", "template": "m-input", "types": "MInputProps", "brand": "MaLang"},
+    "qualityContract": "design/quality-contract.json",
+    "streams": [
+      {"name":"二级流程组件","status":"implemented-and-locally-verified","scope":["MDrawer","MDropdownMenu","MAccordion","MSteps","MProgress","MTimeline","铸刃工坊交付组合"]},
+      {"name":"丰富输入与编辑","status":"planned","scope":["InputNumber","Slider","Combobox","DatePicker","Upload","表单校验与组合"]},
+      {"name":"内容与导航扩展","status":"planned","scope":["Tag","Avatar","Descriptions","Menu","Tree","实际数据页面"]},
+      {"name":"MG与动效家族","status":"planned","scope":["品牌开场","加载等待","成功落印","列表与空间切换","统一生命周期与减少动效"]},
+      {"name":"文档与工程成熟度","status":"in-progress","scope":["公开M命名","风格规范与设计状态","完整API与示例","真实安装包消费","持续浏览器回归","在自用项目验证"]}
+    ],
+    "completionEvidence": ["规划能力已实现且有真实场景","七项品质通过明暗和窄屏实机评审","交互、类型、打包与CI覆盖对应公开能力","未完成项与实际限制明确记录并继续推进"],
+    "latestIteration": {"name":"M命名与二级流程","status":"locally-verified","componentCount":29,"storyCount":169,"browserCases":76,"newComponents":["MDrawer","MDropdownMenu","MAccordion","MSteps","MProgress","MTimeline"],"newScenarios":["功夫朋克规范","铸刃工坊"],"packageConsumer":"真实tgz、无paths、skipLibCheck:false、无GSAP、无全局box-sizing reset、360px与组合回焦均通过"}
+  },
   "repository": "https://github.com/MaLaNg116/malang-ui",
   "confirmed": {
     "purpose": "组件库自己的文档与展示站作为首个验证项目",
@@ -58,13 +73,13 @@
   ],
   "engineeringMilestone": {
     "project": "malang-ui",
-    "delivered": ["23个公开Vue组件，完整清单见basicV1Target", "debounce", "throttle", "asyncLock", "useReducedMotion", "GSAP 轨道构形与墨迹切面编排", "水墨科技、导航弹层与保存反馈组合样板", "筛选、分页、新建、编辑与通知业务组合工作台", "基础版使用指南、组件索引和API文档"],
-    "verified": ["类型检查", "19 项工具测试", "126 个构建后 Story 的浏览器渲染", "55 项表单、数据、导航、浮层、反馈与业务流程浏览器回归", "中文输入重渲染与原生表单验证", "明暗主题、紧凑密度、减少动态效果与360px", "MG 终点定位与 BFCache 生命周期", "Dialog 嵌套焦点与滚动锁清理", "Popover受控请求与异步定位焦点", "Tooltip切角铭牌、方向归位、短屏滚动与高对比回退", "Toast 重叠暂停、剩余计时、消息替换、单一播报与卸载清理", "组件库构建", "Storybook 构建与文档页加载", "全部23个公开组件入口", "独立Vue消费项目声明与泛型Table类型", "SSR导入和基础渲染", "工具与UI入口依赖隔离"],
+    "delivered": ["29个公开M前缀Vue组件，含基础23项与二级流程6项", "MInput与m-input引用命名", "debounce", "throttle", "asyncLock", "useReducedMotion", "GSAP 轨道构形与墨迹切面编排", "水墨科技、导航弹层与保存反馈组合样板", "筛选、分页、新建、编辑与通知业务组合工作台", "功夫朋克七项品质规范", "铸刃工坊取消、异常与重试交付流程", "使用指南、组件索引和API文档"],
+    "verified": ["类型检查", "19 项工具测试", "169 个构建后 Story 的浏览器渲染", "76 项表单、数据、导航、浮层、反馈与业务流程浏览器回归", "中文输入重渲染与原生表单验证", "明暗主题、紧凑密度、减少动态效果与360px", "MG 终点定位与 BFCache 生命周期", "Dialog与Drawer嵌套焦点、正文滚动与滚动锁清理", "Popover受控请求与异步定位焦点", "DropdownMenu方向键、前缀与原生Tab进退", "Accordion标题命名、受控开合与隐藏草稿保留", "Steps进度、Progress语义与Timeline记录", "Tooltip切角铭牌、方向归位、短屏滚动与高对比回退", "Toast 重叠暂停、剩余计时、消息替换、单一播报与卸载清理", "组件库构建", "Storybook 构建与文档页加载", "全部29个M前缀公开组件入口，无旧别名", "独立Vue消费项目声明与泛型Table类型", "真实tgz的MInput/m-input、无全局reset与组合回焦", "SSR导入和基础渲染", "工具与UI入口依赖隔离"],
     "localPreview": "http://127.0.0.1:6006/",
     "packageName": "malang-ui",
     "package": "malang-ui-0.1.0.tgz",
     "packageStatus": "private，尚未发布到 npm；构建后通过 pnpm pack 生成本地安装包",
-    "validationStatus": "基础版已实现；通过公开入口组合业务工作台，由main分支CI持续执行类型、工具、构建和浏览器回归；下一步在自己的真实项目验证"
+    "validationStatus": "基础与第一批二级流程已实现，命名统一为M；通过公开入口组合业务工作台与铸刃工坊，由main分支CI持续回归。持续迭代目标保持active，输入、导航、MG与真实项目验证继续推进。"
   },
   "designTokens": "design/tokens.json",
   "designReferences": "design/skill-references.json",

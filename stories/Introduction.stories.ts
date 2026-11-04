@@ -1,9 +1,9 @@
 import { defineComponent, ref } from 'vue';
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
-import { UiButton, UiInput, UiSwitch } from '../src';
+import { MButton, MInput, MSwitch } from '../src';
 
 const Introduction = defineComponent({
-  components: { UiButton, UiInput, UiSwitch },
+  components: { MButton, MInput, MSwitch },
   setup() {
     const name = ref('我的组件工作台');
     const enabled = ref(true);
@@ -17,9 +17,9 @@ const Introduction = defineComponent({
       <p class="kit-muted">这是第一版开发工作台。通过左侧目录查看组件状态、MG 编排和工具交互，通过顶部工具栏切换主题与密度。</p>
       <section class="kit-panel kit-stack" aria-label="组合使用示例">
         <h2 style="font-size:18px">先创建一个工作空间</h2>
-        <UiInput v-model="name" label="工作空间名称" hint="体验共享 Token、输入状态与键盘操作" />
-        <UiSwitch v-model="enabled" label="启用进展提醒" />
-        <div class="kit-row"><UiButton @click="message = '工作空间「' + (name || '未命名') + '」已准备好。'">创建空间 ↗</UiButton><UiButton variant="secondary" @click="name = ''; message = '请重新填写工作空间名称。'">清空输入</UiButton></div>
+        <MInput v-model="name" label="工作空间名称" hint="体验共享 Token、输入状态与键盘操作" />
+        <MSwitch v-model="enabled" label="启用进展提醒" />
+        <div class="kit-row"><MButton @click="message = '工作空间「' + (name || '未命名') + '」已准备好。'">创建空间 ↗</MButton><MButton variant="secondary" @click="name = ''; message = '请重新填写工作空间名称。'">清空输入</MButton></div>
         <p role="status" aria-live="polite" class="kit-muted">{{ message }}</p>
       </section>
       <div class="kit-panel kit-stack">

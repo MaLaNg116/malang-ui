@@ -1,11 +1,11 @@
 import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
-import type { UiFloatingPlacement } from '../components/types';
+import type { MFloatingPlacement } from '../components/types';
 
 /** One floating surface owns its observers and ignores stale async measurements. */
 export function floatingPosition(
   reference: HTMLElement,
   surface: HTMLElement,
-  placement: () => UiFloatingPlacement,
+  placement: () => MFloatingPlacement,
   positioned: () => void,
 ) {
   let disposed = false;

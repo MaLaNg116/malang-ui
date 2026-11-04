@@ -1,26 +1,26 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { defineComponent, ref } from 'vue';
-import UiEmpty from '../../src/components/UiEmpty.vue';
-import UiButton from '../../src/components/UiButton.vue';
-import UiCard from '../../src/components/UiCard.vue';
+import MEmpty from '../../src/components/MEmpty.vue';
+import MButton from '../../src/components/MButton.vue';
+import MCard from '../../src/components/MCard.vue';
 
 const meta = {
   title: '基础组件/Empty 空状态',
-  component: UiEmpty,
+  component: MEmpty,
   tags: ['autodocs'],
   args: { title: '暂无内容', description: '这里还没有档案，可以从第一份内容开始整理。' },
   parameters: { docs: { description: { component: '以原创档案线稿与可读标题表达空内容。默认插槽用于下一步操作，图形对辅助技术隐藏，组件不会主动移动焦点。' } } },
-  render: args => defineComponent({ components: { UiEmpty, UiCard }, setup: () => ({ args }), template: '<UiCard style="max-width:680px"><UiEmpty v-bind="args" /></UiCard>' }),
-} satisfies Meta<typeof UiEmpty>;
+  render: args => defineComponent({ components: { MEmpty, MCard }, setup: () => ({ args }), template: '<MCard style="max-width:680px"><MEmpty v-bind="args" /></MCard>' }),
+} satisfies Meta<typeof MEmpty>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 export const WithAction: Story = {
   name: '清除筛选操作',
   render: () => defineComponent({
-    components: { UiEmpty, UiButton, UiCard },
+    components: { MEmpty, MButton, MCard },
     setup: () => ({ query: ref('山水'), message: ref('') }),
-    template: `<UiCard style="max-width:680px"><UiEmpty :title="query ? '没有匹配的档案' : '尚未建立档案'" :description="query ? '试着清除「' + query + '」筛选，查看其他内容。' : '筛选已清除，可以添加新的内容。'"><UiButton variant="secondary" :disabled="!query" @click="query = ''; message = '已清除示例筛选。'">清除筛选</UiButton><p role="status" class="kit-muted" style="width:100%;font-size:12px">{{ message }}</p></UiEmpty></UiCard>`,
+    template: `<MCard style="max-width:680px"><MEmpty :title="query ? '没有匹配的档案' : '尚未建立档案'" :description="query ? '试着清除「' + query + '」筛选，查看其他内容。' : '筛选已清除，可以添加新的内容。'"><MButton variant="secondary" :disabled="!query" @click="query = ''; message = '已清除示例筛选。'">清除筛选</MButton><p role="status" class="kit-muted" style="width:100%;font-size:12px">{{ message }}</p></MEmpty></MCard>`,
   }),
 };
 export const LongContent: Story = {

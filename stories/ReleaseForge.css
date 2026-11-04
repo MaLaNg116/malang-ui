@@ -1,0 +1,37 @@
+.release-forge { max-width: 1160px; margin-inline: auto; }
+.release-forge__hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 300px; align-items: center; gap: 48px; padding: 32px 0 40px; border-bottom: 2px solid var(--ui-color-text); }
+.release-forge__eyebrow { color: var(--ui-color-accent); font: 10px/1.5 var(--ui-font-family-mono); letter-spacing: 3px; }
+.release-forge h1 { margin: 20px 0 18px; font: 500 clamp(36px, 5vw, 56px)/1.35 var(--ui-font-family-display); letter-spacing: 2px; }
+.release-forge__intro { max-width: 470px; color: var(--ui-color-text-secondary); font-size: 12px; line-height: 1.9; }
+.release-forge__hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 28px; }
+.release-forge__emblem { position: relative; width: 100%; max-width: 300px; justify-self: center; text-align: center; }
+.release-forge__emblem svg { display: block; width: 100%; height: auto; }
+.release-forge__orbit, .release-forge__inner-orbit, .release-forge__rail { stroke: var(--ui-color-metal); stroke-width: .7; }
+.release-forge__inner-orbit { stroke-dasharray: 2 7; opacity: .7; }
+.release-forge__rail { opacity: .5; }
+.release-forge__blade { fill: color-mix(in srgb, var(--ui-color-accent) 14%, transparent); stroke: var(--ui-color-accent); stroke-width: 1.2; }
+.release-forge__hilt { stroke: var(--ui-color-secondary-accent); stroke-width: 1.2; }
+.release-forge__trace { stroke: var(--ui-color-accent); stroke-width: 1.5; stroke-dasharray: 100; transition: stroke-dashoffset var(--ui-motion-duration-layout) var(--ui-motion-ease-emphasized); }
+.release-forge__pin { fill: var(--ui-color-secondary-accent); }
+.release-forge__emblem > span { display: inline-block; margin-top: 0; color: var(--ui-color-accent); font: 30px/1 var(--ui-font-family-display); font-variant-numeric: tabular-nums; }
+.release-forge__emblem small { font: 11px var(--ui-font-family-mono); margin-left: 4px; }
+.release-forge__emblem > p { display: inline-block; margin-left: 14px; color: var(--ui-color-text-secondary); font-size: 11px; }
+.release-forge__notice { margin-top: 28px; }
+.release-forge__steps { padding: 34px 0; border-bottom: 1px solid var(--ui-color-rule); }
+.release-forge__workspace { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 44px; padding-top: 34px; }
+.release-forge__main, .release-forge__history { min-width: 0; }
+.release-forge__history { border-left: 1px solid var(--ui-color-rule); padding-left: 30px; }
+.release-forge__section-heading { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 26px; }
+.release-forge__section-heading h2 { font: 500 25px/1.5 var(--ui-font-family-display); }
+.release-forge__count { color: var(--ui-color-text-secondary); font: 10px var(--ui-font-family-mono); }
+.release-forge__package { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 24px; }
+.release-forge__package-name { min-width: 0; overflow-wrap: anywhere; font: 19px/1.8 var(--ui-font-family-mono); }
+.release-forge__package-name span { display: inline-block; margin-left: 8px; color: var(--ui-color-text-secondary); font-size: 12px; }
+.release-forge__notes { color: var(--ui-color-text-secondary); font-size: 13px; line-height: 1.9; white-space: pre-wrap; overflow-wrap: anywhere; }
+.release-forge__checks, .release-forge__form { display: grid; gap: 26px; }
+.release-forge__footer { display: flex; align-items: baseline; gap: 16px; margin-top: 40px; padding-block: 20px; border-top: 1px solid var(--ui-color-text); }
+.release-forge__footer > span { color: var(--ui-color-accent); }
+.release-forge__footer > p { color: var(--ui-color-text-secondary); font-size: 12px; line-height: 1.8; }
+@media (max-width: 960px) { .release-forge__hero { grid-template-columns: minmax(0, 1fr) 230px; gap: 28px; } .release-forge__workspace { grid-template-columns: 1fr; gap: 34px; } .release-forge__history { border-left: 0; border-top: 1px solid var(--ui-color-rule); padding: 28px 0 0; } }
+@media (max-width: 600px) { .release-forge__hero { grid-template-columns: minmax(0, 1fr); gap: 24px; } .release-forge__emblem { max-width: 200px; } .release-forge__steps { padding-block: 28px; } }
+@media (prefers-reduced-motion: reduce) { .release-forge__trace { transition: none; } }

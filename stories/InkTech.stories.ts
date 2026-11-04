@@ -1,7 +1,7 @@
 import { computed, defineComponent, h, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue';
 import type { PropType } from 'vue';
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
-import { UiButton, UiInput, UiSwitch, asyncLock, debounce } from '../src';
+import { MButton, MInput, MSwitch, asyncLock, debounce } from '../src';
 import { createInkSequence } from '../src/motion';
 import type { InkSequenceController, InkSequenceState } from '../src/motion';
 import './InkTech.css';
@@ -22,7 +22,7 @@ const catalog = [
 
 const InkTechStudy = defineComponent({
   name: 'InkTechStudy',
-  components: { UiButton, UiInput, UiSwitch },
+  components: { MButton, MInput, MSwitch },
   props: { reducedMotion: { type: [Boolean, String] as PropType<boolean | 'system'>, default: 'system' } },
   setup(props) {
     const canvas = ref<HTMLCanvasElement>();
@@ -92,7 +92,7 @@ const InkTechStudy = defineComponent({
           <h1 id="ink-heading">以墨为形。<br><em>以动见势。</em></h1>
           <p class="ink-study__lede">让东方的留白，遇见精密的秩序。<br>一套有锋芒，也有分寸的界面语言。</p>
           <div class="ink-study__hero-actions">
-            <UiButton size="lg" :disabled="!motionEnabled" @click="play">{{ state.reducedMotion ? '查看落印状态' : state.playing ? '暂停 · 定格此刻' : '起势 · 播放 MG' }} <span aria-hidden="true">↗</span></UiButton>
+            <MButton size="lg" :disabled="!motionEnabled" @click="play">{{ state.reducedMotion ? '查看落印状态' : state.playing ? '暂停 · 定格此刻' : '起势 · 播放 MG' }} <span aria-hidden="true">↗</span></MButton>
             <a class="ink-study__text-link" href="#ink-components">试用组件 <span aria-hidden="true">↓</span></a>
           </div>
           <p class="ink-study__small-note">{{ state.reducedMotion ? '减少动态效果已开启，直接呈现落印。' : '五秒构形 · 手动播放 · 随时可停' }}</p>
@@ -119,9 +119,9 @@ const InkTechStudy = defineComponent({
           <h2 id="ink-components-heading">日常界面，也有锋芒。</h2>
           <p class="ink-study__section-copy">把风格放进真实操作，保留清晰、效率与手感。</p>
           <form class="ink-study__form" @submit.prevent="save">
-            <UiInput v-model="workspace" label="工作空间名称" placeholder="给你的工作空间起个名字" :error="workspaceError" autocomplete="organization" maxlength="40" />
-            <div class="ink-study__setting"><div><strong>允许动效预览</strong><p>由你决定何时起势。</p></div><UiSwitch v-model="motionEnabled" aria-label="允许动效预览" /></div>
-            <div class="ink-study__form-actions"><UiButton type="submit" :loading="saving">{{ saving ? '正在保存' : '保存配置' }} <span v-if="!saving" aria-hidden="true">↗</span></UiButton><UiButton variant="secondary" @click="workspace = '无界设计工作室'; motionEnabled = true; workspaceError = ''; saved = '已恢复默认配置。'">恢复默认</UiButton><UiButton variant="ghost" disabled>即将开放</UiButton></div>
+            <MInput v-model="workspace" label="工作空间名称" placeholder="给你的工作空间起个名字" :error="workspaceError" autocomplete="organization" maxlength="40" />
+            <div class="ink-study__setting"><div><strong>允许动效预览</strong><p>由你决定何时起势。</p></div><MSwitch v-model="motionEnabled" aria-label="允许动效预览" /></div>
+            <div class="ink-study__form-actions"><MButton type="submit" :loading="saving">{{ saving ? '正在保存' : '保存配置' }} <span v-if="!saving" aria-hidden="true">↗</span></MButton><MButton variant="secondary" @click="workspace = '无界设计工作室'; motionEnabled = true; workspaceError = ''; saved = '已恢复默认配置。'">恢复默认</MButton><MButton variant="ghost" disabled>即将开放</MButton></div>
             <p class="ink-study__feedback" role="status" aria-live="polite">{{ saved }}</p>
           </form>
         </section>
@@ -130,7 +130,7 @@ const InkTechStudy = defineComponent({
           <header class="ink-study__section-heading"><span>02 / 实用工具</span><span>SMALL THINGS, WELL MADE</span></header>
           <h2 id="ink-tools-heading">细节之间，自有章法。</h2>
           <p class="ink-study__section-copy">试着连续输入。停下 300ms，搜索才会执行。</p>
-          <div class="ink-study__search"><UiInput v-model="search" label="搜索组件与工具" type="search" placeholder="输入 button、输入框、防抖…" /><p class="ink-study__search-info" role="status" aria-live="polite">{{ waiting ? '等待输入结束…' : '找到 ' + results.length + ' 项' }}<span>执行 {{ searches }} 次</span></p></div>
+          <div class="ink-study__search"><MInput v-model="search" label="搜索组件与工具" type="search" placeholder="输入 button、输入框、防抖…" /><p class="ink-study__search-info" role="status" aria-live="polite">{{ waiting ? '等待输入结束…' : '找到 ' + results.length + ' 项' }}<span>执行 {{ searches }} 次</span></p></div>
           <ul class="ink-study__results" aria-label="搜索结果"><li v-for="item in results" :key="item.name"><span class="ink-study__result-type">{{ item.type }}</span><div><strong>{{ item.name }} <span>{{ item.label }}</span></strong><p>{{ item.detail }}</p></div><span class="ink-study__result-line" aria-hidden="true"></span></li></ul>
           <p v-if="!results.length" class="ink-study__empty">未找到匹配项，试试“按钮”或“防抖”。</p>
         </section>

@@ -1,0 +1,20 @@
+{
+  "identity": "MaLang / 功夫朋克",
+  "publicPrefix": "M",
+  "materials": ["墨色层叠", "纸感留白", "切角金属", "朱砂刻印", "青玉滑轨"],
+  "qualities": [
+    {"name":"美观度","practice":"对齐、留白和文字层级先形成秩序，再加入材质与刻线。","evidence":"明暗主题与360px的真实组合页截图"},
+    {"name":"华丽度","practice":"在展开、完成与展示编排中形成视觉高潮，主体内容保留清晰落点。","evidence":"抽屉开合、状态切换与MG的实机播放"},
+    {"name":"炫酷度","practice":"用切面、印记、滑轨与有力度的归位表达机械感。","evidence":"组件动作有方向、有起止，不遮挡文字"},
+    {"name":"区分度","practice":"统一骨力标题、朱砂断缝与刻印节点，让不同组件属于同一套语言。","evidence":"基础控件、流程组件和组合页并排评审"},
+    {"name":"舒适度","practice":"正文不叠噪点和扫光；强调色集中在动作与状态，留出足够呼吸。","evidence":"长文、密集表单、短屏和减少动效均可阅读"},
+    {"name":"易用度","practice":"标签、焦点、键盘、触屏和状态含义完整；基础表单保持原生语义。","evidence":"真实浏览器验证操作流程与辅助技术语义"},
+    {"name":"流畅度","practice":"常规反馈短促，主要编排可控；实例卸载清理，减少动效有完整静态状态。","evidence":"暂停、取消、重开、卸载及系统减少动效回归"}
+  ],
+  "motion": {"feedback":"100ms","transition":"190ms","layout":"340ms","principle":"小反馈即时，展开有方向，完成有落印；重要MG允许暂停、定位、重播和销毁。"},
+  "interactionReferences": [
+    "https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/",
+    "https://www.w3.org/WAI/ARIA/apg/patterns/menubar/",
+    "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/"
+  ]
+}

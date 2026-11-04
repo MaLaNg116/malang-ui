@@ -2,15 +2,19 @@
 
 一套以水墨与科技融合为视觉方向的前端组件库，包含 UI 组件、GSAP 动效、MG 编排和实用工具。首发使用 Vue 3 + TypeScript，先在自己的项目中验证，再逐步扩展与开源。
 
-当前基础版提供 23 个公开组件、纯 TypeScript 工具与两套 GSAP / MG 编排。视觉使用暖纸、浓墨、朱砂和青玉，颜色与细节仍会继续迭代。
+当前提供 29 个公开组件、纯 TypeScript 工具与两套 GSAP / MG 编排。视觉使用暖纸、浓墨、朱砂和青玉，颜色与细节仍会继续迭代。
+
+组件统一使用 **M 前缀**，例如 `MInput`、`MButton`、`MDrawer`；Vue 模板也可以写成 `<m-input>`、`<m-button>`、`<m-drawer>`。M 代表 MaLang，公开类型对应 `MInputProps` 等。当前私有验证阶段已统一迁移命名。
 
 从 Storybook 的「开始 / 基础版使用指南」查看组件索引和接入方式；在「业务组合工作台」实际操作搜索、阶段筛选、重点项目过滤、分页、编辑、新建与保存通知。示例数据只保留在当前预览，不提交到服务器。
+
+「开始 / 功夫朋克规范」将七项品质落实到真实组件样本；「开始 / 铸刃工坊」组合抽屉、菜单、折叠章节、步骤、进度与时间线，演示资料编辑、取消、异常重试和完成通知。该流程仅在本地计时演练，不执行构建或发布。
 
 「基础组件 / 交互语言」集中展示按钮、输入框与开关的轮廓、焦点和状态反馈。设计使用折锋边角、墨线焦点与方形滑锁，在明暗主题中保持一致，并保留原生输入、键盘与触屏操作。
 
 「开始 / 导航与弹层」把 Tabs 和 Dialog 组合成一个可操作的工作空间：切换示例、用法与参数，打开编辑窗口，校验并保存设置，再回到原先的触发按钮。
 
-工作空间现由 `UiCard` 承载，保存后由 Toast 提供轻提示，结果文字仍会保留。提示不会抢走焦点；悬停、键盘聚焦或页面隐藏时会暂停计时。
+工作空间现由 `MCard` 承载，保存后由 Toast 提供轻提示，结果文字仍会保留。提示不会抢走焦点；悬停、键盘聚焦或页面隐藏时会暂停计时。
 
 ## 本地开发
 
@@ -45,7 +49,7 @@ pnpm check            # 类型、测试、库构建、公开声明消费与工�
 当前包尚未发布到 npm，`package.json` 保持 `private: true`。以下导入方式用于构建后的本地安装包：
 
 ```ts
-import { UiButton, UiInput, UiTable, UiPagination, UiDialog } from 'malang-ui';
+import { MButton, MInput, MTable, MPagination, MDialog } from 'malang-ui';
 import 'malang-ui/style.css';
 
 // 纯工具入口不依赖 Vue 或 GSAP。
@@ -78,15 +82,15 @@ pnpm add gsap@^3.15.0
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue';
-import { UiInput, UiButton } from 'malang-ui';
+import { MInput, MButton } from 'malang-ui';
 import 'malang-ui/style.css';
 const name = ref('');
 </script>
 
 <template>
   <main data-ui-theme="dark" data-ui-density="comfortable">
-    <UiInput v-model="name" label="项目名称" />
-    <UiButton @click="name = ''">清空</UiButton>
+    <MInput v-model="name" label="项目名称" />
+    <MButton @click="name = ''">清空</MButton>
   </main>
 </template>
 ```
@@ -99,11 +103,12 @@ const name = ref('');
 
 | 模块 | 当前内容 |
 | --- | --- |
-| 动作与输入（7） | `UiButton`、`UiInput`、`UiTextarea`、`UiSelect`、`UiCheckbox`、`UiRadioGroup`、`UiSwitch` |
-| 内容与数据（3） | `UiCard`、`UiTable`、`UiDivider` |
-| 页面导航（3） | `UiTabs`、`UiPagination`、`UiBreadcrumb` |
-| 浮层与说明（3） | `UiDialog`、`UiPopover`、`UiTooltip` |
-| 状态与反馈（7） | `UiBadge`、`UiAlert`、`UiSpinner`、`UiSkeleton`、`UiEmpty`、`UiToast`、`UiToastViewport` |
+| 动作与输入（7） | `MButton`、`MInput`、`MTextarea`、`MSelect`、`MCheckbox`、`MRadioGroup`、`MSwitch` |
+| 内容与数据（3） | `MCard`、`MTable`、`MDivider` |
+| 页面导航（3） | `MTabs`、`MPagination`、`MBreadcrumb` |
+| 浮层与说明（3） | `MDialog`、`MPopover`、`MTooltip` |
+| 状态与反馈（7） | `MBadge`、`MAlert`、`MSpinner`、`MSkeleton`、`MEmpty`、`MToast`、`MToastViewport` |
+| 二级流程（6） | `MDrawer`、`MDropdownMenu`、`MAccordion`、`MSteps`、`MProgress`、`MTimeline` |
 | 工具 | `debounce`、`throttle`、`asyncLock` |
 | 动效与 MG | 轨道构形与墨迹切面编排，支持播放、暂停、定位、重播与销毁 |
 | Vue 适配 | `useReducedMotion`，以及示例中的生命周期清理 |
@@ -116,41 +121,56 @@ const name = ref('');
 
 详细参数、可运行状态和插槽示例见各组件的 Storybook「文档」。公开 Props、选项和表格列类型从 `malang-ui` 导出。
 
-`UiInput` / `UiTextarea` 使用字符串 `v-model`，支持 `label/hint/error/disabled`。`name/required/maxlength/autocomplete` 等原生属性与事件传给实际控件；中文组合输入期间保留未提交文本，结束后同步模型。Textarea 默认 4 行，可设置 `rows`。用可见 `label` 或 `aria-label` 为控件命名。
+`MInput` 与 `<m-input>` 都对应同一个公开组件。CSS 类 `ui-*` 和变量 `--ui-*` 继续作为现有主题契约；组件引用使用 `M`，不需要更改已有主题变量。
 
-`UiCheckbox` 使用布尔 `v-model`，支持 `indeterminate`。`UiRadioGroup` 使用字符串 `v-model`、必填 `label` 和 `options`；每个选项提供唯一 `value`、`label`、可选 `disabled/description`，原生方向键会跳过禁用项。每个组默认独立的表单名称，传 `name` 时同一表单内保持唯一。
+`MInput` / `MTextarea` 使用字符串 `v-model`，支持 `label/hint/error/disabled`。`name/required/maxlength/autocomplete` 等原生属性与事件传给实际控件；中文组合输入期间保留未提交文本，结束后同步模型。Textarea 默认 4 行，可设置 `rows`。用可见 `label` 或 `aria-label` 为控件命名。
 
-`UiSelect` 使用字符串 `v-model` 与 `options`（同 `UiChoiceOption`）；`placeholder` 提供不可选的空值提示。它保留原生单选下拉框与系统键盘行为，选项描述用于 RadioGroup。上述表单控件的禁用、错误、帮助信息和模型变化通过原生语义呈现；受控模型由父级决定是否接受更新。
+`MCheckbox` 使用布尔 `v-model`，支持 `indeterminate`。`MRadioGroup` 使用字符串 `v-model`、必填 `label` 和 `options`；每个选项提供唯一 `value`、`label`、可选 `disabled/description`，原生方向键会跳过禁用项。每个组默认独立的表单名称，传 `name` 时同一表单内保持唯一。
 
-`UiPagination` 使用数字 `v-model`、记录总量 `total` 和 `pageSize`（默认 10）。页码从 1 开始，提供首尾和当前页附近的有限按钮；记录减少时夹取显示页码，但不会主动改写父模型。业务列表应同时对其切片页码做校正。「业务组合工作台」展示筛选时重置页码的处理。
+`MSelect` 使用字符串 `v-model` 与 `options`（同 `MChoiceOption`）；`placeholder` 提供不可选的空值提示。它保留原生单选下拉框与系统键盘行为，选项描述用于 RadioGroup。上述表单控件的禁用、错误、帮助信息和模型变化通过原生语义呈现；受控模型由父级决定是否接受更新。
 
-`UiBreadcrumb` 的 `items` 提供 `label` 和可选 `href`；祖先节点使用真实链接，最后一项始终是 `aria-current="page"` 的当前页面文本。适配路由时传入真实路径，或在应用层拦截导航。
+`MPagination` 使用数字 `v-model`、记录总量 `total` 和 `pageSize`（默认 10）。页码从 1 开始，提供首尾和当前页附近的有限按钮；记录减少时夹取显示页码，但不会主动改写父模型。业务列表应同时对其切片页码做校正。「业务组合工作台」展示筛选时重置页码的处理。
 
-`UiTable` 是语义化基础表格，必填 `caption`、`columns` 与 `rows`。列包含 `key/label` 与可选 `align`；行支持普通业务接口，`rowKey` 默认 `id`，没有键时使用索引。排序或更新列表应提供稳定且唯一的行键。`#cell-列key="{ row, value, column, index }"` 自定义单元格；`#loading`、`#empty` 自定义状态。默认只输出简单值，复杂内容通过插槽渲染。窄屏滚动限制在可键盘聚焦的表格区域内。当前不内置排序、选择、筛选或虚拟滚动，数据操作由调用方组合。
+`MBreadcrumb` 的 `items` 提供 `label` 和可选 `href`；祖先节点使用真实链接，最后一项始终是 `aria-current="page"` 的当前页面文本。适配路由时传入真实路径，或在应用层拦截导航。
+
+`MTable` 是语义化基础表格，必填 `caption`、`columns` 与 `rows`。列包含 `key/label` 与可选 `align`；行支持普通业务接口，`rowKey` 默认 `id`，没有键时使用索引。排序或更新列表应提供稳定且唯一的行键。`#cell-列key="{ row, value, column, index }"` 自定义单元格；`#loading`、`#empty` 自定义状态。默认只输出简单值，复杂内容通过插槽渲染。窄屏滚动限制在可键盘聚焦的表格区域内。当前不内置排序、选择、筛选或虚拟滚动，数据操作由调用方组合。
 
 ```vue
-<UiTable :rows="projects" :columns="columns" caption="项目列表">
+<MTable :rows="projects" :columns="columns" caption="项目列表">
   <template #cell-name="{ row }"><strong>{{ row.name }}</strong></template>
-</UiTable>
+</MTable>
 ```
 
-`UiPopover` 使用布尔 `v-model`、必填 `label` 与可选 `triggerLabel/placement/disabled`。它自带触发按钮，`#trigger` 只放文字或图标；默认插槽读取 `{ close }`。键盘打开会聚焦内容，Escape、关闭按钮或外部点击可请求关闭；它是非模态浮层，不锁定背景或循环焦点。
+`MPopover` 使用布尔 `v-model`、必填 `label` 与可选 `triggerLabel/placement/disabled`。它自带触发按钮，`#trigger` 只放文字或图标；默认插槽读取 `{ close }`。键盘打开会聚焦内容，Escape、关闭按钮或外部点击可请求关闭；它是非模态浮层，不锁定背景或循环焦点。
 
-`UiTooltip` 必填 `text` 与 `label`，自带可聚焦触发按钮，默认插槽只放文字或图标。悬停默认等待 300ms，聚焦立即出现，Escape 可关闭；`placement` 和 `delay` 可调整。提示只承载补充文本，需要按钮和表单时使用 Popover。
+`MTooltip` 必填 `text` 与 `label`，自带可聚焦触发按钮，默认插槽只放文字或图标。悬停默认等待 300ms，聚焦立即出现，Escape 可关闭；`placement` 和 `delay` 可调整。提示只承载补充文本，需要按钮和表单时使用 Popover。
 
-`UiBadge` 是静态状态标记。`UiAlert` 必填 `title`，可提供 `description`；默认静态且不自动播报，动态消息设置 `announce` 后，错误使用 alert，其余使用 status。两者的 `tone` 支持 `neutral/info/success/warning/error`。
+`MBadge` 是静态状态标记。`MAlert` 必填 `title`，可提供 `description`；默认静态且不自动播报，动态消息设置 `announce` 后，错误使用 alert，其余使用 status。两者的 `tone` 支持 `neutral/info/success/warning/error`。
 
-`UiSpinner` 提供单一可访问加载名称（`label` 默认「加载中」），支持 `sm/md/lg`。`UiSkeleton` 是隐藏于辅助技术的装饰占位，`lines` 默认 3；两者减少动态效果时静止。`UiEmpty` 提供 `title/description` 和操作插槽，默认标题「暂无内容」。`UiDivider` 是语义分隔线，`label` 可加入可读说明。
+`MSpinner` 提供单一可访问加载名称（`label` 默认「加载中」），支持 `sm/md/lg`。`MSkeleton` 是隐藏于辅助技术的装饰占位，`lines` 默认 3；两者减少动态效果时静止。`MEmpty` 提供 `title/description` 和操作插槽，默认标题「暂无内容」。`MDivider` 是语义分隔线，`label` 可加入可读说明。
 
-`UiTabs` 使用 `v-model`、`items` 和必填的 `label`。每个 item 提供同组唯一的 `value`、`label` 与可选 `disabled`，同名插槽承载面板，默认插槽可读取 `{ item, active }`。面板切换时保留挂载；方向键、Home/End 会跳过禁用项。默认聚焦即激活，`activationMode="manual"` 改为回车或空格确认。传入值不可用时显示首个可用面板，兜底不会主动修改父模型；全禁用或空列表时不显示活动面板。
+`MTabs` 使用 `v-model`、`items` 和必填的 `label`。每个 item 提供同组唯一的 `value`、`label` 与可选 `disabled`，同名插槽承载面板，默认插槽可读取 `{ item, active }`。面板切换时保留挂载；方向键、Home/End 会跳过禁用项。默认聚焦即激活，`activationMode="manual"` 改为回车或空格确认。传入值不可用时显示首个可用面板，兜底不会主动修改父模型；全禁用或空列表时不显示活动面板。
 
-`UiDialog` 使用 `v-model`、必填的 `title` 与可选 `description`，`#footer="{ close }"` 提供自定义操作区。默认允许 Escape 关闭，点击遮罩保持打开；可通过 `closeOnEscape`、`closeOnBackdrop` 调整，关闭按钮始终可用。它基于原生 `dialog.showModal()`，面向支持该 API 的现代浏览器，未附带 polyfill。打开时背景不可交互并锁定滚动，关闭后恢复焦点；嵌套实例和卸载会清理各自的滚动锁。对话框保留原有 DOM 位置，因此可继承所在区域的主题与减少动态效果设置。
+`MDialog` 使用 `v-model`、必填的 `title` 与可选 `description`，`#footer="{ close }"` 提供自定义操作区。默认允许 Escape 关闭，点击遮罩保持打开；可通过 `closeOnEscape`、`closeOnBackdrop` 调整，关闭按钮始终可用。它基于原生 `dialog.showModal()`，面向支持该 API 的现代浏览器，未附带 polyfill。打开时背景不可交互并锁定滚动，关闭后恢复焦点；嵌套实例和卸载会清理各自的滚动锁。对话框保留原有 DOM 位置，因此可继承所在区域的主题与减少动态效果设置。
 
-`UiCard` 默认渲染 `article` 与 `h3` 标题，支持 `as`、`headingTag`、`title`、`description` 和 `header/default/footer` 插槽。卡片本身保持静态，内部按钮、链接和表单各自操作；自定义头部接管标题与说明，必要时由调用方提供 `aria-labelledby`。
+`MCard` 默认渲染 `article` 与 `h3` 标题，支持 `as`、`headingTag`、`title`、`description` 和 `header/default/footer` 插槽。卡片本身保持静态，内部按钮、链接和表单各自操作；自定义头部接管标题与说明，必要时由调用方提供 `aria-labelledby`。
 
-`UiToast` 使用 `v-model`、`title`、`description` 与 `variant`（`info/success/error`）。普通和成功消息默认显示 5000ms，错误消息默认持续显示；显式 `duration` 优先，`:duration="0"` 表示手动关闭。暂停原因可以叠加，全部解除后按剩余时间继续；消息替换会重新计时，每个实例独立清理。提示的播报区常驻，并与关闭按钮分开；同一消息由一个播报区负责，组合页保留的结果文字不重复自动播报。
+`MToast` 使用 `v-model`、`title`、`description` 与 `variant`（`info/success/error`）。普通和成功消息默认显示 5000ms，错误消息默认持续显示；显式 `duration` 优先，`:duration="0"` 表示手动关闭。暂停原因可以叠加，全部解除后按剩余时间继续；消息替换会重新计时，每个实例独立清理。提示的播报区常驻，并与关闭按钮分开；同一消息由一个播报区负责，组合页保留的结果文字不重复自动播报。
 
-`UiToastViewport` 管理通知布局，可放在应用主题容器内，通过 `placement="top-end"` 或 `bottom-end` 选择位置，`label` 提供通知区域名称。调用方管理消息列表与每条消息的 `v-model`，容器保留主题继承，不引入全局队列。
+`MToastViewport` 管理通知布局，可放在应用主题容器内，通过 `placement="top-end"` 或 `bottom-end` 选择位置，`label` 提供通知区域名称。调用方管理消息列表与每条消息的 `v-model`，容器保留主题继承，不引入全局队列。
+
+## 二级流程组件
+
+| 组件 | 主要接口与行为 |
+| --- | --- |
+| `MDrawer` | 复用 `MDialog` 的 `v-model/title/description/closeOnEscape/closeOnBackdrop`；`side` 为 `left/right/bottom`，`size` 为 `sm/md/lg`。正文独立滚动，footer 接收 `{ close }`，原生模态与焦点策略保持一致。 |
+| `MDropdownMenu` | 必填 `v-model/items/label`，`select` 事件给出操作的 `value`。操作项提供 `value/label/disabled/danger/shortcut`；分隔项为 `{ type: 'separator', key }`。方向键、Home/End、字符搜索与原生按钮激活，Tab 离开菜单。`shortcut` 仅显示说明，不注册全局快捷键。 |
+| `MAccordion` | `v-model` 为字符串数组，`items` 提供 `value/label/description/disabled`，必填 `label`。默认单展开，`multiple` 允许多展开；无效值只影响显示兜底，不主动改写父模型。面板隐藏时保留挂载，命名插槽接收 `{ item, expanded }`。 |
+| `MSteps` | 必填 `v-model/items/label`，按顺序表达完成、当前与待办。默认静态；`interactive` 允许原生按钮请求更新，禁用项不能激活。`orientation` 与 `status` 分别控制方向和当前步骤的 `process/error/success` 状态。 |
+| `MProgress` | 必填 `label`；`value/max` 默认 `0/100`，数值夹取到有效范围。`indeterminate` 不提供虚假数值；`status` 为 `default/success/error`，`showValue` 控制可见百分比。每次进度不自动播报，业务层负责完成通知。 |
+| `MTimeline` | 必填 `items/label`，条目提供唯一 `value`、`title` 与可选 `description/time/datetime/status`。顺序由调用方决定；`time` 使用原生 `time` 元素，`datetime` 可提供机器可读时间。命名内容插槽保留原生操作；无记录时呈现空状态。 |
+
+交互语义参考 [W3C 菜单按钮模式](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/) 与 [折叠面板模式](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/)。视觉与验收约定见 [design/quality-contract.json](design/quality-contract.json)。
 
 ## 目录
 

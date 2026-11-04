@@ -1,6 +1,8 @@
 # 项目约定
 
 - 首发使用 Vue 3 + TypeScript。视觉方向为水墨与科技融合、功夫朋克的原创转译；通过基础组件、MG 与真实流程样板持续收敛视觉规范。
+- 公开组件统一使用 `M` 前缀，例如 `MInput` / `<m-input>`，公开 Props 与选项类型同样使用 `M` 前缀。CSS `ui-*` 与 `--ui-*` 是现有主题契约，按需演进，不随组件引用名机械替换。
+- 持续优化遵循 `design/quality-contract.json` 的七项品质约定；每批二级组件需要放进真实组合流程，兼顾明暗、窄屏、长内容和减少动态效果。
 - `src/utils/` 保持纯 TypeScript，不依赖 Vue、React 或 GSAP。Vue 响应式与生命周期适配放在 `src/composables/`。
 - GSAP 和 MG 编排放在独立的 `src/motion/` 入口。纯工具入口不能引入组件、样式或动效运行时；聚合能力通过 `all` 入口提供。
 - `design/tokens.json` 是设计变量真源。修改变量后运行 `pnpm tokens`，生成 `src/styles/tokens.css`，不要只修改生成文件。

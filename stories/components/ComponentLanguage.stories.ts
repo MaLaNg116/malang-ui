@@ -1,11 +1,11 @@
 import { computed, defineComponent, onBeforeUnmount, ref } from 'vue';
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
-import { UiButton, UiInput, UiSwitch } from '../../src/components';
+import { MButton, MInput, MSwitch } from '../../src/components';
 import './ComponentLanguage.css';
 
 const ComponentLanguage = defineComponent({
   name: 'ComponentLanguage',
-  components: { UiButton, UiInput, UiSwitch },
+  components: { MButton, MInput, MSwitch },
   setup() {
     const project = ref('观山 · 设计档案');
     const code = ref('');
@@ -44,22 +44,22 @@ const ComponentLanguage = defineComponent({
       </header>
       <section class="control-study__buttons" aria-labelledby="control-action-title">
         <div class="control-study__section-title"><h2 id="control-action-title"><span>壹</span> 动作有轻重</h2><p>主要操作、次要操作与轻量操作，各有自己的分寸。</p></div>
-        <div class="control-study__actions"><UiButton size="lg" @click="feedback = '主要操作已触发。'">开启新章 <span aria-hidden="true">↗</span></UiButton><UiButton variant="secondary" @click="feedback = '草稿已在当前预览中存放。'">暂存草稿</UiButton><UiButton variant="ghost" @click="feedback = '已打开操作说明：示例中的操作仅在当前预览中生效。'">查看说明</UiButton><UiButton disabled>等待开放</UiButton><UiButton :loading="loading" @click="save">{{ loading ? '落笔中…' : '验证并保存' }}</UiButton></div>
-        <div class="control-study__size-line"><span>同一语法，三种尺度</span><UiButton size="sm" variant="secondary" @click="feedback = '小尺寸操作已触发。'">小成</UiButton><UiButton variant="secondary" @click="feedback = '默认尺寸操作已触发。'">适中</UiButton><UiButton size="lg" variant="secondary" @click="feedback = '大尺寸操作已触发。'">舒展</UiButton></div>
+        <div class="control-study__actions"><MButton size="lg" @click="feedback = '主要操作已触发。'">开启新章 <span aria-hidden="true">↗</span></MButton><MButton variant="secondary" @click="feedback = '草稿已在当前预览中存放。'">暂存草稿</MButton><MButton variant="ghost" @click="feedback = '已打开操作说明：示例中的操作仅在当前预览中生效。'">查看说明</MButton><MButton disabled>等待开放</MButton><MButton :loading="loading" @click="save">{{ loading ? '落笔中…' : '验证并保存' }}</MButton></div>
+        <div class="control-study__size-line"><span>同一语法，三种尺度</span><MButton size="sm" variant="secondary" @click="feedback = '小尺寸操作已触发。'">小成</MButton><MButton variant="secondary" @click="feedback = '默认尺寸操作已触发。'">适中</MButton><MButton size="lg" variant="secondary" @click="feedback = '大尺寸操作已触发。'">舒展</MButton></div>
       </section>
       <div class="control-study__columns">
         <section class="control-study__fields" aria-labelledby="control-input-title">
           <div class="control-study__section-title"><h2 id="control-input-title"><span>贰</span> 落笔有边界</h2><p>尝试聚焦与输入，观察焦点、提示和校验。</p></div>
           <form class="control-study__form" @submit.prevent="save">
-            <UiInput v-model="project" label="项目名称" name="project" :error="projectError" hint="支持中文输入；焦点清楚，文字安静。" autocomplete="organization" />
-            <UiInput v-model="code" label="访问口令" name="accessCode" type="password" autocomplete="new-password" placeholder="至少 4 位" :error="codeError" hint="仅用于本页演示，不会上传或保存口令。" />
-            <UiInput label="归档编号" model-value="ML—2026—001" disabled hint="不可用状态仍保留内容与标签。" />
-            <div class="control-study__form-actions"><UiButton type="submit" :loading="loading">{{ loading ? '正在保存' : '保存此页' }}</UiButton><UiButton variant="ghost" @click="reset">重置示例</UiButton></div>
+            <MInput v-model="project" label="项目名称" name="project" :error="projectError" hint="支持中文输入；焦点清楚，文字安静。" autocomplete="organization" />
+            <MInput v-model="code" label="访问口令" name="accessCode" type="password" autocomplete="new-password" placeholder="至少 4 位" :error="codeError" hint="仅用于本页演示，不会上传或保存口令。" />
+            <MInput label="归档编号" model-value="ML—2026—001" disabled hint="不可用状态仍保留内容与标签。" />
+            <div class="control-study__form-actions"><MButton type="submit" :loading="loading">{{ loading ? '正在保存' : '保存此页' }}</MButton><MButton variant="ghost" @click="reset">重置示例</MButton></div>
           </form>
         </section>
         <section class="control-study__switches" aria-labelledby="control-switch-title">
           <div class="control-study__section-title"><h2 id="control-switch-title"><span>叁</span> 切换有落点</h2><p>机械式的位移，清楚表达每一次选择。</p></div>
-          <div class="control-study__switch-list"><UiSwitch v-model="checked" label="自动收录新稿" hint="用方向与颜色共同表达开启状态。" /><UiSwitch v-model="lowMotion" label="减少动态效果" hint="关闭本页的装饰性动效，仍保留状态反馈。" /><UiSwitch :model-value="true" disabled label="团队归档规则" hint="此项由团队统一设置。" /></div>
+          <div class="control-study__switch-list"><MSwitch v-model="checked" label="自动收录新稿" hint="用方向与颜色共同表达开启状态。" /><MSwitch v-model="lowMotion" label="减少动态效果" hint="关闭本页的装饰性动效，仍保留状态反馈。" /><MSwitch :model-value="true" disabled label="团队归档规则" hint="此项由团队统一设置。" /></div>
           <div class="control-study__rule"><span>交互约定</span><p>可见的键盘焦点<br>明确的加载与错误<br>随时可以停止的动态效果</p></div>
         </section>
       </div>
