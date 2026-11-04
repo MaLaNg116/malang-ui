@@ -83,7 +83,7 @@ export function createSealSequence(canvas: HTMLCanvasElement, options: SealSeque
     const token = (name: string, fallback: string) => styles.getPropertyValue(`--ui-color-${name}`).trim() || fallback;
     fontFamily = styles.getPropertyValue('--ui-font-family-display').trim() || '"STKaiti", "KaiTi", serif';
     palette = {
-      accent: options.colors?.accent ?? token('accent', '#9f342b'), secondary: options.colors?.secondary ?? token('secondary-accent', '#3f7168'),
+      accent: options.colors?.accent ?? token('seal', token('accent', '#9f342b')), secondary: options.colors?.secondary ?? token('secondary-accent', '#3f7168'),
       ink: options.colors?.ink ?? token('ink', '#242c29'), paper: options.colors?.paper ?? token('paper', '#eee9dd'),
       metal: options.colors?.metal ?? token('metal', '#68746b'), text: options.colors?.text ?? token('text', '#242c29'),
       border: options.colors?.border ?? token('border', '#838d81'), onAccent: options.colors?.onAccent ?? token('on-accent', '#fff8e7'),
@@ -231,7 +231,7 @@ export function createSealSequence(canvas: HTMLCanvasElement, options: SealSeque
   timeline.addLabel('gather', 0).addLabel('align', 0.8).addLabel('stamp', 1.65).addLabel('settle', 2.6); timeline.timeScale(speed);
   if (reducedMotion) timeline.pause(DURATION, true);
   resizeObserver?.observe(canvas);
-  for (let ancestor: HTMLElement | null = canvas; ancestor; ancestor = ancestor.parentElement) themeObserver?.observe(ancestor, { attributes: true, attributeFilter: ['style', 'class', 'data-ui-theme'] });
+  for (let ancestor: HTMLElement | null = canvas; ancestor; ancestor = ancestor.parentElement) themeObserver?.observe(ancestor, { attributes: true, attributeFilter: ['style', 'class', 'data-ui-theme', 'data-ui-palette'] });
   browser.addEventListener('resize', resize); browser.addEventListener('pagehide', pageHidden); browser.addEventListener('pageshow', pageShown);
   document.addEventListener('visibilitychange', visibilityChanged); document.fonts?.addEventListener('loadingdone', themeChanged);
   if (followsPreference) preference?.addEventListener('change', preferenceChanged);

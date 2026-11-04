@@ -114,7 +114,7 @@ export function createInkSequence(
     const styles = browser!.getComputedStyle(canvas);
     const token = (name: string, fallback: string) => styles.getPropertyValue(`--ui-color-${name}`).trim() || fallback;
     return {
-      accent: options.colors?.accent ?? token('accent', '#b83e35'),
+      accent: options.colors?.accent ?? token('seal', token('accent', '#b83e35')),
       secondary: options.colors?.secondary ?? token('secondary-accent', '#43877c'),
       ink: options.colors?.ink ?? token('ink', token('text', '#252824')),
       paper: options.colors?.paper ?? token('paper', token('surface', '#f1eee5')),
@@ -405,7 +405,7 @@ export function createInkSequence(
 
   resizeObserver?.observe(canvas);
   for (let ancestor: HTMLElement | null = canvas; ancestor; ancestor = ancestor.parentElement) {
-    themeObserver?.observe(ancestor, { attributes: true, attributeFilter: ['style', 'class', 'data-ui-theme'] });
+    themeObserver?.observe(ancestor, { attributes: true, attributeFilter: ['style', 'class', 'data-ui-theme', 'data-ui-palette'] });
   }
   browser.addEventListener('resize', resize);
   browser.addEventListener('pagehide', pageHidden);

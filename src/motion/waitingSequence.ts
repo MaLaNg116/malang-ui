@@ -212,7 +212,7 @@ export function createWaitingSequence(canvas: HTMLCanvasElement, options: Waitin
   timeline.addLabel('outbound', 0).addLabel('exchange', .7).addLabel('return', 1.4).addLabel('rejoin', 2.1).timeScale(speed);
   if (reducedMotion) timeline.pause(STATIC_TIME, true);
   resizeObserver?.observe(canvas);
-  for (let ancestor: HTMLElement | null = canvas; ancestor; ancestor = ancestor.parentElement) themeObserver?.observe(ancestor, { attributes: true, attributeFilter: ['style', 'class', 'data-ui-theme'] });
+  for (let ancestor: HTMLElement | null = canvas; ancestor; ancestor = ancestor.parentElement) themeObserver?.observe(ancestor, { attributes: true, attributeFilter: ['style', 'class', 'data-ui-theme', 'data-ui-palette'] });
   browser.addEventListener('resize', resize); browser.addEventListener('pagehide', pageHidden); browser.addEventListener('pageshow', pageShown);
   document.addEventListener('visibilitychange', visibilityChanged); document.fonts?.addEventListener('loadingdone', themeChanged);
   if (followsPreference) preference?.addEventListener('change', preferenceChanged);

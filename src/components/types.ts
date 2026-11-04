@@ -71,7 +71,7 @@ export interface MToastProps {
   closeLabel?: string;
 }
 
-export type MToastPlacement = 'top-end' | 'bottom-end';
+export type MToastPlacement = 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end';
 
 export interface MToastViewportProps {
   placement?: MToastPlacement;
@@ -417,4 +417,23 @@ export interface MTreeProps {
   label: string;
   id?: string;
   disabled?: boolean;
+}
+
+export interface MStatisticProps {
+  label: string;
+  value?: string | number | null;
+  prefix?: string;
+  suffix?: string;
+  unit?: string;
+  description?: string;
+  placeholder?: string;
+  tone?: MStatusTone;
+}
+
+export interface MResultProps {
+  title: string;
+  description?: string;
+  status?: 'success' | 'error' | 'warning' | 'info';
+  headingTag?: 'h1' | 'h2' | 'h3';
+  announce?: boolean;
 }

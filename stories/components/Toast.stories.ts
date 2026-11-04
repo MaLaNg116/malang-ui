@@ -2,7 +2,8 @@ import { defineComponent, nextTick, ref, watch } from 'vue';
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import MToast from '../../src/components/MToast.vue';
 import MToastViewport from '../../src/components/MToastViewport.vue';
-import { MButton, MInput } from '../../src/components';
+import { MButton, MInput, MSelect, MSwitch } from '../../src/components';
+import type { MToastPlacement } from '../../src/components';
 
 const meta = {
   title: '基础组件/Toast 轻提示',
@@ -114,5 +115,36 @@ export const LongContent: Story = {
       return { open, title, description };
     },
     template: `<div class="kit-stack"><h1 style="font-family:var(--ui-font-family-display);font-size:32px">长消息，也留有出口。</h1><div class="kit-row"><MButton @click="open = true">显示长消息</MButton></div><p class="kit-muted">右上方显示持续通知，长标题会换行，说明可以滚动；关闭按钮始终可用。</p><MToastViewport placement="top-end" label="阅读通知"><MToast v-model="open" :title="title" :description="description" :duration="0" /></MToastViewport></div>`,
+  }),
+};
+
+export const TopCenter: Story = {
+  name: '顶部居中',
+  render: () => defineComponent({
+    components: { MToast, MToastViewport, MButton, MInput, MSwitch },
+    setup() {
+      const open = ref(false), draft = ref('正在编辑的顶部通知草稿'), long = ref(false);
+      const longTitle = '顶部消息 · ' + 'ArchiveReference'.repeat(14);
+      const longDescription = '完整的资料说明保留在通知内，内容过长时可以独立滚动，关闭按钮始终可用。'.repeat(24);
+      return { open, draft, long, longTitle, longDescription };
+    },
+    template: `<main class="kit-stack" style="max-width:640px"><h1 style="font:500 32px/1.5 var(--ui-font-family-display)">消息从顶部抵达，手中的事继续。</h1><p class="kit-muted">通知显示在顶部中央。短屏和长文都保留关闭入口，编辑中的草稿也会留下。</p><MInput v-model="draft" label="顶部通知外的草稿" /><MSwitch v-model="long" label="使用长通知内容" /><div class="kit-row"><MButton @click="open = true">显示顶部居中通知</MButton></div><p class="kit-muted">{{ open ? '顶部通知显示中。' : '当前没有显示的顶部通知。' }}</p><MToastViewport placement="top-center" label="顶部通知"><MToast v-model="open" :title="long ? longTitle : '顶部消息已就绪'" :description="long ? longDescription : '资料已经更新，可以继续编辑手中的内容。'" :duration="0" close-label="关闭顶部通知" /></MToastViewport></main>`,
+  }),
+};
+
+export const Positions: Story = {
+  name: '六个通知位置',
+  render: () => defineComponent({
+    components: { MToast, MToastViewport, MButton, MInput, MSelect, MSwitch },
+    setup() {
+      const open = ref(false), draft = ref('位置切换时保留的编辑草稿'), rtl = ref(false);
+      const placement = ref<MToastPlacement>('bottom-end');
+      const options = [
+        { value: 'top-start', label: '顶部 · 起始侧' }, { value: 'top-center', label: '顶部 · 居中' }, { value: 'top-end', label: '顶部 · 末尾侧' },
+        { value: 'bottom-start', label: '底部 · 起始侧' }, { value: 'bottom-center', label: '底部 · 居中' }, { value: 'bottom-end', label: '底部 · 末尾侧' },
+      ];
+      return { open, draft, rtl, placement, options };
+    },
+    template: `<main class="kit-stack" :dir="rtl ? 'rtl' : 'ltr'" style="max-width:640px"><h1 style="font:500 32px/1.5 var(--ui-font-family-display)">落点可换，消息仍是这一条。</h1><p class="kit-muted">选择六个位置中的一个。起始侧与末尾侧跟随阅读方向，位置变化不重新播报消息，也不接管输入焦点。</p><MSelect v-model="placement" :options="options" label="通知位置" /><MSwitch v-model="rtl" label="从右向左阅读" /><MInput v-model="draft" label="位置通知外的草稿" /><div class="kit-row"><MButton @click="open = true">显示位置通知</MButton></div><p class="kit-muted">{{ open ? '同一条通知持续显示，可以继续切换位置。' : '当前没有显示的位置通知。' }}</p><MToastViewport :placement="placement" label="位置通知"><MToast v-model="open" title="位置通知已就绪" description="落点已经调整，手中的编辑内容会继续保留。" :duration="0" close-label="关闭位置通知" /></MToastViewport></main>`,
   }),
 };

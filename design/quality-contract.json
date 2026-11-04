@@ -1,7 +1,7 @@
 {
   "identity": "MaLang / 功夫朋克",
   "publicPrefix": "M",
-  "materials": ["墨色层叠", "纸感留白", "切角金属", "朱砂刻印", "青玉滑轨"],
+  "materials": ["宣纸朱砂", "青瓷冷玉", "绢素鎏金", "浓墨层叠", "底纸、浮纸与静层", "切角金属", "独立朱砂刻印", "青玉滑轨", "经纬织光"],
   "qualities": [
     {"name":"美观度","practice":"对齐、留白和文字层级先形成秩序，再加入材质与刻线。","evidence":"明暗主题与360px的真实组合页截图"},
     {"name":"华丽度","practice":"在展开、完成与展示编排中形成视觉高潮，主体内容保留清晰落点。","evidence":"抽屉开合、状态切换与MG的实机播放"},
@@ -11,7 +11,7 @@
     {"name":"易用度","practice":"标签、焦点、键盘、触屏和状态含义完整；基础表单保持原生语义。","evidence":"真实浏览器验证操作流程与辅助技术语义"},
     {"name":"流畅度","practice":"常规反馈短促，主要编排可控；实例卸载清理，减少动效有完整静态状态。","evidence":"暂停、取消、重开、卸载及系统减少动效回归"}
   ],
-  "motion": {"feedback":"100ms","transition":"190ms","layout":"340ms","principle":"小反馈即时，展开有方向，完成有落印；重要MG允许暂停、定位、重播和销毁。"},
+  "motion": {"feedback":"100ms","transition":"190ms","layout":"340ms","principle":"小反馈即时，展开有方向，完成有落印；MG允许暂停、定位、重播和销毁，等待循环只表达处理中，业务确认由调用方负责。","loading":"三片切角叶片整体连续旋转，局部错相开合；细噪点与稀疏短切片只用于加载占位，正文保持安静。按钮loading复用同一装饰图形；系统和容器减少动效、强制颜色模式均保留清晰静态状态。","palette":"主题和浅色配色放在同一容器；主色、副色与朱砂刻印分别表达含义，切换配色重绘当前Canvas位置，避免重建时间线或清空编辑草稿。"},
   "interactionReferences": [
     "https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/",
     "https://www.w3.org/WAI/ARIA/apg/patterns/menubar/",

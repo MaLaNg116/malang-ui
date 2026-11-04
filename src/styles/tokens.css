@@ -1,6 +1,6 @@
 /* Generated from design/tokens.json. Run pnpm tokens after editing tokens. */
 
-/* Draft prototype colors; values remain adjustable. Defines variables only. */
+/* Ink-tech palettes. Defines variables only; theme and palette share one container. */
 
 :root {
   --ui-space-0: 0px;
@@ -43,58 +43,66 @@
   --ui-motion-scale-press: 0.97;
   --ui-motion-expressive-enabled: 1;
   --ui-z-index-toast: 1000;
-  --ui-color-canvas: #eee9dd;
-  --ui-color-surface: #f8f4e9;
-  --ui-color-text: #242c29;
-  --ui-color-text-secondary: #626a62;
-  --ui-color-border: #838d81;
-  --ui-color-accent: #9f342b;
-  --ui-color-on-accent: #fff8e7;
-  --ui-color-accent-soft: #ead8c9;
-  --ui-color-secondary-accent: #3f7168;
+  --ui-color-canvas: #f3f0e8;
+  --ui-color-surface: #fcfaf4;
+  --ui-color-text: #26332e;
+  --ui-color-text-secondary: #5b6961;
+  --ui-color-border: #7a867c;
+  --ui-color-accent: #a13c31;
+  --ui-color-on-accent: #fffaf1;
+  --ui-color-accent-soft: #f0ded3;
+  --ui-color-secondary-accent: #356e64;
   --ui-color-success: #28634e;
   --ui-color-danger: #b32620;
-  --ui-color-warning: #8a5b13;
-  --ui-color-focus: #315f57;
-  --ui-color-surface-raised: #fffcf3;
+  --ui-color-warning: #825713;
+  --ui-color-focus: #356e64;
+  --ui-color-surface-raised: #ffffff;
   --ui-color-overlay: rgba(5, 10, 8, 0.62);
-  --ui-color-ink: #242c29;
-  --ui-color-paper: #eee9dd;
-  --ui-color-metal: #68746b;
-  --ui-color-wash: #ccd0c0;
-  --ui-color-seal: #9f342b;
-  --ui-color-grain: rgba(36, 44, 41, 0.065);
-  --ui-color-rule: #b8bcae;
-  --ui-shadow-panel: 0 12px 30px rgba(36, 44, 41, 0.07);
+  --ui-color-ink: #26332e;
+  --ui-color-paper: #f3f0e8;
+  --ui-color-metal: #727d6b;
+  --ui-color-wash: #dce2d3;
+  --ui-color-seal: #a13c31;
+  --ui-color-grain: rgba(38, 51, 46, 0.045);
+  --ui-color-rule: #c5cabe;
+  --ui-shadow-panel: 0 12px 32px rgba(38, 51, 46, 0.07);
+  --ui-color-surface-muted: #ebe7dc;
+  --ui-color-secondary-soft: #e2ede5;
+  --ui-color-metal-soft: #eee2c9;
+  --ui-shadow-overlay: 0 22px 60px rgba(38, 51, 46, 0.15);
   --ui-control-height: 40px;
   --ui-control-padding-inline: 16px;
   --ui-field-gap: 20px;
 }
 
 [data-ui-theme="light"] {
-  --ui-color-canvas: #eee9dd;
-  --ui-color-surface: #f8f4e9;
-  --ui-color-text: #242c29;
-  --ui-color-text-secondary: #626a62;
-  --ui-color-border: #838d81;
-  --ui-color-accent: #9f342b;
-  --ui-color-on-accent: #fff8e7;
-  --ui-color-accent-soft: #ead8c9;
-  --ui-color-secondary-accent: #3f7168;
+  --ui-color-canvas: #f3f0e8;
+  --ui-color-surface: #fcfaf4;
+  --ui-color-text: #26332e;
+  --ui-color-text-secondary: #5b6961;
+  --ui-color-border: #7a867c;
+  --ui-color-accent: #a13c31;
+  --ui-color-on-accent: #fffaf1;
+  --ui-color-accent-soft: #f0ded3;
+  --ui-color-secondary-accent: #356e64;
   --ui-color-success: #28634e;
   --ui-color-danger: #b32620;
-  --ui-color-warning: #8a5b13;
-  --ui-color-focus: #315f57;
-  --ui-color-surface-raised: #fffcf3;
+  --ui-color-warning: #825713;
+  --ui-color-focus: #356e64;
+  --ui-color-surface-raised: #ffffff;
   --ui-color-overlay: rgba(5, 10, 8, 0.62);
-  --ui-color-ink: #242c29;
-  --ui-color-paper: #eee9dd;
-  --ui-color-metal: #68746b;
-  --ui-color-wash: #ccd0c0;
-  --ui-color-seal: #9f342b;
-  --ui-color-grain: rgba(36, 44, 41, 0.065);
-  --ui-color-rule: #b8bcae;
-  --ui-shadow-panel: 0 12px 30px rgba(36, 44, 41, 0.07);
+  --ui-color-ink: #26332e;
+  --ui-color-paper: #f3f0e8;
+  --ui-color-metal: #727d6b;
+  --ui-color-wash: #dce2d3;
+  --ui-color-seal: #a13c31;
+  --ui-color-grain: rgba(38, 51, 46, 0.045);
+  --ui-color-rule: #c5cabe;
+  --ui-shadow-panel: 0 12px 32px rgba(38, 51, 46, 0.07);
+  --ui-color-surface-muted: #ebe7dc;
+  --ui-color-secondary-soft: #e2ede5;
+  --ui-color-metal-soft: #eee2c9;
+  --ui-shadow-overlay: 0 22px 60px rgba(38, 51, 46, 0.15);
 }
 
 [data-ui-theme="dark"] {
@@ -121,6 +129,10 @@
   --ui-color-grain: rgba(238, 232, 217, 0.055);
   --ui-color-rule: #526458;
   --ui-shadow-panel: 0 18px 38px rgba(0, 0, 0, 0.22);
+  --ui-color-surface-muted: #141d19;
+  --ui-color-secondary-soft: #20372e;
+  --ui-color-metal-soft: #2d3327;
+  --ui-shadow-overlay: 0 24px 64px rgba(0, 0, 0, 0.3);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -148,7 +160,101 @@
   --ui-color-grain: rgba(238, 232, 217, 0.055);
   --ui-color-rule: #526458;
   --ui-shadow-panel: 0 18px 38px rgba(0, 0, 0, 0.22);
+  --ui-color-surface-muted: #141d19;
+  --ui-color-secondary-soft: #20372e;
+  --ui-color-metal-soft: #2d3327;
+  --ui-shadow-overlay: 0 24px 64px rgba(0, 0, 0, 0.3);
 }
+}
+
+[data-ui-theme="light"][data-ui-palette="paper"] {
+  --ui-color-canvas: #f3f0e8;
+  --ui-color-surface: #fcfaf4;
+  --ui-color-text: #26332e;
+  --ui-color-text-secondary: #5b6961;
+  --ui-color-border: #7a867c;
+  --ui-color-accent: #a13c31;
+  --ui-color-on-accent: #fffaf1;
+  --ui-color-accent-soft: #f0ded3;
+  --ui-color-secondary-accent: #356e64;
+  --ui-color-success: #28634e;
+  --ui-color-danger: #b32620;
+  --ui-color-warning: #825713;
+  --ui-color-focus: #356e64;
+  --ui-color-surface-raised: #ffffff;
+  --ui-color-overlay: rgba(5, 10, 8, 0.62);
+  --ui-color-ink: #26332e;
+  --ui-color-paper: #f3f0e8;
+  --ui-color-metal: #727d6b;
+  --ui-color-wash: #dce2d3;
+  --ui-color-seal: #a13c31;
+  --ui-color-grain: rgba(38, 51, 46, 0.045);
+  --ui-color-rule: #c5cabe;
+  --ui-shadow-panel: 0 12px 32px rgba(38, 51, 46, 0.07);
+  --ui-color-surface-muted: #ebe7dc;
+  --ui-color-secondary-soft: #e2ede5;
+  --ui-color-metal-soft: #eee2c9;
+  --ui-shadow-overlay: 0 22px 60px rgba(38, 51, 46, 0.15);
+}
+
+[data-ui-theme="light"][data-ui-palette="celadon"] {
+  --ui-color-canvas: #eaf2ee;
+  --ui-color-surface: #f5faf7;
+  --ui-color-text: #213a34;
+  --ui-color-text-secondary: #526c63;
+  --ui-color-border: #6d887b;
+  --ui-color-accent: #24665b;
+  --ui-color-on-accent: #f5fff9;
+  --ui-color-accent-soft: #d6e9df;
+  --ui-color-secondary-accent: #96513b;
+  --ui-color-success: #28634e;
+  --ui-color-danger: #b32620;
+  --ui-color-warning: #825713;
+  --ui-color-focus: #24665b;
+  --ui-color-surface-raised: #ffffff;
+  --ui-color-overlay: rgba(5, 10, 8, 0.62);
+  --ui-color-ink: #213a34;
+  --ui-color-paper: #eaf2ee;
+  --ui-color-metal: #687f6f;
+  --ui-color-wash: #cadfd2;
+  --ui-color-seal: #a13c31;
+  --ui-color-grain: rgba(33, 58, 52, 0.04);
+  --ui-color-rule: #b8cdc0;
+  --ui-shadow-panel: 0 12px 32px rgba(28, 74, 54, 0.075);
+  --ui-color-surface-muted: #e1ece5;
+  --ui-color-secondary-soft: #f1e2d8;
+  --ui-color-metal-soft: #d9e7dc;
+  --ui-shadow-overlay: 0 22px 60px rgba(25, 64, 47, 0.16);
+}
+
+[data-ui-theme="light"][data-ui-palette="gilt"] {
+  --ui-color-canvas: #f4eee2;
+  --ui-color-surface: #fffbf1;
+  --ui-color-text: #383023;
+  --ui-color-text-secondary: #6c604b;
+  --ui-color-border: #897453;
+  --ui-color-accent: #805522;
+  --ui-color-on-accent: #fffbef;
+  --ui-color-accent-soft: #efdfbf;
+  --ui-color-secondary-accent: #346b64;
+  --ui-color-success: #28634e;
+  --ui-color-danger: #b32620;
+  --ui-color-warning: #825713;
+  --ui-color-focus: #346b64;
+  --ui-color-surface-raised: #fffef9;
+  --ui-color-overlay: rgba(5, 10, 8, 0.62);
+  --ui-color-ink: #383023;
+  --ui-color-paper: #f4eee2;
+  --ui-color-metal: #8c754b;
+  --ui-color-wash: #e2d5bb;
+  --ui-color-seal: #a23b31;
+  --ui-color-grain: rgba(56, 48, 35, 0.045);
+  --ui-color-rule: #d1c3a7;
+  --ui-shadow-panel: 0 12px 32px rgba(84, 60, 27, 0.08);
+  --ui-color-surface-muted: #eee3d0;
+  --ui-color-secondary-soft: #dcebe5;
+  --ui-color-metal-soft: #f0e2bf;
+  --ui-shadow-overlay: 0 22px 60px rgba(84, 60, 27, 0.17);
 }
 
 [data-ui-density="comfortable"] {

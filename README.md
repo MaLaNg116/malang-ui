@@ -2,7 +2,7 @@
 
 一套以水墨与科技融合为视觉方向的前端组件库，包含 UI 组件、GSAP 动效、MG 编排和实用工具。首发使用 Vue 3 + TypeScript，先在自己的项目中验证，再逐步扩展与开源。
 
-当前提供 39 个公开组件、纯 TypeScript 工具、五套 Canvas / MG 编排和 DOM 错峰动效。视觉使用暖纸、浓墨、朱砂和青玉，颜色与细节仍会继续迭代。
+当前提供 41 个公开组件、纯 TypeScript 工具、六套 Canvas / MG 编排和 DOM 错峰动效，共七个动效工厂。浅色提供宣纸朱砂、青瓷冷玉与绢素鎏金三种材质配色，深色保留浓墨；朱砂刻印独立于主题主色。
 
 组件统一使用 **M 前缀**，例如 `MInput`、`MButton`、`MDrawer`；Vue 模板也可以写成 `<m-input>`、`<m-button>`、`<m-drawer>`。M 代表 MaLang，公开类型对应 `MInputProps` 等。当前私有验证阶段已统一迁移命名。
 
@@ -15,6 +15,8 @@
 「开始 / 归印调校台」把搜索预设、数字与滑杆、可移除关键词和资料描述连接到真实的成功落印控制器。草稿在应用前保持独立，应用后可播放、暂停、定位与重播；减少动态效果直接呈现完成态。
 
 「开始 / 藏品归档台」组合侧栏导航、目录树、日期选择与文件选择，演示本地素材登记、资料查看、移除和操作记录。目录焦点与选择分开，切换导航保留编辑草稿；附件不会自动发送到服务器。
+
+「开始 / 纸墨试色台」把三种浅色配色、深色、纸面层次、静态指标和页面结果放在同一个局部容器中。切色保留输入与选项；「记录并验印」保存本页实际方案并播放经纬织光，还原会清空本页草稿与记录。
 
 「基础组件 / 交互语言」集中展示按钮、输入框与开关的轮廓、焦点和状态反馈。设计使用折锋边角、墨线焦点与方形滑锁，在明暗主题中保持一致，并保留原生输入、键盘与触屏操作。
 
@@ -31,7 +33,7 @@ pnpm install
 pnpm dev
 ```
 
-打开终端输出中的 Storybook 地址。左侧目录可以查看组件状态、MG 编排和工具示例；顶部工具栏可以切换主题、密度与减少动态效果。
+打开终端输出中的 Storybook 地址。左侧目录可以查看组件状态、MG 编排和工具示例；顶部工具栏可以切换主题、浅色配色、密度与减少动态效果。
 
 ## 检查与构建
 
@@ -63,7 +65,8 @@ import { debounce, throttle, asyncLock } from 'malang-ui/utils';
 
 // 动效入口单独使用 GSAP，消费方需要安装 gsap。
 import { createInkSequence, createOrbitSequence, createSealSequence,
-  createBrandSequence, createWaitingSequence, createStaggerSequence } from 'malang-ui/motion';
+  createBrandSequence, createWaitingSequence, createWeaveSequence,
+  createStaggerSequence } from 'malang-ui/motion';
 
 // 聚合入口包含 UI、工具与 GSAP 动效。
 import * as MalangUI from 'malang-ui/all';
@@ -102,7 +105,17 @@ const name = ref('');
 </template>
 ```
 
-`style.css` 包含组件样式和 Token，应用导入一次即可。`data-ui-theme` 支持 `light/dark`，`data-ui-density` 支持 `comfortable/compact`；缺省采用浅色和舒适密度。容器可设置 `data-ui-motion="reduced"`，CSS 动效也默认遵循系统偏好。MG 控制器默认读取系统偏好；应用内减少动效开关需同步传入其 `reducedMotion` 选项。
+`style.css` 包含组件样式和 Token，应用导入一次即可。`data-ui-theme` 支持 `light/dark`，`data-ui-density` 支持 `comfortable/compact`；缺省采用宣纸浅色和舒适密度。浅色配色使用 `data-ui-palette="paper|celadon|gilt"`，依次对应宣纸朱砂、青瓷冷玉、绢素鎏金；主题和配色必须放在同一个容器上。深色使用浓墨，保留的 palette 值不改变深色配色。
+
+```html
+<main data-ui-theme="light" data-ui-palette="celadon">
+  <!-- 此区域内的组件与 Canvas MG 继承同一套颜色 -->
+</main>
+```
+
+底纸、浮纸与静层分别使用 `canvas/surface/surface-muted`；`secondary-soft`、`metal-soft` 提供副色与金属的柔和承托。`--ui-color-seal` 始终表达朱砂刻印，主色改为冷玉或鎏金时也保留独立含义。已创建的 Canvas MG 会观察同容器的主题和配色变化并重绘，无需为切色重建时间线。
+
+容器可设置 `data-ui-motion="reduced"`，CSS 动效也默认遵循系统偏好。MG 控制器默认读取系统偏好；应用内减少动效开关需同步传入其 `reducedMotion` 选项。
 
 这是 ESM 包，使用支持原生 `dialog.showModal()` 与 Popover API 的现代浏览器；不附带 polyfill。Popover / Tooltip 使用 `@floating-ui/dom` 定位，随普通依赖安装；基础组件入口不会加载 GSAP。SSR 导入不会访问浏览器全局，原生浮层在挂载后启用。
 
@@ -111,15 +124,15 @@ const name = ref('');
 | 模块 | 当前内容 |
 | --- | --- |
 | 动作与输入（12） | `MButton`、`MInput`、`MInputNumber`、`MSlider`、`MCombobox`、`MDatePicker`、`MUpload`、`MTextarea`、`MSelect`、`MCheckbox`、`MRadioGroup`、`MSwitch` |
-| 内容与数据（6） | `MCard`、`MTable`、`MDivider`、`MTag`、`MAvatar`、`MDescriptions` |
+| 内容与数据（7） | `MCard`、`MTable`、`MDivider`、`MTag`、`MAvatar`、`MDescriptions`、`MStatistic` |
 | 页面导航（5） | `MTabs`、`MPagination`、`MBreadcrumb`、`MMenu`、`MTree` |
 | 浮层与说明（3） | `MDialog`、`MPopover`、`MTooltip` |
-| 状态与反馈（7） | `MBadge`、`MAlert`、`MSpinner`、`MSkeleton`、`MEmpty`、`MToast`、`MToastViewport` |
+| 状态与反馈（8） | `MBadge`、`MAlert`、`MResult`、`MSpinner`、`MSkeleton`、`MEmpty`、`MToast`、`MToastViewport` |
 | 二级流程（6） | `MDrawer`、`MDropdownMenu`、`MAccordion`、`MSteps`、`MProgress`、`MTimeline` |
 | 工具 | `debounce`、`throttle`、`asyncLock` |
-| 动效与 MG | 轨道构形、墨迹切面、成功落印、品牌开场、双轨等待与 DOM 错峰，支持播放、暂停、定位、重播与销毁 |
+| 动效与 MG | 六套 Canvas：轨道构形、墨迹切面、成功落印、品牌开场、双轨等待、经纬织光；另有 DOM 错峰，均提供可控生命周期 |
 | Vue 适配 | `useReducedMotion`，以及示例中的生命周期清理 |
-| 设计基础 | 明暗主题、密度、排版、间距与动效变量 |
+| 设计基础 | 三种浅色材质配色、浓墨深色、密度、排版、间距与动效变量 |
 | 开发工作台 | Storybook 的组件状态、组合界面和工具交互示例 |
 
 防抖和节流提供 `cancel()`、`flush()`、`pending()`。`asyncLock()` 让并发调用共享同一个进行中的 Promise，并在成功或失败后释放。MG 控制器的 `seek()` 使用秒，`dispose()` 只清理当前实例。
@@ -158,6 +171,8 @@ const sliderAmount = computed({
 
 `MDescriptions` 使用原生 `dl/dt/dd` 展示资料，必填 `label/items`；条目包含唯一 `key`、`label`、可选简单值 `value` 和跨列 `span`。`columns` 支持 1–3 列，窄屏自动单列；复杂内容通过同名插槽 `{ item }` 渲染，无资料时有明确空说明。
 
+`MStatistic` 用原生 `dl/dt/dd` 展示静态指标，必填 `label`，`value` 接收数值或已格式化字符串。`prefix/suffix/unit/description` 补充读数；`tone` 使用现有语义色。`null`、空字符串与非有限数值显示 `placeholder`（默认 `—`），省略前后缀与单位，数值 `0` 保留。格式化由应用负责，组件不自动跳数或播报。
+
 `MPagination` 使用数字 `v-model`、记录总量 `total` 和 `pageSize`（默认 10）。页码从 1 开始，提供首尾和当前页附近的有限按钮；记录减少时夹取显示页码，但不会主动改写父模型。业务列表应同时对其切片页码做校正。「业务组合工作台」展示筛选时重置页码的处理。
 
 `MBreadcrumb` 的 `items` 提供 `label` 和可选 `href`；祖先节点使用真实链接，最后一项始终是 `aria-current="page"` 的当前页面文本。适配路由时传入真实路径，或在应用层拦截导航。
@@ -176,7 +191,9 @@ const sliderAmount = computed({
 
 `MBadge` 是静态状态标记。`MAlert` 必填 `title`，可提供 `description`；默认静态且不自动播报，动态消息设置 `announce` 后，错误使用 alert，其余使用 status。两者的 `tone` 支持 `neutral/info/success/warning/error`。
 
-`MSpinner` 提供单一可访问加载名称（`label` 默认「加载中」），支持 `sm/md/lg`。`MSkeleton` 是隐藏于辅助技术的装饰占位，`lines` 默认 3；两者减少动态效果时静止。`MEmpty` 提供 `title/description` 和操作插槽，默认标题「暂无内容」。`MDivider` 是语义分隔线，`label` 可加入可读说明。
+`MSpinner` 提供单一可访问加载名称（`label` 默认「加载中」），支持 `sm/md/lg`；三片切角叶片整体连续旋转，局部错相开合。`MButton loading` 复用同一图形，并将按钮内的装饰加载图形隐藏于辅助技术。`MSkeleton` 用细噪点与稀疏短切片形成装饰占位，隐藏于辅助技术，`lines` 默认 3；两者在减少动态效果与强制颜色模式下静止。`MEmpty` 提供 `title/description` 和操作插槽，默认标题「暂无内容」。`MDivider` 是语义分隔线，`label` 可加入可读说明。
+
+`MResult` 是页面级结果面板，必填 `title`，可设置 `description`、`status="success|error|warning|info"` 和 `headingTag="h1|h2|h3"`（默认 `h2`）。默认静态且不搬移焦点；`default` 补充业务内容，`footer` 放原生按钮或链接。显式 `announce` 仅让标题与描述的消息区播报：错误用 assertive alert，其余用 polite status，补充内容和动作保持独立。组件参数和场景在「二级组件 / Result 结果面板」中查看。
 
 `MTabs` 使用 `v-model`、`items` 和必填的 `label`。每个 item 提供同组唯一的 `value`、`label` 与可选 `disabled`，同名插槽承载面板，默认插槽可读取 `{ item, active }`。面板切换时保留挂载；方向键、Home/End 会跳过禁用项。默认聚焦即激活，`activationMode="manual"` 改为回车或空格确认。传入值不可用时显示首个可用面板，兜底不会主动修改父模型；全禁用或空列表时不显示活动面板。
 
@@ -186,7 +203,7 @@ const sliderAmount = computed({
 
 `MToast` 使用 `v-model`、`title`、`description` 与 `variant`（`info/success/error`）。普通和成功消息默认显示 5000ms，错误消息默认持续显示；显式 `duration` 优先，`:duration="0"` 表示手动关闭。暂停原因可以叠加，全部解除后按剩余时间继续；消息替换会重新计时，每个实例独立清理。提示的播报区常驻，并与关闭按钮分开；同一消息由一个播报区负责，组合页保留的结果文字不重复自动播报。
 
-`MToastViewport` 管理通知布局，可放在应用主题容器内，通过 `placement="top-end"` 或 `bottom-end` 选择位置，`label` 提供通知区域名称。调用方管理消息列表与每条消息的 `v-model`，容器保留主题继承，不引入全局队列。
+`MToastViewport` 管理通知布局，`placement` 支持 `top-start/top-center/top-end/bottom-start/bottom-center/bottom-end`，默认 `bottom-end`；起始侧与末尾侧跟随阅读方向，居中位置保留安全区和窄屏宽度。`label` 提供通知区域名称。调用方管理消息列表与每条消息的 `v-model`，容器保留主题继承，不引入全局队列。Toast 的 `TopCenter` 和 `Positions` 示例分别演示顶部居中，以及六个落点、RTL 与编辑焦点。
 
 ## 二级流程组件
 
@@ -230,7 +247,9 @@ tests/           工具行为与浏览器交互测试
 scripts/         Token 生成与构建辅助脚本
 ```
 
-设计变量以 [design/tokens.json](design/tokens.json) 为真源，通过 `pnpm tokens` 更新生成的 CSS。样板使用同一套变量；明暗主题与减少动态效果可在 Storybook 顶部切换。
+设计变量以 [design/tokens.json](design/tokens.json) 为真源，通过 `pnpm tokens` 更新生成的 CSS。样板使用同一套变量；主题、浅色配色与减少动态效果可在 Storybook 顶部切换。
+
+配色回归针对实际使用的常用不透明前景与背景：普通文字检查至少 4.5:1，识别控件所需的边界与焦点标记检查相邻颜色至少 3:1。按设计变量中的不透明 sRGB 颜色计算相对亮度，在浏览器中核对配色落地；临界值不四舍五入。加载占位的装饰纹理另做视觉与减少动效检查。方法参考 [W3C 文字对比度说明](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)、[G18 相对亮度计算与测试](https://www.w3.org/WAI/WCAG22/Techniques/general/G18) 和 [W3C 非文字对比度说明](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html)。这些检查只覆盖选定配色对；接入页面仍需验证完整状态、结构与辅助技术体验。
 
 `createInkSequence(canvas, options)` 是独立的五秒 MG 编排，按「蓄势、疾出、收锋、归位」组织墨迹与几何切面。控制器默认不自动播放；使用 `play()`、`pause()`、`seek(seconds)`、`replay()` 与 `dispose()` 控制。默认遵循系统减少动态效果偏好，此时播放直接显示落印状态；仍可使用 `seek()` 静态查看各阶段。实例会在页面隐藏时暂停，卸载时应调用 `dispose()`。
 
@@ -240,7 +259,9 @@ scripts/         Token 生成与构建辅助脚本
 
 `createWaitingSequence(canvas, options)` 提供 2.8 秒双轨等待，默认暂停、`loop: true`。`time/progress` 只表示动画周期位置，`cycle` 记录自然跨周期次数，均不代表业务进度。`seek()` 会暂停，包含精确周期终点；从末尾播放或重播开始新一轮。`loop: false` 只运行一周期，终态仍是等待姿态。减少动态效果显示 1.4 秒的静态轨道，不循环、不自动宣告成功；播放偏好恢复后也不自动续播。
 
-业务调用方管理真实请求结果：发起后播放 Waiting，确认成功后停止 Waiting 并播放 Seal；失败、取消与过期响应不触发落印。稳定 DOM 文案负责状态语义，`aria-busy` 表示等待，不逐帧播报。五套 Canvas 编排都支持独立 DPR、主题、字体、页面可见性和 BFCache 生命周期；卸载时调用各自的 `dispose()`。
+`createWeaveSequence(canvas, options)` 提供 4.2 秒「铺经、穿纬、织光、归序」有限编排。开放的经纬丝面承载主副色微光，朱砂刻痕读取独立的 `seal` 颜色。默认暂停，支持 `amplitude/speed/reducedMotion/colors/onUpdate`，`seek()` 使用秒；减少动态效果显示完整静态织印，仍可手动定位。纸墨试色台切换配色时保留当前定位，显式记录后再 `replay()`；组件卸载时调用 `dispose()`。
+
+业务调用方管理真实请求结果：发起后播放 Waiting，确认成功后停止 Waiting 并播放 Seal；失败、取消与过期响应不触发落印。稳定 DOM 文案负责状态语义，`aria-busy` 表示等待，不逐帧播报。六套 Canvas 编排都支持独立 DPR、主题、配色、字体、页面可见性和 BFCache 生命周期；卸载时调用各自的 `dispose()`。
 
 `createStaggerSequence(elements, options)` 面向同一 document 中已挂载的专属 DOM 容器，目标去重后固定顺序。`duration` 默认为每项 0.42 秒，`stagger` 为 0.08 秒，`distance` 为 18px；`direction` 支持 `up/down/left/right`，`speed` 控制播放倍率。控制器的 `duration` 是整条编排长度，定位仍用未乘倍率的秒数。空列表返回零时长的稳定控制器。
 

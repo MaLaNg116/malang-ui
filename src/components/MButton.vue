@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import type { MButtonProps } from './types';
+import MSpinner from './MSpinner.vue';
 
 const props = withDefaults(defineProps<MButtonProps>(), {
   variant: 'primary',
@@ -32,7 +33,7 @@ function handleClick(event: MouseEvent) {
     @click="handleClick"
   >
     <span class="ui-button__surface" aria-hidden="true" />
-    <span v-if="loading" class="ui-button__spinner" aria-hidden="true" />
+    <MSpinner v-if="loading" class="ui-button__spinner" size="sm" label="" aria-hidden="true" />
     <span class="ui-button__content"><slot /></span>
   </button>
 </template>
@@ -149,7 +150,7 @@ function handleClick(event: MouseEvent) {
 
 .ui-button--secondary:hover:not(:disabled) {
   --ui-button-frame: var(--ui-color-secondary-accent);
-  --ui-button-fill: var(--ui-color-accent-soft);
+  --ui-button-fill: var(--ui-color-secondary-soft, var(--ui-color-accent-soft));
 }
 
 .ui-button--ghost:hover:not(:disabled) {
@@ -206,30 +207,16 @@ function handleClick(event: MouseEvent) {
   gap: var(--ui-space-2);
 }
 
-.ui-button__spinner {
+.ui-button .ui-button__spinner {
+  --ui-spinner-color: currentColor;
+  --ui-spinner-secondary-color: currentColor;
   width: 1em;
   height: 1em;
   flex: none;
-  box-sizing: border-box;
-  border: 2px solid currentColor;
-  border-right-color: transparent;
-  border-bottom-color: transparent;
-  border-radius: 1px;
-  transform: rotate(45deg);
-  animation: ui-button-spin 1100ms var(--ui-motion-ease-standard) infinite;
-}
-
-@keyframes ui-button-spin {
-  from { transform: rotate(45deg); }
-  to { transform: rotate(405deg); }
-}
-
-:global([data-ui-motion='reduced'] .ui-button__spinner) {
-  animation: none;
+  color: inherit;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ui-button__spinner { animation: none; }
   .ui-button::after { transition: none; }
 }
 

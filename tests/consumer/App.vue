@@ -7,6 +7,7 @@ import {
   MDrawer, MDropdownMenu, MAccordion, MSteps, MProgress, MTimeline,
   MInputNumber, MSlider, MCombobox, MTag, MAvatar, MDescriptions,
   MDatePicker, MUpload, MMenu, MTree,
+  MStatistic, MResult,
 } from 'malang-ui';
 import type { MChoiceOption, MTableColumn, MTabItem, MMenuItem, MTreeNode, MUploadRejection } from 'malang-ui';
 
@@ -57,4 +58,7 @@ function navigate(_value: string, event: MouseEvent) { event.preventDefault(); }
   <MUpload v-model="attachments" label="本地附件" name="attachments" multiple required :max-count="5" :max-size="2097152" @reject="rejected" />
   <MMenu v-model="selected" v-model:expanded-values="expanded" :items="menuItems" label="资料导航" @select="navigate" />
   <MTree v-model="selected" v-model:expanded-values="expanded" :items="treeItems" label="资料目录" />
+  <MStatistic label="档案数量" :value="0" unit="份" tone="info" />
+  <MResult title="资料已就位" description="可以继续编辑。" status="success"><template #footer><MButton>继续处理</MButton></template></MResult>
+  <MToastViewport placement="top-center" label="顶部通知"><MToast v-model="checked" title="顶部居中提示" :duration="0" /></MToastViewport>
 </template>

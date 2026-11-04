@@ -361,8 +361,8 @@ export function createOrbitSequence(
   timeline.timeScale(speed);
 
   resizeObserver?.observe(canvas);
-  for (let ancestor = canvas.parentElement; ancestor; ancestor = ancestor.parentElement) {
-    themeObserver?.observe(ancestor, { attributes: true, attributeFilter: ['style', 'class', 'data-ui-theme'] });
+  for (let ancestor: HTMLElement | null = canvas; ancestor; ancestor = ancestor.parentElement) {
+    themeObserver?.observe(ancestor, { attributes: true, attributeFilter: ['style', 'class', 'data-ui-theme', 'data-ui-palette'] });
   }
   browser.addEventListener('resize', resize);
   browser.addEventListener('pagehide', pageHidden);

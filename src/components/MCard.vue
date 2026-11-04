@@ -75,7 +75,7 @@ function hasContent(slot: Slot | undefined): boolean {
 .ui-card__body,
 .ui-card__footer { min-width: 0; padding: var(--ui-field-gap); }
 
-.ui-card__header:not(:last-child) { border-bottom: 1px solid var(--ui-color-rule); }
+.ui-card__header:not(:last-child) { border-bottom: 1px solid var(--ui-color-rule); background: linear-gradient(110deg, color-mix(in srgb, var(--ui-color-metal-soft, var(--ui-color-wash)) 35%, var(--ui-color-surface)), var(--ui-color-surface) 85%); }
 
 .ui-card__title {
   margin: 0;
@@ -101,5 +101,6 @@ function hasContent(slot: Slot | undefined): boolean {
 }
 
 .ui-card__footer:not(:first-child) { border-top: 1px solid var(--ui-color-rule); }
+.ui-card__footer { background: color-mix(in srgb, var(--ui-color-secondary-soft, var(--ui-color-wash)) 18%, var(--ui-color-surface)); }
 .ui-card__header + .ui-card__footer { border-top: 0; }
 </style>

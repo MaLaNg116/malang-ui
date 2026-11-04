@@ -135,7 +135,8 @@ const value = computed({
   font: inherit;
   transition:
     border-color var(--ui-motion-duration-transition) var(--ui-motion-ease-standard),
-    box-shadow var(--ui-motion-duration-transition) var(--ui-motion-ease-standard);
+    box-shadow var(--ui-motion-duration-transition) var(--ui-motion-ease-standard),
+    background-color var(--ui-motion-duration-transition) var(--ui-motion-ease-standard);
 }
 
 .ui-input::placeholder {
@@ -149,6 +150,7 @@ const value = computed({
 
 .ui-input:focus-visible {
   outline: none;
+  background: var(--ui-color-surface-raised);
   border-bottom-color: var(--ui-color-accent);
   box-shadow: inset 0 -1px 0 var(--ui-color-accent);
 }

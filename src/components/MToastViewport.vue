@@ -16,12 +16,11 @@ withDefaults(defineProps<MToastViewportProps>(), {
   box-sizing: border-box;
   position: fixed;
   z-index: var(--ui-z-index-toast, 1000);
-  inset-inline-end: max(12px, env(safe-area-inset-right));
   display: flex;
   flex-direction: column;
   gap: var(--ui-space-3);
-  width: min(388px, calc(100vw - 24px));
-  max-width: calc(100vw - max(12px, env(safe-area-inset-left)) - max(12px, env(safe-area-inset-right)));
+  width: min(388px, calc(100% - 24px));
+  max-width: calc(100% - max(12px, env(safe-area-inset-left)) - max(12px, env(safe-area-inset-right)));
   max-height: calc(100vh - 24px);
   max-height: calc(100dvh - max(12px, env(safe-area-inset-top)) - max(12px, env(safe-area-inset-bottom)));
   padding: 4px;
@@ -29,7 +28,12 @@ withDefaults(defineProps<MToastViewportProps>(), {
   overscroll-behavior: contain;
   pointer-events: none;
 }
-.ui-toast-viewport--bottom-end { bottom: max(12px, env(safe-area-inset-bottom)); }
-.ui-toast-viewport--top-end { top: max(12px, env(safe-area-inset-top)); }
+.ui-toast-viewport--bottom-start, .ui-toast-viewport--bottom-center, .ui-toast-viewport--bottom-end { bottom: max(12px, env(safe-area-inset-bottom)); }
+.ui-toast-viewport--top-start, .ui-toast-viewport--top-center, .ui-toast-viewport--top-end { top: max(12px, env(safe-area-inset-top)); }
+.ui-toast-viewport--top-end, .ui-toast-viewport--bottom-end { inset-inline-end: max(12px, env(safe-area-inset-right)); }
+.ui-toast-viewport--top-start, .ui-toast-viewport--bottom-start { inset-inline-start: max(12px, env(safe-area-inset-left)); }
+.ui-toast-viewport--top-center, .ui-toast-viewport--bottom-center { left: calc((100% + max(12px, env(safe-area-inset-left)) - max(12px, env(safe-area-inset-right))) / 2); transform: translateX(-50%); }
+.ui-toast-viewport:dir(rtl).ui-toast-viewport--top-end, .ui-toast-viewport:dir(rtl).ui-toast-viewport--bottom-end { inset-inline-end: max(12px, env(safe-area-inset-left)); }
+.ui-toast-viewport:dir(rtl).ui-toast-viewport--top-start, .ui-toast-viewport:dir(rtl).ui-toast-viewport--bottom-start { inset-inline-start: max(12px, env(safe-area-inset-right)); }
 .ui-toast-viewport :deep(.ui-toast) { pointer-events: auto; }
 </style>

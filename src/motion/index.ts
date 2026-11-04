@@ -50,3 +50,12 @@ export type {
   StaggerSequencePhase,
   StaggerSequenceController,
 } from './staggerSequence';
+
+export { createWeaveSequence } from './weaveSequence';
+export type {
+  WeaveSequenceColors,
+  WeaveSequencePhase,
+  WeaveSequenceState,
+  WeaveSequenceOptions,
+  WeaveSequenceController,
+} from './weaveSequence';

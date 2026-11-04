@@ -37,6 +37,8 @@ export { default as MDatePicker } from './components/MDatePicker.vue';
 export { default as MUpload } from './components/MUpload.vue';
 export { default as MMenu } from './components/MMenu.vue';
 export { default as MTree } from './components/MTree.vue';
+export { default as MStatistic } from './components/MStatistic.vue';
+export { default as MResult } from './components/MResult.vue';
 export type {
   MButtonProps,
   MButtonVariant,
@@ -100,4 +102,6 @@ export type {
   MMenuProps,
   MTreeNode,
   MTreeProps,
+  MStatisticProps,
+  MResultProps,
 } from './components/types';
