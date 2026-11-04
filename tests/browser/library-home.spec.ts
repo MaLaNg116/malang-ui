@@ -44,7 +44,9 @@ test.describe('Library showcase home', () => {
   });
 
   test('keeps a reduced-motion request genuinely pending, shows failure without a seal and stamps only a confirmed success', async ({ page }) => {
-    await page.clock.install(); await openHome(page);
+    await page.clock.install({ time: new Date('2030-01-01T00:00:00Z') }); await openHome(page);
+    // Keep the request clock still while separate locator assertions execute.
+    await page.clock.pauseAt(new Date('2030-01-01T01:00:00Z'));
     const result = page.getByRole('combobox', { name: '演练结果', exact: true });
     const start = page.getByRole('button', { name: '开始请求演练', exact: false });
     const art = feedback(page); const stamp = art.locator('[data-home-sequence="seal"]');
@@ -70,9 +72,10 @@ test.describe('Library showcase home', () => {
   });
 
   test('preserves a live job through a system preference change and ignores a cancelled response after a newer success', async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'no-preference' }); await page.clock.install();
+    await page.emulateMedia({ reducedMotion: 'no-preference' }); await page.clock.install({ time: new Date('2030-01-01T00:00:00Z') });
     await openHome(page, 'theme:light;motion:standard');
     await page.getByRole('button', { name: '跳过开场', exact: true }).click();
+    await page.clock.pauseAt(new Date('2030-01-01T01:00:00Z'));
     const result = page.getByRole('combobox', { name: '演练结果', exact: true });
     const start = page.getByRole('button', { name: '开始请求演练', exact: false });
     await result.selectOption('slow'); await start.click(); await page.clock.runFor(1000);
