@@ -12,12 +12,8 @@
 .ink-demo__controls { padding:20px 32px 26px; border-top:1px solid var(--ui-color-border); background:var(--ui-color-surface); }
 .ink-demo__status { display:flex; justify-content:space-between; gap:14px; margin-bottom:14px; font-size:12px; line-height:1.5; }
 .ink-demo__time { color:var(--ui-color-text-secondary); font-family:var(--ui-font-family-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
-.ink-demo__timeline { display:block; width:100%; margin:0 0 20px; accent-color:var(--ui-color-accent); cursor:ew-resize; }
+.ink-demo__timeline { min-width:0; margin:0 0 20px; }
 .ink-demo__buttons { display:flex; flex-wrap:wrap; gap:10px; }
-.ink-demo__button { min-height:40px; padding:9px 16px; border:1px solid var(--ui-color-border); border-radius:var(--ui-radius-control); color:var(--ui-color-text); background:var(--ui-color-canvas); font:400 12px/1.5 var(--ui-font-family); cursor:pointer; }
-.ink-demo__button:hover { border-color:var(--ui-color-accent); }
-.ink-demo__button--primary { color:var(--ui-color-on-accent); background:var(--ui-color-accent); border-color:var(--ui-color-accent); }
-.ink-demo__button:focus-visible, .ink-demo__timeline:focus-visible { outline:var(--ui-focus-width) solid var(--ui-color-focus); outline-offset:var(--ui-focus-offset); }
 .ink-demo__note { margin:14px 0 0; color:var(--ui-color-text-secondary); font-size:11px; line-height:1.7; }
 @media(max-width:480px) {
   .ink-demo__heading { padding:23px 20px 0; }
@@ -27,9 +23,4 @@
   .ink-demo__canvas { height:280px; }
   .ink-demo__stage-label { left:20px; bottom:22px; font-size:8px; }
   .ink-demo__controls { padding:18px 20px 23px; }
-  .ink-demo__button { padding:9px 12px; }
-}
-@media(pointer:coarse) {
-  .ink-demo__button { min-height:44px; }
-  .ink-demo__timeline { min-height:32px; }
 }

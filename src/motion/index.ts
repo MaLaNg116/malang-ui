@@ -15,3 +15,12 @@ export type {
   InkSequenceOptions,
   InkSequenceState,
 } from './inkSequence';
+
+export { createSealSequence } from './sealSequence';
+export type {
+  SealPalette,
+  SealPhase,
+  SealSequenceState,
+  SealSequenceOptions,
+  SealSequenceController,
+} from './sealSequence';

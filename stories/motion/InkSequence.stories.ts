@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { computed, defineComponent, h, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue';
 import type { PropType } from 'vue';
+import { MButton, MSlider } from '../../src';
 import { createInkSequence } from '../../src/motion';
 import type { InkSequenceController, InkSequenceState } from '../../src/motion';
 import './InkSequence.css';
@@ -60,22 +61,18 @@ const InkSequenceDemo = defineComponent({
           h('span', { role: 'status', 'aria-live': 'polite' }, phase.value),
           h('span', { class: 'ink-demo__time', 'aria-hidden': 'true' }, `${state.value.time.toFixed(1)} / 5.0 s`),
         ]),
-        h('input', {
-          type: 'range', class: 'ink-demo__timeline', min: 0, max: 5, step: 0.01, value: state.value.time,
-          'aria-label': '墨迹切面动画进度', 'aria-valuetext': `${state.value.time.toFixed(1)} 秒，共 5 秒；${phase.value}`,
-          onInput: (event: Event) => {
-            const next = Number((event.target as HTMLInputElement).value);
-            controller?.pause();
-            controller?.seek(next);
-          },
-        }),
+        h('div', { class: 'ink-demo__timeline' }, [h(MSlider, {
+          modelValue: state.value.time, label: '墨迹切面动画进度', min: 0, max: 5, step: 0.01, showValue: false,
+          'aria-valuetext': `${state.value.time.toFixed(1)} 秒，共 5 秒；${phase.value}`,
+          'onUpdate:modelValue': (value: number) => { controller?.pause(); controller?.seek(value); },
+        })]),
         h('div', { class: 'ink-demo__buttons' }, [
-          h('button', {
-            type: 'button', class: 'ink-demo__button ink-demo__button--primary',
+          h(MButton, {
+            type: 'button',
             onClick: () => state.value.playing ? controller?.pause() : controller?.play(),
-          }, state.value.reducedMotion ? '查看落印状态' : state.value.playing ? '暂停动画' : '播放动画'),
-          h('button', { type: 'button', class: 'ink-demo__button', onClick: () => controller?.replay() }, '重新播放'),
-          h('button', { type: 'button', class: 'ink-demo__button', onClick: () => { controller?.pause(); controller?.seek(5); } }, '定位到落印'),
+          }, () => state.value.reducedMotion ? '查看落印状态' : state.value.playing ? '暂停动画' : '播放动画'),
+          h(MButton, { type: 'button', variant: 'secondary', onClick: () => controller?.replay() }, () => '重新播放'),
+          h(MButton, { type: 'button', variant: 'ghost', onClick: () => { controller?.pause(); controller?.seek(5); } }, () => '定位到落印'),
         ]),
         h('p', { class: 'ink-demo__note' }, state.value.reducedMotion
           ? '已启用减少动态效果：播放会直接显示落印状态，进度条仍可查看各阶段。'

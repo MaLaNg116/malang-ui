@@ -15,6 +15,9 @@
   "interactionReferences": [
     "https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/",
     "https://www.w3.org/WAI/ARIA/apg/patterns/menubar/",
-    "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/"
+    "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/",
+    "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/",
+    "https://www.w3.org/WAI/ARIA/apg/patterns/slider/",
+    "https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/"
   ]
 }

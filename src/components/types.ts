@@ -288,3 +288,68 @@ export interface MTimelineProps {
   label: string;
   headingTag?: 'h3' | 'h4';
 }
+
+export interface MInputNumberProps {
+  modelValue: number | null;
+  label: string;
+  id?: string;
+  min?: number;
+  max?: number;
+  step?: number;
+  disabled?: boolean;
+  hint?: string;
+  error?: string;
+}
+
+export interface MSliderProps {
+  modelValue: number;
+  label: string;
+  id?: string;
+  min?: number;
+  max?: number;
+  step?: number;
+  disabled?: boolean;
+  hint?: string;
+  error?: string;
+  showValue?: boolean;
+}
+
+export interface MComboboxProps {
+  modelValue: string;
+  options: readonly MChoiceOption[];
+  label: string;
+  id?: string;
+  placeholder?: string;
+  hint?: string;
+  error?: string;
+  disabled?: boolean;
+  clearable?: boolean;
+}
+
+export interface MTagProps {
+  tone?: MStatusTone;
+  closable?: boolean;
+  closeLabel?: string;
+  disabled?: boolean;
+}
+
+export interface MAvatarProps {
+  src?: string;
+  alt: string;
+  name?: string;
+  size?: MControlSize;
+  tone?: 'ink' | 'seal' | 'jade';
+}
+
+export interface MDescriptionItem {
+  key: string;
+  label: string;
+  value?: string | number;
+  span?: 1 | 2 | 3;
+}
+export interface MDescriptionsProps {
+  items: readonly MDescriptionItem[];
+  label: string;
+  columns?: 1 | 2 | 3;
+  headingTag?: 'h3' | 'h4';
+}

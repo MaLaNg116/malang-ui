@@ -1,0 +1,16 @@
+import { defineComponent, ref } from 'vue';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
+import MDescriptions from '../../src/components/MDescriptions.vue';
+import MTag from '../../src/components/MTag.vue';
+import MButton from '../../src/components/MButton.vue';
+import type { MDescriptionItem } from '../../src/components/types';
+const items: MDescriptionItem[] = [{ key:'name',label:'档案名称',value:'归印 · 交互调校' },{ key:'version',label:'版本标识',value:'0.2.0' },{ key:'owner',label:'归属',value:'MaLang 工坊' },{ key:'state',label:'状态',value:'待校准' },{ key:'notes',label:'说明',value:'墨色、刻印与机械滑轨，共同构成一份完整的交互档案。',span:2 }];
+const meta = { title:'二级组件/Descriptions 资料描述',component:MDescriptions,tags:['autodocs'],args:{label:'预设档案',items,columns:2},render:args=>defineComponent({components:{MDescriptions},setup:()=>({args}),template:'<div style="max-width:800px"><MDescriptions v-bind="args" /></div>'}),parameters:{docs:{description:{component:'用原生dl/dt/dd表达成组资料，columns提供1至3列，条目span跨列且在窄屏自动单列。简单值直接显示，命名插槽接收{item}；操作保持独立原生语义。空值显示破折号，无资料时显示明确空说明。'}}}} satisfies Meta<typeof MDescriptions>;
+export default meta;
+type Story=StoryObj<typeof meta>;
+export const Default:Story={};
+export const WithSlots:Story={render:args=>defineComponent({components:{MDescriptions,MTag,MButton},setup:()=>({args,saved:ref(false)}),template:'<main class="kit-stack" style="max-width:800px"><MDescriptions v-bind="args"><template #state><div class="kit-row"><MTag :tone="saved ? \'success\' : \'warning\'">{{ saved ? \'已归档\' : \'待校准\' }}</MTag><MButton variant="ghost" size="sm" @click="saved = true">归档资料</MButton></div></template></MDescriptions><p role="status">{{ saved ? \'这份资料已归档。\' : \'尚未归档。\' }}</p></main>'})};
+export const OneColumn:Story={args:{columns:1}};
+export const ThreeColumns:Story={args:{columns:3}};
+export const Empty:Story={args:{items:[]}};
+export const LongContent:Story={args:{items:[{key:'long',label:'ArchiveLabelWithoutArtificialClipping',value:'ReferenceWithoutArtificialTruncation'.repeat(5),span:2},{key:'empty',label:'待补充字段'}]}};

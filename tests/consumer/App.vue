@@ -5,6 +5,7 @@ import {
   MCheckbox, MRadioGroup, MSelect, MTextarea, MPopover, MTooltip, MTable,
   MPagination, MBreadcrumb, MBadge, MAlert, MSpinner, MSkeleton, MEmpty, MDivider,
   MDrawer, MDropdownMenu, MAccordion, MSteps, MProgress, MTimeline,
+  MInputNumber, MSlider, MCombobox, MTag, MAvatar, MDescriptions,
 } from 'malang-ui';
 import type { MChoiceOption, MTableColumn, MTabItem } from 'malang-ui';
 
@@ -16,6 +17,7 @@ const options: MChoiceOption[] = [{ value: 'one', label: '第一项' }];
 const tabs: MTabItem[] = [{ value: 'one', label: '示例' }];
 const value = ref('one'); const checked = ref(false); const open = ref(false); const popup = ref(false); const page = ref(1);
 const sections = ref<string[]>(['one']);
+const amount = ref<number | null>(1); const intensity = ref(1);
 </script>
 <template>
   <MBreadcrumb :items="[{ label: '组件', href: '/' }, { label: '验证' }]" />
@@ -38,4 +40,10 @@ const sections = ref<string[]>(['one']);
   <MSteps v-model="value" :items="tabs" label="流程" interactive />
   <MProgress :value="42" label="检查进度" />
   <MTimeline :items="[{value:'created',title:'已建立',status:'success'}]" label="操作记录" />
+  <MInputNumber v-model="amount" label="数值" :min="0" :max="10" :step="0.1" name="amount" required />
+  <MSlider v-model="intensity" label="力度" :min="0" :max="10" :step="0.1" name="intensity" />
+  <MCombobox v-model="value" :options="options" label="搜索选择" name="preset" required />
+  <MTag tone="info" closable close-label="移除调校标签" @close="checked = true">调校</MTag>
+  <MAvatar name="ML" alt="工坊标记" tone="jade" />
+  <MDescriptions :items="[{key:'name',label:'名称',value:'预设'},{key:'state',label:'状态'}]" label="档案"><template #state="{ item }">{{ item.label }}</template></MDescriptions>
 </template>

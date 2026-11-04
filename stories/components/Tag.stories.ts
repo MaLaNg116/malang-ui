@@ -1,0 +1,12 @@
+import { defineComponent, nextTick, ref } from 'vue';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
+import MTag from '../../src/components/MTag.vue';
+import MButton from '../../src/components/MButton.vue';
+const meta = { title: '基础组件/Tag 标签', component: MTag, tags: ['autodocs'], args: { tone: 'neutral', closable: false, disabled: false }, render: args => defineComponent({ components: { MTag }, setup: () => ({ args }), template: '<div class="kit-row"><MTag v-bind="args">墨线构形</MTag></div>' }), parameters: { docs: { description: { component: '关键词与分类标签。closable 提供原生关闭按钮并发出 close，是否移除由父级决定；closeLabel 可命名具体操作，按钮描述引用标签文字。装饰不参与命名，禁用时不发关闭请求。' } } } } satisfies Meta<typeof MTag>;
+export default meta;
+type Story = StoryObj<typeof meta>;
+export const Default: Story = {};
+export const Tones: Story = { render: () => defineComponent({ components: { MTag }, setup: () => ({ tones: ['neutral','info','success','warning','error'] }), template: '<div class="kit-row"><MTag v-for="tone in tones" :key="tone" :tone="tone">{{ tone }}</MTag></div>' }) };
+export const Closable: Story = { render: () => defineComponent({ components: { MTag, MButton }, setup() { const initial = ['墨线构形','朱砂落印','机械归位']; const tags = ref([...initial]); const group = ref<HTMLElement>(); const restore = ref<InstanceType<typeof MButton>>(); const result = ref('可以移除标签，移除后焦点转到下一个操作。'); async function remove(value: string) { const index=tags.value.indexOf(value);tags.value=tags.value.filter(item=>item!==value);result.value=`已移除：${value}`;await nextTick();const buttons=group.value?.querySelectorAll<HTMLButtonElement>('button');(buttons?.[Math.min(index,buttons.length-1)]||restore.value?.$el)?.focus(); } return { tags, group, restore, result, remove, reset:()=>{tags.value=[...initial];result.value='标签已恢复。';} }; }, template: '<main class="kit-stack"><div ref="group" class="kit-row"><MTag v-for="tag in tags" :key="tag" closable :close-label="\'移除\'+tag" @close="remove(tag)">{{ tag }}</MTag></div><div><MButton ref="restore" variant="secondary" @click="reset">恢复标签</MButton></div><p role="status">{{ result }}</p></main>' }) };
+export const Disabled: Story = { args: { closable: true, disabled: true, closeLabel: '移除墨线构形' } };
+export const LongContent: Story = { render: args => defineComponent({ components: { MTag }, setup: () => ({ args }), template: '<div style="max-width:280px"><MTag v-bind="args" closable close-label="移除长标签">ArchiveWithoutArtificialClippingOrTruncationWithAMuchLongerKeyword</MTag></div>' }) };

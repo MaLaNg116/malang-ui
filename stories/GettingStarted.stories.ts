@@ -4,8 +4,8 @@ import { MAlert, MBadge, MCard, MDivider } from '../src';
 import './GettingStarted.css';
 
 const catalog = [
-  { title: '动作与输入', count: 7, names: 'MButton · MInput · MTextarea · MSelect · MCheckbox · MRadioGroup · MSwitch', detail: '原生表单、中文输入、禁用与错误状态' },
-  { title: '内容与数据', count: 3, names: 'MCard · MTable · MDivider', detail: '语义化内容、单元格插槽、加载与空状态' },
+  { title: '动作与输入', count: 10, names: 'MButton · MInput · MInputNumber · MSlider · MCombobox · MTextarea · MSelect · MCheckbox · MRadioGroup · MSwitch', detail: '原生表单、中文搜索、数值刻度与完整状态' },
+  { title: '内容与数据', count: 6, names: 'MCard · MTable · MDivider · MTag · MAvatar · MDescriptions', detail: '语义化内容、关键词、头像与成组资料' },
   { title: '页面导航', count: 3, names: 'MTabs · MPagination · MBreadcrumb', detail: '键盘切换、受控分页与真实链接' },
   { title: '浮层与说明', count: 3, names: 'MDialog · MPopover · MTooltip', detail: '模态焦点、非模态浮层与文本提示' },
   { title: '状态与反馈', count: 7, names: 'MBadge · MAlert · MSpinner · MSkeleton · MEmpty · MToast · MToastViewport', detail: '静态状态、可选播报、独立通知计时' },
@@ -34,14 +34,14 @@ import type { MTableColumn } from 'malang-ui';
 import { debounce, throttle, asyncLock } from 'malang-ui/utils';
 
 // 独立 GSAP / MG 入口；组件卸载时调用 controller.dispose()
-import { createInkSequence, createOrbitSequence } from 'malang-ui/motion';`;
+import { createInkSequence, createOrbitSequence, createSealSequence } from 'malang-ui/motion';`;
 const GettingStarted = defineComponent({
   components: { MAlert, MBadge, MCard, MDivider },
   setup: () => ({ catalog, total: catalog.reduce((sum, group) => sum + group.count, 0), install, usage, modules }),
   template: `<main class="getting-started">
     <header><p class="getting-started__eyebrow">MALANG / KUNGFU PUNK</p><h1>落墨有形，交互有章。</h1><p class="getting-started__intro">{{ total }} 个 Vue 组件，一套功夫朋克语言。从单个状态走向能实际操作的业务页面。</p><div class="getting-started__badges"><MBadge tone="info">Vue 3 + TypeScript</MBadge><MBadge>M 前缀 · 本地验证版</MBadge><MBadge tone="success">明暗主题 · 键盘操作</MBadge></div></header>
     <MAlert title="先在自己的项目中验证" description="当前包尚未发布到 npm。通过本地构建与打包安装使用；颜色、细节和更多 MG 编排仍会继续迭代。" />
-    <section aria-labelledby="start-route"><h2 id="start-route">从这里开始</h2><ol class="getting-started__route"><li><strong>看语言</strong><p>「水墨科技样板」与「交互语言」展示视觉方向、焦点和动效。</p></li><li><strong>试组合</strong><p>「业务组合工作台」完成搜索、筛选、分页、编辑和保存通知。</p></li><li><strong>查组件</strong><p>在左侧基础组件目录切换状态；「文档」页提供参数与可运行示例。</p></li></ol></section>
+    <section aria-labelledby="start-route"><h2 id="start-route">从这里开始</h2><ol class="getting-started__route"><li><strong>看语言</strong><p>「功夫朋克规范」与「交互语言」展示材质、焦点和七项品质约定。</p></li><li><strong>试组合</strong><p>「业务组合工作台」「铸刃工坊」「归印调校台」验证编辑、交付和真实 MG。</p></li><li><strong>查组件</strong><p>在基础与二级组件目录切换状态；「文档」页提供参数与可运行示例。</p></li></ol></section>
     <MDivider :label="'组件索引 / ' + total" />
     <section class="getting-started__catalog" aria-label="组件分类"><MCard v-for="group in catalog" :key="group.title" :title="group.title" :description="group.detail" heading-tag="h2"><MBadge>{{ group.count }} 个组件</MBadge><p>{{ group.names }}</p></MCard></section>
     <section aria-labelledby="start-install"><h2 id="start-install">安装到本地项目</h2><p>组件运行时使用 Vue 3.5+；开发工作台使用 Node.js 24+、pnpm 11.25。替换下方安装包路径为你本机的实际位置。</p><pre tabindex="0" aria-label="本地安装命令"><code v-text="install"></code></pre></section>

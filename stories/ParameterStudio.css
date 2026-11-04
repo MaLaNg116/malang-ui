@@ -1,0 +1,31 @@
+.parameter-studio { max-width: 1240px; margin-inline: auto; }
+.parameter-studio__header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 30px; padding: 30px 0 34px; border-bottom: 2px solid var(--ui-color-text); }
+.parameter-studio__eyebrow { color: var(--ui-color-accent); font: 10px/1.5 var(--ui-font-family-mono); letter-spacing: 3px; }
+.parameter-studio h1 { font: 500 clamp(31px, 4.2vw, 48px)/1.5 var(--ui-font-family-display); margin: 18px 0 12px; }
+.parameter-studio__intro { max-width: 600px; color: var(--ui-color-text-secondary); font-size: 12px; line-height: 1.9; }
+.parameter-studio__author { display: flex; align-items: center; gap: 14px; }
+.parameter-studio__author strong { font-size: 12px; font-weight: 500; } .parameter-studio__author p { margin-top: 8px; color: var(--ui-color-text-secondary); font-size: 10px; }
+.parameter-studio__workspace { display: grid; grid-template-columns: minmax(300px, .78fr) minmax(0, 1fr); gap: 50px; margin-top: 34px; }
+.parameter-studio__editor, .parameter-studio__preview { min-width: 0; }
+.parameter-studio__editor { display: grid; align-content: start; gap: 26px; }
+.parameter-studio__preview { border-left: 1px solid var(--ui-color-rule); padding-left: 34px; }
+.parameter-studio__section-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.parameter-studio__section-heading h2 { font: 500 25px/1.5 var(--ui-font-family-display); }
+.parameter-studio__calibration { display: grid; gap: 20px; border-bottom: 1px solid var(--ui-color-rule); padding-bottom: 24px; }
+.parameter-studio__keywords h3 { font: 500 17px/1.5 var(--ui-font-family-display); margin: 0 0 16px; }
+.parameter-studio__tags { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 12px; }
+.parameter-studio__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.parameter-studio__muted { color: var(--ui-color-text-secondary); font-size: 11px; line-height: 1.9; }
+.parameter-studio__canvas-wrap { position: relative; overflow: hidden; border-block: 1px solid var(--ui-color-metal); margin: 24px 0 14px; background: var(--ui-color-surface); }
+.parameter-studio__canvas-wrap::before, .parameter-studio__canvas-wrap::after { content: ''; position: absolute; width: 28px; height: 2px; background: var(--ui-color-accent); pointer-events: none; }
+.parameter-studio__canvas-wrap::before { left: 0; top: 0; } .parameter-studio__canvas-wrap::after { right: 0; bottom: 0; background: var(--ui-color-secondary-accent); }
+.parameter-studio canvas { display: block; width: 100%; height: 360px; }
+.parameter-studio__canvas-caption { position: absolute; inset: auto 16px 12px; display: flex; justify-content: space-between; gap: 20px; font: 9px var(--ui-font-family-mono); letter-spacing: 1px; color: var(--ui-color-text-secondary); pointer-events: none; }
+.parameter-studio__phase { margin-bottom: 22px; color: var(--ui-color-accent); font-size: 12px; }
+.parameter-studio__transport { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 18px 0 28px; }
+.parameter-studio__transport > span { margin-left: auto; color: var(--ui-color-text-secondary); font: 10px var(--ui-font-family-mono); font-variant-numeric: tabular-nums; }
+.parameter-studio__preview > .ui-descriptions { margin-top: 26px; }
+.parameter-studio__footer { display: flex; align-items: baseline; gap: 16px; margin-top: 40px; padding-block: 20px; border-top: 1px solid var(--ui-color-text); }
+.parameter-studio__footer > span { color: var(--ui-color-accent); } .parameter-studio__footer > p { color: var(--ui-color-text-secondary); font-size: 11px; line-height: 1.9; }
+@media (max-width: 960px) { .parameter-studio__workspace { grid-template-columns: minmax(0,1fr); gap: 34px; } .parameter-studio__preview { border-left: 0; border-top: 1px solid var(--ui-color-rule); padding: 28px 0 0; } }
+@media (max-width: 480px) { .parameter-studio canvas { height: 270px; } .parameter-studio__transport { gap: 8px; } .parameter-studio__transport > span { flex-basis: 100%; margin: 8px 0 0; } }

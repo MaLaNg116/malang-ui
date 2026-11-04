@@ -2,13 +2,15 @@
 
 一套以水墨与科技融合为视觉方向的前端组件库，包含 UI 组件、GSAP 动效、MG 编排和实用工具。首发使用 Vue 3 + TypeScript，先在自己的项目中验证，再逐步扩展与开源。
 
-当前提供 29 个公开组件、纯 TypeScript 工具与两套 GSAP / MG 编排。视觉使用暖纸、浓墨、朱砂和青玉，颜色与细节仍会继续迭代。
+当前提供 35 个公开组件、纯 TypeScript 工具与三套 GSAP / MG 编排。视觉使用暖纸、浓墨、朱砂和青玉，颜色与细节仍会继续迭代。
 
 组件统一使用 **M 前缀**，例如 `MInput`、`MButton`、`MDrawer`；Vue 模板也可以写成 `<m-input>`、`<m-button>`、`<m-drawer>`。M 代表 MaLang，公开类型对应 `MInputProps` 等。当前私有验证阶段已统一迁移命名。
 
 从 Storybook 的「开始 / 基础版使用指南」查看组件索引和接入方式；在「业务组合工作台」实际操作搜索、阶段筛选、重点项目过滤、分页、编辑、新建与保存通知。示例数据只保留在当前预览，不提交到服务器。
 
 「开始 / 功夫朋克规范」将七项品质落实到真实组件样本；「开始 / 铸刃工坊」组合抽屉、菜单、折叠章节、步骤、进度与时间线，演示资料编辑、取消、异常重试和完成通知。该流程仅在本地计时演练，不执行构建或发布。
+
+「开始 / 归印调校台」把搜索预设、数字与滑杆、可移除关键词和资料描述连接到真实的成功落印控制器。草稿在应用前保持独立，应用后可播放、暂停、定位与重播；减少动态效果直接呈现完成态。
 
 「基础组件 / 交互语言」集中展示按钮、输入框与开关的轮廓、焦点和状态反馈。设计使用折锋边角、墨线焦点与方形滑锁，在明暗主题中保持一致，并保留原生输入、键盘与触屏操作。
 
@@ -103,14 +105,14 @@ const name = ref('');
 
 | 模块 | 当前内容 |
 | --- | --- |
-| 动作与输入（7） | `MButton`、`MInput`、`MTextarea`、`MSelect`、`MCheckbox`、`MRadioGroup`、`MSwitch` |
-| 内容与数据（3） | `MCard`、`MTable`、`MDivider` |
+| 动作与输入（10） | `MButton`、`MInput`、`MInputNumber`、`MSlider`、`MCombobox`、`MTextarea`、`MSelect`、`MCheckbox`、`MRadioGroup`、`MSwitch` |
+| 内容与数据（6） | `MCard`、`MTable`、`MDivider`、`MTag`、`MAvatar`、`MDescriptions` |
 | 页面导航（3） | `MTabs`、`MPagination`、`MBreadcrumb` |
 | 浮层与说明（3） | `MDialog`、`MPopover`、`MTooltip` |
 | 状态与反馈（7） | `MBadge`、`MAlert`、`MSpinner`、`MSkeleton`、`MEmpty`、`MToast`、`MToastViewport` |
 | 二级流程（6） | `MDrawer`、`MDropdownMenu`、`MAccordion`、`MSteps`、`MProgress`、`MTimeline` |
 | 工具 | `debounce`、`throttle`、`asyncLock` |
-| 动效与 MG | 轨道构形与墨迹切面编排，支持播放、暂停、定位、重播与销毁 |
+| 动效与 MG | 轨道构形、墨迹切面与成功落印，支持播放、暂停、定位、重播与销毁 |
 | Vue 适配 | `useReducedMotion`，以及示例中的生命周期清理 |
 | 设计基础 | 明暗主题、密度、排版、间距与动效变量 |
 | 开发工作台 | Storybook 的组件状态、组合界面和工具交互示例 |
@@ -128,6 +130,28 @@ const name = ref('');
 `MCheckbox` 使用布尔 `v-model`，支持 `indeterminate`。`MRadioGroup` 使用字符串 `v-model`、必填 `label` 和 `options`；每个选项提供唯一 `value`、`label`、可选 `disabled/description`，原生方向键会跳过禁用项。每个组默认独立的表单名称，传 `name` 时同一表单内保持唯一。
 
 `MSelect` 使用字符串 `v-model` 与 `options`（同 `MChoiceOption`）；`placeholder` 提供不可选的空值提示。它保留原生单选下拉框与系统键盘行为，选项描述用于 RadioGroup。上述表单控件的禁用、错误、帮助信息和模型变化通过原生语义呈现；受控模型由父级决定是否接受更新。
+
+`MInputNumber` 使用 `number | null` 模型，清空表示 `null`；`min/max/step` 作用于原生数字控件和增减拨片。输入不会发出 `NaN`，组合输入保留草稿，失焦时规范化格式与边界。手输不强制四舍五入到步长，原生 `stepMismatch` 仍参与表单验证；`readonly` 同时阻止拨片，`name/required/form` 等属性提交到原生输入框。
+
+`MSlider` 使用数字 `v-model`，默认 `0–100`、步长 `1`，保留原生 range 的键盘、触屏和表单行为。显示值按范围和步长对齐，范围变化不会擅自改写父模型；`showValue` 可关闭可见数值。与可清空的数字输入联动时，使用 `computed` 的 get/set 桥接空值，示例见归印调校台。
+
+```ts
+import { computed, ref } from 'vue';
+
+const amount = ref<number | null>(1);
+const sliderAmount = computed({
+  get: () => amount.value ?? 1,
+  set: (value: number) => { amount.value = value; },
+});
+```
+
+`MCombobox` 是本地过滤的单选搜索控件，`modelValue` 始终是已选选项的 `value`；自由输入只作为查询，不自动创建选项。使用非空且组内唯一的选项 value，空字符串表示未选择。通过 `MChoiceOption` 提供候选，方向键浏览、Enter 选择、Escape 放弃查询、Tab 离开；中文组合输入不会抢选。`name/form` 提交真实选值，`required` 校验真实候选和未确认查询；`readonly` 阻止打开与清空，`clearable` 默认开启。
+
+`MTag` 表达关键词和分类，支持 `MStatusTone` 的语义色；`closable` 发出 `close(MouseEvent)` 请求，父级决定是否移除并安排后续焦点。`closeLabel` 命名具体关闭操作，默认说明会关联标签文字；关闭按钮在触屏上提供 44px 操作区。
+
+`MAvatar` 的 `alt` 必填，提供单一的图像名称；相邻文字已经表达身份时可传空字符串，作为装饰。`name` 提供最多两个字素的缩略，图片加载或失败时保留文字回退，更换 `src` 后重新尝试。`size` 支持 `sm/md/lg`，`tone` 支持 `ink/seal/jade`。
+
+`MDescriptions` 使用原生 `dl/dt/dd` 展示资料，必填 `label/items`；条目包含唯一 `key`、`label`、可选简单值 `value` 和跨列 `span`。`columns` 支持 1–3 列，窄屏自动单列；复杂内容通过同名插槽 `{ item }` 渲染，无资料时有明确空说明。
 
 `MPagination` 使用数字 `v-model`、记录总量 `total` 和 `pageSize`（默认 10）。页码从 1 开始，提供首尾和当前页附近的有限按钮；记录减少时夹取显示页码，但不会主动改写父模型。业务列表应同时对其切片页码做校正。「业务组合工作台」展示筛选时重置页码的处理。
 
@@ -190,6 +214,8 @@ scripts/         Token 生成与构建辅助脚本
 设计变量以 [design/tokens.json](design/tokens.json) 为真源，通过 `pnpm tokens` 更新生成的 CSS。样板使用同一套变量；明暗主题与减少动态效果可在 Storybook 顶部切换。
 
 `createInkSequence(canvas, options)` 是独立的五秒 MG 编排，按「蓄势、疾出、收锋、归位」组织墨迹与几何切面。控制器默认不自动播放；使用 `play()`、`pause()`、`seek(seconds)`、`replay()` 与 `dispose()` 控制。默认遵循系统减少动态效果偏好，此时播放直接显示落印状态；仍可使用 `seek()` 静态查看各阶段。实例会在页面隐藏时暂停，卸载时应调用 `dispose()`。
+
+`createSealSequence(canvas, options)` 提供 3.6 秒「蓄印、合轨、落印、回响」编排，四向机械夹具、缓存朱砂印面与干墨纹共同形成“成章”终态。默认手动播放；减少动态效果在创建时直接显示终态，仍可通过 `seek()` 静态看各阶段。`amplitude` 为 0.6–1.8，`speed` 为有限正数；定位仍以编排秒数为单位。控制器独立处理页面隐藏、BFCache、DPR、字体与主题变化，销毁一枚印记不会清理其他实例。
 
 ## 后续方向
 

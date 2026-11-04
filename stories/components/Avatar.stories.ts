@@ -1,0 +1,15 @@
+import { defineComponent, ref } from 'vue';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
+import MAvatar from '../../src/components/MAvatar.vue';
+import MButton from '../../src/components/MButton.vue';
+const portrait = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128"><rect width="128" height="128" fill="#243129"/><circle cx="64" cy="48" r="23" fill="#de795f"/><path d="M20 128v-16a44 44 0 0 1 88 0v16" fill="#8bb9aa"/></svg>');
+const broken = 'data:image/png;base64,broken';
+const meta = { title: '基础组件/Avatar 头像', component: MAvatar, tags: ['autodocs'], args: { alt: 'MaLang 工坊', name: 'ML', size: 'md', tone: 'seal' }, render: args => defineComponent({ components: { MAvatar }, setup: () => ({ args }), template: '<div class="kit-row"><MAvatar v-bind="args" /><p>MaLang · 设计工坊</p></div>' }), parameters: { docs: { description: { component: '切角印框承载头像或文字。alt 必填并提供单一可访问名称；传空字符串表示装饰。name 提供文字缩略，图片加载或失败时保留缩略状态，更换 src 后会重新尝试。支持 sm/md/lg 与 ink/seal/jade 材质色。' } } } } satisfies Meta<typeof MAvatar>;
+export default meta;
+type Story = StoryObj<typeof meta>;
+export const Default: Story = {};
+export const Sizes: Story = { render: args => defineComponent({ components: { MAvatar }, setup: () => ({ args, sizes: ['sm','md','lg'] }), template: '<div class="kit-row"><MAvatar v-for="size in sizes" :key="size" v-bind="args" :size="size" /></div>' }) };
+export const Image: Story = { args: { src: portrait, alt: '工坊成员的示意头像' } };
+export const ErrorFallback: Story = { args: { src: broken, alt: '墨客的头像', name: '墨客' } };
+export const SourceChange: Story = { render: () => defineComponent({ components: { MAvatar, MButton }, setup: () => ({ source: ref(broken), portrait, broken }), template: '<main class="kit-stack"><div class="kit-row"><MAvatar :src="source" alt="可以重新加载的工坊头像" name="工坊" size="lg" tone="jade"/><MButton variant="secondary" @click="source = source === broken ? portrait : broken">切换图片来源</MButton></div><p class="kit-muted">错误来源显示文字，切换到有效来源后显示图像。</p></main>' }) };
+export const Decorative: Story = { args: { alt: '', name: 'M', tone: 'ink' } };

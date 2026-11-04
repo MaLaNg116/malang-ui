@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { computed, defineComponent, h, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue';
 import type { PropType } from 'vue';
+import { MButton, MSlider } from '../../src';
 import { createOrbitSequence } from '../../src/motion';
 import type { OrbitSequenceController, OrbitSequenceState } from '../../src/motion';
 import './OrbitSequence.css';
@@ -51,21 +52,18 @@ const OrbitSequenceDemo = defineComponent({
           h('span', { role:'status', 'aria-live':'polite' }, phase.value),
           h('span', { class:'orbit-demo__time', 'aria-hidden':'true' }, `${state.value.time.toFixed(1)} / 4.8s`),
         ]),
-        h('input', {
-          type:'range', class:'orbit-demo__timeline', min:0, max:4.8, step:0.01, value:state.value.time,
-          'aria-label':'MG 编排进度', 'aria-valuetext':`${state.value.time.toFixed(1)} 秒，共 4.8 秒`,
-          onInput:(event:Event) => {
-            const next = Number((event.target as HTMLInputElement).value);
-            controller?.pause(); controller?.seek(next);
-          },
-        }),
+        h('div', { class:'orbit-demo__timeline' }, [h(MSlider, {
+          modelValue:state.value.time, label:'MG 编排进度', min:0, max:4.8, step:0.01, showValue:false,
+          'aria-valuetext':`${state.value.time.toFixed(1)} 秒，共 4.8 秒`,
+          'onUpdate:modelValue':(value:number) => { controller?.pause(); controller?.seek(value); },
+        })]),
         h('div', { class:'orbit-demo__buttons' }, [
-          h('button', {
-            type:'button', class:'orbit-demo__button orbit-demo__button--primary',
+          h(MButton, {
+            type:'button',
             onClick:() => state.value.playing ? controller?.pause() : controller?.play(),
-          }, state.value.reducedMotion ? '查看完成状态' : state.value.playing ? '暂停' : '播放'),
-          h('button', { type:'button', class:'orbit-demo__button', onClick:() => controller?.replay() }, '重新播放'),
-          h('button', { type:'button', class:'orbit-demo__button', onClick:() => { controller?.pause(); controller?.seek(4.8); } }, '完成状态'),
+          }, () => state.value.reducedMotion ? '查看完成状态' : state.value.playing ? '暂停' : '播放'),
+          h(MButton, { type:'button', variant:'secondary', onClick:() => controller?.replay() }, () => '重新播放'),
+          h(MButton, { type:'button', variant:'ghost', onClick:() => { controller?.pause(); controller?.seek(4.8); } }, () => '完成状态'),
         ]),
         h('p', { class:'orbit-demo__note' }, state.value.reducedMotion ? '已启用减少动态效果，播放时直接显示完成状态。' : '手动播放，支持暂停与拖动；离开示例时释放动画与订阅。'),
       ]),

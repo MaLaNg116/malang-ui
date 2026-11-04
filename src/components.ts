@@ -27,6 +27,12 @@ export { default as MAccordion } from './components/MAccordion.vue';
 export { default as MSteps } from './components/MSteps.vue';
 export { default as MProgress } from './components/MProgress.vue';
 export { default as MTimeline } from './components/MTimeline.vue';
+export { default as MInputNumber } from './components/MInputNumber.vue';
+export { default as MSlider } from './components/MSlider.vue';
+export { default as MCombobox } from './components/MCombobox.vue';
+export { default as MTag } from './components/MTag.vue';
+export { default as MAvatar } from './components/MAvatar.vue';
+export { default as MDescriptions } from './components/MDescriptions.vue';
 export type {
   MButtonProps,
   MButtonVariant,
@@ -76,4 +82,11 @@ export type {
   MTimelineStatus,
   MTimelineItem,
   MTimelineProps,
+  MInputNumberProps,
+  MSliderProps,
+  MComboboxProps,
+  MTagProps,
+  MAvatarProps,
+  MDescriptionItem,
+  MDescriptionsProps,
 } from './components/types';
