@@ -34,7 +34,7 @@ import type { MTableColumn } from 'malang-ui';
 import { debounce, throttle, asyncLock } from 'malang-ui/utils';
 
 // 独立 GSAP / MG 入口；组件卸载时调用 controller.dispose()
-import { createInkSequence, createOrbitSequence, createSealSequence } from 'malang-ui/motion';`;
+import { createInkSequence, createOrbitSequence, createSealSequence, createBrandSequence, createWaitingSequence, createStaggerSequence } from 'malang-ui/motion';`;
 const GettingStarted = defineComponent({
   components: { MAlert, MBadge, MCard, MDivider },
   setup: () => ({ catalog, total: catalog.reduce((sum, group) => sum + group.count, 0), install, usage, modules }),

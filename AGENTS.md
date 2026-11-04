@@ -11,5 +11,6 @@
 - 修改后执行与改动相关的检查；交付工程变更前运行 `pnpm check`。有交互变更时在 Storybook 中检查相关状态和窄屏表现。
 - `pnpm check` 在构建后以 `skipLibCheck: false` 检查 `tests/consumer/` 对公开声明的使用。新增组件或入口时同步覆盖消费用法，不用源码别名替代构建产物。
 - 表单、导航、数据、浮层、通知或业务组合的交互变更还需运行 `pnpm test:browser`；不要让工具层测试与真实浏览器用例互相混入。先完成源码与 Token 生成，再启动浏览器回归，避免开发服务器 HMR 干扰测试。
+- 浏览器回归在本地使用独立 Storybook 开发服务；CI 在 `pnpm check` 后托管刚生成的 `storybook-static`，校验实际构建产物，避免将首次开发编译时间混入交互断言。进入 Story 后先等待工作台渲染容器就绪，不用延长断言超时掩盖页面尚未加载。
 - 保留现有 MIT `LICENSE` 和版权声明。构建产物、依赖目录和工作台静态产物不提交。
 - 当前按用户约定在 `main` 推进；相关检查和 `pnpm check` 通过后直接提交并推送 `main`，不主动创建 PR。每次提交前核对仓库级 Git 身份，使用已确认的 GitHub 用户名 `MaLaNg116` 和 `117097445+MaLaNg116@users.noreply.github.com`，不要沿用全局实名身份。

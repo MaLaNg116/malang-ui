@@ -2,9 +2,11 @@
 
 一套以水墨与科技融合为视觉方向的前端组件库，包含 UI 组件、GSAP 动效、MG 编排和实用工具。首发使用 Vue 3 + TypeScript，先在自己的项目中验证，再逐步扩展与开源。
 
-当前提供 39 个公开组件、纯 TypeScript 工具与三套 GSAP / MG 编排。视觉使用暖纸、浓墨、朱砂和青玉，颜色与细节仍会继续迭代。
+当前提供 39 个公开组件、纯 TypeScript 工具、五套 Canvas / MG 编排和 DOM 错峰动效。视觉使用暖纸、浓墨、朱砂和青玉，颜色与细节仍会继续迭代。
 
 组件统一使用 **M 前缀**，例如 `MInput`、`MButton`、`MDrawer`；Vue 模板也可以写成 `<m-input>`、`<m-button>`、`<m-drawer>`。M 代表 MaLang，公开类型对应 `MInputProps` 等。当前私有验证阶段已统一迁移命名。
+
+「开始 / 组件库展示首页」提供可跳过、可重播的品牌开场、能力索引和真实本地请求演练。等待只表示处理中；仅确认成功才触发落印，失败、取消和迟到响应不会伪装成完成。列表默认可读，显式重播时再错峰归位。
 
 从 Storybook 的「开始 / 基础版使用指南」查看组件索引和接入方式；在「业务组合工作台」实际操作搜索、阶段筛选、重点项目过滤、分页、编辑、新建与保存通知。示例数据只保留在当前预览，不提交到服务器。
 
@@ -46,7 +48,7 @@ pnpm check            # 类型、测试、库构建、公开声明消费与工�
 
 `dist/` 是组件库产物，`storybook-static/` 是工作台产物。开发工具、stories 和测试文件不属于组件运行时入口。
 
-首次运行浏览器测试前执行 `pnpm exec playwright install chromium`；Linux 如需系统依赖可加 `--with-deps`。测试会自动在 6007 端口启动独立 Storybook，不占用日常预览的 6006。CI 会安装浏览器，并在 `pnpm check` 后执行这批交互测试。
+首次运行浏览器测试前执行 `pnpm exec playwright install chromium`；Linux 如需系统依赖可加 `--with-deps`。本地测试在 6007 启动独立 Storybook，不占日常预览的 6006。CI 在 `pnpm check` 后使用 Vite preview 托管刚生成的 `storybook-static`，验证实际构建产物；交互断言先等待工作台容器就绪。服务管理遵循 [Playwright webServer](https://playwright.dev/docs/test-webserver) 的启动与就绪配置。
 
 ## 模块入口
 
@@ -60,7 +62,8 @@ import 'malang-ui/style.css';
 import { debounce, throttle, asyncLock } from 'malang-ui/utils';
 
 // 动效入口单独使用 GSAP，消费方需要安装 gsap。
-import { createInkSequence, createOrbitSequence } from 'malang-ui/motion';
+import { createInkSequence, createOrbitSequence, createSealSequence,
+  createBrandSequence, createWaitingSequence, createStaggerSequence } from 'malang-ui/motion';
 
 // 聚合入口包含 UI、工具与 GSAP 动效。
 import * as MalangUI from 'malang-ui/all';
@@ -114,7 +117,7 @@ const name = ref('');
 | 状态与反馈（7） | `MBadge`、`MAlert`、`MSpinner`、`MSkeleton`、`MEmpty`、`MToast`、`MToastViewport` |
 | 二级流程（6） | `MDrawer`、`MDropdownMenu`、`MAccordion`、`MSteps`、`MProgress`、`MTimeline` |
 | 工具 | `debounce`、`throttle`、`asyncLock` |
-| 动效与 MG | 轨道构形、墨迹切面与成功落印，支持播放、暂停、定位、重播与销毁 |
+| 动效与 MG | 轨道构形、墨迹切面、成功落印、品牌开场、双轨等待与 DOM 错峰，支持播放、暂停、定位、重播与销毁 |
 | Vue 适配 | `useReducedMotion`，以及示例中的生命周期清理 |
 | 设计基础 | 明暗主题、密度、排版、间距与动效变量 |
 | 开发工作台 | Storybook 的组件状态、组合界面和工具交互示例 |
@@ -232,6 +235,16 @@ scripts/         Token 生成与构建辅助脚本
 `createInkSequence(canvas, options)` 是独立的五秒 MG 编排，按「蓄势、疾出、收锋、归位」组织墨迹与几何切面。控制器默认不自动播放；使用 `play()`、`pause()`、`seek(seconds)`、`replay()` 与 `dispose()` 控制。默认遵循系统减少动态效果偏好，此时播放直接显示落印状态；仍可使用 `seek()` 静态查看各阶段。实例会在页面隐藏时暂停，卸载时应调用 `dispose()`。
 
 `createSealSequence(canvas, options)` 提供 3.6 秒「蓄印、合轨、落印、回响」编排，四向机械夹具、缓存朱砂印面与干墨纹共同形成“成章”终态。默认手动播放；减少动态效果在创建时直接显示终态，仍可通过 `seek()` 静态看各阶段。`amplitude` 为 0.6–1.8，`speed` 为有限正数；定位仍以编排秒数为单位。控制器独立处理页面隐藏、BFCache、DPR、字体与主题变化，销毁一枚印记不会清理其他实例。
+
+`createBrandSequence(canvas, options)` 提供 4.8 秒「聚轨、刻骨、显字、归定」开场，终态清晰呈现 MALANG UI。默认暂停；展示首页自行决定首次播放，正文和导航始终可用。跳过使用 `pause(); seek(controller.duration)`，重播使用 `replay()`；减少动态效果直接呈现完整字标。选项与成功落印同样提供 `amplitude/speed/reducedMotion/colors/onUpdate`。
+
+`createWaitingSequence(canvas, options)` 提供 2.8 秒双轨等待，默认暂停、`loop: true`。`time/progress` 只表示动画周期位置，`cycle` 记录自然跨周期次数，均不代表业务进度。`seek()` 会暂停，包含精确周期终点；从末尾播放或重播开始新一轮。`loop: false` 只运行一周期，终态仍是等待姿态。减少动态效果显示 1.4 秒的静态轨道，不循环、不自动宣告成功；播放偏好恢复后也不自动续播。
+
+业务调用方管理真实请求结果：发起后播放 Waiting，确认成功后停止 Waiting 并播放 Seal；失败、取消与过期响应不触发落印。稳定 DOM 文案负责状态语义，`aria-busy` 表示等待，不逐帧播报。五套 Canvas 编排都支持独立 DPR、主题、字体、页面可见性和 BFCache 生命周期；卸载时调用各自的 `dispose()`。
+
+`createStaggerSequence(elements, options)` 面向同一 document 中已挂载的专属 DOM 容器，目标去重后固定顺序。`duration` 默认为每项 0.42 秒，`stagger` 为 0.08 秒，`distance` 为 18px；`direction` 支持 `up/down/left/right`，`speed` 控制播放倍率。控制器的 `duration` 是整条编排长度，定位仍用未乘倍率的秒数。空列表返回零时长的稳定控制器。
+
+创建时内容保持原样可读，首次播放、重播或显式定位才应用入场状态。它只管理自己的位移与 opacity，不修改 `visibility/aria-hidden/tabindex`；焦点进入目标时立即归位并暂停。减少动态效果或页面隐藏也会收束为可读终态。目标的 transform/opacity 交由这一实例独占，业务自身的变换放在内层；重叠实例会被拒绝，销毁归还自己的样式并释放监听。列表变更后在 Vue `nextTick` 中销毁并重新创建。错峰与样式恢复参考 [GSAP Staggers](https://gsap.com/resources/getting-started/Staggers/) 和 [GSAP revert](https://gsap.com/docs/v3/GSAP/Timeline/revert()/)。
 
 ## 后续方向
 

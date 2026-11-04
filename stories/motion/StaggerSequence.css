@@ -1,0 +1,24 @@
+.stagger-demo { box-sizing: border-box; min-width: 0; max-width: 860px; margin-inline: auto; padding: clamp(20px,4vw,48px); color: var(--ui-color-text); font: var(--ui-font-size-body)/1.8 var(--ui-font-family); }
+.stagger-demo__heading { display: grid; gap: 12px; padding-bottom: 28px; border-bottom: 1px solid var(--ui-color-rule); }
+.stagger-demo__heading h2 { margin: 0; font: 500 clamp(26px,4vw,38px)/1.5 var(--ui-font-family-display); }
+.stagger-demo__heading p { margin: 0; max-width: 52ch; color: var(--ui-color-text-secondary); }
+.stagger-demo__heading .stagger-demo__eyebrow { color: var(--ui-color-accent); font: 10px/1.6 var(--ui-font-family-mono); letter-spacing: .16em; }
+.stagger-demo__controls { display: grid; gap: 18px; padding-block: 24px; }
+.stagger-demo__readout { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px; }
+.stagger-demo__readout p { margin: 0; color: var(--ui-color-secondary-accent); font: 15px/1.6 var(--ui-font-family-display); }
+.stagger-demo__readout > span { color: var(--ui-color-text-secondary); font: 10px/1.6 var(--ui-font-family-mono); font-variant-numeric: tabular-nums; }
+.stagger-demo__buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+.stagger-demo__ownership { margin: 0; padding: 12px; border-left: 2px solid var(--ui-color-accent); font-size: 12px; overflow-wrap: anywhere; }
+.stagger-demo__stage { display: grid; gap: 22px; min-width: 0; padding: 18px 4px 24px; overflow: clip; }
+.stagger-demo__item { position: relative; min-width: 0; }
+.stagger-demo__index { display: block; margin-bottom: 7px; padding-left: 12px; border-left: 2px solid var(--ui-color-accent); color: var(--ui-color-metal); font: 9px/1.6 var(--ui-font-family-mono); letter-spacing: .12em; }
+.stagger-demo__item .ui-card { min-width: 0; }
+.stagger-demo__item .ui-card p { margin: 0; color: var(--ui-color-text-secondary); overflow-wrap: anywhere; }
+.stagger-demo__item .ui-card .ui-native-field { margin-top: 20px; }
+.stagger-demo__note { margin: 0; padding-top: 20px; border-top: 1px solid var(--ui-color-rule); color: var(--ui-color-text-secondary); font-size: 12px; overflow-wrap: anywhere; }
+.stagger-pair { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.stagger-pair .stagger-demo { width: 100%; padding: 24px; }
+.stagger-pair-shell { min-width: 0; }
+.stagger-pair-tools { padding: 24px 24px 0; }
+.stagger-pair-empty { margin: 24px; padding: 24px; border: 1px solid var(--ui-color-rule); color: var(--ui-color-text-secondary); }
+@media(max-width:720px) { .stagger-pair { grid-template-columns: minmax(0,1fr); } .stagger-demo { padding: 20px; } }

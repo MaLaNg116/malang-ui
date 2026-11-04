@@ -24,7 +24,9 @@ export default defineConfig({
     use: { ...devices['Desktop Chrome'], channel: process.env.PLAYWRIGHT_CHANNEL || undefined },
   }],
   webServer: {
-    command: 'pnpm exec storybook dev --port 6007 --ci --no-open',
+    command: process.env.CI
+      ? 'pnpm exec vite preview --outDir storybook-static --port 6007 --host 127.0.0.1 --strictPort'
+      : 'pnpm exec storybook dev --port 6007 --ci --no-open',
     url: `${baseURL}/index.json`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

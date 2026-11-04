@@ -19,7 +19,7 @@ const preview: Preview = {
   parameters: {
     layout: 'fullscreen',
     controls: { expanded: true },
-    options: { storySort: { order: ['开始', ['基础版使用指南', '功夫朋克规范', '归印调校台', '藏品归档台', '铸刃工坊', '业务组合工作台', '水墨科技样板', '导航与弹层', '工程起点'], '基础组件', ['交互语言', 'Button 按钮', 'Input 输入框', 'Textarea 多行输入', 'Select 选择器', 'Checkbox 复选框', 'RadioGroup 单选组', 'Switch 开关', 'Card 卡片', 'Tag 标签', 'Avatar 头像', 'Table 表格', 'Divider 分隔线', 'Tabs 标签页', 'Pagination 分页', 'Breadcrumb 面包屑', 'Dialog 对话框', 'Popover 气泡', 'Tooltip 提示', 'Badge 状态标记', 'Alert 提示块', 'Spinner 加载标记', 'Skeleton 骨架屏', 'Empty 空状态', 'Toast 轻提示'], '二级组件', ['InputNumber 数字输入', 'Slider 刻度滑轨', 'Combobox 搜索选择', 'DatePicker 日期历盘', 'Upload 本地文件', 'Menu 导航菜单', 'Tree 层级目录', 'Descriptions 资料描述', 'Drawer 抽屉', 'DropdownMenu 操作菜单', 'Accordion 折叠面板', 'Steps 步骤条', 'Progress 进度条', 'Timeline 时间线'], '动效', '实用工具'] } }
+    options: { storySort: { order: ['开始', ['组件库展示首页', '基础版使用指南', '功夫朋克规范', '归印调校台', '藏品归档台', '铸刃工坊', '业务组合工作台', '水墨科技样板', '导航与弹层', '工程起点'], '基础组件', ['交互语言', 'Button 按钮', 'Input 输入框', 'Textarea 多行输入', 'Select 选择器', 'Checkbox 复选框', 'RadioGroup 单选组', 'Switch 开关', 'Card 卡片', 'Tag 标签', 'Avatar 头像', 'Table 表格', 'Divider 分隔线', 'Tabs 标签页', 'Pagination 分页', 'Breadcrumb 面包屑', 'Dialog 对话框', 'Popover 气泡', 'Tooltip 提示', 'Badge 状态标记', 'Alert 提示块', 'Spinner 加载标记', 'Skeleton 骨架屏', 'Empty 空状态', 'Toast 轻提示'], '二级组件', ['InputNumber 数字输入', 'Slider 刻度滑轨', 'Combobox 搜索选择', 'DatePicker 日期历盘', 'Upload 本地文件', 'Menu 导航菜单', 'Tree 层级目录', 'Descriptions 资料描述', 'Drawer 抽屉', 'DropdownMenu 操作菜单', 'Accordion 折叠面板', 'Steps 步骤条', 'Progress 进度条', 'Timeline 时间线'], '动效', '实用工具'] } }
   }
 };
 

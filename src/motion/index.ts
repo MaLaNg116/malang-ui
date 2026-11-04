@@ -24,3 +24,29 @@ export type {
   SealSequenceOptions,
   SealSequenceController,
 } from './sealSequence';
+
+export { createBrandSequence } from './brandSequence';
+export type {
+  BrandSequenceColors,
+  BrandSequencePhase,
+  BrandSequenceState,
+  BrandSequenceOptions,
+  BrandSequenceController,
+} from './brandSequence';
+
+export { createWaitingSequence } from './waitingSequence';
+export type {
+  WaitingSequenceColors,
+  WaitingSequencePhase,
+  WaitingSequenceState,
+  WaitingSequenceOptions,
+  WaitingSequenceController,
+} from './waitingSequence';
+
+export { createStaggerSequence } from './staggerSequence';
+export type {
+  StaggerSequenceOptions,
+  StaggerSequenceState,
+  StaggerSequencePhase,
+  StaggerSequenceController,
+} from './staggerSequence';

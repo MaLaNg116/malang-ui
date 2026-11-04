@@ -17,6 +17,7 @@ async function openStudio(page: Page, theme = 'light') {
   const story = entries.find(entry => entry.type === 'story' && entry.title === '开始/藏品归档台' && entry.id.endsWith('--default'));
   expect(story).toBeDefined();
   await page.goto(`/iframe.html?id=${encodeURIComponent(story!.id)}&viewMode=story&globals=theme:${theme};motion:reduced`);
+  await page.locator('#storybook-root .kit-story-surface').waitFor();
   await expect(page.getByRole('heading', { name: '藏锋于卷，万象有序。', exact: true })).toBeVisible();
 }
 function previewValue(page: Page, label: string) {
