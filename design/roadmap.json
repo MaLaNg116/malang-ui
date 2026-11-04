@@ -9,13 +9,13 @@
     "qualityContract": "design/quality-contract.json",
     "streams": [
       {"name":"二级流程组件","status":"implemented-and-locally-verified","scope":["MDrawer","MDropdownMenu","MAccordion","MSteps","MProgress","MTimeline","铸刃工坊交付组合"]},
-      {"name":"丰富输入与编辑","status":"in-progress","delivered":["MInputNumber","MSlider","MCombobox","归印调校台的原生表单、草稿与应用流程"],"remaining":["DatePicker","Upload","更丰富的表单校验与组合"]},
-      {"name":"内容与导航扩展","status":"in-progress","delivered":["MTag","MAvatar","MDescriptions","调校参数与归档关键词展示"],"remaining":["Menu","Tree","实际数据页面"]},
+      {"name":"丰富输入与编辑","status":"implemented-and-verified","delivered":["MInputNumber","MSlider","MCombobox","MDatePicker","MUpload","归印调校台的原生表单、草稿与应用流程","藏品归档台的日期草稿、真实File与受控原生reset"],"followups":["日期范围与时间选择","更多自用项目表单需求"]},
+      {"name":"内容与导航扩展","status":"implemented-and-verified","delivered":["MTag","MAvatar","MDescriptions","MMenu","MTree","调校参数与归档关键词展示","藏品归档台目录浏览、登记、详情与移除记录"],"followups":["树形下拉选择器","高级表格与虚拟滚动"]},
       {"name":"MG与动效家族","status":"in-progress","delivered":["轨道构形","墨迹切面","机械合轨与朱砂成章","三套MG共用公开MButton与MSlider控件","统一生命周期与减少动效"],"remaining":["品牌开场","加载等待","列表与空间切换"]},
       {"name":"文档与工程成熟度","status":"in-progress","scope":["公开M命名","风格规范与设计状态","完整API与示例","真实安装包消费","持续浏览器回归","在自用项目验证"]}
     ],
     "completionEvidence": ["规划能力已实现且有真实场景","七项品质通过明暗和窄屏实机评审","交互、类型、打包与CI覆盖对应公开能力","未完成项与实际限制明确记录并继续推进"],
-    "latestIteration": {"name":"数控调校与成功落印","status":"locally-verified","componentCount":35,"storyCount":216,"browserCases":97,"newComponents":["MInputNumber","MSlider","MCombobox","MTag","MAvatar","MDescriptions"],"newScenarios":["归印调校台"],"newMotion":"createSealSequence：3.6秒蓄印、合轨、落印、回响；三套MG共用公开控件","packageConsumer":"真实tgz、无paths、skipLibCheck:false、35个M导出与m-input、无GSAP基础UI、无全局box-sizing reset、原生FormData与360px均通过；独立GSAP消费工程验证落印运行、定位和销毁"}
+    "latestIteration": {"name":"本地素材归档与层级导航","status":"locally-verified","componentCount":39,"storyCount":248,"browserCases":118,"unitCases":55,"newComponents":["MDatePicker","MUpload","MMenu","MTree"],"newScenarios":["藏品归档台"],"nativeForms":"ISO整数日期、IME与无布局位移校验、真实File/FormData、只读与受控reset、局部拖放、目录焦点与选择分离","packageConsumer":"最终真实tgz、无paths、skipLibCheck:false、39个M导出与m-input、无GSAP、无全局reset；日期键盘与原生表单、附件reset后两帧的真实File、导航目录组合及360px均通过"}
   },
   "repository": "https://github.com/MaLaNg116/malang-ui",
   "confirmed": {
@@ -53,7 +53,7 @@
     "components": ["Button", "Input", "Switch", "Card", "Tabs", "Dialog", "Toast", "ToastViewport", "Popover", "Tooltip", "Checkbox", "RadioGroup", "Select", "Textarea", "Pagination", "Breadcrumb", "Badge", "Alert", "Spinner", "Skeleton", "Empty", "Divider", "Table"],
     "scenario": "列表筛选、分页、编辑、保存反馈，全部从公开入口组合",
     "acceptance": ["原生表单与中文输入", "导航、弹层与通知键盘和生命周期", "明暗、紧凑、减少动态效果和360px", "Storybook文档和最小用法", "组件库构建与类型消费", "工具入口依赖隔离", "浏览器回归和main分支CI"],
-    "deferred": ["高级表格与虚拟滚动", "日期与树形选择器", "React实现", "npm发布", "更多MG与独立包拆分"]
+    "deferred": ["高级表格与虚拟滚动", "日期范围、时间与树形下拉选择器", "React实现", "npm发布", "更多MG与独立包拆分"]
   },
   "mgExpansion": {
     "futureFamilies": ["品牌开场", "功能演示", "加载等待", "空状态", "成功反馈", "数据与流程叙事"],
@@ -73,13 +73,13 @@
   ],
   "engineeringMilestone": {
     "project": "malang-ui",
-    "delivered": ["35个公开M前缀Vue组件，含基础23项、二级流程6项与输入内容6项", "MInput与m-input引用命名", "debounce", "throttle", "asyncLock", "useReducedMotion", "GSAP 轨道构形、墨迹切面与成功落印编排", "水墨科技、导航弹层与保存反馈组合样板", "筛选、分页、新建、编辑与通知业务组合工作台", "功夫朋克七项品质规范", "铸刃工坊取消、异常与重试交付流程", "归印调校台预设搜索、数值联动、草稿还原与真实MG预览", "使用指南、组件索引和API文档"],
-    "verified": ["类型检查", "19 项工具测试", "216 个构建后 Story 的浏览器渲染", "97 项表单、数据、导航、浮层、反馈、MG与业务流程浏览器回归", "中文输入重渲染与原生表单验证", "数字空值、原生步长校验、受控请求与搜索选择FormData", "明暗主题、紧凑密度、减少动态效果与360px", "三套MG公开控件、终点定位、实例隔离与 BFCache 生命周期", "Dialog与Drawer嵌套焦点、正文滚动与滚动锁清理", "Popover受控请求与异步定位焦点", "DropdownMenu方向键、前缀与原生Tab进退", "Accordion标题命名、受控开合与隐藏草稿保留", "Steps进度、Progress语义与Timeline记录", "Tag移除回焦、Avatar错误换源与窄尺寸、Descriptions原生语义与长文", "归印调校台草稿应用与精确还原、单一完成播报和真实工具栏切换", "Tooltip切角铭牌、方向归位、短屏滚动与高对比回退", "Toast 重叠暂停、剩余计时、消息替换、单一播报与卸载清理", "组件库构建", "Storybook 构建与9份文档页加载", "全部35个M前缀公开组件入口，无旧别名", "独立Vue消费项目声明与泛型Table类型", "真实tgz的MInput/m-input、无GSAP、无全局reset与360px组合回焦", "独立GSAP消费工程的成功落印、seek3.6与销毁", "SSR导入和基础渲染", "工具与UI入口依赖隔离"],
+    "delivered": ["39个公开M前缀Vue组件，含基础23项、二级流程6项、输入内容6项与日期附件导航4项", "MInput与m-input引用命名", "debounce", "throttle", "asyncLock", "useReducedMotion", "GSAP 轨道构形、墨迹切面与成功落印编排", "水墨科技、导航弹层与保存反馈组合样板", "筛选、分页、新建、编辑与通知业务组合工作台", "功夫朋克七项品质规范", "铸刃工坊取消、异常与重试交付流程", "归印调校台预设搜索、数值联动、草稿还原与真实MG预览", "藏品归档台的目录、日期、附件登记、详情与真实操作记录", "使用指南、组件索引和API文档"],
+    "verified": ["类型检查", "55 项单元测试：工具19项与整数日期36项", "248 个构建后 Story 的浏览器渲染", "118 项表单、数据、导航、浮层、反馈、MG与业务流程浏览器回归", "中文输入重渲染与原生表单验证", "数字空值、原生步长校验、受控请求与搜索选择FormData", "日期首末年、闰年、跨月、反向范围与无布局位移错误提示", "真实File、空MIME、部分接受、受控移除回焦、只读reset与卸载任务清理", "原生链接修改键与中键、Menu层级收起、Tree独立焦点与选择、重排删除焦点修复", "明暗主题、紧凑密度、减少动态效果与8组360px", "三套MG公开控件、终点定位、实例隔离与 BFCache 生命周期", "Dialog与Drawer嵌套焦点、正文滚动与滚动锁清理", "Popover受控请求与异步定位焦点", "DropdownMenu方向键、前缀与原生Tab进退", "Accordion标题命名、受控开合与隐藏草稿保留", "Steps进度、Progress语义与Timeline记录", "Tag移除回焦、Avatar错误换源与窄尺寸、Descriptions原生语义与长文", "归印调校台草稿应用与精确还原、单一完成播报和真实工具栏切换", "藏品归档台保留草稿、非法日期原生校验、聚焦时requestSubmit读取实际日期与资料移除回焦", "Tooltip切角铭牌、方向归位、短屏滚动与高对比回退", "Toast 重叠暂停、剩余计时、消息替换、单一播报与卸载清理", "组件库构建", "Storybook 构建与13份文档页加载", "全部39个M前缀公开组件入口，无旧别名", "独立Vue消费项目声明与泛型Table类型", "最终真实tgz的MInput/m-input、无GSAP、无全局reset与360px组合回焦", "独立GSAP消费工程的成功落印、seek3.6与销毁", "SSR导入和基础渲染（无File与DOM全局）", "工具与UI入口依赖隔离"],
     "localPreview": "http://127.0.0.1:6006/",
     "packageName": "malang-ui",
     "package": "malang-ui-0.1.0.tgz",
     "packageStatus": "private，尚未发布到 npm；构建后通过 pnpm pack 生成本地安装包",
-    "validationStatus": "基础、二级流程与首批丰富输入内容已实现，统一M命名；公开入口组合业务工作台、铸刃工坊与归印调校台，由main分支CI持续回归。持续迭代目标保持active，日期、上传、菜单、树、品牌与加载MG以及真实项目验证继续推进。"
+    "validationStatus": "基础、二级流程、丰富输入内容与日期附件导航已实现，统一M命名；公开入口组合业务工作台、铸刃工坊、归印调校台与藏品归档台，由main分支CI持续回归。持续迭代目标保持active，品牌、等待与列表空间动效以及展示首页继续推进；高级数据能力与React适配保留后续范围。"
   },
   "designTokens": "design/tokens.json",
   "designReferences": "design/skill-references.json",

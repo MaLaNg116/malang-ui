@@ -18,6 +18,10 @@
     "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/",
     "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/",
     "https://www.w3.org/WAI/ARIA/apg/patterns/slider/",
-    "https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/"
+    "https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/",
+    "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/",
+    "https://www.w3.org/WAI/ARIA/apg/patterns/treeview/",
+    "https://www.w3.org/WAI/ARIA/apg/patterns/grid/",
+    "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/file"
   ]
 }

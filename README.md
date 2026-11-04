@@ -2,7 +2,7 @@
 
 一套以水墨与科技融合为视觉方向的前端组件库，包含 UI 组件、GSAP 动效、MG 编排和实用工具。首发使用 Vue 3 + TypeScript，先在自己的项目中验证，再逐步扩展与开源。
 
-当前提供 35 个公开组件、纯 TypeScript 工具与三套 GSAP / MG 编排。视觉使用暖纸、浓墨、朱砂和青玉，颜色与细节仍会继续迭代。
+当前提供 39 个公开组件、纯 TypeScript 工具与三套 GSAP / MG 编排。视觉使用暖纸、浓墨、朱砂和青玉，颜色与细节仍会继续迭代。
 
 组件统一使用 **M 前缀**，例如 `MInput`、`MButton`、`MDrawer`；Vue 模板也可以写成 `<m-input>`、`<m-button>`、`<m-drawer>`。M 代表 MaLang，公开类型对应 `MInputProps` 等。当前私有验证阶段已统一迁移命名。
 
@@ -11,6 +11,8 @@
 「开始 / 功夫朋克规范」将七项品质落实到真实组件样本；「开始 / 铸刃工坊」组合抽屉、菜单、折叠章节、步骤、进度与时间线，演示资料编辑、取消、异常重试和完成通知。该流程仅在本地计时演练，不执行构建或发布。
 
 「开始 / 归印调校台」把搜索预设、数字与滑杆、可移除关键词和资料描述连接到真实的成功落印控制器。草稿在应用前保持独立，应用后可播放、暂停、定位与重播；减少动态效果直接呈现完成态。
+
+「开始 / 藏品归档台」组合侧栏导航、目录树、日期选择与文件选择，演示本地素材登记、资料查看、移除和操作记录。目录焦点与选择分开，切换导航保留编辑草稿；附件不会自动发送到服务器。
 
 「基础组件 / 交互语言」集中展示按钮、输入框与开关的轮廓、焦点和状态反馈。设计使用折锋边角、墨线焦点与方形滑锁，在明暗主题中保持一致，并保留原生输入、键盘与触屏操作。
 
@@ -105,9 +107,9 @@ const name = ref('');
 
 | 模块 | 当前内容 |
 | --- | --- |
-| 动作与输入（10） | `MButton`、`MInput`、`MInputNumber`、`MSlider`、`MCombobox`、`MTextarea`、`MSelect`、`MCheckbox`、`MRadioGroup`、`MSwitch` |
+| 动作与输入（12） | `MButton`、`MInput`、`MInputNumber`、`MSlider`、`MCombobox`、`MDatePicker`、`MUpload`、`MTextarea`、`MSelect`、`MCheckbox`、`MRadioGroup`、`MSwitch` |
 | 内容与数据（6） | `MCard`、`MTable`、`MDivider`、`MTag`、`MAvatar`、`MDescriptions` |
-| 页面导航（3） | `MTabs`、`MPagination`、`MBreadcrumb` |
+| 页面导航（5） | `MTabs`、`MPagination`、`MBreadcrumb`、`MMenu`、`MTree` |
 | 浮层与说明（3） | `MDialog`、`MPopover`、`MTooltip` |
 | 状态与反馈（7） | `MBadge`、`MAlert`、`MSpinner`、`MSkeleton`、`MEmpty`、`MToast`、`MToastViewport` |
 | 二级流程（6） | `MDrawer`、`MDropdownMenu`、`MAccordion`、`MSteps`、`MProgress`、`MTimeline` |
@@ -194,6 +196,20 @@ const sliderAmount = computed({
 | `MProgress` | 必填 `label`；`value/max` 默认 `0/100`，数值夹取到有效范围。`indeterminate` 不提供虚假数值；`status` 为 `default/success/error`，`showValue` 控制可见百分比。每次进度不自动播报，业务层负责完成通知。 |
 | `MTimeline` | 必填 `items/label`，条目提供唯一 `value`、`title` 与可选 `description/time/datetime/status`。顺序由调用方决定；`time` 使用原生 `time` 元素，`datetime` 可提供机器可读时间。命名内容插槽保留原生操作；无记录时呈现空状态。 |
 
+## 日期、附件与目录
+
+`MDatePicker` 使用字符串 `v-model`（空字符串或 `YYYY-MM-DD`）与必填 `label`。首版提供公历单日期、周一开始的历盘，支持 `min/max/clearable`；年份为 `0001–9999`，日期不经时区转换。文本草稿与已确认模型独立，完整合法日期在确认或离开时请求更新，非法和越界草稿保留供修改并阻止表单验证通过。中文组合输入期间不提交。`name/form/required/readonly/disabled` 保持原生表单行为，提交规范日期。
+
+历盘使用非模态区域与网格；打开后可用方向键、Home/End、PageUp/Down 浏览，Shift + PageUp/Down 切年，Enter 或空格选择。焦点与选中日期分别呈现，Escape 返回输入，Tab 可正常离开。边界含端点；非法边界或反向范围会显示配置错误并禁止选择，外部无效模型不会被静默改写。
+
+`MUpload` 使用 `readonly File[]` 模型和必填 `label`。单选替换，多选追加；`accept/maxCount/maxSize` 分别约束本地文件类型、数量和每个文件的字节数。选择与拖放共用校验，合法文件可部分接受；`reject` 事件返回 `MUploadRejection[]`，原因为 `type/size/count/duplicate`，重复判定依据文件元数据。`accept` 是客户端选择约束，正式应用仍需按自己的保存流程验证文件。
+
+附件由真实 file input 承载，`name/form/required` 对应真实 File 对象；只读保留已选文件的提交，禁用时不提交。取消选择保留原内容；父级可拒绝添加和移除请求。组件仅管理本地选择，界面不虚构上传完成或网络进度；正式上传由应用接管。长文件名换行，移除被接受后将焦点交给相邻项或选择入口。
+
+`MMenu` 使用 `v-model`（`string | null`）、`v-model:expandedValues`、`items` 和 `label`。条目包含全局唯一 `value`、`label` 与可选 `href/disabled/children`；带子项的节点作为展开分组，其 `href` 不参与导航。它使用原生导航链接和按钮，保留 Tab 顺序与修改键、新标签页操作；普通激活才请求当前项更新。`select(value, event)` 提供原始鼠标事件，路由适配可在调用方阻止默认导航。命令操作继续使用 `MDropdownMenu`。
+
+`MTree` 使用同样的两个受控模型、`items` 和 `label`，节点为递归的 `MTreeNode`。首版提供单选与展开，不含勾选、拖拽或虚拟滚动。方向键和 Home/End 移动焦点，Enter 或空格才选择；右键展开或进入子级，左键收起或返回父级，字符前缀可定位节点。仅一个节点进入 Tab 顺序；禁用节点可以被浏览，但不能请求选择或展开，已展开后代仍按各自状态操作。删除、重排与外部收起仅修复必要的内部焦点，不清洗父模型或抢走组件外的焦点。
+
 交互语义参考 [W3C 菜单按钮模式](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/) 与 [折叠面板模式](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/)。视觉与验收约定见 [design/quality-contract.json](design/quality-contract.json)。
 
 ## 目录
@@ -221,7 +237,7 @@ scripts/         Token 生成与构建辅助脚本
 
 - 用基础版组件在自己的真实项目中验证，逐步形成独立文档与展示站。
 - 根据首轮水墨科技样板继续优化颜色与细节，扩充笔画构形、切面展开、机械归位等 MG 场景。
-- 按实际项目需求增加日期选择、树形结构、高级表格和更多场景组合。
+- 按实际项目需求增加日期范围、树形下拉选择、高级表格和更多场景组合。
 - 保持工具、设计数据和编排规范可复用，后续增加 React 适配。
 
 完整范围见 [design/roadmap.json](design/roadmap.json)，设计参考见 [design/skill-references.json](design/skill-references.json)。

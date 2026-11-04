@@ -6,8 +6,9 @@ import {
   MPagination, MBreadcrumb, MBadge, MAlert, MSpinner, MSkeleton, MEmpty, MDivider,
   MDrawer, MDropdownMenu, MAccordion, MSteps, MProgress, MTimeline,
   MInputNumber, MSlider, MCombobox, MTag, MAvatar, MDescriptions,
+  MDatePicker, MUpload, MMenu, MTree,
 } from 'malang-ui';
-import type { MChoiceOption, MTableColumn, MTabItem } from 'malang-ui';
+import type { MChoiceOption, MTableColumn, MTabItem, MMenuItem, MTreeNode, MUploadRejection } from 'malang-ui';
 
 // A normal business interface has no dictionary index signature.
 interface Project { id: number; name: string; description: string }
@@ -18,6 +19,12 @@ const tabs: MTabItem[] = [{ value: 'one', label: '示例' }];
 const value = ref('one'); const checked = ref(false); const open = ref(false); const popup = ref(false); const page = ref(1);
 const sections = ref<string[]>(['one']);
 const amount = ref<number | null>(1); const intensity = ref(1);
+const date = ref('2026-11-04'); const attachments = ref<File[]>([]);
+const selected = ref<string | null>('one'); const expanded = ref<string[]>(['group']);
+const menuItems: readonly MMenuItem[] = [{value:'group',label:'分组',children:[{value:'one',label:'第一项',href:'#one'}]}];
+const treeItems: readonly MTreeNode[] = [{value:'group',label:'目录',children:[{value:'one',label:'第一项'}]}];
+function rejected(items: MUploadRejection[]) { value.value = items[0]?.reason || ''; }
+function navigate(_value: string, event: MouseEvent) { event.preventDefault(); }
 </script>
 <template>
   <MBreadcrumb :items="[{ label: '组件', href: '/' }, { label: '验证' }]" />
@@ -46,4 +53,8 @@ const amount = ref<number | null>(1); const intensity = ref(1);
   <MTag tone="info" closable close-label="移除调校标签" @close="checked = true">调校</MTag>
   <MAvatar name="ML" alt="工坊标记" tone="jade" />
   <MDescriptions :items="[{key:'name',label:'名称',value:'预设'},{key:'state',label:'状态'}]" label="档案"><template #state="{ item }">{{ item.label }}</template></MDescriptions>
+  <MDatePicker v-model="date" label="归档日期" name="date" required min="2025-01-01" max="2028-12-31" />
+  <MUpload v-model="attachments" label="本地附件" name="attachments" multiple required :max-count="5" :max-size="2097152" @reject="rejected" />
+  <MMenu v-model="selected" v-model:expanded-values="expanded" :items="menuItems" label="资料导航" @select="navigate" />
+  <MTree v-model="selected" v-model:expanded-values="expanded" :items="treeItems" label="资料目录" />
 </template>

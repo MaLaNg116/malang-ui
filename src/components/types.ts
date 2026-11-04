@@ -353,3 +353,68 @@ export interface MDescriptionsProps {
   columns?: 1 | 2 | 3;
   headingTag?: 'h3' | 'h4';
 }
+
+export interface MDatePickerProps {
+  modelValue: string;
+  label: string;
+  id?: string;
+  min?: string;
+  max?: string;
+  placeholder?: string;
+  hint?: string;
+  error?: string;
+  disabled?: boolean;
+  clearable?: boolean;
+}
+
+export interface MUploadProps {
+  modelValue: readonly File[];
+  label: string;
+  id?: string;
+  accept?: string;
+  multiple?: boolean;
+  maxCount?: number;
+  maxSize?: number;
+  hint?: string;
+  error?: string;
+  disabled?: boolean;
+  readonly?: boolean;
+}
+
+export interface MUploadRejection {
+  file: File;
+  reason: 'type' | 'size' | 'count' | 'duplicate';
+}
+
+export interface MMenuItem {
+  value: string;
+  label: string;
+  href?: string;
+  disabled?: boolean;
+  children?: readonly MMenuItem[];
+}
+
+export interface MMenuProps {
+  modelValue: string | null;
+  items: readonly MMenuItem[];
+  expandedValues: readonly string[];
+  label: string;
+  id?: string;
+  disabled?: boolean;
+}
+
+export interface MTreeNode {
+  value: string;
+  label: string;
+  disabled?: boolean;
+  children?: readonly MTreeNode[];
+}
+
+export interface MTreeProps {
+  modelValue: string | null;
+  items: readonly MTreeNode[];
+  expandedValues: readonly string[];
+  label: string;
+  id?: string;
+  disabled?: boolean;
+}

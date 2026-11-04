@@ -33,6 +33,10 @@ export { default as MCombobox } from './components/MCombobox.vue';
 export { default as MTag } from './components/MTag.vue';
 export { default as MAvatar } from './components/MAvatar.vue';
 export { default as MDescriptions } from './components/MDescriptions.vue';
+export { default as MDatePicker } from './components/MDatePicker.vue';
+export { default as MUpload } from './components/MUpload.vue';
+export { default as MMenu } from './components/MMenu.vue';
+export { default as MTree } from './components/MTree.vue';
 export type {
   MButtonProps,
   MButtonVariant,
@@ -89,4 +93,11 @@ export type {
   MAvatarProps,
   MDescriptionItem,
   MDescriptionsProps,
+  MDatePickerProps,
+  MUploadProps,
+  MUploadRejection,
+  MMenuItem,
+  MMenuProps,
+  MTreeNode,
+  MTreeProps,
 } from './components/types';
