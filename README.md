@@ -191,7 +191,7 @@ const sliderAmount = computed({
 
 `MBadge` 是静态状态标记。`MAlert` 必填 `title`，可提供 `description`；默认静态且不自动播报，动态消息设置 `announce` 后，错误使用 alert，其余使用 status。两者的 `tone` 支持 `neutral/info/success/warning/error`。
 
-`MSpinner` 提供单一可访问加载名称（`label` 默认「加载中」），支持 `sm/md/lg`；三片切角叶片整体连续旋转，局部错相开合。`MButton loading` 复用同一图形，并将按钮内的装饰加载图形隐藏于辅助技术。`MSkeleton` 用细噪点与稀疏短切片形成装饰占位，隐藏于辅助技术，`lines` 默认 3；两者在减少动态效果与强制颜色模式下静止。`MEmpty` 提供 `title/description` 和操作插槽，默认标题「暂无内容」。`MDivider` 是语义分隔线，`label` 可加入可读说明。
+`MSpinner` 提供单一可访问加载名称（`label` 默认「加载中」），支持 `sm/md/lg`，对应 16/24/32 px。方印离合由四枚厚折角逐角离位，再共同合成方印；双楔内芯反向换位，外轨匀速旋转。`MButton loading` 复用同一图形，并将按钮内的装饰加载图形隐藏于辅助技术。`MSkeleton` 用细噪点与稀疏短切片形成装饰占位，隐藏于辅助技术，`lines` 默认 3；两者在系统或容器减少动态效果与强制颜色模式下保留静态形态。`MEmpty` 提供 `title/description` 和操作插槽，默认标题「暂无内容」。`MDivider` 是语义分隔线，`label` 可加入可读说明。
 
 `MResult` 是页面级结果面板，必填 `title`，可设置 `description`、`status="success|error|warning|info"` 和 `headingTag="h1|h2|h3"`（默认 `h2`）。默认静态且不搬移焦点；`default` 补充业务内容，`footer` 放原生按钮或链接。显式 `announce` 仅让标题与描述的消息区播报：错误用 assertive alert，其余用 polite status，补充内容和动作保持独立。组件参数和场景在「二级组件 / Result 结果面板」中查看。
 

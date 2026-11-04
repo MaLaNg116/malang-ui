@@ -8,11 +8,12 @@ withDefaults(defineProps<MSpinnerProps>(), { label: '加载中', size: 'md' });
   <span class="ui-spinner" :class="`ui-spinner--${size}`" role="status" aria-live="polite" aria-atomic="true">
     <svg class="ui-spinner__visual" viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false">
       <g class="ui-spinner__assembly">
-        <g class="ui-spinner__arm" transform="rotate(0 24 24)"><g class="ui-spinner__blade ui-spinner__blade--lead"><path d="M22 8h6l5 8-4 6-4-2-5-7z" /></g></g>
-        <g class="ui-spinner__arm" transform="rotate(120 24 24)"><g class="ui-spinner__blade ui-spinner__blade--second"><path d="M22 8h6l5 8-4 6-4-2-5-7z" /></g></g>
-        <g class="ui-spinner__arm" transform="rotate(240 24 24)"><g class="ui-spinner__blade ui-spinner__blade--third"><path d="M22 8h6l5 8-4 6-4-2-5-7z" /></g></g>
+        <g class="ui-spinner__arm" transform="rotate(0 24 24)"><g class="ui-spinner__segment"><path d="M9 21v-9l3-3h10v6h-7v6z" /></g></g>
+        <g class="ui-spinner__arm" transform="rotate(90 24 24)"><g class="ui-spinner__segment ui-spinner__segment--second"><path d="M9 21v-9l3-3h10v6h-7v6z" /></g></g>
+        <g class="ui-spinner__arm" transform="rotate(180 24 24)"><g class="ui-spinner__segment ui-spinner__segment--third"><path d="M9 21v-9l3-3h10v6h-7v6z" /></g></g>
+        <g class="ui-spinner__arm" transform="rotate(270 24 24)"><g class="ui-spinner__segment ui-spinner__segment--fourth"><path d="M9 21v-9l3-3h10v6h-7v6z" /></g></g>
+        <g class="ui-spinner__core"><path d="m20 19 3-3h5v5h-5l-3 3zm8 10-3 3h-5v-5h5l3-3z" /></g>
       </g>
-      <circle class="ui-spinner__pin" cx="24" cy="24" r="2.2" />
     </svg>
     <span class="ui-spinner__label">{{ label }}</span>
   </span>
@@ -23,16 +24,20 @@ withDefaults(defineProps<MSpinnerProps>(), { label: '加载中', size: 'md' });
 .ui-spinner--sm { --ui-spinner-size: 16px; }
 .ui-spinner--lg { --ui-spinner-size: 32px; }
 .ui-spinner__visual { display: block; width: 100%; height: 100%; overflow: visible; fill: currentColor; }
-.ui-spinner__assembly, .ui-spinner__blade { transform-box: view-box; transform-origin: 50% 50%; }
-.ui-spinner__assembly { animation: ui-spinner-orbit 2100ms linear infinite; }
-.ui-spinner__blade { animation: ui-spinner-open 2100ms var(--ui-motion-ease-standard) infinite; }
-.ui-spinner__blade--second { color: var(--ui-spinner-secondary-color, currentColor); fill: currentColor; opacity: .72; animation-delay: -700ms; }
-.ui-spinner__blade--third { opacity: .46; animation-delay: -1400ms; }
-.ui-spinner__pin { opacity: .4; }
+.ui-spinner__assembly, .ui-spinner__segment, .ui-spinner__core { transform-box: view-box; transform-origin: 50% 50%; }
+.ui-spinner__assembly { animation: ui-spinner-orbit 4800ms linear infinite; }
+.ui-spinner__segment { animation: ui-spinner-release 2400ms var(--ui-motion-ease-emphasized) infinite; }
+.ui-spinner__segment--second { animation-delay: 100ms; }
+.ui-spinner__segment--third { animation-delay: 200ms; }
+.ui-spinner__segment--fourth { animation-delay: 300ms; }
+.ui-spinner__core { color: var(--ui-spinner-secondary-color, var(--ui-color-secondary-accent)); fill: currentColor; animation: ui-spinner-counter 2400ms var(--ui-motion-ease-emphasized) infinite; }
 .ui-spinner__label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 @keyframes ui-spinner-orbit { to { transform: rotate(360deg); } }
-@keyframes ui-spinner-open { 0%, 12% { transform: translateY(0) rotate(0deg); } 30% { transform: translateY(-1.8px) rotate(-6deg); } 46%, 100% { transform: translateY(0) rotate(0deg); } }
-:global([data-ui-motion='reduced'] .ui-spinner__assembly), :global([data-ui-motion='reduced'] .ui-spinner__blade) { animation: none; transform: none; }
-@media (prefers-reduced-motion: reduce) { .ui-spinner__assembly, .ui-spinner__blade { animation: none; transform: none; } }
-@media (forced-colors: active) { .ui-spinner, .ui-spinner__blade--second { color: CanvasText; } .ui-spinner__assembly, .ui-spinner__blade { animation: none; transform: none; } .ui-spinner__blade, .ui-spinner__pin { opacity: 1; } }
+/* The last corner returns by 1.7s, leaving a shared lock before the next release. */
+@keyframes ui-spinner-release { 0%, 12%, 58%, 100% { transform: translate(0, 0) rotate(0deg); } 28%, 38% { transform: translate(-2px, -2px) rotate(-10deg); } }
+/* Two identical opposing teeth make the 180deg reset visually continuous. */
+@keyframes ui-spinner-counter { 0%, 14% { transform: rotate(0deg); } 45%, 100% { transform: rotate(-180deg); } }
+:global([data-ui-motion='reduced'] .ui-spinner__assembly), :global([data-ui-motion='reduced'] .ui-spinner__segment), :global([data-ui-motion='reduced'] .ui-spinner__core) { animation: none; transform: none; }
+@media (prefers-reduced-motion: reduce) { .ui-spinner__assembly, .ui-spinner__segment, .ui-spinner__core { animation: none; transform: none; } }
+@media (forced-colors: active) { .ui-spinner, .ui-spinner__core { color: CanvasText; } .ui-spinner__assembly, .ui-spinner__segment, .ui-spinner__core { animation: none; transform: none; } }
 </style>

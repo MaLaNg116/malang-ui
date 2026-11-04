@@ -89,8 +89,9 @@ test.describe('Paper and pigment studio', () => {
       await page.getByRole('button', { name: '载入长文样本', exact: true }).click(); await page.getByRole('button', { name: '记录并验印', exact: false }).click();
       await expect(recentValue(page, '方案名称')).toHaveText('ArchivePaletteDraftWithoutArtificialClipping'); await expect(recordCount(page)).toHaveText(/1\s*份/); await expect(slider).toHaveValue('4.2');
       await expect(page.getByRole('status').filter({ hasText: '旋转错层加载演示' })).toHaveCount(1);
-      await expect(page.locator('.ui-spinner__assembly')).toHaveCount(1); await expect(page.locator('.ui-spinner__blade')).toHaveCount(3);
-      expect(await page.locator('.ui-spinner__assembly, .ui-spinner__blade').evaluateAll(elements => elements.every(element => getComputedStyle(element).animationName === 'none'))).toBe(true);
+      await expect(page.locator('.ui-spinner__assembly')).toHaveCount(1); await expect(page.locator('.ui-spinner__segment')).toHaveCount(4); await expect(page.locator('.ui-spinner__core')).toHaveCount(1);
+      const spinnerLayers = page.locator('.ui-spinner__assembly, .ui-spinner__segment, .ui-spinner__core'); await expect(spinnerLayers).toHaveCount(6);
+      expect(await spinnerLayers.evaluateAll(elements => elements.every(element => getComputedStyle(element).animationName === 'none' && getComputedStyle(element).transform === 'none'))).toBe(true);
       expect(await page.locator('.ui-skeleton__line').first().evaluate(element => getComputedStyle(element, '::before').animationName)).toBe('none');
       await noOverflow(page);
       await page.getByRole('button', { name: '聚焦方案名称', exact: true }).click(); await expect(page.getByRole('textbox', { name: '方案名称', exact: true })).toBeFocused();
