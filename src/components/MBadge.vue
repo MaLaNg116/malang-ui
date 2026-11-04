@@ -27,7 +27,7 @@ withDefaults(defineProps<MBadgeProps>(), { tone: 'neutral' });
   vertical-align: middle;
 }
 .ui-badge::before { content: ''; flex: none; width: 4px; height: 4px; background: currentColor; align-self: center; }
-.ui-badge--info { --ui-badge-tone: var(--ui-color-secondary-accent); }
+.ui-badge--info { --ui-badge-tone: var(--ui-color-info); }
 .ui-badge--success { --ui-badge-tone: var(--ui-color-success); }
 .ui-badge--warning { --ui-badge-tone: var(--ui-color-warning, var(--ui-color-text)); }
 .ui-badge--error { --ui-badge-tone: var(--ui-color-danger); }

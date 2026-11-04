@@ -61,7 +61,7 @@ watch(() => [props.modelValue, props.min, props.max, props.step], () => {
 </template>
 
 <style scoped>
-.ui-slider { --ui-slider-tone: var(--ui-color-accent); min-width: 0; display: grid; gap: 8px; color: var(--ui-color-text); font: var(--ui-font-size-body)/var(--ui-line-height-body) var(--ui-font-family); }
+.ui-slider { --ui-slider-tone: var(--ui-color-info); min-width: 0; display: grid; gap: 8px; color: var(--ui-color-text); font: var(--ui-font-size-body)/var(--ui-line-height-body) var(--ui-font-family); }
 .ui-slider--error { --ui-slider-tone: var(--ui-color-danger); }
 .ui-slider__heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
 .ui-slider__label { min-width: 0; overflow-wrap: anywhere; font-size: var(--ui-font-size-caption); font-weight: var(--ui-font-weight-emphasis); letter-spacing: .04em; }

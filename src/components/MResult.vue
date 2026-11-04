@@ -36,7 +36,7 @@ const caption = computed(() => ({ success: '已完成', error: '未完成', warn
 .ui-result { --ui-result-tone: var(--ui-color-success); box-sizing: border-box; display: grid; justify-items: center; min-width: 0; max-width: 100%; padding: clamp(28px, 5vw, 48px) clamp(20px, 4vw, 40px); border-block: 1px solid var(--ui-color-rule); background: var(--ui-color-surface-muted, var(--ui-color-surface)); color: var(--ui-color-text); text-align: center; font: var(--ui-font-size-body)/var(--ui-line-height-body) var(--ui-font-family); }
 .ui-result--error { --ui-result-tone: var(--ui-color-danger); }
 .ui-result--warning { --ui-result-tone: var(--ui-color-warning); }
-.ui-result--info { --ui-result-tone: var(--ui-color-secondary-accent); }
+.ui-result--info { --ui-result-tone: var(--ui-color-info); }
 .ui-result__mark { box-sizing: border-box; display: block; width: 144px; height: 128px; max-width: 100%; margin-bottom: 24px; color: var(--ui-result-tone); stroke: currentColor; stroke-linecap: square; stroke-linejoin: miter; }
 .ui-result__wash { fill: color-mix(in srgb, var(--ui-result-tone) 7%, transparent); stroke: none; }
 .ui-result__scaffold { stroke: var(--ui-color-metal); stroke-width: .9; opacity: .55; }

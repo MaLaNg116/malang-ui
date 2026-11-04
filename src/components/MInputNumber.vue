@@ -110,7 +110,7 @@ watch(() => [props.min, props.max, props.step, props.disabled], sync, { flush: '
 .ui-input-number__step:hover:not(:disabled) { background: var(--ui-color-accent-soft); color: var(--ui-color-accent); }
 .ui-input-number__step:focus-visible { outline: 2px solid var(--ui-color-focus); outline-offset: -4px; color: var(--ui-color-accent); }
 .ui-input-number__step:disabled { opacity: .45; cursor: not-allowed; }
-.ui-input-number__control:focus-within { --ui-number-line: var(--ui-color-accent); }
+.ui-input-number__control:focus-within { --ui-number-line: var(--ui-color-focus); }
 .ui-input-number__control:focus-within .ui-input-number__step, .ui-input-number__control:focus-within .ui-input-number__input { border-bottom-color: var(--ui-number-line); box-shadow: inset 0 -1px 0 var(--ui-number-line); }
 .ui-native-field--error .ui-input-number__control { --ui-number-line: var(--ui-color-danger); }
 :global([data-ui-motion='reduced'] .ui-input-number__step) { transition: none; }

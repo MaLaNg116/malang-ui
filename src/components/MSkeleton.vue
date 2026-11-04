@@ -35,12 +35,12 @@ const count = computed(() => Math.min(12, Math.max(1, Math.floor(Number.isFinite
   opacity: .16; animation: ui-skeleton-grain 6400ms linear infinite; animation-delay: calc(var(--ui-skeleton-phase) * -410ms);
 }
 .ui-skeleton__line::after {
-  background: linear-gradient(var(--ui-skeleton-pixel), var(--ui-skeleton-pixel)) 13% 22% / 18px 2px no-repeat,
+  background: linear-gradient(var(--ui-skeleton-pixel), var(--ui-skeleton-pixel)) 13% 22% / 18px 1px no-repeat,
     linear-gradient(var(--ui-skeleton-echo), var(--ui-skeleton-echo)) 64% 48% / 9px 1px no-repeat,
-    linear-gradient(var(--ui-skeleton-pixel), var(--ui-skeleton-pixel)) 84% 78% / 26px 2px no-repeat,
-    linear-gradient(var(--ui-skeleton-echo), var(--ui-skeleton-echo)) 37% 67% / 4px 3px no-repeat;
-  clip-path: inset(18% 0 73%); opacity: 0;
-  animation: ui-skeleton-fragments 4700ms linear infinite; animation-delay: calc(var(--ui-skeleton-phase) * -630ms);
+    linear-gradient(var(--ui-skeleton-pixel), var(--ui-skeleton-pixel)) 84% 78% / 22px 1px no-repeat,
+    linear-gradient(var(--ui-skeleton-echo), var(--ui-skeleton-echo)) 37% 67% / 12px 1px no-repeat;
+  opacity: .1;
+  animation: ui-skeleton-fragments 6800ms cubic-bezier(.45, 0, .55, 1) infinite; animation-delay: calc(var(--ui-skeleton-phase) * -630ms);
 }
 @keyframes ui-skeleton-grain {
   0%, 100% { background-position: calc(var(--ui-skeleton-phase) * -37px) calc(var(--ui-skeleton-phase) * -19px); }
@@ -48,21 +48,17 @@ const count = computed(() => Math.min(12, Math.max(1, Math.floor(Number.isFinite
   61% { background-position: calc(var(--ui-skeleton-phase) * -37px - 2px) calc(var(--ui-skeleton-phase) * -19px + 2px); }
   83% { background-position: calc(var(--ui-skeleton-phase) * -37px + 1px) calc(var(--ui-skeleton-phase) * -19px - 2px); }
 }
-/* Three small local cuts interrupt the quiet field; the whole bar never flashes. */
+/* Sparse horizontal echoes emerge gently above the unchanged snow texture. */
 @keyframes ui-skeleton-fragments {
-  0%, 16% { opacity: 0; transform: translateX(0); clip-path: inset(18% 0 73%); }
-  17% { opacity: .52; transform: translateX(2px); clip-path: inset(18% 0 73%); }
-  22% { opacity: 0; transform: translateX(0); clip-path: inset(18% 0 73%); }
-  55% { opacity: 0; transform: translateX(0); clip-path: inset(44% 0 47%); }
-  56% { opacity: .42; transform: translateX(-2px); clip-path: inset(44% 0 47%); }
-  59% { opacity: 0; transform: translateX(0); clip-path: inset(44% 0 47%); }
-  83% { opacity: 0; transform: translateX(0); clip-path: inset(74% 0 16%); }
-  84% { opacity: .45; transform: translateX(1px); clip-path: inset(74% 0 16%); }
-  88%, 100% { opacity: 0; transform: translateX(0); clip-path: inset(74% 0 16%); }
+  0%, 100% { opacity: .1; transform: translateX(0); }
+  22% { opacity: .22; transform: translateX(1px); }
+  47% { opacity: .09; transform: translateX(0); }
+  73% { opacity: .2; transform: translateX(-1px); }
+  90% { opacity: .12; transform: translateX(0); }
 }
 :global([data-ui-motion='reduced'] .ui-skeleton__line::before), :global([data-ui-motion='reduced'] .ui-skeleton__line::after) { animation: none; transform: none; }
-:global([data-ui-motion='reduced'] .ui-skeleton__line::after) { opacity: .23; clip-path: none; }
-@media (prefers-reduced-motion: reduce) { .ui-skeleton__line::before, .ui-skeleton__line::after { animation: none; transform: none; } .ui-skeleton__line::after { opacity: .23; clip-path: none; } }
+:global([data-ui-motion='reduced'] .ui-skeleton__line::after) { opacity: .14; }
+@media (prefers-reduced-motion: reduce) { .ui-skeleton__line::before, .ui-skeleton__line::after { animation: none; transform: none; } .ui-skeleton__line::after { opacity: .14; } }
 @media (forced-colors: active) {
   .ui-skeleton__line { forced-color-adjust: none; border: 1px solid GrayText; background: Canvas; }
   .ui-skeleton__line::before { forced-color-adjust: none; opacity: .1; animation: none; }

@@ -71,6 +71,99 @@ test.describe('Progress and timeline', () => {
     await expect(unknown).toHaveAttribute('aria-valuetext', '正在处理');
     await expect(page.getByText('处理中', { exact: true })).toBeVisible();
     await expect(page.getByText(/\d+%/)).toHaveCount(0);
+
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    for (const [theme, palette] of [['light', 'paper'], ['light', 'celadon'], ['light', 'gilt'], ['dark', 'gilt']]) {
+      await openStory(page, progressTitle, 'StateComparison', `theme:${theme};palette:${palette};motion:standard`);
+      await expect(page.getByRole('progressbar')).toHaveCount(7);
+      // Batch actual paints and state semantics together. Resolve the gradient's
+      // final painted stop as a color instead of asserting a custom-property name.
+      const comparison = await page.locator('#storybook-root .kit-story-surface').evaluate(surface => {
+        const probe = document.createElement('span'); probe.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none'; surface.append(probe);
+        function resolve(value: string) {
+          probe.style.color = ''; probe.style.color = value;
+          if (!probe.style.color) throw new Error(`Unresolved state color: ${value}`);
+          return getComputedStyle(probe).color;
+        }
+        function gradientEnd(image: string) {
+          let depth = 0, lastComma = -1;
+          for (let index = 0; index < image.length; index++) {
+            if (image[index] === '(') depth++;
+            else if (image[index] === ')') depth--;
+            else if (image[index] === ',' && depth === 1) lastComma = index;
+          }
+          if (lastComma < 0) throw new Error(`Expected a painted progress gradient: ${image}`);
+          return resolve(image.slice(lastComma + 1, -1).trim().replace(/\s+-?[\d.]+(?:%|px)$/, ''));
+        }
+        try {
+          const tokens = { info: resolve('var(--ui-color-info)'), error: resolve('var(--ui-color-danger)'), success: resolve('var(--ui-color-success)'), focus: resolve('var(--ui-color-focus)') };
+          const progress = Object.fromEntries([...surface.querySelectorAll('.ui-progress')].map(root => {
+            const label = root.querySelector('.ui-progress__label')!, track = root.querySelector('[role="progressbar"]')!, fill = root.querySelector('.ui-progress__fill')!;
+            const value = root.querySelector('.ui-progress__value'), glyph = root.querySelector('.ui-progress__status');
+            return [label.textContent!.trim(), {
+              labelled: track.getAttribute('aria-labelledby') === label.id, min: track.getAttribute('aria-valuemin'), max: track.getAttribute('aria-valuemax'), now: track.getAttribute('aria-valuenow'), valueText: track.getAttribute('aria-valuetext'),
+              visibleValue: value?.textContent?.trim() || '', valueColor: value && getComputedStyle(value).color, fillColor: gradientEnd(getComputedStyle(fill).backgroundImage), animation: getComputedStyle(fill).animationName,
+              glyphCount: root.querySelectorAll('.ui-progress__status').length, glyphHidden: glyph?.getAttribute('aria-hidden'), glyphFocusable: glyph?.getAttribute('focusable'), glyphColor: glyph && getComputedStyle(glyph).stroke, glyphPath: glyph?.querySelector('path')?.getAttribute('d'),
+              liveRegions: root.querySelectorAll('[role="status"], [role="alert"], [aria-live]').length,
+            }];
+          }));
+          const timelineRoot = surface.querySelector('.ui-timeline')!;
+          const timeline = Object.fromEntries([...timelineRoot.querySelectorAll('.ui-timeline__item')].map(item => {
+            const node = item.querySelector('.ui-timeline__node')!, state = item.querySelector('.ui-timeline__state')!, dot = item.querySelector('.ui-timeline__dot'), glyph = node.querySelector('path');
+            return [item.getAttribute('data-status')!, { text: state.textContent?.trim(), nodeColor: getComputedStyle(node).color, stateColor: getComputedStyle(state).color, nodeHidden: node.getAttribute('aria-hidden'), dotColor: dot && getComputedStyle(dot).backgroundColor, glyphColor: glyph && getComputedStyle(glyph).stroke, glyphPath: glyph?.getAttribute('d') }];
+          }));
+          const stepsRoot = surface.querySelector('.ui-steps')!;
+          const steps = [...stepsRoot.querySelectorAll('.ui-steps__item')].map(item => ({ current: item.querySelector('.ui-steps__node')?.getAttribute('aria-current'), state: item.querySelector('.ui-steps__sr-only')?.textContent?.trim(), sealColor: getComputedStyle(item.querySelector('.ui-steps__seal')!).color, sealHidden: item.querySelector('.ui-steps__seal')?.getAttribute('aria-hidden') }));
+          return { tokens, progress, timeline, steps, timelineLabel: timelineRoot.getAttribute('aria-label'), stepsLabel: stepsRoot.getAttribute('aria-label') };
+        } finally { probe.remove(); }
+      });
+      const { tokens, progress: painted, timeline, steps } = comparison;
+      expect(new Set([tokens.info, tokens.error, tokens.success]).size).toBe(3);
+      const channels = (color: string) => color.match(/[\d.]+/g)!.slice(0, 3).map(Number);
+      const [infoR, infoG, infoB] = channels(tokens.info), [errorR, errorG, errorB] = channels(tokens.error), [successR, successG, successB] = channels(tokens.success);
+      expect(infoB!).toBeGreaterThan(infoG!); expect(infoG!).toBeGreaterThan(infoR!);
+      expect(errorR!).toBeGreaterThan(Math.max(errorG!, errorB!)); expect(successG!).toBeGreaterThan(Math.max(successR!, successB!));
+      for (const [label, color, now, valueText, visibleValue] of [
+        ['进行中进度', tokens.info, '42', '42%', '42%'],
+        ['异常进度', tokens.error, '68', '68%，发生错误', '中断 · 68%'],
+        ['完成进度', tokens.success, '100', '100%，已完成', '100%'],
+      ]) {
+        const sample = painted[label!]!;
+        expect(sample.labelled).toBe(true); expect(sample.min).toBe('0'); expect(sample.max).toBe('100'); expect(sample.now).toBe(now);
+        expect(sample.valueText).toBe(valueText); expect(sample.visibleValue).toBe(visibleValue); expect(sample.valueColor).toBe(color); expect(sample.fillColor).toBe(color); expect(sample.liveRegions).toBe(0);
+      }
+      expect(painted['进行中进度']!.glyphCount).toBe(0);
+      for (const [label, color] of [['异常进度', tokens.error], ['完成进度', tokens.success], ['仅图形异常进度', tokens.error], ['仅图形完成进度', tokens.success]]) {
+        const sample = painted[label!]!;
+        expect(sample.glyphCount).toBe(1); expect(sample.glyphHidden).toBe('true'); expect(sample.glyphFocusable).toBe('false'); expect(sample.glyphColor).toBe(color); expect(sample.glyphPath).toBeTruthy();
+      }
+      expect(painted['异常进度']!.glyphPath).not.toBe(painted['完成进度']!.glyphPath);
+      expect(painted['仅图形异常进度']!.visibleValue).toBe(''); expect(painted['仅图形异常进度']!.valueText).toBe('68%，发生错误');
+      expect(painted['仅图形完成进度']!.visibleValue).toBe(''); expect(painted['仅图形完成进度']!.valueText).toBe('100%，已完成');
+      for (const [label, valueText, visibleValue, color] of [['异常进度未知', '处理出错，进度未知', '已中断', tokens.error], ['完成进度未知', '已完成', '已完成', tokens.success]]) {
+        const sample = painted[label!]!;
+        expect(sample.now).toBeNull(); expect(sample.valueText).toBe(valueText); expect(sample.visibleValue).toBe(visibleValue); expect(sample.visibleValue).not.toMatch(/\d+%/);
+        expect(sample.animation).toBe('none'); expect(sample.fillColor).toBe(color); expect(sample.glyphCount).toBe(1); expect(sample.glyphHidden).toBe('true');
+      }
+      expect(comparison.timelineLabel).toBe('状态对照时间线'); expect(Object.keys(timeline)).toHaveLength(3);
+      for (const [status, text, color] of [['active', '进行中', tokens.info], ['error', '异常', tokens.error], ['success', '已完成', tokens.success]]) {
+        const item = timeline[status!]!;
+        expect(item.text).toBe(text); expect(item.nodeColor).toBe(color); expect(item.stateColor).toBe(color); expect(item.nodeHidden).toBe('true');
+      }
+      expect(timeline.active!.dotColor).toBe(tokens.info); expect(timeline.error!.glyphColor).toBe(tokens.error); expect(timeline.success!.glyphColor).toBe(tokens.success);
+      expect(timeline.error!.glyphPath).toBeTruthy(); expect(timeline.success!.glyphPath).toBeTruthy(); expect(timeline.error!.glyphPath).not.toBe(timeline.success!.glyphPath);
+      expect(comparison.stepsLabel).toBe('状态对照步骤'); expect(steps).toHaveLength(3);
+      expect(steps.map(step => step.current)).toEqual([null, 'step', null]);
+      expect(steps.map(step => step.state)).toEqual(['已完成', '当前步骤，进行中', '待开始']);
+      expect(steps[0]!.sealColor).toBe(tokens.success); expect(steps[1]!.sealColor).toBe(tokens.info); expect(steps.every(step => step.sealHidden === 'true')).toBe(true);
+      const normalInput = page.getByRole('textbox', { name: '正常聚焦输入', exact: true });
+      await normalInput.focus(); await expect(normalInput).toBeFocused(); await expect(normalInput).not.toHaveAttribute('aria-invalid', 'true');
+      await expect.poll(() => normalInput.evaluate(element => getComputedStyle(element).borderBottomColor)).toBe(tokens.focus);
+      const errorInput = page.getByRole('textbox', { name: '异常聚焦输入', exact: true });
+      await errorInput.focus(); await expect(errorInput).toBeFocused(); await expect(errorInput).toHaveAttribute('aria-invalid', 'true');
+      await expect.poll(() => errorInput.evaluate(element => getComputedStyle(element).borderBottomColor)).toBe(tokens.error);
+      expect(await errorInput.evaluate(element => element.getAttribute('aria-describedby')?.split(/\s+/).some(id => document.getElementById(id)?.textContent === '此项需要修正。'))).toBe(true);
+    }
   });
 
   test('stops indefinite and state-change motion from either preference source and keeps progress visible in forced colors', async ({ page }) => {

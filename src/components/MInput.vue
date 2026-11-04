@@ -145,18 +145,18 @@ const value = computed({
 }
 
 .ui-input:hover:not(:disabled) {
-  border-bottom-color: color-mix(in srgb, var(--ui-color-accent) 48%, var(--ui-color-border));
+  border-bottom-color: color-mix(in srgb, var(--ui-color-focus) 48%, var(--ui-color-border));
 }
 
 .ui-input:focus-visible {
   outline: none;
   background: var(--ui-color-surface-raised);
-  border-bottom-color: var(--ui-color-accent);
-  box-shadow: inset 0 -1px 0 var(--ui-color-accent);
+  border-bottom-color: var(--ui-color-focus);
+  box-shadow: inset 0 -1px 0 var(--ui-color-focus);
 }
 
 .ui-field__control:focus-within {
-  --ui-field-frame: var(--ui-color-accent);
+  --ui-field-frame: var(--ui-color-focus);
 }
 
 .ui-field__control:focus-within .ui-field__registration::before,

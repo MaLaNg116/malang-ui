@@ -147,6 +147,25 @@ test.describe('Steps', () => {
     await openStory(page, stepsTitle, 'InvalidValue');
     await expect(group.locator('[aria-current="step"]')).toContainText('建档');
     await expect(page.getByRole('status')).toHaveText('父模型步骤：missing');
+
+    for (const globals of ['theme:light;palette:paper;motion:standard', 'theme:light;palette:celadon;motion:standard', 'theme:light;palette:gilt;motion:standard', 'theme:dark;palette:paper;motion:standard']) {
+      await openStory(page, stepsTitle, 'Interactive', globals);
+      const pending = group.getByRole('button', { name: '落印', exact: true });
+      await expect(pending).toHaveAccessibleDescription('待开始 确认后保存本次成果。'); await pending.hover();
+      const labelId = await pending.getAttribute('aria-labelledby'); expect(labelId).toBeTruthy();
+      const title = page.locator(`[id="${labelId}"]`);
+      await title.evaluate(async element => { getComputedStyle(element).color; await Promise.all(element.getAnimations().map(animation => animation.finished)); });
+      const reading = await title.evaluate(element => {
+        const parse = (color: string) => color.match(/[\d.]+/g)!.map(Number);
+        const color = getComputedStyle(element).color;
+        let background = 'rgb(255, 255, 255)';
+        for (let ancestor: Element | null = element; ancestor; ancestor = ancestor.parentElement) { const candidate = getComputedStyle(ancestor).backgroundColor; if ((parse(candidate)[3] ?? 1) === 1) { background = candidate; break; } }
+        const luminance = (value: string) => { const rgb = parse(value).slice(0, 3).map(channel => { const normalized = channel / 255; return normalized <= .04045 ? normalized / 12.92 : ((normalized + .055) / 1.055) ** 2.4; }); return rgb[0]! * .2126 + rgb[1]! * .7152 + rgb[2]! * .0722; };
+        const foreground = luminance(color), backdrop = luminance(background);
+        return { color, background, contrast: (Math.max(foreground, backdrop) + .05) / (Math.min(foreground, backdrop) + .05) };
+      });
+      expect(reading.contrast, `${globals}: hovered pending text ${reading.color} on ${reading.background}`).toBeGreaterThanOrEqual(4.5);
+    }
   });
 });
 

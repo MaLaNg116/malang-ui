@@ -30,7 +30,7 @@ const statuses: Record<MTimelineStatus, string> = { neutral: '记录', pending: 
 .ui-timeline__item { --ui-timeline-color: var(--ui-color-metal); position: relative; display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 20px; padding-bottom: 24px; }
 .ui-timeline__item::before { content: ''; position: absolute; left: 11px; top: 24px; bottom: 0; border-left: 1px solid var(--ui-color-rule); }
 .ui-timeline__item:last-child { padding-bottom: 0; } .ui-timeline__item:last-child::before { display: none; }
-.ui-timeline__item[data-status='active'] { --ui-timeline-color: var(--ui-color-accent); }
+.ui-timeline__item[data-status='active'] { --ui-timeline-color: var(--ui-color-info); }
 .ui-timeline__item[data-status='success'] { --ui-timeline-color: var(--ui-color-success); }
 .ui-timeline__item[data-status='error'] { --ui-timeline-color: var(--ui-color-danger); }
 .ui-timeline__node { box-sizing: border-box; display: grid; place-items: center; width: 24px; height: 24px; margin-top: 1px; border: 1px solid var(--ui-timeline-color); background: var(--ui-color-canvas); color: var(--ui-timeline-color); }

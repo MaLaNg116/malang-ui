@@ -19,7 +19,7 @@ function close(event: MouseEvent) { if (!props.disabled) emit('close', event); }
 .ui-tag::before, .ui-tag::after { content: ''; position: absolute; pointer-events: none; z-index: -1; clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px)); }
 .ui-tag::before { inset: 0; background: color-mix(in srgb, var(--ui-tag-color) 65%, var(--ui-color-rule)); }
 .ui-tag::after { inset: 1px; background: color-mix(in srgb, var(--ui-tag-color) 9%, var(--ui-color-surface)); }
-.ui-tag[data-tone='info'] { --ui-tag-color: var(--ui-color-secondary-accent); }
+.ui-tag[data-tone='info'] { --ui-tag-color: var(--ui-color-info); }
 .ui-tag[data-tone='success'] { --ui-tag-color: var(--ui-color-success); }
 .ui-tag[data-tone='warning'] { --ui-tag-color: var(--ui-color-warning); }
 .ui-tag[data-tone='error'] { --ui-tag-color: var(--ui-color-danger); }

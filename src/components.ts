@@ -39,6 +39,9 @@ export { default as MMenu } from './components/MMenu.vue';
 export { default as MTree } from './components/MTree.vue';
 export { default as MStatistic } from './components/MStatistic.vue';
 export { default as MResult } from './components/MResult.vue';
+export { default as MSpace } from './components/MSpace.vue';
+export { default as MBackTop } from './components/MBackTop.vue';
+export { default as MMessage } from './components/MMessage.vue';
 export type {
   MButtonProps,
   MButtonVariant,
@@ -51,6 +54,7 @@ export type {
   MDialogProps,
   MCardProps,
   MToastProps,
+  MMessageProps,
   MToastVariant,
   MToastPlacement,
   MToastViewportProps,
@@ -104,4 +108,6 @@ export type {
   MTreeProps,
   MStatisticProps,
   MResultProps,
+  MSpaceProps,
+  MBackTopProps,
 } from './components/types';

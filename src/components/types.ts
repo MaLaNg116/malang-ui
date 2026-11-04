@@ -60,9 +60,22 @@ export interface MCardProps {
   headingTag?: 'h2' | 'h3' | 'h4';
 }
 
-export type MToastVariant = 'info' | 'success' | 'error';
+export type MToastVariant = 'info' | 'success' | 'warning' | 'error' | 'loading';
+
+export interface MMessageProps {
+  modelValue: boolean;
+  content: string;
+  type?: MToastVariant;
+  duration?: number;
+  closable?: boolean;
+  closeLabel?: string;
+  offset?: number;
+  label?: string;
+}
 
 export interface MToastProps {
+  presentation?: 'message' | 'notification';
+  closable?: boolean;
   modelValue: boolean;
   title: string;
   description?: string;
@@ -436,4 +449,19 @@ export interface MResultProps {
   status?: 'success' | 'error' | 'warning' | 'info';
   headingTag?: 'h1' | 'h2' | 'h3';
   announce?: boolean;
+}
+
+export interface MSpaceProps {
+  direction?: 'horizontal' | 'vertical';
+  size?: MControlSize | number;
+  align?: 'start' | 'center' | 'end' | 'baseline' | 'stretch';
+  wrap?: boolean;
+  inline?: boolean;
+}
+
+export interface MBackTopProps {
+  target?: HTMLElement | (() => HTMLElement | null | undefined);
+  visibilityHeight?: number;
+  label?: string;
+  behavior?: 'smooth' | 'instant';
 }

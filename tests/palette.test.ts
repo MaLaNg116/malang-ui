@@ -12,7 +12,7 @@ palettes.push(['dark', tokens.themes.dark]);
 const backgrounds = ['color-canvas', 'color-surface', 'color-surface-raised', 'color-surface-muted'];
 describe('material palette contracts', () => {
   it.each(palettes)('%s keeps small text, primary labels and control cues readable', (_name, palette) => {
-    for (const foreground of ['color-text', 'color-text-secondary', 'color-accent', 'color-secondary-accent', 'color-success', 'color-danger', 'color-warning']) {
+    for (const foreground of ['color-text', 'color-text-secondary', 'color-info', 'color-accent', 'color-secondary-accent', 'color-success', 'color-danger', 'color-warning']) {
       for (const background of backgrounds) expect(contrast(palette[foreground]!, palette[background]!), `${foreground} / ${background}`).toBeGreaterThanOrEqual(4.5);
     }
     expect(contrast(palette['color-on-accent']!, palette['color-accent']!)).toBeGreaterThanOrEqual(4.5);

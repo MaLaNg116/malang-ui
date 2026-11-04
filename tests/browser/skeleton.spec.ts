@@ -48,7 +48,7 @@ test.describe('Pixel ink skeleton', () => {
     expect(sizes.every(size => size.height === sizes[0]!.height && size.height > 0)).toBe(true);
   });
 
-  test('animates separate local snow/mosaic layers while the line box stays still', async ({ page }) => {
+  test('keeps snow and soft local echoes separate with a gentle envelope while the line box stays still', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' }); await openStory(page);
     const lines = page.locator('.ui-skeleton__line'), first = lines.first();
     await expect.poll(() => first.evaluate(element => element.getAnimations({ subtree: true }).length)).toBe(2);
@@ -60,8 +60,21 @@ test.describe('Pixel ink skeleton', () => {
     await first.evaluate(element => element.getAnimations({ subtree: true }).forEach(animation => { animation.currentTime = 1400; })); const displaced = await texture(first);
     expect(displaced).not.toEqual(initial); expect(displaced.every(layer => layer.background !== 'none' && !layer.background.includes('repeating-'))).toBe(true);
     expect(displaced[0]!.opacity).toBeGreaterThan(0); expect(displaced[0]!.opacity).toBeLessThan(.25);
-    expect(displaced[1]!.opacity).toBeGreaterThanOrEqual(0); expect(displaced[1]!.opacity).toBeLessThan(.6);
+    expect(displaced[1]!.opacity).toBeGreaterThanOrEqual(.08); expect(displaced[1]!.opacity).toBeLessThanOrEqual(.26);
     expect(await first.evaluate(element => getComputedStyle(element, '::after').backgroundRepeat.split(',').every(value => value.trim() === 'no-repeat'))).toBe(true);
+    const envelope = await first.evaluate(element => {
+      const animationName = getComputedStyle(element, '::after').animationName;
+      const echo = element.getAnimations({ subtree: true }).find(animation => (animation as CSSAnimation).animationName === animationName)!;
+      const duration = Number(echo.effect!.getTiming().duration), samples: number[] = [];
+      echo.pause();
+      for (let time = 0; time <= duration; time += 100) { echo.currentTime = time; samples.push(Number(getComputedStyle(element, '::after').opacity)); }
+      const style = getComputedStyle(element, '::after');
+      return { samples, maximumStep: Math.max(...samples.slice(1).map((value, index) => Math.abs(value - samples[index]!))), clip: style.clipPath,
+        sizes: style.backgroundSize.split(',').map(value => value.trim().split(/\s+/).map(parseFloat)) };
+    });
+    expect(Math.min(...envelope.samples)).toBeGreaterThanOrEqual(.08); expect(Math.max(...envelope.samples)).toBeLessThanOrEqual(.26);
+    expect(envelope.maximumStep).toBeLessThan(.04); expect(envelope.clip).toBe('none');
+    expect(envelope.sizes.every(([width, height]) => width! <= 26 && height! <= 2)).toBe(true);
     expect(await first.boundingBox()).toEqual(before); expect(await first.evaluate(element => getComputedStyle(element).opacity)).toBe('1');
     expect(await first.evaluate(element => getComputedStyle(element).animationName)).toBe('none');
     expect(await first.evaluate(element => getComputedStyle(element).overflow)).toBe('hidden');
@@ -85,7 +98,7 @@ test.describe('Pixel ink skeleton', () => {
     page.on('pageerror', error => errors.push(error.message)); page.on('console', message => { if (message.type() === 'warning' && message.text().includes('[Vue warn]')) errors.push(message.text()); });
     try {
       await page.emulateMedia({ reducedMotion: 'no-preference' });
-      for (const theme of ['light', 'dark']) { await openStory(page, 'Compositions', `theme:${theme};motion:standard`); expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(360); expect(await page.locator('.ui-skeleton__line').evaluateAll(elements => elements.every(element => element.getBoundingClientRect().left >= 0 && element.getBoundingClientRect().right <= 360))).toBe(true); }
+      for (const profile of ['theme:light;palette:paper', 'theme:light;palette:celadon', 'theme:light;palette:gilt', 'theme:dark;palette:paper']) { await openStory(page, 'Compositions', `${profile};motion:standard`); expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(360); expect(await page.locator('.ui-skeleton__line').evaluateAll(elements => elements.every(element => element.getBoundingClientRect().left >= 0 && element.getBoundingClientRect().right <= 360))).toBe(true); }
       await openStory(page, 'ContentReplacement'); const region = page.getByRole('region', { name: '最近整理', exact: true });
       await expect(region).toHaveAttribute('aria-busy', 'true'); await expect(page.getByRole('status')).toHaveCount(1); await expect(page.getByRole('status')).toHaveText('内容正在载入。');
       const retired = await region.locator('.ui-skeleton__line').first().evaluateHandle(element => element);

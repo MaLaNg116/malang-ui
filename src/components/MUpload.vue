@@ -165,7 +165,7 @@ onBeforeUnmount(() => { mounted = false; revision++; notice++; pending = undefin
 </template>
 
 <style scoped>
-.ui-upload { --ui-upload-accent: var(--ui-color-accent); }
+.ui-upload { --ui-upload-accent: var(--ui-color-focus); }
 .ui-upload__label { max-width: 100%; overflow-wrap: anywhere; }
 .ui-upload__receiver { box-sizing: border-box; position: relative; isolation: isolate; min-width: 0; color: var(--ui-color-text); }
 .ui-upload__receiver::before, .ui-upload__receiver::after { content: ''; position: absolute; pointer-events: none; z-index: -1; clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px)); }
@@ -179,11 +179,11 @@ onBeforeUnmount(() => { mounted = false; revision++; notice++; pending = undefin
 .ui-upload__receiver-text > span { color: var(--ui-color-text-secondary); font-size: var(--ui-font-size-caption); }
 .ui-upload__mark { align-self: start; color: var(--ui-color-metal); font: 10px/1.5 var(--ui-font-family-mono); }
 .ui-upload__rail { position: absolute; pointer-events: none; inset: auto 10px 0; height: 2px; background: linear-gradient(90deg, var(--ui-upload-accent) 0 20%, transparent 20% 80%, var(--ui-upload-accent) 80% 100%); transform: scaleX(.45); opacity: .6; transition: transform var(--ui-motion-duration-transition) var(--ui-motion-ease-emphasized), opacity var(--ui-motion-duration-feedback) var(--ui-motion-ease-standard); }
-.ui-upload__receiver:hover:has(.ui-upload__input:not(:disabled):not([aria-disabled='true'])) .ui-upload__slot { color: var(--ui-color-accent); }
+.ui-upload__receiver:hover:has(.ui-upload__input:not(:disabled):not([aria-disabled='true'])) .ui-upload__slot { color: var(--ui-color-focus); }
 .ui-upload__receiver:focus-within { outline: 2px solid var(--ui-color-focus); outline-offset: 3px; }
 .ui-upload__receiver:focus-within::before, .ui-upload__receiver[data-dragging]::before { background: var(--ui-upload-accent); }
 .ui-upload__receiver:focus-within .ui-upload__rail, .ui-upload__receiver[data-dragging] .ui-upload__rail { transform: scaleX(1); opacity: 1; }
-.ui-upload__receiver[data-dragging]::after { background: var(--ui-color-accent-soft); }
+.ui-upload__receiver[data-dragging]::after { background: color-mix(in srgb, var(--ui-color-focus) 10%, var(--ui-color-surface)); }
 .ui-upload__requirements { min-width: 0; margin: 0; color: var(--ui-color-text-secondary); font: 10px/1.7 var(--ui-font-family-mono); overflow-wrap: anywhere; }
 .ui-upload__files { min-width: 0; display: grid; gap: 0; margin: 8px 0 0; padding: 0; list-style: none; }
 .ui-upload__file { min-width: 0; display: grid; grid-template-columns: 20px minmax(0, 1fr) 44px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--ui-color-rule); }

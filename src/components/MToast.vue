@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { nextTick, onBeforeUnmount, onMounted, ref, useAttrs, useId, watch } from 'vue';
 import type { MToastProps } from './types';
+import MSpinner from './MSpinner.vue';
 
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<MToastProps>(), {
   variant: 'info',
   closeLabel: '关闭通知',
+  presentation: 'notification',
+  closable: true,
 });
 const emit = defineEmits<{ 'update:modelValue': [open: boolean] }>();
 const attrs = useAttrs();
@@ -28,7 +31,7 @@ let requesting = false;
 let announcementVersion = 0;
 
 function duration() {
-  const value = props.duration ?? (props.variant === 'error' ? 0 : 5000);
+  const value = props.duration ?? (props.variant === 'error' ? 0 : props.presentation === 'message' ? 3000 : 5000);
   // Invalid or unbounded delays stay readable rather than overflowing to 1ms.
   return Number.isFinite(value) && value > 0
     ? Math.min(value, 2_147_483_647)
@@ -113,10 +116,19 @@ function describedBy() {
     .filter(Boolean).join(' ') || undefined;
 }
 
-watch(() => [props.modelValue, props.title, props.description, props.variant, props.duration] as const, (value, previous) => {
+watch(() => [props.modelValue, props.title, props.description, props.variant, props.duration, props.presentation] as const, (value, previous) => {
   if (!mounted) return;
-  resetTimer();
+  // A purely visual switch keeps an explicit lifetime; an implicit lifetime
+  // follows the chosen presentation. Neither change repeats the announcement.
+  if (value.slice(0, 5).some((item, index) => item !== previous[index]) || props.duration === undefined) resetTimer();
   if (value.slice(0, 4).some((item, index) => item !== previous[index])) void announce();
+}, { flush: 'post' });
+
+watch(() => props.closable, () => {
+  if (!mounted || !props.modelValue) return;
+  // Removing a focused close button does not reliably dispatch focusout in
+  // every browser. Reconcile only this pause reason, preserving elapsed time.
+  pause('focus', !!document?.activeElement && !!toast.value?.contains(document.activeElement));
 }, { flush: 'post' });
 
 onMounted(() => {
@@ -146,7 +158,7 @@ onBeforeUnmount(() => {
       v-bind="attrs"
       ref="toast"
       class="ui-toast"
-      :class="`ui-toast--${variant}`"
+      :class="[`ui-toast--${variant}`, `ui-toast--${presentation}`, { 'ui-toast--unclosable': !closable }]"
       role="group"
       :aria-labelledby="titleId"
       :aria-describedby="describedBy()"
@@ -156,15 +168,23 @@ onBeforeUnmount(() => {
       @focusout="focusOut"
     >
       <span class="ui-toast__seal" aria-hidden="true">
-        <svg v-if="variant === 'success'" viewBox="0 0 20 20" fill="none"><path d="m5.5 10 3 3 6-6" /></svg>
-        <svg v-else-if="variant === 'error'" viewBox="0 0 20 20" fill="none"><path d="m6 6 8 8m0-8-8 8" /></svg>
-        <svg v-else viewBox="0 0 20 20" fill="none"><path d="M10 8v6m0-9v.5" /></svg>
+        <MSpinner v-if="variant === 'loading'" class="ui-toast__spinner" label="" aria-hidden="true" />
+        <svg v-else viewBox="0 0 20 20" fill="none">
+          <path v-if="presentation === 'message'" class="ui-toast__message-ring" d="M6 3h8l3 3v8l-3 3H6l-3-3V6Z" />
+          <path v-if="variant === 'success'" d="m5.5 10 3 3 6-6" />
+          <path v-else-if="variant === 'error'" d="m6 6 8 8m0-8-8 8" />
+          <path v-else-if="variant === 'warning'" d="M10 5.5v6m0 2.5v.5" />
+          <path v-else d="M10 8v6m0-9v.5" />
+        </svg>
       </span>
       <div class="ui-toast__content">
-        <p :id="titleId" class="ui-toast__title">{{ title }}</p>
-        <p v-if="description" :id="descriptionId" class="ui-toast__description">{{ description }}</p>
+        <p v-if="presentation === 'message'" class="ui-toast__message"><span :id="titleId">{{ title }}</span><template v-if="description"><span class="ui-toast__message-separator" aria-hidden="true"> · </span><span :id="descriptionId">{{ description }}</span></template></p>
+        <template v-else>
+          <p :id="titleId" class="ui-toast__title">{{ title }}</p>
+          <p v-if="description" :id="descriptionId" class="ui-toast__description">{{ description }}</p>
+        </template>
       </div>
-      <button class="ui-toast__close" type="button" :aria-label="closeLabel" @click="requestClose">
+      <button v-if="closable" class="ui-toast__close" type="button" :aria-label="closeLabel" @click="requestClose">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8m0-8-8 8" /></svg>
       </button>
     </div>
@@ -186,7 +206,7 @@ onBeforeUnmount(() => {
   pointer-events: none;
 }
 .ui-toast {
-  --ui-toast-tone: var(--ui-color-secondary-accent);
+  --ui-toast-tone: var(--ui-color-info);
   box-sizing: border-box;
   position: relative;
   display: grid;
@@ -208,9 +228,12 @@ onBeforeUnmount(() => {
 }
 .ui-toast--success { --ui-toast-tone: var(--ui-color-success); }
 .ui-toast--error { --ui-toast-tone: var(--ui-color-danger); }
+.ui-toast--warning { --ui-toast-tone: var(--ui-color-warning); }
+.ui-toast--unclosable { grid-template-columns: 24px minmax(0, 1fr); }
 .ui-toast::after { content: ''; position: absolute; right: 5px; bottom: 5px; width: 6px; height: 6px; border-right: 1px solid var(--ui-toast-tone); border-bottom: 1px solid var(--ui-toast-tone); opacity: .65; pointer-events: none; }
 .ui-toast__seal { display: grid; place-items: center; width: 22px; height: 24px; margin-top: 1px; color: var(--ui-toast-tone); border: 1px solid currentColor; }
-.ui-toast__seal svg { width: 19px; height: 19px; stroke: currentColor; stroke-width: 1.6; stroke-linecap: square; stroke-linejoin: miter; }
+.ui-toast__seal > svg { width: 19px; height: 19px; stroke: currentColor; stroke-width: 1.6; stroke-linecap: square; stroke-linejoin: miter; }
+.ui-toast__spinner { --ui-spinner-color: currentColor; --ui-spinner-secondary-color: currentColor; width: 18px; height: 18px; }
 .ui-toast__content { min-width: 0; max-height: min(260px, calc(100dvh - 96px)); padding-block: 2px; overflow: auto; overflow-wrap: anywhere; }
 .ui-toast__title { margin: 0; font-weight: var(--ui-font-weight-emphasis); line-height: 1.5; }
 .ui-toast__description { margin: var(--ui-space-2) 0 0; color: var(--ui-color-text-secondary); font-size: var(--ui-font-size-caption); line-height: 1.7; }
@@ -218,9 +241,35 @@ onBeforeUnmount(() => {
 .ui-toast__close svg { stroke: currentColor; stroke-width: 1.5; }
 .ui-toast__close:hover { background: var(--ui-color-accent-soft); color: var(--ui-color-accent); }
 .ui-toast__close:focus-visible { outline: var(--ui-focus-width) solid var(--ui-color-focus); outline-offset: var(--ui-focus-offset); }
+.ui-toast--message {
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  gap: 10px;
+  width: max-content;
+  max-width: 100%;
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid color-mix(in srgb, var(--ui-toast-tone) 16%, var(--ui-color-rule));
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--ui-toast-tone) 5%, var(--ui-color-surface-raised));
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--ui-color-ink) 8%, transparent);
+}
+.ui-toast--message.ui-toast--unclosable { grid-template-columns: 18px minmax(0, 1fr); }
+.ui-toast--message::before, .ui-toast--message::after { content: ''; position: absolute; width: 6px; height: 6px; opacity: .52; border-color: var(--ui-toast-tone); border-style: solid; pointer-events: none; }
+.ui-toast--message::before { inset-inline-start: 4px; top: 4px; border-width: 1px 0 0 1px; }
+.ui-toast--message::after { right: auto; inset-inline-end: 4px; bottom: 4px; border-width: 0 1px 1px 0; }
+.ui-toast--message:dir(rtl)::before { border-width: 1px 1px 0 0; }
+.ui-toast--message:dir(rtl)::after { border-width: 0 0 1px 1px; }
+.ui-toast--message .ui-toast__seal { width: 18px; height: 18px; margin-top: 2px; border: 0; }
+.ui-toast--message .ui-toast__seal > svg { width: 18px; height: 18px; }
+.ui-toast--message .ui-toast__message-ring { stroke-width: 1; opacity: .65; }
+.ui-toast--message .ui-toast__content { padding: 0; }
+.ui-toast__message { margin: 0; font-weight: var(--ui-font-weight-body); line-height: 1.55; }
+.ui-toast__message-separator { color: var(--ui-toast-tone); opacity: .6; }
+.ui-toast--message .ui-toast__close { width: 24px; height: 24px; margin: 0; }
 @keyframes ui-toast-enter { from { opacity: 0; transform: translateY(var(--ui-motion-distance-enter)); } to { opacity: 1; transform: translateY(0); } }
 :global([data-ui-motion='reduced'] .ui-toast) { animation: none; }
 :global([data-ui-motion='reduced'] .ui-toast__close) { transition: none; }
 @media (prefers-reduced-motion: reduce) { .ui-toast { animation: none; } .ui-toast__close { transition: none; } }
-@media (pointer: coarse) { .ui-toast__close { width: 44px; height: 44px; } }
+@media (pointer: coarse) { .ui-toast__close, .ui-toast--message .ui-toast__close { width: 44px; height: 44px; } }
+@media (forced-colors: active) { .ui-toast--message { border-color: CanvasText; background: Canvas; color: CanvasText; box-shadow: none; } .ui-toast--message::before, .ui-toast--message::after { border-color: CanvasText; } }
 </style>

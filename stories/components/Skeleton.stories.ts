@@ -10,8 +10,8 @@ const meta = {
   tags: ['autodocs'],
   args: { lines: 3 },
   argTypes: { lines: { control: { type: 'range', min: 1, max: 12, step: 1 } } },
-  parameters: { docs: { description: { component: '连续素面叠加细密碎墨噪点，少量短暂的像素微切片按错开的相位穿插。底层版面保持稳定，不使用全域棋盘、整块明暗硬闪或整条扫光。lines 仍在 1 至 12 行之间；噪点来自固定 seed 的自包含 SVG feTurbulence，几何与相位均确定，不依赖随机数、外部图片、GSAP 或浏览器计时器。媒体可使用单行并通过 --ui-skeleton-line-height 设置占位高度。骨架本身 aria-hidden，不单独播报；父区域管理 aria-busy 与唯一加载消息。两种减少动效来源和强制配色均显示静态纹理。' } } },
-  render: args => defineComponent({ components: { MSkeleton, MCard }, setup: () => ({ args }), template: '<div class="kit-stack" style="width:min(100%,580px)"><p class="kit-muted">像素碎墨，保留尚未落定的版面。</p><MCard title="设计档案"><MSkeleton v-bind="args" /></MCard></div>' }),
+  parameters: { docs: { description: { component: '细密雪花纹理承托稳定的版面，少量1px水平短断片以错开的相位低对比浮现，再平滑退去。局部回声仅小幅移动，整块底色不明灭，不使用全域棋盘、骤闪或整条白光扫动。lines 仍在 1 至 12 行之间；雪花来自固定 seed 的自包含 SVG feTurbulence，几何与相位均确定，不依赖随机数、外部图片、GSAP 或浏览器计时器。媒体可使用单行并通过 --ui-skeleton-line-height 设置占位高度。骨架本身 aria-hidden，不单独播报；父区域管理 aria-busy 与唯一加载消息。两种减少动效来源和强制配色均显示静态纹理。' } } },
+  render: args => defineComponent({ components: { MSkeleton, MCard }, setup: () => ({ args }), template: '<div class="kit-stack" style="width:min(100%,580px)"><p class="kit-muted">细密雪花，安静保留尚未落定的版面。</p><MCard title="设计档案"><MSkeleton v-bind="args" /></MCard></div>' }),
 } satisfies Meta<typeof MSkeleton>;
 export default meta;
 type Story = StoryObj<typeof meta>;

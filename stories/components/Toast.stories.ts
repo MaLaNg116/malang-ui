@@ -9,11 +9,13 @@ const meta = {
   title: '基础组件/Toast 轻提示',
   component: MToast,
   tags: ['autodocs'],
-  args: { modelValue: false, title: '设置已保存', description: '新的配置已经应用，可以继续创作。', variant: 'success', closeLabel: '关闭通知' },
+  args: { modelValue: false, title: '设置已保存', description: '新的配置已经应用，可以继续创作。', variant: 'success', closeLabel: '关闭通知', presentation: 'notification', closable: true },
   parameters: { docs: { description: { component: '受控的单条轻提示，每个实例管理自己的剩余时间。duration=0 保持显示；悬停、键盘焦点或页面隐藏时暂停，解除全部原因后继续。通知不抢焦点；独立的稳定 live regions 负责消息播报。MToastViewport 仅提供主题范围内的浮层布局，不创建全局单例。' } } },
   argTypes: {
     variant: { control: 'select', options: ['info', 'success', 'error'] },
-    duration: { control: { type: 'number', min: 0, step: 500 }, description: '自动关闭的毫秒数；未设置时普通/成功为5000ms，错误持续显示。0 表示持续显示。' },
+    presentation: { control: 'inline-radio', options: ['notification', 'message'], description: '通知卡片或单句轻提示，保留同一受控与播报模型。' },
+    closable: { control: 'boolean', description: '是否显示关闭按钮；默认显示，短时轻提示可省略。' },
+    duration: { control: { type: 'number', min: 0, step: 500 }, description: '自动关闭的毫秒数；未设置时轻提示3000ms、通知5000ms，错误持续显示。0 表示持续显示。' },
   },
   render: args => defineComponent({
     components: { MToast, MToastViewport, MButton, MInput },
@@ -126,9 +128,10 @@ export const TopCenter: Story = {
       const open = ref(false), draft = ref('正在编辑的顶部通知草稿'), long = ref(false);
       const longTitle = '顶部消息 · ' + 'ArchiveReference'.repeat(14);
       const longDescription = '完整的资料说明保留在通知内，内容过长时可以独立滚动，关闭按钮始终可用。'.repeat(24);
-      return { open, draft, long, longTitle, longDescription };
+      async function show() { open.value = false; await nextTick(); open.value = true; }
+      return { open, draft, long, longTitle, longDescription, show };
     },
-    template: `<main class="kit-stack" style="max-width:640px"><h1 style="font:500 32px/1.5 var(--ui-font-family-display)">消息从顶部抵达，手中的事继续。</h1><p class="kit-muted">通知显示在顶部中央。短屏和长文都保留关闭入口，编辑中的草稿也会留下。</p><MInput v-model="draft" label="顶部通知外的草稿" /><MSwitch v-model="long" label="使用长通知内容" /><div class="kit-row"><MButton @click="open = true">显示顶部居中通知</MButton></div><p class="kit-muted">{{ open ? '顶部通知显示中。' : '当前没有显示的顶部通知。' }}</p><MToastViewport placement="top-center" label="顶部通知"><MToast v-model="open" :title="long ? longTitle : '顶部消息已就绪'" :description="long ? longDescription : '资料已经更新，可以继续编辑手中的内容。'" :duration="0" close-label="关闭顶部通知" /></MToastViewport></main>`,
+    template: `<main class="kit-stack" style="max-width:640px"><h1 style="font:500 32px/1.5 var(--ui-font-family-display)">轻轻回应，继续手中的事。</h1><p class="kit-muted">顶部居中的单句提示显示3秒，不打断编辑。长消息保留手动关闭与独立滚动。</p><MInput v-model="draft" label="顶部通知外的草稿" /><MSwitch v-model="long" label="使用长通知内容" /><div class="kit-row"><MButton @click="show">显示顶部居中通知</MButton></div><p class="kit-muted">{{ open ? '顶部通知显示中。' : '当前没有显示的顶部通知。' }}</p><MToastViewport placement="top-center" label="顶部通知"><MToast v-model="open" presentation="message" variant="success" :title="long ? longTitle : '资料已更新，可以继续编辑。'" :description="long ? longDescription : undefined" :duration="long ? 0 : 3000" :closable="long" close-label="关闭顶部通知" /></MToastViewport></main>`,
   }),
 };
 

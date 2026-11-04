@@ -1,0 +1,393 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-04",
+  "publicComponentCount": 44,
+  "basis": "按使用能力归并，不按组件同名计数；此对照不代表 Ant Design 或 Element Plus API 兼容。",
+  "planning": "P1 优先补齐高频缺口；P2 按真实页面需要推进，不承诺全部立即实现。已具备表示列出的基础能力，不等同于参考库的完整功能。",
+  "sources": [
+    {
+      "id": "ant-overview",
+      "label": "Ant Design · 组件目录",
+      "url": "https://ant.design/components/overview/"
+    },
+    {
+      "id": "element-overview",
+      "label": "Element Plus · 组件目录",
+      "url": "https://element-plus.org/en-US/component/overview.html"
+    },
+    {
+      "id": "ant-message",
+      "label": "Ant Design · Message",
+      "url": "https://ant.design/components/message/"
+    },
+    {
+      "id": "element-message",
+      "label": "Element Plus · Message",
+      "url": "https://element-plus.org/en-US/component/message.html"
+    },
+    {
+      "id": "ant-space",
+      "label": "Ant Design · Space",
+      "url": "https://ant.design/components/space/"
+    },
+    {
+      "id": "element-space",
+      "label": "Element Plus · Space",
+      "url": "https://element-plus.org/en-US/component/space.html"
+    },
+    {
+      "id": "ant-backtop",
+      "label": "Ant Design · FloatButton.BackTop",
+      "url": "https://ant.design/components/float-button/#floatbuttonbacktop"
+    },
+    {
+      "id": "element-backtop",
+      "label": "Element Plus · Backtop",
+      "url": "https://element-plus.org/en-US/component/backtop.html"
+    }
+  ],
+  "items": [
+    {
+      "id": "space",
+      "capability": "组件间距",
+      "antDesign": "Space",
+      "elementPlus": "Space",
+      "status": "added",
+      "priority": null,
+      "components": [
+        "MSpace"
+      ],
+      "available": "横纵排列、间距、对齐与换行。",
+      "boundary": "负责组件之间的留白；不提供栅格、页面布局或可拖动分栏。",
+      "next": "用于按钮组、筛选项与信息行。"
+    },
+    {
+      "id": "backtop",
+      "capability": "返回顶部",
+      "antDesign": "FloatButton.BackTop",
+      "elementPlus": "Backtop",
+      "status": "added",
+      "priority": null,
+      "components": [
+        "MBackTop"
+      ],
+      "available": "按滚动高度显隐，返回页面或指定滚动容器的顶部。",
+      "boundary": "支持减少动态效果；不包含浮动按钮菜单、进度环或锚点导航。",
+      "next": "用于长文档和滚动面板。"
+    },
+    {
+      "id": "message",
+      "capability": "操作后轻提示",
+      "antDesign": "Message",
+      "elementPlus": "Message",
+      "status": "added",
+      "priority": null,
+      "components": [
+        "MMessage"
+      ],
+      "available": "MMessage 提供顶部居中、默认3秒的单句轻提示，支持信息、成功、警告、错误与加载五种类型。",
+      "boundary": "受控 v-model，沿用主题与 Toast 计时/播报能力；不创建全局命令式消息服务。MToast 默认 notification 保留详情通知。",
+      "next": "保存、复制等短反馈使用 message；较完整通知使用 notification。"
+    },
+    {
+      "id": "form-controls",
+      "capability": "表单基础控件",
+      "antDesign": "Button / Input / Select / Radio / Checkbox / DatePicker / Upload 等",
+      "elementPlus": "Button / Input / Select / Radio / Checkbox / Date Picker / Upload 等",
+      "status": "available",
+      "priority": null,
+      "components": [
+        "MButton",
+        "MInput",
+        "MTextarea",
+        "MInputNumber",
+        "MSelect",
+        "MCombobox",
+        "MCheckbox",
+        "MRadioGroup",
+        "MSwitch",
+        "MSlider",
+        "MDatePicker",
+        "MUpload"
+      ],
+      "available": "11 个输入与选择组件，加原生表单动作按钮，共 12 个基础控件。保留 name、required、禁用及原生表单语义。",
+      "boundary": "搜索选择、单日期和本地文件选择各有边界；不包含多选级联、远程上传或完整表单验证引擎。",
+      "next": "先用现有控件组合真实表单，再按需求增加专用输入。"
+    },
+    {
+      "id": "content",
+      "capability": "内容容器与标记",
+      "antDesign": "Card / Divider / Tag / Avatar / Badge / Empty",
+      "elementPlus": "Card / Divider / Tag / Avatar / Badge / Empty",
+      "status": "available",
+      "priority": null,
+      "components": [
+        "MCard",
+        "MDivider",
+        "MTag",
+        "MAvatar",
+        "MBadge",
+        "MEmpty"
+      ],
+      "available": "卡片分区、分隔、标签、头像、状态与空内容。",
+      "boundary": "头像提供身份图像与回退，不提供图片画廊或大图预览。",
+      "next": "配合业务内容使用独立的状态与层级。"
+    },
+    {
+      "id": "data",
+      "capability": "数据与页面结果",
+      "antDesign": "Table / Tree / Descriptions / Statistic / Result",
+      "elementPlus": "Table / Tree / Descriptions / Statistic / Result",
+      "status": "available",
+      "priority": null,
+      "components": [
+        "MTable",
+        "MTree",
+        "MDescriptions",
+        "MStatistic",
+        "MResult"
+      ],
+      "available": "基础语义表格、层级目录、资料描述、静态指标与页面级结果。",
+      "boundary": "表格与树不做虚拟渲染；指标不伪造数值增长。表格没有内置排序、筛选或编辑引擎。",
+      "next": "复杂数据交互与大数据量能力单独评估。"
+    },
+    {
+      "id": "navigation",
+      "capability": "导航与流程",
+      "antDesign": "Tabs / Menu / Dropdown / Breadcrumb / Pagination / Steps",
+      "elementPlus": "Tabs / Menu / Dropdown / Breadcrumb / Pagination / Steps",
+      "status": "available",
+      "priority": null,
+      "components": [
+        "MTabs",
+        "MMenu",
+        "MDropdownMenu",
+        "MBreadcrumb",
+        "MPagination",
+        "MSteps"
+      ],
+      "available": "标签切换、菜单、操作下拉、路径、分页与步骤。",
+      "boundary": "路由跳转与业务步骤校验由页面负责；操作菜单不代替表单选择器。",
+      "next": "结合项目路由与流程状态使用。"
+    },
+    {
+      "id": "overlays",
+      "capability": "浮层与折叠",
+      "antDesign": "Modal / Drawer / Popover / Tooltip / Collapse",
+      "elementPlus": "Dialog / Drawer / Popover / Tooltip / Collapse",
+      "status": "available",
+      "priority": null,
+      "components": [
+        "MDialog",
+        "MDrawer",
+        "MPopover",
+        "MTooltip",
+        "MAccordion"
+      ],
+      "available": "对话框、抽屉、气泡、提示与折叠面板。Collapse 对应 MAccordion。",
+      "boundary": "Popover 是通用浮层，没有专用确认契约；Tooltip 用于简短说明。",
+      "next": "需要确认动作时优先遵循独立的确认交互约定。"
+    },
+    {
+      "id": "feedback",
+      "capability": "状态、加载与通知",
+      "antDesign": "Alert / Progress / Timeline / Spin / Skeleton / Notification",
+      "elementPlus": "Alert / Progress / Timeline / Loading / Skeleton / Notification",
+      "status": "available",
+      "priority": null,
+      "components": [
+        "MAlert",
+        "MProgress",
+        "MTimeline",
+        "MSpinner",
+        "MSkeleton",
+        "MToast",
+        "MToastViewport"
+      ],
+      "available": "行内提示、确定进度、时间线、内联加载与骨架；Notification 对应 MToast 默认通知模式。",
+      "boundary": "Spinner 表示处理中，不表示完成百分比；没有 Loading 遮罩服务或全局通知服务。",
+      "next": "依据已知进度、局部等待或通知选择相应形式。"
+    },
+    {
+      "id": "segmented",
+      "capability": "分段选择",
+      "antDesign": "Segmented",
+      "elementPlus": "Segmented",
+      "status": "planned",
+      "priority": "P1",
+      "components": [],
+      "available": "暂无专用组件。",
+      "boundary": "RadioGroup 可承接单选语义，但没有紧凑分段外观与选中滑块。",
+      "next": "优先支持视图切换与短选项筛选。"
+    },
+    {
+      "id": "popconfirm",
+      "capability": "轻量操作确认",
+      "antDesign": "Popconfirm",
+      "elementPlus": "Popconfirm",
+      "status": "planned",
+      "priority": "P1",
+      "components": [
+        "MPopover",
+        "MButton"
+      ],
+      "available": "可用 Popover 与按钮组合。",
+      "boundary": "暂无专用 Popconfirm；确认、取消、异步状态和回焦仍需页面实现。",
+      "next": "优先收敛删除、移除等局部确认。"
+    },
+    {
+      "id": "image",
+      "capability": "图片与大图预览",
+      "antDesign": "Image",
+      "elementPlus": "Image",
+      "status": "planned",
+      "priority": "P1",
+      "components": [],
+      "available": "暂无专用图片组件。",
+      "boundary": "Avatar 不代替图片加载、错误回退、缩放或画廊预览。",
+      "next": "优先补齐图片状态与可键盘操作的预览。"
+    },
+    {
+      "id": "form",
+      "capability": "表单布局与验证",
+      "antDesign": "Form / Form.Item",
+      "elementPlus": "Form / FormItem",
+      "status": "planned",
+      "priority": "P1",
+      "components": [],
+      "available": "已有原生 form 语义与各控件的 hint / error。",
+      "boundary": "没有 MForm / MFormItem、跨字段规则、异步校验与统一错误摘要引擎。",
+      "next": "优先统一字段布局和错误关联，再评估校验层。"
+    },
+    {
+      "id": "typography",
+      "capability": "排版与链接",
+      "antDesign": "Typography",
+      "elementPlus": "Typography / Text / Link",
+      "status": "planned",
+      "priority": "P2",
+      "components": [],
+      "available": "已有字体与颜色设计变量，可使用原生文字及链接。",
+      "boundary": "暂无专用 Typography / Link；复制、编辑和省略展开不在组件范围内。",
+      "next": "按文档与业务正文需求统一排版。"
+    },
+    {
+      "id": "anchor",
+      "capability": "锚点与吸附",
+      "antDesign": "Anchor / Affix",
+      "elementPlus": "Anchor / Affix",
+      "status": "planned",
+      "priority": "P2",
+      "components": [],
+      "available": "可使用原生锚点与 CSS sticky。",
+      "boundary": "BackTop 只返回顶部，不提供章节跟踪、活动锚点或吸附状态。",
+      "next": "长文档侧栏与滚动定位出现时补齐。"
+    },
+    {
+      "id": "hierarchical-select",
+      "capability": "层级选择",
+      "antDesign": "Cascader / TreeSelect",
+      "elementPlus": "Cascader / TreeSelect",
+      "status": "planned",
+      "priority": "P2",
+      "components": [],
+      "available": "已有普通选择、搜索选择和独立目录树。",
+      "boundary": "尚未形成 Cascader / TreeSelect 的弹层、路径选择与表单值契约。",
+      "next": "区域、分类等多层级字段有需求时推进。"
+    },
+    {
+      "id": "date-time",
+      "capability": "日期区间、时间与日历",
+      "antDesign": "DatePicker.RangePicker / TimePicker / Calendar",
+      "elementPlus": "Date Picker range / Time Picker / Calendar",
+      "status": "planned",
+      "priority": "P2",
+      "components": [
+        "MDatePicker"
+      ],
+      "available": "已有 ISO 单日期输入与日期历盘。",
+      "boundary": "没有日期区间、时间选择、日期时间组合或独立日历面板。",
+      "next": "按预约、排期等场景逐项增加。"
+    },
+    {
+      "id": "virtual-data",
+      "capability": "大数据与虚拟列表",
+      "antDesign": "Table / Tree 虚拟渲染、Listy",
+      "elementPlus": "Virtualized Table / Virtualized Tree / Virtualized Select",
+      "status": "planned",
+      "priority": "P2",
+      "components": [
+        "MTable",
+        "MTree"
+      ],
+      "available": "已有基础表格与树。",
+      "boundary": "没有虚拟 Table / Tree / List；可滚动容器不等于虚拟渲染。",
+      "next": "有实际数据规模与交互指标后选择实现。"
+    },
+    {
+      "id": "special-inputs",
+      "capability": "专用输入与迁移",
+      "antDesign": "ColorPicker / Rate / Transfer / Input.OTP / Mentions",
+      "elementPlus": "Color Picker / Rate / Transfer / Input OTP / Mention",
+      "status": "planned",
+      "priority": "P2",
+      "components": [],
+      "available": "暂无颜色、评分、穿梭框、验证码或提及组件。",
+      "boundary": "普通输入不包含这些专用交互与键盘规则。",
+      "next": "按业务字段出现频率分别立项。"
+    },
+    {
+      "id": "showcase",
+      "capability": "轮播、引导与内容标记",
+      "antDesign": "Carousel / Tour / Watermark / QRCode",
+      "elementPlus": "Carousel / Tour / Watermark；目录未列独立 QRCode",
+      "status": "planned",
+      "priority": "P2",
+      "components": [],
+      "available": "暂无轮播、漫游引导、水印或二维码组件。",
+      "boundary": "现有 Canvas MG 用于视觉编排，不代替上述内容与导航能力。",
+      "next": "按展示站与业务需求分别评估。"
+    },
+    {
+      "id": "layout",
+      "capability": "栅格、页面布局与分栏",
+      "antDesign": "Grid / Layout / Flex / Splitter",
+      "elementPlus": "Layout / Layout Container / Splitter",
+      "status": "planned",
+      "priority": "P2",
+      "components": [
+        "MSpace"
+      ],
+      "available": "已有组件间距排列；页面可使用原生 CSS Grid / Flex。",
+      "boundary": "MSpace 不提供栅格断点、布局容器或可拖动分栏。",
+      "next": "先由真实页面沉淀布局约定，再提取公共能力。"
+    },
+    {
+      "id": "configuration",
+      "capability": "全局配置与国际化",
+      "antDesign": "ConfigProvider / App",
+      "elementPlus": "Config Provider",
+      "status": "planned",
+      "priority": "P2",
+      "components": [],
+      "available": "容器 data-ui-theme / data-ui-palette 支持主题与浅色配色。",
+      "boundary": "没有 Vue ConfigProvider、语言包注入、全局尺寸与服务上下文；主题属性不等于 i18n。",
+      "next": "跨项目与多语言需求明确后统一配置层。"
+    },
+    {
+      "id": "loading-overlay",
+      "capability": "加载遮罩与服务",
+      "antDesign": "Spin 全屏 / 遮罩用法",
+      "elementPlus": "Loading directive / service",
+      "status": "planned",
+      "priority": "P2",
+      "components": [
+        "MSpinner",
+        "MSkeleton"
+      ],
+      "available": "已有内联等待与内容占位。",
+      "boundary": "没有区域遮罩指令、页面滚动锁定或命令式 Loading 服务。",
+      "next": "遮罩需求出现时，明确阻挡范围、取消和焦点策略。"
+    }
+  ]
+}

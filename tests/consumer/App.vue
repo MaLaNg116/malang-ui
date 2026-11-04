@@ -7,7 +7,7 @@ import {
   MDrawer, MDropdownMenu, MAccordion, MSteps, MProgress, MTimeline,
   MInputNumber, MSlider, MCombobox, MTag, MAvatar, MDescriptions,
   MDatePicker, MUpload, MMenu, MTree,
-  MStatistic, MResult,
+  MStatistic, MResult, MSpace, MBackTop, MMessage,
 } from 'malang-ui';
 import type { MChoiceOption, MTableColumn, MTabItem, MMenuItem, MTreeNode, MUploadRejection } from 'malang-ui';
 
@@ -22,6 +22,7 @@ const sections = ref<string[]>(['one']);
 const amount = ref<number | null>(1); const intensity = ref(1);
 const date = ref('2026-11-04'); const attachments = ref<File[]>([]);
 const selected = ref<string | null>('one'); const expanded = ref<string[]>(['group']);
+const scrollHost = ref<HTMLElement | null>(null);
 const menuItems: readonly MMenuItem[] = [{value:'group',label:'分组',children:[{value:'one',label:'第一项',href:'#one'}]}];
 const treeItems: readonly MTreeNode[] = [{value:'group',label:'目录',children:[{value:'one',label:'第一项'}]}];
 function rejected(items: MUploadRejection[]) { value.value = items[0]?.reason || ''; }
@@ -29,6 +30,10 @@ function navigate(_value: string, event: MouseEvent) { event.preventDefault(); }
 </script>
 <template>
   <MBreadcrumb :items="[{ label: '组件', href: '/' }, { label: '验证' }]" />
+  <MSpace direction="horizontal" :size="8" align="center" wrap inline><MButton>第一项</MButton><MButton variant="secondary">第二项</MButton></MSpace>
+  <div ref="scrollHost"><MBackTop :target="() => scrollHost" :visibility-height="100" behavior="instant" label="回到消费页顶部" @click="navigate('top', $event)" /></div>
+  <MToastViewport placement="top-center"><MToast v-model="checked" presentation="message" title="轻提示已就绪" :closable="false" :duration="3000" /></MToastViewport>
+  <MMessage v-model="open" content="操作处理中" type="loading" :duration="0" :offset="8" />
   <MCard title="公开接口" heading-tag="h2"><MInput v-model="value" label="名称" /><MButton @click="open = true">编辑</MButton></MCard>
   <MSwitch v-model="checked" label="启用" /><MCheckbox v-model="checked" label="确认" />
   <MRadioGroup v-model="value" :options="options" label="单选" /><MSelect v-model="value" :options="options" label="分类" />

@@ -2,7 +2,7 @@
 
 一套以水墨与科技融合为视觉方向的前端组件库，包含 UI 组件、GSAP 动效、MG 编排和实用工具。首发使用 Vue 3 + TypeScript，先在自己的项目中验证，再逐步扩展与开源。
 
-当前提供 41 个公开组件、纯 TypeScript 工具、六套 Canvas / MG 编排和 DOM 错峰动效，共七个动效工厂。浅色提供宣纸朱砂、青瓷冷玉与绢素鎏金三种材质配色，深色保留浓墨；朱砂刻印独立于主题主色。
+当前提供 44 个公开组件、纯 TypeScript 工具、六套 Canvas / MG 编排和 DOM 错峰动效，共七个动效工厂。浅色提供宣纸朱砂、青瓷冷玉与绢素鎏金三种材质配色，深色保留浓墨；朱砂刻印独立于主题主色。
 
 组件统一使用 **M 前缀**，例如 `MInput`、`MButton`、`MDrawer`；Vue 模板也可以写成 `<m-input>`、`<m-button>`、`<m-drawer>`。M 代表 MaLang，公开类型对应 `MInputProps` 等。当前私有验证阶段已统一迁移命名。
 
@@ -115,6 +115,8 @@ const name = ref('');
 
 底纸、浮纸与静层分别使用 `canvas/surface/surface-muted`；`secondary-soft`、`metal-soft` 提供副色与金属的柔和承托。`--ui-color-seal` 始终表达朱砂刻印，主色改为冷玉或鎏金时也保留独立含义。已创建的 Canvas MG 会观察同容器的主题和配色变化并重绘，无需为切色重建时间线。
 
+状态使用独立语义色：`--ui-color-info` 的低饱和青灰表示信息与处理中，`--ui-color-success` 的青玉绿表示成功与完成，`--ui-color-warning` 的鎏金表示提醒，`--ui-color-danger` 的朱红表示错误。`--ui-color-focus` 使用低饱和青灰标记键盘与编辑焦点。品牌强调色 `--ui-color-accent` 随浅色配色使用朱砂、冷玉或鎏金，`seal` 表达刻印；状态通过各自的语义变量取色。
+
 容器可设置 `data-ui-motion="reduced"`，CSS 动效也默认遵循系统偏好。MG 控制器默认读取系统偏好；应用内减少动效开关需同步传入其 `reducedMotion` 选项。
 
 这是 ESM 包，使用支持原生 `dialog.showModal()` 与 Popover API 的现代浏览器；不附带 polyfill。Popover / Tooltip 使用 `@floating-ui/dom` 定位，随普通依赖安装；基础组件入口不会加载 GSAP。SSR 导入不会访问浏览器全局，原生浮层在挂载后启用。
@@ -125,9 +127,10 @@ const name = ref('');
 | --- | --- |
 | 动作与输入（12） | `MButton`、`MInput`、`MInputNumber`、`MSlider`、`MCombobox`、`MDatePicker`、`MUpload`、`MTextarea`、`MSelect`、`MCheckbox`、`MRadioGroup`、`MSwitch` |
 | 内容与数据（7） | `MCard`、`MTable`、`MDivider`、`MTag`、`MAvatar`、`MDescriptions`、`MStatistic` |
-| 页面导航（5） | `MTabs`、`MPagination`、`MBreadcrumb`、`MMenu`、`MTree` |
+| 页面导航（6） | `MTabs`、`MPagination`、`MBreadcrumb`、`MMenu`、`MTree`、`MBackTop` |
+| 布局间距（1） | `MSpace` |
 | 浮层与说明（3） | `MDialog`、`MPopover`、`MTooltip` |
-| 状态与反馈（8） | `MBadge`、`MAlert`、`MResult`、`MSpinner`、`MSkeleton`、`MEmpty`、`MToast`、`MToastViewport` |
+| 状态与反馈（9） | `MBadge`、`MAlert`、`MResult`、`MSpinner`、`MSkeleton`、`MEmpty`、`MMessage`、`MToast`、`MToastViewport` |
 | 二级流程（6） | `MDrawer`、`MDropdownMenu`、`MAccordion`、`MSteps`、`MProgress`、`MTimeline` |
 | 工具 | `debounce`、`throttle`、`asyncLock` |
 | 动效与 MG | 六套 Canvas：轨道构形、墨迹切面、成功落印、品牌开场、双轨等待、经纬织光；另有 DOM 错峰，均提供可控生命周期 |
@@ -177,6 +180,10 @@ const sliderAmount = computed({
 
 `MBreadcrumb` 的 `items` 提供 `label` 和可选 `href`；祖先节点使用真实链接，最后一项始终是 `aria-current="page"` 的当前页面文本。适配路由时传入真实路径，或在应用层拦截导航。
 
+`MSpace` 统一安排子项间距，支持 `direction="horizontal|vertical"`、`align`、`wrap` 与 `inline`。`size` 使用 `sm/md/lg` 或非负像素数值，`0` 有效；不增加子项包装与额外语义，适合按钮组、工具条与纵向控件组合。
+
+`MBackTop` 在滚动超过 `visibilityHeight`（默认 400px）时显示 44px 原生返回按钮。默认滚动当前文档，也可通过 `target` 传入元素或返回元素的 getter；显式空目标不会操作文档。`label` 提供名称，`behavior` 支持 `smooth/instant`，系统或祖先容器减少动效时使用即时回顶。键盘操作后保留按钮焦点，离焦后再隐藏；`class/style` 传给按钮，可调整浮动位置或置于自定义容器。
+
 `MTable` 是语义化基础表格，必填 `caption`、`columns` 与 `rows`。列包含 `key/label` 与可选 `align`；行支持普通业务接口，`rowKey` 默认 `id`，没有键时使用索引。排序或更新列表应提供稳定且唯一的行键。`#cell-列key="{ row, value, column, index }"` 自定义单元格；`#loading`、`#empty` 自定义状态。默认只输出简单值，复杂内容通过插槽渲染。窄屏滚动限制在可键盘聚焦的表格区域内。当前不内置排序、选择、筛选或虚拟滚动，数据操作由调用方组合。
 
 ```vue
@@ -191,7 +198,7 @@ const sliderAmount = computed({
 
 `MBadge` 是静态状态标记。`MAlert` 必填 `title`，可提供 `description`；默认静态且不自动播报，动态消息设置 `announce` 后，错误使用 alert，其余使用 status。两者的 `tone` 支持 `neutral/info/success/warning/error`。
 
-`MSpinner` 提供单一可访问加载名称（`label` 默认「加载中」），支持 `sm/md/lg`，对应 16/24/32 px。方印离合由四枚厚折角逐角离位，再共同合成方印；双楔内芯反向换位，外轨匀速旋转。`MButton loading` 复用同一图形，并将按钮内的装饰加载图形隐藏于辅助技术。`MSkeleton` 用细噪点与稀疏短切片形成装饰占位，隐藏于辅助技术，`lines` 默认 3；两者在系统或容器减少动态效果与强制颜色模式下保留静态形态。`MEmpty` 提供 `title/description` 和操作插槽，默认标题「暂无内容」。`MDivider` 是语义分隔线，`label` 可加入可读说明。
+`MSpinner` 提供单一可访问加载名称（`label` 默认「加载中」），支持 `sm/md/lg`，对应 16/24/32 px。四枚轻折角在舒展、强展与回收之间连续离合；外轨以三拍变速完成三圈，平均每圈 1.8 秒，双楔内芯持续反转。不同段落的转速平滑衔接，保留轻细线条与更明显的伸缩。默认外轨与内芯分别使用主题主色和副色；宣纸与浓墨保留朱砂、青玉搭配，`MButton loading` 复用同一图形并继承按钮文字颜色，将装饰加载图形隐藏于辅助技术。`MSkeleton` 用固定纹理的细密雪花形成装饰占位，稀疏的 1px 水平短断片以低对比平滑浮现与退去，底色保持稳定；组件隐藏于辅助技术，`lines` 默认 3。两者在系统或容器减少动态效果与强制颜色模式下保留静态形态。`MEmpty` 提供 `title/description` 和操作插槽，默认标题「暂无内容」。`MDivider` 是语义分隔线，`label` 可加入可读说明。
 
 `MResult` 是页面级结果面板，必填 `title`，可设置 `description`、`status="success|error|warning|info"` 和 `headingTag="h1|h2|h3"`（默认 `h2`）。默认静态且不搬移焦点；`default` 补充业务内容，`footer` 放原生按钮或链接。显式 `announce` 仅让标题与描述的消息区播报：错误用 assertive alert，其余用 polite status，补充内容和动作保持独立。组件参数和场景在「二级组件 / Result 结果面板」中查看。
 
@@ -201,7 +208,16 @@ const sliderAmount = computed({
 
 `MCard` 默认渲染 `article` 与 `h3` 标题，支持 `as`、`headingTag`、`title`、`description` 和 `header/default/footer` 插槽。卡片本身保持静态，内部按钮、链接和表单各自操作；自定义头部接管标题与说明，必要时由调用方提供 `aria-labelledby`。
 
-`MToast` 使用 `v-model`、`title`、`description` 与 `variant`（`info/success/error`）。普通和成功消息默认显示 5000ms，错误消息默认持续显示；显式 `duration` 优先，`:duration="0"` 表示手动关闭。暂停原因可以叠加，全部解除后按剩余时间继续；消息替换会重新计时，每个实例独立清理。提示的播报区常驻，并与关闭按钮分开；同一消息由一个播报区负责，组合页保留的结果文字不重复自动播报。
+`MToast` 使用 `v-model`、`title`、`description` 与 `variant`（`info/success/warning/error/loading`）。`presentation="message"` 提供轻量单句反馈，普通和成功消息默认 3000ms；默认的 `notification` 模式保留标题与详情卡片，普通和成功消息默认 5000ms。错误消息默认持续显示；显式 `duration` 优先，`:duration="0"` 表示持续显示。`closable` 默认开启，轻提示可显式关闭它。悬停、聚焦与页面隐藏暂停计时，原因可以叠加，全部解除后按剩余时间继续；消息替换会重新计时，每个实例独立清理。形态切换不重新播报相同消息。
+
+`MMessage` 是「反馈组件 / Message 全局提示」的独立入口：`v-model` 控制显示，`content` 提供单句内容，`type` 支持 `info/success/warning/error/loading`。默认顶部居中、偏移 `8px`、`duration=3000`、无关闭按钮；`:duration="0"` 持续显示，适合等待实际操作完成后再切换成功或错误。`closable`、`closeLabel`、`offset` 和通知区域 `label` 可配置。可见提示继承主题，悬停、聚焦与页面隐藏暂停剩余计时，自动关闭不移动编辑焦点。
+
+```vue
+<MMessage v-model="saved" content="已保存" type="success" />
+<MMessage v-model="saving" content="正在保存" type="loading" :duration="0" />
+```
+
+这种顶部轻反馈的用途参考 [Ant Design Message](https://ant.design/components/message/) 与 [Element Plus Message](https://element-plus.org/en-US/component/message.html)，视觉继续使用本库的纸墨与短折角。调用方管理状态，组件不创建全局单例。
 
 `MToastViewport` 管理通知布局，`placement` 支持 `top-start/top-center/top-end/bottom-start/bottom-center/bottom-end`，默认 `bottom-end`；起始侧与末尾侧跟随阅读方向，居中位置保留安全区和窄屏宽度。`label` 提供通知区域名称。调用方管理消息列表与每条消息的 `v-model`，容器保留主题继承，不引入全局队列。Toast 的 `TopCenter` 和 `Positions` 示例分别演示顶部居中，以及六个落点、RTL 与编辑焦点。
 
@@ -213,7 +229,7 @@ const sliderAmount = computed({
 | `MDropdownMenu` | 必填 `v-model/items/label`，`select` 事件给出操作的 `value`。操作项提供 `value/label/disabled/danger/shortcut`；分隔项为 `{ type: 'separator', key }`。方向键、Home/End、字符搜索与原生按钮激活，Tab 离开菜单。`shortcut` 仅显示说明，不注册全局快捷键。 |
 | `MAccordion` | `v-model` 为字符串数组，`items` 提供 `value/label/description/disabled`，必填 `label`。默认单展开，`multiple` 允许多展开；无效值只影响显示兜底，不主动改写父模型。面板隐藏时保留挂载，命名插槽接收 `{ item, expanded }`。 |
 | `MSteps` | 必填 `v-model/items/label`，按顺序表达完成、当前与待办。默认静态；`interactive` 允许原生按钮请求更新，禁用项不能激活。`orientation` 与 `status` 分别控制方向和当前步骤的 `process/error/success` 状态。 |
-| `MProgress` | 必填 `label`；`value/max` 默认 `0/100`，数值夹取到有效范围。`indeterminate` 不提供虚假数值；`status` 为 `default/success/error`，`showValue` 控制可见百分比。每次进度不自动播报，业务层负责完成通知。 |
+| `MProgress` | 必填 `label`；`value/max` 默认 `0/100`，数值夹取到有效范围。`status` 为 `default/success/error`，分别使用信息、成功与错误色；成功和错误有可见图形标记，`showValue` 仅控制可见百分比。`indeterminate` 省略当前数值，错误时的 `aria-valuetext` 为「处理出错，进度未知」。每次进度不自动播报，业务层负责完成通知。 |
 | `MTimeline` | 必填 `items/label`，条目提供唯一 `value`、`title` 与可选 `description/time/datetime/status`。顺序由调用方决定；`time` 使用原生 `time` 元素，`datetime` 可提供机器可读时间。命名内容插槽保留原生操作；无记录时呈现空状态。 |
 
 ## 日期、附件与目录
@@ -266,6 +282,10 @@ scripts/         Token 生成与构建辅助脚本
 `createStaggerSequence(elements, options)` 面向同一 document 中已挂载的专属 DOM 容器，目标去重后固定顺序。`duration` 默认为每项 0.42 秒，`stagger` 为 0.08 秒，`distance` 为 18px；`direction` 支持 `up/down/left/right`，`speed` 控制播放倍率。控制器的 `duration` 是整条编排长度，定位仍用未乘倍率的秒数。空列表返回零时长的稳定控制器。
 
 创建时内容保持原样可读，首次播放、重播或显式定位才应用入场状态。它只管理自己的位移与 opacity，不修改 `visibility/aria-hidden/tabindex`；焦点进入目标时立即归位并暂停。减少动态效果或页面隐藏也会收束为可读终态。目标的 transform/opacity 交由这一实例独占，业务自身的变换放在内层；重叠实例会被拒绝，销毁归还自己的样式并释放监听。列表变更后在 Vue `nextTick` 中销毁并重新创建。错峰与样式恢复参考 [GSAP Staggers](https://gsap.com/resources/getting-started/Staggers/) 和 [GSAP revert](https://gsap.com/docs/v3/GSAP/Timeline/revert()/)。
+
+## 组件覆盖对照
+
+「开始 / 组件覆盖对照」按能力搜索和筛选，映射本库组件与 [Ant Design 目录](https://ant.design/components/overview/)、[Element Plus 目录](https://element-plus.org/en-US/component/overview.html)。记录见 [design/component-coverage.json](design/component-coverage.json)；按能力对照，不承诺第三方 API 兼容。Space、BackTop 与轻 Message 已补齐，Segmented、Popconfirm、Image 和 Form 容器列为优先方向，其余按实际项目需要推进。
 
 ## 后续方向
 

@@ -37,7 +37,7 @@ const descriptionId = `ui-alert-${identity}-description`;
 
 <style scoped>
 .ui-alert {
-  --ui-alert-tone: var(--ui-color-secondary-accent);
+  --ui-alert-tone: var(--ui-color-info);
   position: relative;
   display: grid;
   grid-template-columns: 28px minmax(0, 1fr);

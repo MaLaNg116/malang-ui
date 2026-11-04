@@ -111,4 +111,31 @@ test.describe('Toast placement', () => {
       expect(errors).toEqual([]);
     } finally { await context.close(); }
   });
+
+  test('shows a compact single-message body, preserves editing focus and pauses its three-second lifetime on hover', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 720 }); await openStory(page, 'TopCenter');
+    const viewport = page.getByRole('region', { name: '顶部通知', exact: true });
+    const draft = page.getByRole('textbox', { name: '顶部通知外的草稿', exact: true });
+    const show = page.getByRole('button', { name: '显示顶部居中通知', exact: true });
+    await expect(viewport.getByRole('group')).toHaveCount(0); await draft.fill('轻提示出现后仍保留的中文草稿');
+    await show.click();
+    const toast = viewport.getByRole('group', { name: '资料已更新，可以继续编辑。', exact: true });
+    await expect(toast).toBeVisible(); await expect(show).toBeFocused();
+    await expect(toast.getByRole('button')).toHaveCount(0);
+    await expect(toast.locator('.ui-toast__title, .ui-toast__description')).toHaveCount(0);
+    await expect(viewport.getByRole('status')).toHaveText('资料已更新，可以继续编辑。');
+    await expect(viewport.getByRole('alert')).toBeEmpty();
+    const box = await toast.boundingBox(), area = await viewport.boundingBox();
+    expect(box!.height).toBeLessThanOrEqual(48); expect(box!.width).toBeLessThan(area!.width);
+    expect(Math.abs(box!.x + box!.width / 2 - 640)).toBeLessThanOrEqual(1);
+    await draft.focus(); await expect(draft).toBeFocused();
+    await page.mouse.move(0, 480);
+    await expect(toast).toHaveCount(0); await expect(viewport.getByRole('status')).toBeEmpty();
+    await expect(draft).toBeFocused(); await expect(draft).toHaveValue('轻提示出现后仍保留的中文草稿');
+
+    await show.click(); await expect(toast).toBeVisible(); await toast.hover();
+    await page.waitForTimeout(3200); await expect(toast).toBeVisible();
+    await page.mouse.move(0, 480); await expect(toast).toHaveCount(0);
+    await expect(viewport.getByRole('status')).toBeEmpty();
+  });
 });

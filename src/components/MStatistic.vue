@@ -23,7 +23,7 @@ const display = computed(() => hasValue.value ? String(props.value) : props.plac
 <style scoped>
 .ui-statistic { --ui-statistic-tone: var(--ui-color-text); box-sizing: border-box; position: relative; min-width: 0; max-width: 100%; padding: 18px 0 20px; border-bottom: 1px solid var(--ui-color-rule); color: var(--ui-color-text); font: var(--ui-font-size-body)/var(--ui-line-height-body) var(--ui-font-family); }
 .ui-statistic::after { content: ''; position: absolute; right: 0; bottom: -1px; width: 18px; height: 2px; background: var(--ui-statistic-tone); opacity: .65; pointer-events: none; }
-.ui-statistic--info { --ui-statistic-tone: var(--ui-color-secondary-accent); }
+.ui-statistic--info { --ui-statistic-tone: var(--ui-color-info); }
 .ui-statistic--success { --ui-statistic-tone: var(--ui-color-success); }
 .ui-statistic--warning { --ui-statistic-tone: var(--ui-color-warning); }
 .ui-statistic--error { --ui-statistic-tone: var(--ui-color-danger); }
