@@ -1,0 +1,17 @@
+.ui-transition-move {
+  transition: transform var(--ui-motion-duration-transition, 190ms) var(--ui-motion-ease-standard, ease-out);
+}
+
+[data-ui-motion='reduced'] .ui-transition-move,
+.ui-transition-move[data-ui-motion='reduced'] {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-transition-move {
+    transition: none;
+  }
+}
+.ui-transition-group {
+  position: relative;
+}

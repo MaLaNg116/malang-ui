@@ -143,7 +143,7 @@ const name = ref('');
 | 配置与服务 | `MConfigProvider`、`MApp`、`useMConfig`、`useMApp`、`vMLoading`、`createMLoading` |
 | 工具 | `debounce`、`throttle`、`asyncLock`、`MGetProps`、`MGetProp`、`MGetRef` |
 | 动效与 MG | 六套 Canvas：轨道构形、墨迹切面、成功落印、品牌开场、双轨等待、经纬织光；另有 DOM 错峰，均提供可控生命周期 |
-| Vue 适配 | `useReducedMotion`，以及示例中的生命周期清理 |
+| Vue 适配 | `useReducedMotion`、`useMTransition`；DOM 入场、离场、折叠与列表重排 |
 | 设计基础 | 三种浅色材质配色、浓墨深色、密度、排版、间距与动效变量 |
 | 开发工作台 | Storybook 的组件状态、组合界面和工具交互示例 |
 
@@ -360,13 +360,41 @@ scripts/         Token 生成与构建辅助脚本
 
 配色复核参考高星设计技能中的暖中性色、灰绿/象牙白与暖金关系，具体取舍见[design/palette-review.json](design/palette-review.json)。仅将宣纸和青瓷浮层底调整为带少量材质倾向的白色，保留朱砂/青玉品牌双色与独立状态语义；滚动条使用金属灰与青灰，避免与错误状态混淆。
 
-`MQRCode` 编码真实UTF-8文本，支持SVG/Canvas、四档纠错、受限中心图标、至少4模块静区、`active/loading/expired/scanned`状态与`refresh`事件。实例`toDataURL('svg'|'png')/download(filename,format)`返回可导出的图像；颜色使用不透明六位HEX并检查对比度。编码/图标读取失败通过`error`报告，外部图标导出需允许跨域读取。默认固定高对比浅色码体，主题装饰位于静区之外。
+`MQRCode` 编码真实UTF-8文本，支持SVG/Canvas、四档纠错、受限中心图标、至少4模块静区、`active/loading/expired/scanned`状态与`refresh`事件。实例`toDataURL('svg'|'png')/download(filename,format)`返回可导出的图像；颜色使用不透明六位HEX并检查对比度。编码/图标读取失败通过`error`报告，外部图标导出需允许跨域读取。默认固定高对比浅色码体，外框装饰位于静区之外。
+
+二维码本体使用连片墨块和切角定位图案，SVG、Canvas与导出共用几何；小尺寸和高密度码回到方格以保障识别。码面和SVG导出按完整码点居中，窄容器按实际可用尺寸调整。机械定位角、细刻度和朱砂小印衔接四套外壳材质。`size`仍表示外框尺寸，`bordered=false`提供净码；下载和`toDataURL`导出净码。状态内容采用落印过渡，半透明遮罩覆盖在静止码体上方，仍能看见底下码纹；版本和纠错信息保留在`data-qr-version/data-qr-level`供调试。
 
 `MConfigProvider` 的`theme/palette/density/motion/locale/dir/messages`配置在子树内继承；`useMConfig()`提供响应式配置和文案。`MApp` 为后代`useMApp()`提供独立的`message/notification/messageBox/alert/confirm/prompt/destroyAll`，不建立进程级全局队列。Message支持同key更新和返回句柄`update/close`，MessageBox返回`{action:'confirm'|'cancel'|'close',value}`并取消过期校验；卸载会结束本实例待处理请求。
 
 `MLoading` 支持局部/模态全屏、延迟与取消；`vMLoading`和`createMLoading({target,text,...})`用于现有区域，返回句柄需在所属任务或组件结束时`close()`。独立实例只恢复自己管理的样式、busy状态与交互锁；不要将真实上传进度用虚构计时器替代。
 
 `MTypography/MText/MLink/MIcon` 提供正文、标题、编辑复制、截断展开、真实链接和SVG图形。`MCheckboxGroup`提供原生复选数组与数量约束，只统计当前存在、启用且唯一的选项；在`MForm`中通过`MFormItem`注册字段，`error`用于呈现，业务校验由表单规则负责。`MSelect multiple`使用`v-model:selectedValues`，保持原单选`v-model`的字符串契约。需要搜索和标签多选时使用`MVirtualSelect`。
+
+## DOM 操作过渡
+
+在 Vue `setup` 中调用 `useMTransition`，将 `transition` 绑定到原生 `Transition` 或 `TransitionGroup`。`reveal`短距离揭页，`fold`收合真实高度，`stamp`用于状态落印；`duration`指定入场毫秒数，离场为其74%，列表位移使用主题动效 Token。
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useMTransition } from 'malang-ui';
+
+const records = ref([{ id: 'ink', label: '墨迹卷宗' }]);
+const { transition, moveClass } = useMTransition({ preset: 'reveal', group: true });
+</script>
+
+<template>
+  <TransitionGroup v-bind="transition" :move-class="moveClass" tag="ul" class="ui-transition-group">
+    <li v-for="record in records" :key="record.id">{{ record.label }}</li>
+  </TransitionGroup>
+</template>
+```
+
+列表使用稳定的业务 key，`group:true`配合`ui-transition-group`为离场和相邻项位移预留正确位置。单个展开区域使用`Transition`与`preset:'fold'`，无需`group`。`disabled`接受响应式布尔值或 getter；系统和祖先`data-ui-motion="reduced"`会收束过渡。`focusTarget`仅在离场区域持有焦点时使用，保持外部编辑焦点。
+
+离场期间的控件立即退出交互和原生表单提交，取消离场会归还本次持有的属性。`v-show`保留原生隐藏语义：折叠结束后字段是否提交仍由业务的`disabled`决定。每个组件实例负责自己的取消与卸载。标签、穿梭框、树选择和动态表单示例已接入；列表重排约定参照 [Vue TransitionGroup](https://vuejs.org/guide/built-ins/transition-group.html)，单区域切换参照 [Vue Transition](https://vuejs.org/guide/built-ins/transition.html)。
+
+全库100个组件的高亮、选中、开合和增删行为见[交互动效盘点](./design/motion-audit.md)。[逐项清单](./design/motion-audit.json)区分现有实现、验证证据和待优化项，作为后续统一高亮滑移与局部过渡的依据。
 
 ## 后续方向
 

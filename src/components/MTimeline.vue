@@ -27,13 +27,13 @@ const statuses: Record<MTimelineStatus, string> = { neutral: '记录', pending: 
 <style scoped>
 .ui-timeline { min-width: 0; color: var(--ui-color-text); font: var(--ui-font-size-body)/var(--ui-line-height-body) var(--ui-font-family); }
 .ui-timeline__list { list-style: none; margin: 0; padding: 0; }
-.ui-timeline__item { --ui-timeline-color: var(--ui-color-metal); position: relative; display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 20px; padding-bottom: 24px; }
-.ui-timeline__item::before { content: ''; position: absolute; left: 11px; top: 24px; bottom: 0; border-left: 1px solid var(--ui-color-rule); }
+.ui-timeline__item { --ui-timeline-color: var(--ui-color-metal); --ui-timeline-node-size: 24px; --ui-timeline-node-offset: 1px; position: relative; display: grid; grid-template-columns: var(--ui-timeline-node-size) minmax(0, 1fr); gap: 20px; padding-bottom: 24px; }
+.ui-timeline__item::before { content: ''; position: absolute; left: calc(var(--ui-timeline-node-size) / 2 - 1px); top: calc(var(--ui-timeline-node-size) + var(--ui-timeline-node-offset)); bottom: 0; border-left: 1px solid var(--ui-color-rule); }
 .ui-timeline__item:last-child { padding-bottom: 0; } .ui-timeline__item:last-child::before { display: none; }
 .ui-timeline__item[data-status='active'] { --ui-timeline-color: var(--ui-color-info); }
 .ui-timeline__item[data-status='success'] { --ui-timeline-color: var(--ui-color-success); }
 .ui-timeline__item[data-status='error'] { --ui-timeline-color: var(--ui-color-danger); }
-.ui-timeline__node { box-sizing: border-box; display: grid; place-items: center; width: 24px; height: 24px; margin-top: 1px; border: 1px solid var(--ui-timeline-color); background: var(--ui-color-canvas); color: var(--ui-timeline-color); }
+.ui-timeline__node { position: relative; z-index: 1; box-sizing: border-box; display: grid; place-items: center; width: var(--ui-timeline-node-size); height: var(--ui-timeline-node-size); margin-top: var(--ui-timeline-node-offset); border: 1px solid var(--ui-timeline-color); background: var(--ui-color-canvas); color: var(--ui-timeline-color); }
 .ui-timeline__dot { width: 5px; height: 5px; background: currentColor; transform: rotate(45deg); }
 .ui-timeline__item[data-status='pending'] .ui-timeline__dot { background: transparent; border: 1px solid currentColor; }
 .ui-timeline__item[data-status='active'] .ui-timeline__node { box-shadow: inset 3px 0 var(--ui-timeline-color); animation: ui-timeline-seat var(--ui-motion-duration-layout) var(--ui-motion-ease-emphasized); }

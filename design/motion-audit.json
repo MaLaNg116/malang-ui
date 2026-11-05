@@ -1,0 +1,2998 @@
+{
+  "auditDate": "2026-11-05",
+  "scope": {
+    "entry": "src/components.ts",
+    "publicComponentCount": 100,
+    "snapshot": "本批快照以 7216a9c 为基础，包含本轮过渡、二维码和 Timeline 接缝改动。",
+    "verificationBaselines": [
+      {
+        "id": "qr-dom-browser",
+        "kind": "existing-local-run",
+        "shards": [
+          128,
+          128
+        ]
+      },
+      {
+        "id": "qr-body-review-grid",
+        "kind": "existing-local-browser-probe",
+        "companion": "qr-body-review-dpr"
+      },
+      {
+        "id": "timeline-join-after",
+        "kind": "existing-local-browser-probe"
+      }
+    ],
+    "ranBrowserTestsForAudit": false,
+    "finalBuiltRegression": {
+      "id": "qr-dom-final-browser",
+      "kind": "built-storybook",
+      "shards": [
+        129,
+        129
+      ],
+      "passed": 258
+    }
+  },
+  "evidenceLevels": {
+    "verified": "引用已有浏览器运行或独立实测，具体证据仅覆盖列明的动效、轨道几何或减动行为。未验证的细节不继承此状态。",
+    "code-reviewed": "核对了本次源码快照。若列出 behaviorTestFile，只表示存在行为回归，不代表已经测试建议中的运动。",
+    "needs-browser": "行为已实现，待针对性浏览器或最终静态产物验证。"
+  },
+  "implementationStatuses": {
+    "planned": "待实施，完成后按验收条件进行浏览器验证。",
+    "needs-browser": "行为已实现，待针对性浏览器或最终静态产物验证。",
+    "preserve": "保留现有行为。"
+  },
+  "priorities": {
+    "P1": "优先统一的交互轨道和日历核心反馈",
+    "P2": "结构变化及反馈的后续接入",
+    "P3": "局部可选打磨",
+    "keep": "延续现有行为或基础能力"
+  },
+  "sharedAcceptance": [
+    "先更新 ARIA、受控真实值、焦点和原生提交，再绘制装饰。hover、键盘焦点、候选和已选的状态各自可辨。",
+    "优先使用单装饰层，近距短动。首帧、resize/字体回流、远跳、系统及容器减少动效和强制颜色均有静态可用状态。",
+    "快速反向从当前动画帧接续，不阻挡首击；保持多实例隔离与卸载清理。虚拟化、原生控件和连续指针拖拽维持真实几何。",
+    "常规交互用 UI token 和 Vue/WAAPI；GSAP 仍用于独立 MG 编排。"
+  ],
+  "summary": {
+    "byMotionKind": {
+      "continuous": 4,
+      "delegated": 15,
+      "direct": 23,
+      "direct-manipulation": 6,
+      "enter-only": 11,
+      "example-opt-in": 1,
+      "local-transition": 16,
+      "native": 3,
+      "shared-dom": 4,
+      "shared-slide": 1,
+      "static": 16
+    },
+    "byEvidence": {
+      "code-reviewed": 83,
+      "verified": 17
+    },
+    "byPriority": {
+      "P1": 20,
+      "P2": 26,
+      "P3": 23,
+      "keep": 31
+    }
+  },
+  "recommendationGroups": [
+    {
+      "id": "persistent-rail",
+      "order": 1,
+      "priority": "P1",
+      "name": "持续选中与当前位置",
+      "components": [
+        "MSegmented",
+        "MTabs",
+        "MMenu",
+        "MAnchor",
+        "MTree",
+        "MSteps",
+        "MPagination",
+        "MCarousel"
+      ],
+      "direction": "以 MSegmented 为样板，先在 Tabs 做一条随真实标签平移调宽的朱砂刻线，再给 Menu/Anchor/Tree 单选模式用窄纵轨。步骤、页码、轮播使用同节奏的各自刻线。",
+      "acceptance": [
+        "对比起点、中帧和终点，确认同一装饰节点实际平移并按目标尺寸对齐。",
+        "RTL、变长标签、滚动容器、360px 与窗口 resize 下对齐；初始化和无可见目标时无需补间。",
+        "手动激活、禁用和受控拒绝不改变已确认轨道，键盘焦点始终独立可见。"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "candidate-rail",
+      "order": 2,
+      "priority": "P1",
+      "name": "候选游标与悬浮刻线",
+      "components": [
+        "MCombobox",
+        "MAutoComplete",
+        "MVirtualSelect",
+        "MVirtualList",
+        "MListy",
+        "MVirtualTree",
+        "MTreeSelect",
+        "MCascader",
+        "MDropdownMenu",
+        "MMention",
+        "MTimePicker"
+      ],
+      "direction": "使用一条独立候选轨，近距移动而远跳直接就位。区分候选、已选和焦点；虚拟列表轨道只依赖当前可见目标。",
+      "acceptance": [
+        "连续方向键、hover、快速筛选、IME 和禁用项下视觉与真实 active 位置一致。",
+        "跨窗口和异步替换不保留旧轨；在 10k 项场景比较可见节点量、真实滚动范围与位置。"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "disclosure",
+      "order": 3,
+      "priority": "P2",
+      "name": "开合与层级展开",
+      "components": [
+        "MAccordion",
+        "MMenu",
+        "MTree",
+        "MTreeSelect",
+        "MTable",
+        "MFloatButtonGroup",
+        "MSplitter"
+      ],
+      "direction": "用现有 fold 衔接真实开合，分支行复用 keyed group；内容保留草稿，铰链与内部展开共用节奏。表格只动明细单元格内层。",
+      "acceptance": [
+        "快反向从当前高度和透明度接续，双行同时离场保留原坐标。",
+        "离场立即退出焦点与原生提交，真实点击不中断，分支焦点不抢外部。"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "replacement",
+      "order": 4,
+      "priority": "P2",
+      "name": "换页与状态替换",
+      "components": [
+        "MDatePicker",
+        "MDatePickerPanel",
+        "MCalendar",
+        "MCarousel",
+        "MTable",
+        "MVirtualTable",
+        "MTour",
+        "MResult",
+        "MImage",
+        "MQRCode"
+      ],
+      "direction": "在稳定容器内按方向轻揭页，状态用局部落印；日期网格、表头、图片操作和二维码码体维持真实可读位置。",
+      "acceptance": [
+        "重复切页不保留离场焦点或隐藏提交，内容最后位置与真实数据一致。",
+        "日历跨月键盘焦点、表格排序、二维码扫码与图片错误回退可独立验证。"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "collection",
+      "order": 5,
+      "priority": "P2",
+      "name": "集合增删与业务反馈",
+      "components": [
+        "MInputTag",
+        "MTransfer",
+        "MFormList",
+        "MToast",
+        "MToastViewport",
+        "MMessage",
+        "MApp",
+        "MUpload",
+        "MList",
+        "MTimeline"
+      ],
+      "direction": "以已通过的标签、穿梭和表单列表为模板，仅给稳定 keyed 的业务增删短揭页/收锋/FLIP。通知栈优先支持同栈回位，文件状态紧随实际请求。",
+      "acceptance": [
+        "同一更新增删时没有首帧瞬跳；重排保留草稿和焦点，离场不进入 FileList/FormData。",
+        "通知不重复播报或重置剩余计时，响应大量记录时不逐项级联。"
+      ],
+      "status": "planned"
+    }
+  ],
+  "components": [
+    {
+      "component": "MButton",
+      "code": [
+        {
+          "file": "src/components/MButton.vue",
+          "lines": [
+            36,
+            68,
+            109
+          ]
+        }
+      ],
+      "trigger": "hover、按下、loading 切换",
+      "motionKind": "local-transition",
+      "current": "切角与色彩有短反馈；Spinner 在同一按钮内即时切换",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/forms.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "可在固定宽度中短淡入加载图标，原生禁用与文字即时"
+      }
+    },
+    {
+      "component": "MInput",
+      "code": [
+        {
+          "file": "src/components/MInput.vue",
+          "lines": [
+            61,
+            105,
+            136
+          ]
+        }
+      ],
+      "trigger": "hover、聚焦、校验文案替换",
+      "motionKind": "local-transition",
+      "current": "边线与下划线有过渡；错误文本 v-if 即时",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/forms.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "保留即时焦点与 invalid；需要时仅过渡固定区域内反馈文案"
+      }
+    },
+    {
+      "component": "MSwitch",
+      "code": [
+        {
+          "file": "src/components/MSwitch.vue",
+          "lines": [
+            83,
+            113,
+            128
+          ]
+        }
+      ],
+      "trigger": "鼠标、Space 或受控开关",
+      "motionKind": "local-transition",
+      "current": "拨片位移及底色已有过渡，系统和容器 reduced 停用",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/forms.spec.ts"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "保留直接的二元滑动"
+      }
+    },
+    {
+      "component": "MTabs",
+      "code": [
+        {
+          "file": "src/components/MTabs.vue",
+          "lines": [
+            126,
+            139,
+            207,
+            214
+          ]
+        }
+      ],
+      "trigger": "点击、方向键、手动 Enter、受控选择",
+      "motionKind": "local-transition",
+      "current": "各标签的独立下划线淡入并 scaleX，面板立即 hidden，草稿仍挂载",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/navigation.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "用一条横向共享刻线移动并调宽，独立键盘焦点，面板以短揭页为可选"
+      }
+    },
+    {
+      "component": "MDialog",
+      "code": [
+        {
+          "file": "src/components/MDialog.vue",
+          "lines": [
+            175,
+            223,
+            273
+          ]
+        }
+      ],
+      "trigger": "打开、Esc、确认关闭",
+      "motionKind": "enter-only",
+      "current": "原生模态打开有短位移；关闭即时；现有焦点锁与原生滚动",
+      "evidence": {
+        "level": "verified",
+        "baseline": "qr-dom-browser",
+        "tests": [
+          {
+            "file": "tests/browser/navigation.spec.ts",
+            "lines": [
+              288
+            ],
+            "coverage": "窄屏长内容和 reduced 下入场禁用。"
+          }
+        ]
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "首选统一装饰收束；要做出场须先验证模态退出、焦点与锁释放"
+      }
+    },
+    {
+      "component": "MCard",
+      "code": [
+        {
+          "file": "src/components/MCard.vue",
+          "lines": [
+            34,
+            40,
+            41
+          ]
+        }
+      ],
+      "trigger": "标题、插槽或内容变化",
+      "motionKind": "static",
+      "current": "静态语义容器，slot 依宿主渲染",
+      "evidence": {
+        "level": "code-reviewed"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "由业务容器声明过渡"
+      }
+    },
+    {
+      "component": "MToast",
+      "code": [
+        {
+          "file": "src/components/MToast.vue",
+          "lines": [
+            160,
+            174,
+            230,
+            273
+          ]
+        }
+      ],
+      "trigger": "通知出现、更新、关闭或超时",
+      "motionKind": "enter-only",
+      "current": "卡片短入场，关闭与文案替换即时；计时及 live 生命周期独立",
+      "evidence": {
+        "level": "verified",
+        "baseline": "qr-dom-browser",
+        "tests": [
+          {
+            "file": "tests/browser/feedback.spec.ts",
+            "lines": [
+              320
+            ],
+            "coverage": "主题继承、窄屏以及减少动态效果下关闭按钮/入场静态。"
+          }
+        ]
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "短收束和堆栈位移，替换文本不重复播报且计时不重置错误"
+      }
+    },
+    {
+      "component": "MToastViewport",
+      "code": [
+        {
+          "file": "src/components/MToastViewport.vue",
+          "lines": [
+            10,
+            22
+          ]
+        }
+      ],
+      "trigger": "placement 切换、通知栈增减",
+      "motionKind": "direct",
+      "current": "六位置采用定位与布局，新位置即时，同一通知节点保留",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/toast-placement.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "仅在位置相邻且安全区允许时移动；先做同栈稳定 FLIP"
+      }
+    },
+    {
+      "component": "MPopover",
+      "code": [
+        {
+          "file": "src/components/MPopover.vue",
+          "lines": [
+            94,
+            106,
+            113
+          ]
+        }
+      ],
+      "trigger": "打开或关闭浮层、锚点跟随",
+      "motionKind": "enter-only",
+      "current": "浮层定位完成后淡入位移，hidePopover 即时",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/overlays.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "共享进入节奏；只有不影响 top layer、焦点和外部关闭时再做出场"
+      }
+    },
+    {
+      "component": "MTooltip",
+      "code": [
+        {
+          "file": "src/components/MTooltip.vue",
+          "lines": [
+            111,
+            112,
+            115
+          ]
+        }
+      ],
+      "trigger": "hover、聚焦与锚点方向变化",
+      "motionKind": "enter-only",
+      "current": "定位后方向性入场，切角装饰归位，隐藏即时",
+      "evidence": {
+        "level": "verified",
+        "baseline": "qr-dom-browser",
+        "tests": [
+          {
+            "file": "tests/browser/overlays.spec.ts",
+            "lines": [
+              262
+            ],
+            "coverage": "窄屏定位以及两种减少动效下表面和装饰静态。"
+          }
+        ]
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "保留现有短运动与读取延时，锚点跟随几何即时"
+      }
+    },
+    {
+      "component": "MCheckbox",
+      "code": [
+        {
+          "file": "src/components/MCheckbox.vue",
+          "lines": [
+            37,
+            41,
+            54,
+            59
+          ]
+        }
+      ],
+      "trigger": "勾选、半选、校验",
+      "motionKind": "local-transition",
+      "current": "原生 checked 即时，方印底色和描记有局部过渡",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/forms.spec.ts"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "保留原生提交与短勾选反馈"
+      }
+    },
+    {
+      "component": "MRadioGroup",
+      "code": [
+        {
+          "file": "src/components/MRadioGroup.vue",
+          "lines": [
+            36,
+            43,
+            56,
+            57
+          ]
+        }
+      ],
+      "trigger": "点击、方向键、切换单选项",
+      "motionKind": "local-transition",
+      "current": "各项圆印独立淡入缩放，受控状态独立",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/forms.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "延续输入控件的短状态过渡；列表外框无需滑座"
+      }
+    },
+    {
+      "component": "MSelect",
+      "code": [
+        {
+          "file": "src/components/MSelect.vue",
+          "lines": [
+            46,
+            50,
+            52
+          ]
+        }
+      ],
+      "trigger": "打开系统选择器、键盘选项、加载更多",
+      "motionKind": "native",
+      "current": "原生 select/option，弹层与高亮由系统管理",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-data-select-infinite.spec.ts"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "保持原生菜单；自定义候选动效放入 Combobox 系列"
+      }
+    },
+    {
+      "component": "MTextarea",
+      "code": [
+        {
+          "file": "src/components/MTextarea.vue",
+          "lines": [
+            42,
+            50
+          ]
+        },
+        {
+          "file": "src/components/nativeField.css",
+          "lines": [
+            14,
+            23,
+            44,
+            46
+          ]
+        }
+      ],
+      "trigger": "聚焦、错误提示和用户拖拽改高",
+      "motionKind": "local-transition",
+      "current": "复用原生控件线色过渡，错误文案即时，浏览器直接改尺寸",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/forms.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "与 MInput 共用固定反馈区，拖拽与输入保持实时"
+      }
+    },
+    {
+      "component": "MPagination",
+      "code": [
+        {
+          "file": "src/components/MPagination.vue",
+          "lines": [
+            26,
+            31,
+            32
+          ]
+        }
+      ],
+      "trigger": "页码、上/下一页、外部页变化",
+      "motionKind": "direct",
+      "current": "当前页切换主/幽灵按钮；边界省略和窗口重排即时",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/data.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "同组可见相邻页用单一页码刻线；省略窗口替换采用淡入"
+      }
+    },
+    {
+      "component": "MBreadcrumb",
+      "code": [
+        {
+          "file": "src/components/MBreadcrumb.vue",
+          "lines": [
+            9,
+            11,
+            12,
+            24
+          ]
+        }
+      ],
+      "trigger": "悬浮路径、当前路由更新",
+      "motionKind": "direct",
+      "current": "链接 hover 和末级当前项直接切换",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/structure.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "只给 hover 下划线短扫过，动态路径仍用宿主路由过渡"
+      }
+    },
+    {
+      "component": "MTable",
+      "code": [
+        {
+          "file": "src/components/MTable.vue",
+          "lines": [
+            53,
+            55,
+            57,
+            60,
+            75
+          ]
+        }
+      ],
+      "trigger": "勾选、排序、筛选、翻页、明细展开",
+      "motionKind": "direct",
+      "current": "原生勾选与行语义即时，行仅有即时 hover；箭头、明细与数据直接替换",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-data-tables.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "选中行可加短色反馈，排序箭头归位，明细只动画单元格内层"
+      }
+    },
+    {
+      "component": "MBadge",
+      "code": [
+        {
+          "file": "src/components/MBadge.vue",
+          "lines": [
+            7,
+            8
+          ]
+        }
+      ],
+      "trigger": "外部更新计数或语义状态",
+      "motionKind": "static",
+      "current": "徽标文字/色值直接更新",
+      "evidence": {
+        "level": "code-reviewed"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "有真实成功事件时可短落印，高频计数保持可读"
+      }
+    },
+    {
+      "component": "MAlert",
+      "code": [
+        {
+          "file": "src/components/MAlert.vue",
+          "lines": [
+            11,
+            23,
+            32
+          ]
+        }
+      ],
+      "trigger": "告警出现、内容或严重性改变",
+      "motionKind": "static",
+      "current": "语义图案与文本直接替换，无自身退出控制",
+      "evidence": {
+        "level": "code-reviewed"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "仅在宿主明确触发时揭页反馈，aria-live 即时"
+      }
+    },
+    {
+      "component": "MSpinner",
+      "code": [
+        {
+          "file": "src/components/MSpinner.vue",
+          "lines": [
+            28,
+            29,
+            33,
+            50
+          ]
+        }
+      ],
+      "trigger": "处理中状态挂载",
+      "motionKind": "continuous",
+      "current": "三拍外轨、错相折角和反向内芯，双来源 reduced 停止",
+      "evidence": {
+        "level": "verified",
+        "baseline": "qr-dom-browser",
+        "tests": [
+          {
+            "file": "tests/browser/spinner.spec.ts",
+            "lines": [
+              17
+            ],
+            "coverage": "实测旋转、错相和缩放几何。"
+          },
+          {
+            "file": "tests/browser/spinner.spec.ts",
+            "lines": [
+              93
+            ],
+            "coverage": "两种减少动效与强制颜色。"
+          }
+        ]
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "保留连续过程信号与静态降级"
+      }
+    },
+    {
+      "component": "MSkeleton",
+      "code": [
+        {
+          "file": "src/components/MSkeleton.vue",
+          "lines": [
+            35,
+            43,
+            52,
+            59
+          ]
+        }
+      ],
+      "trigger": "加载中、骨架替换",
+      "motionKind": "continuous",
+      "current": "局部雪花/短断片轻柔回声，不改变占位几何",
+      "evidence": {
+        "level": "verified",
+        "baseline": "qr-dom-browser",
+        "tests": [
+          {
+            "file": "tests/browser/skeleton.spec.ts",
+            "lines": [
+              51
+            ],
+            "coverage": "实测雪花与局部回声的包络及稳定盒。"
+          },
+          {
+            "file": "tests/browser/skeleton.spec.ts",
+            "lines": [
+              83
+            ],
+            "coverage": "两种减少动效和强制颜色静态。"
+          }
+        ]
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "骨架持续静态尺寸，实际加载完成由宿主揭页"
+      }
+    },
+    {
+      "component": "MEmpty",
+      "code": [
+        {
+          "file": "src/components/MEmpty.vue",
+          "lines": [
+            11,
+            18,
+            19
+          ]
+        }
+      ],
+      "trigger": "无数据或筛选为空",
+      "motionKind": "static",
+      "current": "无独立替换控制；文字和操作可直接读取",
+      "evidence": {
+        "level": "code-reviewed"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "由数据容器调度一次温和揭页"
+      }
+    },
+    {
+      "component": "MDivider",
+      "code": [
+        {
+          "file": "src/components/MDivider.vue",
+          "lines": [
+            7,
+            9
+          ]
+        }
+      ],
+      "trigger": "分隔文字、方向、线条显示",
+      "motionKind": "static",
+      "current": "纯分隔元素",
+      "evidence": {
+        "level": "code-reviewed"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "保持分隔信息稳定"
+      }
+    },
+    {
+      "component": "MDrawer",
+      "code": [
+        {
+          "file": "src/components/MDrawer.vue",
+          "lines": [
+            16,
+            56,
+            65
+          ]
+        }
+      ],
+      "trigger": "侧/底部打开、Esc、确认关闭",
+      "motionKind": "enter-only",
+      "current": "方向性入场；借 MDialog 处理关闭与回焦",
+      "evidence": {
+        "level": "verified",
+        "baseline": "qr-dom-browser",
+        "tests": [
+          {
+            "file": "tests/browser/drawer.spec.ts",
+            "lines": [
+              65
+            ],
+            "coverage": "窄短屏卷末可达、按钮可见以及 reduced 下静态。"
+          }
+        ]
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "仅在模态生命周期可安全衔接时统一出场曲线"
+      }
+    },
+    {
+      "component": "MDropdownMenu",
+      "code": [
+        {
+          "file": "src/components/MDropdownMenu.vue",
+          "lines": [
+            155,
+            165,
+            172,
+            180
+          ]
+        }
+      ],
+      "trigger": "键盘方向键、悬浮项目、菜单开合",
+      "motionKind": "enter-only",
+      "current": "浮层短入场与箭头旋转；每行动作底色过渡，焦点刻线直接换项",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/menu.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "共享短候选轨，方向键焦点与 hover 区分，保持原生 Tab/浮层关闭"
+      }
+    },
+    {
+      "component": "MAccordion",
+      "code": [
+        {
+          "file": "src/components/MAccordion.vue",
+          "lines": [
+            40,
+            45,
+            69,
+            75
+          ]
+        }
+      ],
+      "trigger": "单/多项展开收起、键盘与受控重开",
+      "motionKind": "enter-only",
+      "current": "铰链旋转、展开内容入场；hidden 关闭即时",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/menu.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "真实高度折叠反向接续，保留草稿并按既有可访问性隐藏"
+      }
+    },
+    {
+      "component": "MSteps",
+      "code": [
+        {
+          "file": "src/components/MSteps.vue",
+          "lines": [
+            17,
+            18,
+            48,
+            50
+          ]
+        }
+      ],
+      "trigger": "进入下一步、回退或错误状态",
+      "motionKind": "local-transition",
+      "current": "当前/错误印章局部落座，节点与连接线状态跳变",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/menu.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "用单条当前轨作短位移，已完成/错误图形和语义独立"
+      }
+    },
+    {
+      "component": "MProgress",
+      "code": [
+        {
+          "file": "src/components/MProgress.vue",
+          "lines": [
+            18,
+            22,
+            45,
+            48
+          ]
+        }
+      ],
+      "trigger": "数值改变、未知进度、成功和错误",
+      "motionKind": "local-transition",
+      "current": "填充宽度已有过渡，未知进度循环，图形可辨状态",
+      "evidence": {
+        "level": "verified",
+        "baseline": "qr-dom-browser",
+        "tests": [
+          {
+            "file": "tests/browser/progress-timeline.spec.ts",
+            "lines": [
+              169
+            ],
+            "coverage": "两种减少动效下停止未知进度与填充过渡，强制颜色可读。"
+          }
+        ]
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "作为连续变化基线，错误与真实值即时，避免伪进度"
+      }
+    },
+    {
+      "component": "MTimeline",
+      "code": [
+        {
+          "file": "src/components/MTimeline.vue",
+          "lines": [
+            13,
+            14,
+            30,
+            31,
+            36,
+            39,
+            49
+          ]
+        }
+      ],
+      "trigger": "激活节点、追加日志、状态完成",
+      "motionKind": "local-transition",
+      "current": "活动节点有一次短入场，增删和排序直接更新；连接线在节点底边精确接合",
+      "evidence": {
+        "level": "verified",
+        "baseline": "qr-dom-browser",
+        "tests": [
+          {
+            "file": "tests/browser/progress-timeline.spec.ts",
+            "lines": [
+              169
+            ],
+            "coverage": "两种减少动效下停止活动节点入场。"
+          }
+        ]
+      },
+      "connectorFix": {
+        "level": "verified",
+        "baseline": "timeline-join-after",
+        "browserProbe": "360px 四主题，连接线与节点底边间距由 -1px 修正为 0px，底边中心像素恢复节点边框色。正常活动入场仍为 340ms，系统与容器 reduced 静态。",
+        "localBehaviorRegression": {
+          "level": "verified",
+          "file": "tests/browser/progress-timeline.spec.ts",
+          "passed": 4
+        },
+        "finalBuiltRegression": {
+          "level": "verified",
+          "file": "tests/browser/progress-timeline.spec.ts",
+          "lines": [
+            169,
+            200,
+            233
+          ],
+          "passed": 4,
+          "baseline": "qr-dom-final-browser"
+        }
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "仅新追加或替换的记录短揭页，滚动阅读位置稳定"
+      }
+    },
+    {
+      "component": "MInputNumber",
+      "code": [
+        {
+          "file": "src/components/MInputNumber.vue",
+          "lines": [
+            88,
+            93,
+            107,
+            110
+          ]
+        }
+      ],
+      "trigger": "步进键、键盘、校验",
+      "motionKind": "local-transition",
+      "current": "步进按钮色彩过渡，原生数字即时更新",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/forms.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "短按压反馈保留，数字和值不延迟"
+      }
+    },
+    {
+      "component": "MSlider",
+      "code": [
+        {
+          "file": "src/components/MSlider.vue",
+          "lines": [
+            52,
+            55,
+            77,
+            81
+          ]
+        }
+      ],
+      "trigger": "拖动、方向键、Home/End",
+      "motionKind": "direct-manipulation",
+      "current": "实际范围/填色直接跟手；滑钮 hover/焦点有短反馈",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/forms.spec.ts"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "保留零滞后，不给连续指针输入加惯性"
+      }
+    },
+    {
+      "component": "MCombobox",
+      "code": [
+        {
+          "file": "src/components/MCombobox.vue",
+          "lines": [
+            182,
+            193,
+            194,
+            218,
+            225
+          ]
+        }
+      ],
+      "trigger": "输入筛选、上下键、hover 候选与选择",
+      "motionKind": "enter-only",
+      "current": "浮层短入场；行级 active 背景/刻线切换；选中和编辑文本独立",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/combobox.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "统一候选轨，近距短移、筛选换数据就地重测，保持 IME 和 FormData"
+      }
+    },
+    {
+      "component": "MTag",
+      "code": [
+        {
+          "file": "src/components/MTag.vue",
+          "lines": [
+            10,
+            13,
+            27
+          ]
+        }
+      ],
+      "trigger": "关闭标签、改语义色",
+      "motionKind": "local-transition",
+      "current": "关闭按钮短 hover 过渡；移除由父级实际执行",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/content-details.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "父级 keyed 列表使用 useMTransition，标签自身保持受控"
+      }
+    },
+    {
+      "component": "MAvatar",
+      "code": [
+        {
+          "file": "src/components/MAvatar.vue",
+          "lines": [
+            17,
+            19,
+            20
+          ]
+        }
+      ],
+      "trigger": "更换图片、成功或错误回退",
+      "motionKind": "direct",
+      "current": "缩写/图像按真实加载结果即时交换",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/content-details.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "加载成功可在固定头像框内轻淡入，错误回退即时"
+      }
+    },
+    {
+      "component": "MDescriptions",
+      "code": [
+        {
+          "file": "src/components/MDescriptions.vue",
+          "lines": [
+            13,
+            14
+          ]
+        }
+      ],
+      "trigger": "档案字段和布局变更",
+      "motionKind": "static",
+      "current": "语义 dl 直接布局",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/content-details.spec.ts"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "过渡由宿主用于档案页替换"
+      }
+    },
+    {
+      "component": "MDatePicker",
+      "code": [
+        {
+          "file": "src/components/MDatePicker.vue",
+          "lines": [
+            240,
+            250,
+            254,
+            274,
+            289
+          ]
+        }
+      ],
+      "trigger": "前后月、键盘跨月、选日、清空",
+      "motionKind": "enter-only",
+      "current": "浮层有入场；选日刻面和月网格内容直接更换",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/date-picker.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "月页保持尺寸做方向揭页；同月短距日格高亮，今日与焦点独立"
+      }
+    },
+    {
+      "component": "MUpload",
+      "code": [
+        {
+          "file": "src/components/MUpload.vue",
+          "lines": [
+            237,
+            239,
+            242,
+            267,
+            292
+          ]
+        }
+      ],
+      "trigger": "拖入、添加、删除、重试、远程状态变化",
+      "motionKind": "local-transition",
+      "current": "接收区/按钮短色过渡；文件列表即时增删，进度复用 MProgress",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/upload-remote.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "已接受文件用 keyed 揭页/FLIP，真实 FileList 与取消即刻，状态徽记轻切换"
+      }
+    },
+    {
+      "component": "MMenu",
+      "code": [
+        {
+          "file": "src/components/MMenu.vue",
+          "lines": [
+            81,
+            84,
+            111,
+            115,
+            120
+          ]
+        }
+      ],
+      "trigger": "路由确认当前项、分组展开收起、hover",
+      "motionKind": "local-transition",
+      "current": "行背景/色有短过渡、铰链旋转；当前刻线跟各行瞬间重画",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/navigation-tree.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "单条纵向青玉轨随已确认当前项滑移，展开以独立节奏处理"
+      }
+    },
+    {
+      "component": "MTree",
+      "code": [
+        {
+          "file": "src/components/MTree.vue",
+          "lines": [
+            150,
+            152,
+            162,
+            183,
+            191
+          ]
+        }
+      ],
+      "trigger": "选中、键盘焦点、分支展开、勾选",
+      "motionKind": "local-transition",
+      "current": "行色和铰链过渡；选中刻线即时；分支插入删除即时",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/tree-selection.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "单选模式共享当前轨，多选独立标记；分支可用稳定 keyed 揭页，焦点立即可辨"
+      }
+    },
+    {
+      "component": "MStatistic",
+      "code": [
+        {
+          "file": "src/components/MStatistic.vue",
+          "lines": [
+            13,
+            17,
+            19
+          ]
+        }
+      ],
+      "trigger": "数字、空值与单位更新",
+      "motionKind": "static",
+      "current": "格式化数值直接替换",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/display-results.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "仅有明确用户触发的低频值可短淡入，精确数字即时"
+      }
+    },
+    {
+      "component": "MResult",
+      "code": [
+        {
+          "file": "src/components/MResult.vue",
+          "lines": [
+            12,
+            19,
+            28
+          ]
+        }
+      ],
+      "trigger": "等待转换为成功、错误或空状态",
+      "motionKind": "static",
+      "current": "图形和内容按状态直接切换",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/display-results.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "由稳定容器对图形做局部落印，状态文字即时可读"
+      }
+    },
+    {
+      "component": "MSpace",
+      "code": [
+        {
+          "file": "src/components/MSpace.vue",
+          "lines": [
+            20
+          ]
+        }
+      ],
+      "trigger": "间距、换行和插槽内容改变",
+      "motionKind": "static",
+      "current": "排版工具直接按实际尺寸换行",
+      "evidence": {
+        "level": "code-reviewed"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "业务容器决定变化动效"
+      }
+    },
+    {
+      "component": "MBackTop",
+      "code": [
+        {
+          "file": "src/components/MBackTop.vue",
+          "lines": [
+            49,
+            63,
+            68
+          ]
+        }
+      ],
+      "trigger": "达到阈值、点击回顶、键盘聚焦",
+      "motionKind": "direct-manipulation",
+      "current": "滚动支持平滑/减动即时；按钮挂载直接，只有色过渡",
+      "evidence": {
+        "level": "verified",
+        "baseline": "qr-dom-browser",
+        "tests": [
+          {
+            "file": "tests/browser/backtop.spec.ts",
+            "lines": [
+              84
+            ],
+            "coverage": "系统和容器减少动效下真实回顶无平滑滞后。"
+          }
+        ]
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "可给阈值出现轻揭页，滚动行为维持当前配置"
+      }
+    },
+    {
+      "component": "MMessage",
+      "code": [
+        {
+          "file": "src/components/MMessage.vue",
+          "lines": [
+            25,
+            26,
+            27
+          ]
+        },
+        {
+          "file": "src/components/MToast.vue",
+          "lines": [
+            230,
+            273
+          ]
+        }
+      ],
+      "trigger": "顶部轻提示出现、loading 转结果",
+      "motionKind": "delegated",
+      "current": "复用 MToast 入场，状态图标与文字即时替换",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/message.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "与通知栈共用位移策略；短提示读取和播报独立"
+      }
+    },
+    {
+      "component": "MSegmented",
+      "code": [
+        {
+          "file": "src/components/MSegmented.vue",
+          "lines": [
+            19,
+            36,
+            104,
+            121,
+            139
+          ]
+        }
+      ],
+      "trigger": "点击/方向键选择、RTL、字体和宽度变化",
+      "motionKind": "shared-slide",
+      "current": "单一实测滑座平移且调宽/高，选项保持原生 radio",
+      "evidence": {
+        "level": "verified",
+        "baseline": "qr-dom-browser",
+        "tests": [
+          {
+            "file": "tests/browser/segmented.spec.ts",
+            "lines": [
+              109
+            ],
+            "coverage": "滑座最终对齐、RTL、尺寸重测、系统及容器 reduced、强制颜色。中途轨迹尚未单独断言。"
+          }
+        ]
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "作为持续高亮的首个参照，补中途反向/动态减动的路径验证"
+      }
+    },
+    {
+      "component": "MPopconfirm",
+      "code": [
+        {
+          "file": "src/components/MPopconfirm.vue",
+          "lines": [
+            153,
+            154,
+            155,
+            165,
+            178
+          ]
+        }
+      ],
+      "trigger": "弹层打开、等待、确认失败与关闭",
+      "motionKind": "enter-only",
+      "current": "弹层短入场；pending/error 反馈文本即时；原生焦点和关闭保护",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/popconfirm.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "固定反馈区局部淡入，确认和取消状态即时"
+      }
+    },
+    {
+      "component": "MImage",
+      "code": [
+        {
+          "file": "src/components/MImage.vue",
+          "lines": [
+            104,
+            105,
+            112,
+            113,
+            116
+          ]
+        }
+      ],
+      "trigger": "加载成功/失败、切图、缩放与预览",
+      "motionKind": "delegated",
+      "current": "预览复用 MDialog 入场；图像替换、缩放和错误即时",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/image.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "已解码图片在固定预览槽轻换页，缩放直接跟手，旧源失败隔离"
+      }
+    },
+    {
+      "component": "MForm",
+      "code": [
+        {
+          "file": "src/components/MForm.vue",
+          "lines": [
+            140,
+            144,
+            145
+          ]
+        }
+      ],
+      "trigger": "提交失败、错误摘要更新、重置",
+      "motionKind": "direct",
+      "current": "校验和错误列表即时渲染，焦点即时移到需要核对的位置",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/form.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "仅摘要的非聚焦外观做局部揭页，错误字段、原生 validity 和焦点即时"
+      }
+    },
+    {
+      "component": "MFormItem",
+      "code": [
+        {
+          "file": "src/components/MFormItem.vue",
+          "lines": [
+            24,
+            25,
+            27
+          ]
+        }
+      ],
+      "trigger": "单项错误、帮助文案出现、异步校验完成",
+      "motionKind": "direct",
+      "current": "data-invalid 和校验插槽状态立即更新；提示由调用者渲染",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/form.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "在调用者的固定反馈区提供可选短淡入，ARIA 和 FormData 不等待"
+      }
+    },
+    {
+      "component": "MQRCode",
+      "code": [
+        {
+          "file": "src/components/reference-common/MQRCode.vue",
+          "lines": [
+            43,
+            200,
+            223,
+            224
+          ]
+        }
+      ],
+      "trigger": "激活、扫描、过期、刷新、失败",
+      "motionKind": "shared-dom",
+      "current": "非激活态使用半透明遮罩，状态内容使用 stamp；码体和导出保持静态",
+      "evidence": {
+        "level": "verified",
+        "baseline": "qr-body-review-grid",
+        "browserProbe": "16 个组合的屏上、SVG 和 PNG 共 48/48 可解码。另有 DPR 1.25/2 和同一实例缩窄后恢复宽度的本地浏览器核验。",
+        "mask": {
+          "level": "verified",
+          "baseline": "qr-dom-final-browser",
+          "coverage": "半透明遮罩覆盖可见码体；状态切换、刷新后无障碍扫描及减少动态效果通过最终静态产物用例。"
+        },
+        "finalBuiltRegression": {
+          "level": "verified",
+          "file": "tests/browser/qr-theme.spec.ts",
+          "lines": [
+            38,
+            64,
+            107,
+            132,
+            154,
+            179
+          ],
+          "passed": 6,
+          "baseline": "qr-dom-final-browser"
+        }
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "保留静态码体、像素对齐及可透底的状态遮罩；后续改动继续验证扫码和减少动态效果。"
+      }
+    },
+    {
+      "component": "MIcon",
+      "code": [
+        {
+          "file": "src/components/reference-common/MIcon.vue",
+          "lines": [
+            5,
+            7
+          ]
+        }
+      ],
+      "trigger": "spin 或图标名替换",
+      "motionKind": "continuous",
+      "current": "可选连续旋转，减动停转；具体图案直接更新",
+      "evidence": {
+        "level": "code-reviewed"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "图标只在业务明确需要时移动"
+      }
+    },
+    {
+      "component": "MTypography",
+      "code": [
+        {
+          "file": "src/components/reference-common/MTypography.vue",
+          "lines": [
+            41,
+            43,
+            44,
+            45
+          ]
+        }
+      ],
+      "trigger": "复制成功/失败，文本进入编辑或保存",
+      "motionKind": "direct",
+      "current": "编辑器与正文立即替换，状态提示即时",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-common.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "复制图标可落印，聚焦编辑器即归位"
+      }
+    },
+    {
+      "component": "MText",
+      "code": [
+        {
+          "file": "src/components/reference-common/MText.vue",
+          "lines": [
+            7
+          ]
+        }
+      ],
+      "trigger": "复制、编辑或截断交互",
+      "motionKind": "delegated",
+      "current": "复用 MTypography 的即时切换",
+      "evidence": {
+        "level": "code-reviewed"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "跟随排版组件，不新增独立策略"
+      }
+    },
+    {
+      "component": "MLink",
+      "code": [
+        {
+          "file": "src/components/reference-common/MLink.vue",
+          "lines": [
+            9,
+            11
+          ]
+        }
+      ],
+      "trigger": "hover、键盘聚焦、访问或禁用",
+      "motionKind": "direct",
+      "current": "链接样式和下划线即时",
+      "evidence": {
+        "level": "code-reviewed"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "可选短下划线揭页，导航与焦点按原生行为"
+      }
+    },
+    {
+      "component": "MConfigProvider",
+      "code": [
+        {
+          "file": "src/components/reference-common/MConfigProvider.vue",
+          "lines": [
+            13,
+            14
+          ]
+        }
+      ],
+      "trigger": "主题、色材、密度、dir 或 motion 切换",
+      "motionKind": "static",
+      "current": "把语义配置与 CSS 变量立即传入子树",
+      "evidence": {
+        "level": "code-reviewed"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "reduced 变化立即生效，主题过渡由展示应用决定"
+      }
+    },
+    {
+      "component": "MApp",
+      "code": [
+        {
+          "file": "src/components/reference-common/MApp.vue",
+          "lines": [
+            31,
+            33,
+            34,
+            35
+          ]
+        }
+      ],
+      "trigger": "推送通知、按通道关闭、确认队列前进",
+      "motionKind": "delegated",
+      "current": "各队列复用 Toast/Dialog 进入，通知列表重排即时",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-common-boundaries.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "以通道为边界做堆栈位移，通知计时/模态语义各自独立"
+      }
+    },
+    {
+      "component": "MMessageBox",
+      "code": [
+        {
+          "file": "src/components/reference-common/MMessageBox.vue",
+          "lines": [
+            37,
+            38,
+            39
+          ]
+        }
+      ],
+      "trigger": "alert/confirm/prompt、等待确认和错误",
+      "motionKind": "delegated",
+      "current": "模态入场来自 MDialog，内容和状态文案直接变化",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-common.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "继承安全模态节奏，局部状态提示保持固定宽高"
+      }
+    },
+    {
+      "component": "MLoading",
+      "code": [
+        {
+          "file": "src/components/reference-common/MLoading.vue",
+          "lines": [
+            39,
+            42,
+            43
+          ]
+        }
+      ],
+      "trigger": "显示局部遮罩、进入全屏、异步完成",
+      "motionKind": "delegated",
+      "current": "遮罩即时出现/消失，Spinner 和全屏 MDialog 有既有动效",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-common.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "遮罩外观可短淡入，阻止背景交互及恢复应即时"
+      }
+    },
+    {
+      "component": "MCheckboxGroup",
+      "code": [
+        {
+          "file": "src/components/reference-common/MCheckboxGroup.vue",
+          "lines": [
+            45,
+            49,
+            52
+          ]
+        }
+      ],
+      "trigger": "改变已选集合、全选/半选、错误",
+      "motionKind": "delegated",
+      "current": "逐项复用 MCheckbox，无跨项移动高亮",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/checkbox-group.spec.ts"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "保持多选语义和即时集合，错误提示随表单策略"
+      }
+    },
+    {
+      "component": "MFormList",
+      "code": [
+        {
+          "file": "src/components/reference-common/MFormList.vue",
+          "lines": [
+            9,
+            10,
+            11,
+            14
+          ]
+        },
+        {
+          "file": "stories/reference-common/FormList.stories.ts",
+          "lines": [
+            15,
+            25
+          ]
+        }
+      ],
+      "trigger": "字段添加、删除、上移或下移",
+      "motionKind": "example-opt-in",
+      "current": "核心暴露稳定键和插槽；演示显式 TransitionGroup 已实现 FLIP",
+      "evidence": {
+        "level": "verified",
+        "baseline": "qr-dom-browser",
+        "tests": [
+          {
+            "file": "tests/browser/tree-form-motion.spec.ts",
+            "lines": [
+              75
+            ],
+            "coverage": "Story 显式接入的离场提交、重排草稿与焦点。"
+          }
+        ]
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "默认插槽结构不变，推广已验证的显式集成方案"
+      }
+    },
+    {
+      "component": "MCascader",
+      "code": [
+        {
+          "file": "src/components/reference-inputs/MCascader.vue",
+          "lines": [
+            17,
+            18
+          ]
+        }
+      ],
+      "trigger": "更换路径分支、键盘浏览、筛选匹配",
+      "motionKind": "delegated",
+      "current": "MPopover 入场；各列 path 高亮与列替换即时",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-inputs.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "每列一个候选刻线，子列在稳定容器短揭页，勾选独立"
+      }
+    },
+    {
+      "component": "MRadio",
+      "code": [
+        {
+          "file": "src/components/reference-inputs/MRadio.vue",
+          "lines": [
+            35,
+            46
+          ]
+        }
+      ],
+      "trigger": "鼠标、键盘和受控状态",
+      "motionKind": "local-transition",
+      "current": "原生 radio 与局部圆印的缩放/色过渡",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-inputs.spec.ts"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "保留控件级短反馈"
+      }
+    },
+    {
+      "component": "MTreeSelect",
+      "code": [
+        {
+          "file": "src/components/reference-inputs/MTreeSelect.vue",
+          "lines": [
+            10,
+            28,
+            32,
+            34,
+            37
+          ]
+        },
+        {
+          "file": "src/composables/useMTransition.ts",
+          "lines": [
+            138,
+            152,
+            232
+          ]
+        }
+      ],
+      "trigger": "分支开合、过滤、选择与勾选",
+      "motionKind": "shared-dom",
+      "current": "树行已有 keyed enter/leave 与 FLIP；候选按项直接高亮",
+      "evidence": {
+        "level": "verified",
+        "baseline": "qr-dom-browser",
+        "tests": [
+          {
+            "file": "tests/browser/tree-form-motion.spec.ts",
+            "lines": [
+              33
+            ],
+            "coverage": "分支过渡、同批离场几何与反向恢复。"
+          },
+          {
+            "file": "tests/browser/tree-form-motion.spec.ts",
+            "lines": [
+              61
+            ],
+            "coverage": "两个减少动效来源。"
+          }
+        ]
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "复用独立候选轨，保留批量几何、快反向和搜索输入焦点"
+      }
+    },
+    {
+      "component": "MColorPicker",
+      "code": [
+        {
+          "file": "src/components/reference-inputs/MColorPicker.vue",
+          "lines": [
+            5,
+            6
+          ]
+        }
+      ],
+      "trigger": "打开色板、清空或确认颜色",
+      "motionKind": "delegated",
+      "current": "弹层复用 MPopover，色块即时反映业务值",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-inputs.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "仅确认控件做短反馈，实际颜色预览即时"
+      }
+    },
+    {
+      "component": "MColorPickerPanel",
+      "code": [
+        {
+          "file": "src/components/reference-inputs/MColorPickerPanel.vue",
+          "lines": [
+            12,
+            13
+          ]
+        }
+      ],
+      "trigger": "颜色/透明度拖动、预设与输入",
+      "motionKind": "direct-manipulation",
+      "current": "原生拖拽和 swatch 状态跟手",
+      "evidence": {
+        "level": "code-reviewed"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "色值与轨道位置保持实时"
+      }
+    },
+    {
+      "component": "MRate",
+      "code": [
+        {
+          "file": "src/components/reference-inputs/MRate.vue",
+          "lines": [
+            7,
+            8
+          ]
+        }
+      ],
+      "trigger": "悬浮半星、点选、键盘和清空",
+      "motionKind": "direct-manipulation",
+      "current": "星形 clipPath 即时跟随指针，数值同步",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-inputs.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "保持 hover 即时；可只给已确认星色短反馈"
+      }
+    },
+    {
+      "component": "MTransfer",
+      "code": [
+        {
+          "file": "src/components/reference-inputs/MTransfer.vue",
+          "lines": [
+            31,
+            89,
+            97,
+            99
+          ]
+        }
+      ],
+      "trigger": "两栏移动、筛选与反向操作",
+      "motionKind": "shared-dom",
+      "current": "每栏 keyed enter/leave 和真实 FLIP，离场控件禁用",
+      "evidence": {
+        "level": "verified",
+        "baseline": "qr-dom-browser",
+        "tests": [
+          {
+            "file": "tests/browser/input-operation-motion.spec.ts",
+            "lines": [
+              99
+            ],
+            "coverage": "两栏真实过渡、反向、复选首击和原生提交。"
+          }
+        ]
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "沿用该方案，批量搬移无长级联"
+      }
+    },
+    {
+      "component": "MInputOTP",
+      "code": [
+        {
+          "file": "src/components/reference-inputs/MInputOTP.vue",
+          "lines": [
+            14,
+            15
+          ]
+        }
+      ],
+      "trigger": "键入、粘贴、分格跳转",
+      "motionKind": "native",
+      "current": "分格焦点与数字即时",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-inputs.spec.ts"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "保留输入、粘贴与键盘语义，仅可加短颜色反馈"
+      }
+    },
+    {
+      "component": "MInputTag",
+      "code": [
+        {
+          "file": "src/components/reference-inputs/MInputTag.vue",
+          "lines": [
+            16,
+            110,
+            111
+          ]
+        }
+      ],
+      "trigger": "创建标签、重复项、Backspace 和移除",
+      "motionKind": "shared-dom",
+      "current": "稳定 key 的揭页、离场、FLIP 与回焦已接入",
+      "evidence": {
+        "level": "verified",
+        "baseline": "qr-dom-browser",
+        "tests": [
+          {
+            "file": "tests/browser/input-operation-motion.spec.ts",
+            "lines": [
+              50
+            ],
+            "coverage": "标签真实入场/离场、原生提交与焦点。"
+          }
+        ]
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "沿用该方案，保持 IME、受控拒绝与即时提交"
+      }
+    },
+    {
+      "component": "MMention",
+      "code": [
+        {
+          "file": "src/components/reference-inputs/MMention.vue",
+          "lines": [
+            8,
+            11
+          ]
+        }
+      ],
+      "trigger": "触发 @ 候选、上下键、鼠标选中",
+      "motionKind": "direct",
+      "current": "候选面板即时插入，aria-selected 直接切换",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-inputs.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "共用候选轨和短揭页，输入法、文本和选区即时"
+      }
+    },
+    {
+      "component": "MTimePicker",
+      "code": [
+        {
+          "file": "src/components/reference-inputs/MTimePicker.vue",
+          "lines": [
+            43,
+            45,
+            48
+          ]
+        }
+      ],
+      "trigger": "切换小时、分、秒和键盘浏览",
+      "motionKind": "delegated",
+      "current": "弹层复用 MPopover 入场；各列当前按钮色直接变",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-inputs.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "每列短候选轨，滚动追随即时，越界或远跳不扫过全部值"
+      }
+    },
+    {
+      "component": "MTimeSelect",
+      "code": [
+        {
+          "file": "src/components/reference-inputs/MTimeSelect.vue",
+          "lines": [
+            11,
+            13
+          ]
+        }
+      ],
+      "trigger": "原生时间下拉与选项更换",
+      "motionKind": "native",
+      "current": "系统 select 高亮和键盘状态",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-inputs.spec.ts"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "保持系统控件行为"
+      }
+    },
+    {
+      "component": "MDateRangePicker",
+      "code": [
+        {
+          "file": "src/components/reference-inputs/MDateRangePicker.vue",
+          "lines": [
+            12,
+            15
+          ]
+        }
+      ],
+      "trigger": "选择开始结束日期、清空、校验范围",
+      "motionKind": "delegated",
+      "current": "复用 MDatePicker 两个日期端点和弹层",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-inputs.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "继承月页揭页；端点和错误信息保持独立"
+      }
+    },
+    {
+      "component": "MDateTimePicker",
+      "code": [
+        {
+          "file": "src/components/reference-inputs/MDateTimePicker.vue",
+          "lines": [
+            9,
+            12
+          ]
+        }
+      ],
+      "trigger": "分别切换日期时间及组合结果",
+      "motionKind": "delegated",
+      "current": "复用日期和时间浮层；组合值即时",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-inputs.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "继承日格和时间列策略，不把字段状态合并成单一滑座"
+      }
+    },
+    {
+      "component": "MDatePickerPanel",
+      "code": [
+        {
+          "file": "src/components/reference-inputs/MDatePickerPanel.vue",
+          "lines": [
+            41,
+            42
+          ]
+        }
+      ],
+      "trigger": "前后月、改年份、选择日期、键盘网格",
+      "motionKind": "direct",
+      "current": "六周语义网格保持几何，月份和选中格直接更新",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-inputs.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "共享月份方向揭页与同月刻线，跨月焦点即时"
+      }
+    },
+    {
+      "component": "MCalendar",
+      "code": [
+        {
+          "file": "src/components/reference-inputs/MCalendar.vue",
+          "lines": [
+            6,
+            7
+          ]
+        },
+        {
+          "file": "src/components/reference-inputs/MDatePickerPanel.vue",
+          "lines": [
+            41,
+            42
+          ]
+        }
+      ],
+      "trigger": "切换月页、点选日期和日程展示",
+      "motionKind": "delegated",
+      "current": "复用 MDatePickerPanel；桌面与窄屏日格高度固定",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-inputs.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "继承面板短换页；日期槽内容的排版与可访问状态稳定"
+      }
+    },
+    {
+      "component": "MScrollbar",
+      "code": [
+        {
+          "file": "src/components/reference-data/MScrollbar.vue",
+          "lines": [
+            31,
+            47,
+            134,
+            135,
+            175
+          ]
+        }
+      ],
+      "trigger": "拖拽滑块、点轨、键盘、内容尺寸变化",
+      "motionKind": "direct-manipulation",
+      "current": "真实原生 scroll 与双轴 thumb 同步，轨道留位和 RTL",
+      "evidence": {
+        "level": "verified",
+        "baseline": "qr-dom-browser",
+        "tests": [
+          {
+            "file": "tests/browser/reference-data-scrollbar.spec.ts",
+            "lines": [
+              8
+            ],
+            "coverage": "真实双轴滚动、滑块拖动、轨道和键盘。"
+          },
+          {
+            "file": "tests/browser/reference-data-scrollbar.spec.ts",
+            "lines": [
+              34
+            ],
+            "coverage": "动态宽度、RTL、图片和内容裁切。"
+          }
+        ]
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "拖动零滞后；保留 forced-colors 原生轨"
+      }
+    },
+    {
+      "component": "MList",
+      "code": [
+        {
+          "file": "src/components/reference-data/MList.vue",
+          "lines": [
+            13,
+            14,
+            15
+          ]
+        }
+      ],
+      "trigger": "增删记录、筛选、加载和空状态",
+      "motionKind": "direct",
+      "current": "原生语义列表 keyed 渲染，记录和空态即时变化",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-data-windowing.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "为小型稳定键列表开放显式 FLIP，批量/首屏不逐条播放"
+      }
+    },
+    {
+      "component": "MListy",
+      "code": [
+        {
+          "file": "src/components/reference-data/MListy.vue",
+          "lines": [
+            5,
+            12,
+            14
+          ]
+        },
+        {
+          "file": "src/components/reference-data/reference-data.css",
+          "lines": [
+            10,
+            11,
+            18
+          ]
+        }
+      ],
+      "trigger": "可选模式下的键盘活跃行与选中、编号",
+      "motionKind": "delegated",
+      "current": "默认开启 selectable，委托 MVirtualList 处理选择和窗口回收，不另持选中状态",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-data-windowing.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "只继承选择模式的候选轨，编号与行位置稳定"
+      }
+    },
+    {
+      "component": "MVirtualList",
+      "code": [
+        {
+          "file": "src/components/reference-data/MVirtualList.vue",
+          "lines": [
+            9,
+            17,
+            33,
+            34,
+            36
+          ]
+        },
+        {
+          "file": "src/components/reference-data/reference-data.css",
+          "lines": [
+            10,
+            11,
+            18
+          ]
+        }
+      ],
+      "trigger": "可选模式下方向键、点击、选中；普通滚动和数据替换",
+      "motionKind": "direct",
+      "current": "行按索引绝对定位；仅 selectable 时有 active 与选中，选中可由宿主控制或局部持有；普通列表无选择",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-data-windowing.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "仅在 selectable 模式渲染一条候选轨，跨窗口就位，保留真实行、行高与滚动"
+      }
+    },
+    {
+      "component": "MVirtualTable",
+      "code": [
+        {
+          "file": "src/components/reference-data/MVirtualTable.vue",
+          "lines": [
+            52,
+            53,
+            57
+          ]
+        }
+      ],
+      "trigger": "排序、可选多行勾选、加载与窗口滚动",
+      "motionKind": "direct",
+      "current": "真实 table 与占位行保持窗口几何；selectable 下逐行选中底色即时，无单一当前行游标",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-data-tables.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "只给可见勾选行短色反馈与表头排序指示短转，保留现有选择 API"
+      }
+    },
+    {
+      "component": "MVirtualTree",
+      "code": [
+        {
+          "file": "src/components/reference-data/MVirtualTree.vue",
+          "lines": [
+            50,
+            51,
+            52
+          ]
+        },
+        {
+          "file": "src/components/reference-data/reference-data.css",
+          "lines": [
+            10,
+            11,
+            18
+          ]
+        }
+      ],
+      "trigger": "键盘选中、树分支展开、滚动回收",
+      "motionKind": "direct",
+      "current": "压平节点后按索引直接定位，active/selected 和铰链即时",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-data-windowing.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "单一可见候选轨；分支只动装饰，绝对定位与节点量保持稳定"
+      }
+    },
+    {
+      "component": "MVirtualSelect",
+      "code": [
+        {
+          "file": "src/components/reference-data/MVirtualSelect.vue",
+          "lines": [
+            69,
+            70,
+            71,
+            75
+          ]
+        },
+        {
+          "file": "src/components/reference-data/reference-data.css",
+          "lines": [
+            10,
+            11,
+            18
+          ]
+        }
+      ],
+      "trigger": "上下键、选中/移除值、搜索和弹层开合",
+      "motionKind": "direct",
+      "current": "候选、chips 与浮层显示即时；选中和 active 分开，隐藏字段即时",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-data-select-infinite.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "候选共享轨；chip 动效只挂装饰层，保留隐藏提交值并阻止滞留"
+      }
+    },
+    {
+      "component": "MInfiniteScroll",
+      "code": [
+        {
+          "file": "src/components/reference-data/MInfiniteScroll.vue",
+          "lines": [
+            17,
+            36
+          ]
+        }
+      ],
+      "trigger": "触底请求、加载、重试、完成",
+      "motionKind": "delegated",
+      "current": "MScrollbar 原生滚动，Spinner 表达等待，列表由宿主渲染",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-data-select-infinite.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "可轻过渡底部状态，不给自动追加的整屏记录加级联"
+      }
+    },
+    {
+      "component": "MAutoComplete",
+      "code": [
+        {
+          "file": "src/components/reference-data/MAutoComplete.vue",
+          "lines": [
+            55,
+            71,
+            95,
+            99
+          ]
+        },
+        {
+          "file": "src/components/reference-data/reference-data.css",
+          "lines": [
+            10,
+            11,
+            18
+          ]
+        }
+      ],
+      "trigger": "输入后搜索、方向键、选中建议、loading",
+      "motionKind": "direct",
+      "current": "窗口化选项和 loading/empty 即时替换，浮层定位后直接显示",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-data-autocomplete.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "共享候选轨和小幅入场，过滤重置与输入法及时"
+      }
+    },
+    {
+      "component": "MGrid",
+      "code": [
+        {
+          "file": "src/components/reference-layout/MGrid.vue",
+          "lines": [
+            10,
+            11
+          ]
+        }
+      ],
+      "trigger": "断点列数、容器宽度、间距调整",
+      "motionKind": "static",
+      "current": "CSS grid 布局立即适配",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-layout.spec.ts"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "不为响应式重排默认加动画"
+      }
+    },
+    {
+      "component": "MGridItem",
+      "code": [
+        {
+          "file": "src/components/reference-layout/MGridItem.vue",
+          "lines": [
+            9,
+            10
+          ]
+        }
+      ],
+      "trigger": "断点跨度和偏移变化",
+      "motionKind": "static",
+      "current": "原生 grid-column 立即变化",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-layout.spec.ts"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "由业务重排显式管理"
+      }
+    },
+    {
+      "component": "MFlex",
+      "code": [
+        {
+          "file": "src/components/reference-layout/MFlex.vue",
+          "lines": [
+            8,
+            9
+          ]
+        }
+      ],
+      "trigger": "断点方向、换行、对齐",
+      "motionKind": "static",
+      "current": "布局属性即时适配",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-layout.spec.ts"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "保持断点与文本排版稳定"
+      }
+    },
+    {
+      "component": "MLayout",
+      "code": [
+        {
+          "file": "src/components/reference-layout/MLayout.vue",
+          "lines": [
+            8,
+            9
+          ]
+        }
+      ],
+      "trigger": "布局区域与断点变化",
+      "motionKind": "static",
+      "current": "区域布局随插槽和断点即时变化",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-layout.spec.ts"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "业务侧栏可使用明确的折叠组件或过渡"
+      }
+    },
+    {
+      "component": "MSplitter",
+      "code": [
+        {
+          "file": "src/components/reference-layout/MSplitter.vue",
+          "lines": [
+            39,
+            40
+          ]
+        }
+      ],
+      "trigger": "拖拽、键盘步进、显式折叠展开",
+      "motionKind": "direct-manipulation",
+      "current": "grid 轨道实时跟随，折叠/还原即时",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-layout.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "只为显式折叠提供短收锋，拖动/受控步进保持零滞后"
+      }
+    },
+    {
+      "component": "MMasonry",
+      "code": [
+        {
+          "file": "src/components/reference-layout/MMasonry.vue",
+          "lines": [
+            21,
+            26,
+            27
+          ]
+        }
+      ],
+      "trigger": "图片加载、测量更新、重排或缩放",
+      "motionKind": "direct",
+      "current": "重测后重新排列最短列，坐标直接改变",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-layout.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "只对显式用户重排的已稳定键做可选 FLIP，避免测量循环"
+      }
+    },
+    {
+      "component": "MAnchor",
+      "code": [
+        {
+          "file": "src/components/reference-layout/MAnchor.vue",
+          "lines": [
+            15,
+            20,
+            21
+          ]
+        }
+      ],
+      "trigger": "容器滚动跟踪、点击目录或路由片段",
+      "motionKind": "direct",
+      "current": "当前刻线按链接瞬切，滚动几何独立",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-layout.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "单一纵向标记短移；高频滚动合并测量，远跳直接对齐"
+      }
+    },
+    {
+      "component": "MAffix",
+      "code": [
+        {
+          "file": "src/components/reference-layout/MAffix.vue",
+          "lines": [
+            9,
+            16,
+            17
+          ]
+        }
+      ],
+      "trigger": "滚动进入/离开吸附边界",
+      "motionKind": "direct",
+      "current": "真实 fixed 与占位即时切换，阴影直接更新",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-layout.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "可短过渡边线/阴影，吸附位置、占位即时"
+      }
+    },
+    {
+      "component": "MPageHeader",
+      "code": [
+        {
+          "file": "src/components/reference-layout/MPageHeader.vue",
+          "lines": [
+            6,
+            7
+          ]
+        }
+      ],
+      "trigger": "返回、更新标题和操作区",
+      "motionKind": "static",
+      "current": "原生返回按钮与槽即时更新",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-layout.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "路径切换由宿主负责，保留返回意图"
+      }
+    },
+    {
+      "component": "MFloatButton",
+      "code": [
+        {
+          "file": "src/components/reference-layout/MFloatButton.vue",
+          "lines": [
+            9,
+            10
+          ]
+        }
+      ],
+      "trigger": "hover、键盘焦点、徽标/提示更新",
+      "motionKind": "direct",
+      "current": "提示 visibility 直接切换，操作位置固定",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-layout.spec.ts"
+      },
+      "next": {
+        "priority": "P3",
+        "status": "planned",
+        "suggestion": "给短说明加局部淡入，键盘提示即时可读"
+      }
+    },
+    {
+      "component": "MFloatButtonGroup",
+      "code": [
+        {
+          "file": "src/components/reference-layout/MFloatButtonGroup.vue",
+          "lines": [
+            16,
+            17
+          ]
+        }
+      ],
+      "trigger": "点击/Enter 展开，Esc/外部点击收起",
+      "motionKind": "direct",
+      "current": "v-show/inert 与回焦即时，按钮组直接开合",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-layout.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "小幅揭页或 fold；外部焦点与隐藏状态即时"
+      }
+    },
+    {
+      "component": "MCarousel",
+      "code": [
+        {
+          "file": "src/components/reference-layout/MCarousel.vue",
+          "lines": [
+            19,
+            35,
+            36
+          ]
+        }
+      ],
+      "trigger": "上一/下一张、键盘、指示点和自动播放",
+      "motionKind": "direct",
+      "current": "当前指示宽/色即时，幻灯片 hidden/inert 即时，内容保留",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-layout.spec.ts"
+      },
+      "next": {
+        "priority": "P1",
+        "status": "planned",
+        "suggestion": "先统一指示条滑动，页内短方向揭页，避免旧页面参与焦点"
+      }
+    },
+    {
+      "component": "MTour",
+      "code": [
+        {
+          "file": "src/components/reference-layout/MTour.vue",
+          "lines": [
+            20,
+            40,
+            41
+          ]
+        }
+      ],
+      "trigger": "下一步、回退、目标失效和模态关闭",
+      "motionKind": "enter-only",
+      "current": "对话框有入场，步骤内容和遮罩洞位置即时替换",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-layout.spec.ts"
+      },
+      "next": {
+        "priority": "P2",
+        "status": "planned",
+        "suggestion": "短淡入步骤说明与同屏近距标记，遮罩安全区和无目标状态即时"
+      }
+    },
+    {
+      "component": "MWatermark",
+      "code": [
+        {
+          "file": "src/components/reference-layout/MWatermark.vue",
+          "lines": [
+            19,
+            27
+          ]
+        }
+      ],
+      "trigger": "文字、图像和窗口尺寸变更",
+      "motionKind": "static",
+      "current": "Canvas 重新生成平铺纹样，和正文布局独立",
+      "evidence": {
+        "level": "code-reviewed",
+        "behaviorTestFile": "tests/browser/reference-layout.spec.ts"
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "保持稳定覆盖，正文按自己的节奏更新"
+      }
+    },
+    {
+      "component": "MBorderBeam",
+      "code": [
+        {
+          "file": "src/components/reference-layout/MBorderBeam.vue",
+          "lines": [
+            8,
+            9
+          ]
+        }
+      ],
+      "trigger": "启用边框光束和调整数量",
+      "motionKind": "continuous",
+      "current": "装饰独立沿边旋转，减少动效与强制颜色静态",
+      "evidence": {
+        "level": "verified",
+        "baseline": "qr-dom-browser",
+        "tests": [
+          {
+            "file": "tests/browser/reference-layout.spec.ts",
+            "lines": [
+              133
+            ],
+            "coverage": "实测边框运动、数量调节、系统 reduced 和静态边界。"
+          }
+        ]
+      },
+      "next": {
+        "priority": "keep",
+        "status": "preserve",
+        "suggestion": "保留装饰范围与可读性"
+      }
+    }
+  ]
+}

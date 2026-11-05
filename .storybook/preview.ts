@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/vue3-vite';
 import '../src/styles/tokens.css';
 import '../src/styles/scrollbar.css';
+import '../src/styles/dom-transitions.css';
 import './preview.css';
 
 const preview: Preview = {
