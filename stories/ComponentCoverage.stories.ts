@@ -5,13 +5,13 @@ import type { MStatusTone, MTableColumn } from '../src';
 import coverage from '../design/component-coverage.json';
 import './ComponentCoverage.css';
 
-const statusLabels: Record<string, string> = { added: '本轮补齐', available: '已具备', planned: '后续规划' };
+const statusLabels: Record<string, string> = { added: '新增实现', available: '已具备', planned: '仍有缺项' };
 const statusTones: Record<string, MStatusTone> = { added: 'success', available: 'info', planned: 'neutral' };
 const statusOptions = [
   { value: 'all', label: '全部' },
-  { value: 'added', label: '本轮补齐' },
+  { value: 'added', label: '新增实现' },
   { value: 'available', label: '已具备' },
-  { value: 'planned', label: '后续规划' },
+  { value: 'planned', label: '仍有缺项' },
 ];
 const columns: MTableColumn[] = [
   { key: 'capability', label: '能力与参考名称' },
@@ -47,14 +47,14 @@ const ComponentCoverage = defineComponent({
   template: `<main class="component-coverage">
     <header class="component-coverage__hero">
       <p class="component-coverage__eyebrow">MALANG / CAPABILITY ATLAS</p>
-      <h1>补齐常用，再逐层深入。</h1>
+      <h1>逐项核对，让能力有据可查。</h1>
       <p class="component-coverage__intro">从真实页面需要出发，查看已有能力、适用边界与下一步选择。{{ coverage.basis }}</p>
       <div class="component-coverage__meta"><MTag>对照日期 {{ coverage.checkedOn }}</MTag><span>Ant Design {{ coverage.referenceVersions.antDesign }} / Element Plus {{ coverage.referenceVersions.elementPlus }}</span></div>
     </header>
     <dl class="component-coverage__summary" aria-label="覆盖概览">
-      <div><dt>公开组件</dt><dd>{{ coverage.publicComponentCount }}<span> 个</span></dd><dd class="component-coverage__summary-note">MMessage 提供独立的全局轻提示入口。</dd></div>
-      <div><dt>本轮补齐</dt><dd>{{ additions }}<span> 项能力</span></dd><dd class="component-coverage__summary-note">分段选择 · 轻量确认 · 图片 · 表单</dd></div>
-      <div><dt>优先推进</dt><dd>{{ priorities.length }}<span> 项 P1</span></dd><dd class="component-coverage__summary-note">排版链接 · 锚点 · 日期时间 · 页面布局</dd></div>
+      <div><dt>公开组件</dt><dd>{{ coverage.publicComponentCount }}<span> 个</span></dd><dd class="component-coverage__summary-note">按真实公开导出统计，不以重复别名增加数量。</dd></div>
+      <div><dt>新增实现</dt><dd>{{ additions }}<span> 项能力</span></dd><dd class="component-coverage__summary-note">目录对应与验证状态分别记录。</dd></div>
+      <div><dt>逐项对照</dt><dd>155<span> 个目录条目</span></dd><dd class="component-coverage__summary-note">Ant Design 73项 · Element Plus 82项</dd></div>
     </dl>
     <section class="component-coverage__catalog" aria-labelledby="component-coverage-heading">
       <div class="component-coverage__section-head"><h2 id="component-coverage-heading">查能力，也看边界。</h2><p>一项可对应多个组件；同一组件也可承担不同用途。</p></div>
@@ -71,13 +71,13 @@ const ComponentCoverage = defineComponent({
       </MTable>
       <p class="component-coverage__scroll-note">窄屏可聚焦表格区域，横向滚动查看完整对照。</p>
     </section>
-    <section class="component-coverage__references" aria-labelledby="component-reference-heading"><h2 id="component-reference-heading">逐项核对官方目录</h2><p>按各自目录计数；Border、Color 等设计文档单独标记。基础可用表示当前已列明的能力，完整边界仍以组件文档为准。</p>
+    <section class="component-coverage__references" aria-labelledby="component-reference-heading"><h2 id="component-reference-heading">逐项核对官方目录</h2><p>按各自目录计数；Border、Color 等设计文档单独标记。实现与通过验证是两个阶段，完整边界仍以组件文档为准。</p>
       <details v-for="library in catalogs" :key="library.id" :open="!!query.trim()"><summary><strong>{{ library.id === 'ant-design' ? 'Ant Design' : 'Element Plus' }} {{ library.version }}</strong><span>{{ library.items.length }} / {{ library.total }} 项</span></summary>
-        <ul><li v-for="item in library.items" :key="item.name"><strong>{{ item.name }}</strong><span>{{ item.category }} · {{ item.coverage === 'basic' ? '基础可用' : item.coverage === 'design-token' ? '设计变量' : '待补齐' }}</span><code v-if="item.components.length">{{ item.components.join(' · ') }}</code></li></ul>
+        <ul><li v-for="item in library.items" :key="item.name"><strong>{{ item.name }}</strong><span>{{ item.category }} · {{ item.coverage === 'verified' ? '已验证' : item.coverage === 'design-token' ? '设计变量' : item.coverage === 'implementation-pending-verification' ? '已实现 · 验证中' : '待补齐' }}</span><code v-if="item.components.length">{{ item.components.join(' · ') }}</code></li></ul>
         <p v-if="!library.items.length">没有匹配的目录条目。</p>
       </details>
     </section>
-    <aside class="component-coverage__planning" aria-labelledby="component-coverage-priority"><h2 id="component-coverage-priority">先补高频，再按场景深入。</h2><p>{{ coverage.planning }}</p><ul><li v-for="item in priorities" :key="item.id"><span>P1</span><strong>{{ item.capability }}</strong><p>{{ item.next }}</p></li></ul></aside>
+    <aside class="component-coverage__planning" aria-labelledby="component-coverage-priority"><h2 id="component-coverage-priority">当前核对范围</h2><p>{{ coverage.planning }}</p></aside>
     <footer class="component-coverage__sources" aria-labelledby="component-coverage-sources"><h2 id="component-coverage-sources">官方参考</h2><p>名称与分类参考以下目录；MaLang 的能力与边界以本页说明及组件文档为准。</p><ul><li v-for="source in coverage.sources" :key="source.id"><a :href="source.url" target="_blank" rel="noopener noreferrer">{{ source.label }}<span class="component-coverage__sr-only">（新窗口打开）</span><span aria-hidden="true"> ↗</span></a></li></ul></footer>
   </main>`,
 });

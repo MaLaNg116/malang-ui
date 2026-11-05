@@ -137,7 +137,9 @@ export interface MRadioGroupProps {
 }
 
 export interface MSelectProps {
-  modelValue: string;
+  modelValue?: string;
+  multiple?: boolean;
+  selectedValues?: readonly string[];
   options: readonly MChoiceOption[];
   id?: string;
   label?: string;
@@ -210,6 +212,8 @@ export interface MTableColumn {
   key: string;
   label: string;
   align?: 'start' | 'center' | 'end';
+  sortable?: boolean;
+  filterOptions?: readonly { label: string; value: string }[];
 }
 
 export type MTableRow = Record<string, unknown>;
@@ -222,6 +226,14 @@ export interface MTableProps<Row extends object = MTableRow> {
   loading?: boolean;
   emptyTitle?: string;
   emptyDescription?: string;
+  sort?: { key: string; order: 'asc' | 'desc' } | null;
+  filters?: Readonly<Record<string, string>>;
+  selectable?: boolean;
+  selectedKeys?: readonly (string | number)[];
+  expandable?: boolean;
+  expandedKeys?: readonly (string | number)[];
+  page?: number;
+  pageSize?: number;
 }
 
 export interface MDrawerProps extends MDialogProps {
@@ -392,7 +404,33 @@ export interface MUploadProps {
   error?: string;
   disabled?: boolean;
   readonly?: boolean;
+  action?: string | ((file: File) => string | Promise<string>);
+  url?: string;
+  method?: string;
+  headers?: Readonly<Record<string, string>>;
+  data?: MUploadRequestData | ((file: File) => MUploadRequestData | Promise<MUploadRequestData>);
+  withCredentials?: boolean;
+  autoUpload?: boolean;
+  fieldName?: string;
+  customRequest?: MUploadCustomRequest;
 }
+
+export type MUploadStatus = 'ready' | 'uploading' | 'success' | 'error' | 'aborted';
+export interface MUploadProgress { loaded: number; total?: number; percent?: number; }
+export interface MUploadFileState extends MUploadProgress { file: File; status: MUploadStatus; response?: unknown; error?: unknown; }
+export type MUploadRequestData = Readonly<Record<string, string | number | boolean | Blob | null | undefined | readonly (string | number | boolean | Blob)[]>>;
+export interface MUploadRequestOptions {
+  file: File;
+  action: string;
+  method: string;
+  headers: Readonly<Record<string, string>>;
+  data: MUploadRequestData;
+  withCredentials: boolean;
+  fieldName: string;
+  signal: AbortSignal;
+  onProgress: (progress: MUploadProgress) => void;
+}
+export type MUploadCustomRequest = (options: MUploadRequestOptions) => Promise<unknown>;
 
 export interface MUploadRejection {
   file: File;
@@ -430,6 +468,11 @@ export interface MTreeProps {
   label: string;
   id?: string;
   disabled?: boolean;
+  checkable?: boolean;
+  checkedValues?: readonly string[];
+  checkStrictly?: boolean;
+  multiple?: boolean;
+  selectedValues?: readonly string[];
 }
 
 export interface MStatisticProps {

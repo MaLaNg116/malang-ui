@@ -13,8 +13,12 @@ export default defineComponent({
     items: { type: Array as PropType<MTreeProps['items']>, required: true },
     expandedValues: { type: Array as PropType<MTreeProps['expandedValues']>, required: true },
     label: { type: String, required: true }, id: String, disabled: { type: Boolean, default: false },
+    checkable: { type: Boolean, default: false }, checkedValues: { type: Array as PropType<readonly string[]>, default: () => [] },
+    checkStrictly: { type: Boolean, default: false }, multiple: { type: Boolean, default: false },
+    selectedValues: { type: Array as PropType<readonly string[]>, default: () => [] },
   },
-  emits: { 'update:modelValue': (_value: string) => true, 'update:expandedValues': (_values: string[]) => true },
+  emits: { 'update:modelValue': (_value: string) => true, 'update:expandedValues': (_values: string[]) => true,
+    'update:checkedValues': (_values: string[]) => true, 'update:selectedValues': (_values: string[]) => true },
   setup(props, { attrs, emit }) {
     const root = ref<HTMLElement>(); const focused = ref<string>();
     const identity = `ui-tree-${useId()}`;
@@ -25,14 +29,47 @@ export default defineComponent({
     const controls = new Map<string, HTMLElement>(); const ids = new Map<string, number>(); let nextId = 0;
     const nodeId = (value: string) => { if (!ids.has(value)) ids.set(value, nextId++); return `${rootId.value}-node-${ids.get(value)}`; };
     const unavailable = (entry: Entry) => props.disabled || Boolean(entry.item.disabled);
+    const selected = (entry: Entry) => props.multiple ? props.selectedValues.includes(entry.item.value) : props.modelValue === entry.item.value;
+    type CheckState = boolean | 'mixed';
+    function checkStates(values: readonly string[]) {
+      const supplied = new Set(values), states = new Map<string, CheckState>();
+      function visit(entry: Entry, inherited = false) {
+        const checked = supplied.has(entry.item.value) || !props.checkStrictly && inherited && !entry.item.disabled;
+        entry.children.forEach(child => visit(child, !entry.item.disabled && checked));
+        const children = entry.children.filter(child => !child.item.disabled);
+        states.set(entry.item.value, props.checkStrictly || entry.item.disabled || !children.length ? checked :
+          children.every(child => states.get(child.item.value) === true) ? true : children.some(child => states.get(child.item.value) !== false) ? 'mixed' : false);
+      }
+      hierarchy.value.roots.forEach(entry => visit(entry));
+      return states;
+    }
+    const checks = computed(() => checkStates(props.checkedValues));
+    function check(entry: Entry) {
+      if (!props.checkable || unavailable(entry)) return;
+      if (props.checkStrictly) {
+        emit('update:checkedValues', props.checkedValues.includes(entry.item.value) ? props.checkedValues.filter(value => value !== entry.item.value) : [...props.checkedValues, entry.item.value]);
+        return;
+      }
+      const next = new Set([...props.checkedValues.filter(value => !hierarchy.value.all.some(item => item.item.value === value)), ...hierarchy.value.all.filter(item => checks.value.get(item.item.value) === true).map(item => item.item.value)]);
+      const removing = checks.value.get(entry.item.value) === true;
+      function change(item: Entry) { if (item.item.disabled) return; if (removing) next.delete(item.item.value); else next.add(item.item.value); item.children.forEach(change); }
+      change(entry);
+      // Remove an explicit ancestor before deriving its state from the changed children.
+      for (const value of [...entry.ancestors].reverse()) {
+        if (hierarchy.value.all.find(item => item.item.value === value)?.item.disabled) break;
+        next.delete(value);
+      }
+      const normalized = checkStates([...next]);
+      emit('update:checkedValues', [...hierarchy.value.all.filter(item => normalized.get(item.item.value) === true).map(item => item.item.value), ...[...next].filter(value => !hierarchy.value.all.some(item => item.item.value === value))]);
+    }
     let previous: Entry[] = [];
     let pending: { value?: string; ancestors: string[]; index: number } | undefined;
     let search = '', searchTimer: ReturnType<typeof setTimeout> | undefined;
     function resetSearch() { search = ''; if (searchTimer !== undefined) clearTimeout(searchTimer); searchTimer = undefined; }
     function entryTarget() {
-      const selected = hierarchy.value.all.find(entry => entry.item.value === props.modelValue);
-      return visible.value.find(entry => entry.item.value === selected?.item.value)?.item.value
-        ?? [...selected?.ancestors ?? []].reverse().find(value => visible.value.some(entry => entry.item.value === value))
+      const selection = hierarchy.value.all.find(selected);
+      return visible.value.find(entry => entry.item.value === selection?.item.value)?.item.value
+        ?? [...selection?.ancestors ?? []].reverse().find(value => visible.value.some(entry => entry.item.value === value))
         ?? visible.value[0]?.item.value;
     }
     const tabValue = computed(() => visible.value.some(entry => entry.item.value === focused.value) ? focused.value : entryTarget());
@@ -70,7 +107,11 @@ export default defineComponent({
       if (next.has(entry.item.value)) next.delete(entry.item.value); else next.add(entry.item.value);
       emit('update:expandedValues', [...next]);
     }
-    function select(entry: Entry) { if (!unavailable(entry) && entry.item.value !== props.modelValue) emit('update:modelValue', entry.item.value); }
+    function select(entry: Entry) {
+      if (unavailable(entry)) return;
+      if (props.multiple) emit('update:selectedValues', props.selectedValues.includes(entry.item.value) ? props.selectedValues.filter(value => value !== entry.item.value) : [...props.selectedValues, entry.item.value]);
+      else if (entry.item.value !== props.modelValue) emit('update:modelValue', entry.item.value);
+    }
     function keydown(entry: Entry, event: KeyboardEvent) {
       if (event.target !== event.currentTarget || event.isComposing || event.keyCode === 229 || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
       const index = visible.value.findIndex(candidate => candidate.item.value === entry.item.value);
@@ -85,7 +126,8 @@ export default defineComponent({
       } else if (event.key === 'ArrowLeft') {
         if (entry.children.length && expanded.value.has(entry.item.value)) toggle(entry);
         else target = entry.ancestors.at(-1);
-      } else if (event.key === 'Enter' || event.key === ' ') select(entry);
+      } else if (event.key === ' ' && props.checkable) check(entry);
+      else if (event.key === 'Enter' || event.key === ' ') select(entry);
       else if (event.key.length === 1) {
         const character = event.key.normalize('NFKC').toLocaleLowerCase();
         search += character;
@@ -105,15 +147,16 @@ export default defineComponent({
         return h('li', {
           key: item.value, id: nodeId(item.value), role: 'treeitem', class: 'ui-tree__item',
           ref: (element: unknown) => { if (element) controls.set(item.value, element as HTMLElement); else controls.delete(item.value); },
-          tabindex: tabValue.value === item.value ? 0 : -1, 'aria-label': item.label, 'aria-selected': props.modelValue === item.value,
+          tabindex: tabValue.value === item.value ? 0 : -1, 'aria-label': item.label, 'aria-selected': selected(entry),
+          'aria-checked': props.checkable ? checks.value.get(item.value) ?? false : undefined,
           'aria-expanded': branch ? open : undefined, 'aria-disabled': disabled || undefined,
           onFocus: (event: FocusEvent) => { if (event.target === event.currentTarget) focused.value = item.value; },
           onKeydown: (event: KeyboardEvent) => keydown(entry, event),
         }, [
           h('div', { class: 'ui-tree__row', onClick: (event: MouseEvent) => { event.stopPropagation(); focus(item.value); select(entry); } }, [
             h('span', { class: ['ui-tree__hinge', { 'ui-tree__hinge--leaf': !branch }], 'aria-hidden': 'true', onClick: (event: MouseEvent) => { if (branch) { event.stopPropagation(); focus(item.value); toggle(entry); } } }, branch ? '›' : '·'),
-            h('span', { class: 'ui-tree__mark', 'aria-hidden': 'true' }), h('span', { class: 'ui-tree__label' }, item.label),
-            h('span', { class: 'ui-tree__impression', 'aria-hidden': 'true' }, props.modelValue === item.value ? '定' : ''),
+            props.checkable ? h('span', { class: 'ui-tree__check', 'data-state': checks.value.get(item.value), 'aria-hidden': 'true', onClick: (event: MouseEvent) => { event.stopPropagation(); focus(item.value); check(entry); } }, checks.value.get(item.value) === 'mixed' ? '−' : checks.value.get(item.value) ? '✓' : '') : h('span', { class: 'ui-tree__mark', 'aria-hidden': 'true' }), h('span', { class: 'ui-tree__label' }, item.label),
+            h('span', { class: 'ui-tree__impression', 'aria-hidden': 'true' }, selected(entry) ? '定' : ''),
           ]),
           branch ? h('div', { hidden: !open }, [renderNodes(entry.children, true)]) : null,
         ]);
@@ -121,7 +164,7 @@ export default defineComponent({
     }
     onMounted(repair); onBeforeUpdate(remember); onUpdated(repair);
     onBeforeUnmount(() => { resetSearch(); controls.clear(); ids.clear(); pending = undefined; });
-    return () => h('div', mergeProps(attrs, { ref: root, id: rootId.value, role: 'tree', class: 'ui-tree', 'aria-label': props.label, 'aria-disabled': props.disabled || undefined, tabindex: visible.value.length ? undefined : 0,
+    return () => h('div', mergeProps(attrs, { ref: root, id: rootId.value, role: 'tree', class: 'ui-tree', 'aria-label': props.label, 'aria-disabled': props.disabled || undefined, 'aria-multiselectable': props.multiple || undefined, tabindex: visible.value.length ? undefined : 0,
       onFocusout: (event: FocusEvent) => { if (!event.relatedTarget || !root.value?.contains(event.relatedTarget as Node)) { resetSearch(); focused.value = entryTarget(); } },
     }), hierarchy.value.roots.length ? [renderNodes(hierarchy.value.roots)] : [h('p', { class: 'ui-tree__empty' }, '暂无目录项目')]);
   },
@@ -141,6 +184,9 @@ export default defineComponent({
 .ui-tree__hinge--leaf { color: var(--ui-color-metal); }
 .ui-tree__item[aria-expanded='true'] > .ui-tree__row .ui-tree__hinge { transform: rotate(90deg); }
 .ui-tree__mark { width: 8px; height: 13px; flex: none; border: 1px solid var(--ui-color-metal); border-block-width: 2px; transform: skewY(-15deg); }
+.ui-tree__check { display: grid; place-items: center; width: 20px; height: 20px; flex: none; border: 1px solid var(--ui-color-border); background: var(--ui-color-surface); color: var(--ui-color-on-accent); font: 16px/1 var(--ui-font-family-mono); }
+.ui-tree__check[data-state='true'], .ui-tree__check[data-state='mixed'] { border-color: var(--ui-color-accent); background: var(--ui-color-accent); }
+@media (forced-colors: active) { .ui-tree__check { border-color: CanvasText; background: Canvas; color: CanvasText; } .ui-tree__check[data-state='true'], .ui-tree__check[data-state='mixed'] { forced-color-adjust: none; border-color: Highlight; background: Highlight; color: HighlightText; } }
 .ui-tree__impression { min-width: 17px; flex: none; color: var(--ui-color-accent); font: 13px/1 var(--ui-font-family-display); }
 .ui-tree__item[aria-selected='true'] > .ui-tree__row { background: var(--ui-color-accent-soft); }
 .ui-tree__item[aria-selected='true'] > .ui-tree__row::before { content: ''; position: absolute; inset-inline-start: -1px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(var(--ui-color-accent) 0 40%, transparent 40% 60%, var(--ui-color-accent) 60%); }

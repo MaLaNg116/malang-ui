@@ -3,6 +3,7 @@ import { computed, nextTick, onBeforeUnmount, provide, ref, shallowReactive, wat
 import type { MFormErrors, MFormModel, MFormProps, MFormValidation } from './types';
 import { formContextKey } from './formContext';
 import type { FormField } from './formContext';
+import { formPathValue, matchesFormPath } from './formPath';
 
 const props = withDefaults(defineProps<MFormProps>(), { rules: () => ({}), label: '表单', disabled: false, validateOn: 'submit', showSummary: true });
 const emit = defineEmits<{ submit: [model: MFormModel, event: SubmitEvent]; invalid: [errors: Readonly<MFormErrors>]; reset: [initialModel: MFormModel] }>();
@@ -27,7 +28,7 @@ function copy(value: unknown, seen = new WeakMap<object, unknown>()): unknown {
 const modelCopy = (model: object) => copy({ ...model }) as MFormModel;
 const initial = modelCopy(props.model);
 function invalidate() { version++; controller?.abort(); controller = undefined; validating.value = false; submitting = false; }
-function rulesFor(name: string) { return Object.hasOwn(props.rules, name) ? props.rules[name] : []; }
+function rulesFor(name: string) { return Object.hasOwn(props.rules, name) ? props.rules[name] : Object.entries(props.rules).filter(([pattern]) => matchesFormPath(pattern, name)).flatMap(([, rules]) => rules); }
 function hasComposition() {
   for (const target of composing) {
     const node = target as HTMLElement;
@@ -64,7 +65,7 @@ async function validate(names?: readonly string[]): Promise<MFormValidation> {
   for (const name of selected) {
     delete next[name]; const field = fields.get(name)!;
     if (props.disabled || field.disabled() || control(field)?.matches(':disabled')) continue;
-    const value = model[name];
+    const value = formPathValue(model, name);
     for (const rule of rulesFor(name)) {
       const empty = value === undefined || value === null || value === '' || value === false || Array.isArray(value) && value.length === 0;
       const length = typeof value === 'number' ? value : typeof value === 'string' || Array.isArray(value) ? value.length : undefined;
@@ -122,6 +123,10 @@ provide(formContextKey, {
   disabled: computed(() => props.disabled), errors, validating,
   required: name => rulesFor(name).some(rule => rule.required),
   register(name, field) {
+    // A keyed dynamic row can take over another row's previous path before
+    // that row unregisters. Errors and pending validation belong to the old
+    // registration, never to the new occupant of the same array index.
+    clearValidation([name]);
     fields.set(name, field);
     return () => { if (fields.get(name) === field) { fields.delete(name); clearValidation([name]); } };
   },

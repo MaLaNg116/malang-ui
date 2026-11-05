@@ -4,20 +4,42 @@
   "private": true,
   "description": "Vue component library exploring ink and technology, with GSAP motion and framework-independent utilities",
   "license": "MIT",
-  "repository": { "type": "git", "url": "git+https://github.com/MaLaNg116/malang-ui.git" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaLaNg116/malang-ui.git"
+  },
   "type": "module",
   "packageManager": "pnpm@11.25.0",
-  "engines": { "node": ">=24" },
-  "files": ["dist"],
-  "sideEffects": ["**/*.css"],
+  "engines": {
+    "node": ">=24"
+  },
+  "files": [
+    "dist",
+    "THIRD_PARTY_NOTICES.txt"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
-    "./utils": { "types": "./dist/utils/index.d.ts", "import": "./dist/utils.js" },
-    "./motion": { "types": "./dist/motion/index.d.ts", "import": "./dist/motion.js" },
-    "./all": { "types": "./dist/all.d.ts", "import": "./dist/all.js" },
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "import": "./dist/utils.js"
+    },
+    "./motion": {
+      "types": "./dist/motion/index.d.ts",
+      "import": "./dist/motion.js"
+    },
+    "./all": {
+      "types": "./dist/all.d.ts",
+      "import": "./dist/all.js"
+    },
     "./style.css": "./dist/style.css",
     "./tokens.css": "./dist/tokens.css"
   },
@@ -28,20 +50,29 @@
     "typecheck": "vue-tsc --noEmit",
     "typecheck:package": "vue-tsc -p tests/consumer/tsconfig.json",
     "test": "vitest run",
-    "test:browser": "playwright test",
+    "test:browser": "node scripts/test-browser.mjs",
     "tokens": "node scripts/generate-tokens.mjs",
     "build": "pnpm tokens && vite build && vue-tsc -p tsconfig.build.json && node scripts/copy-tokens.mjs",
     "check": "pnpm typecheck && pnpm test && pnpm build && pnpm typecheck:package && pnpm build:storybook"
   },
-  "peerDependencies": { "vue": "^3.5.0", "gsap": "^3.15.0" },
-  "peerDependenciesMeta": { "gsap": { "optional": true } },
+  "peerDependencies": {
+    "gsap": "^3.15.0",
+    "vue": "^3.5.0"
+  },
+  "peerDependenciesMeta": {
+    "gsap": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@playwright/test": "1.64.1",
     "@storybook/addon-docs": "10.6.5",
     "@storybook/vue3-vite": "10.6.5",
     "@types/node": "^24.0.0",
     "@vitejs/plugin-vue": "6.0.10",
+    "@vue/server-renderer": "3.5.44",
     "gsap": "3.15.0",
+    "jsqr": "1.4.0",
     "storybook": "10.6.5",
     "typescript": "~5.9.3",
     "vite": "8.3.5",
@@ -50,6 +81,7 @@
     "vue-tsc": "3.3.14"
   },
   "dependencies": {
-    "@floating-ui/dom": "1.8.0"
+    "@floating-ui/dom": "1.8.0",
+    "qrcode-generator": "2.0.4"
   }
 }

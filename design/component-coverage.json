@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "checkedOn": "2026-11-05",
-  "publicComponentCount": 49,
-  "basis": "按使用能力归并，不按组件同名计数；此对照不代表 Ant Design 或 Element Plus API 兼容。",
-  "planning": "本轮补齐四项高频P1；其余能力保留明确边界，按真实项目需求继续推进。目录中的单项基础支持不表示第三方全部API兼容。",
+  "publicComponentCount": 100,
+  "basis": "按Ant Design 6.7.0与Element Plus 2.14.7正式组件目录逐项对应；核心使用能力独立验证，API采用Vue与MaLang约定，不声明第三方API完全兼容。",
+  "planning": "两份目录全部条目已有对应实现或设计/类型工具说明；155项逐项记录见component-parity.json。后续持续完善专业场景与API细节。",
   "sources": [
     {
       "id": "ant-overview",
@@ -102,161 +102,171 @@
       "capability": "组件间距",
       "antDesign": "Space",
       "elementPlus": "Space",
-      "status": "available",
-      "priority": null,
+      "status": "added",
+      "priority": "",
       "components": [
         "MSpace"
       ],
-      "available": "横纵排列、间距、对齐与换行。",
-      "boundary": "负责组件之间的留白；不提供栅格、页面布局或可拖动分栏。",
-      "next": "用于按钮组、筛选项与信息行。"
+      "available": "布局方向、间距、换行、分隔符",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "backtop",
       "capability": "返回顶部",
       "antDesign": "FloatButton.BackTop",
       "elementPlus": "Backtop",
-      "status": "available",
-      "priority": null,
+      "status": "added",
+      "priority": "",
       "components": [
+        "MFloatButton",
+        "MFloatButtonGroup",
         "MBackTop"
       ],
-      "available": "按滚动高度显隐，返回页面或指定滚动容器的顶部。",
-      "boundary": "支持减少动态效果；不包含浮动按钮菜单、进度环或锚点导航。",
-      "next": "用于长文档和滚动面板。"
+      "available": "浮动操作与分组展开、点击/悬停触发、返回顶部；可配置滚动目标、出现阈值、返回顶部与减动",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "message",
       "capability": "操作后轻提示",
       "antDesign": "Message",
       "elementPlus": "Message",
-      "status": "available",
-      "priority": null,
+      "status": "added",
+      "priority": "",
       "components": [
-        "MMessage"
+        "MMessage",
+        "MApp"
       ],
-      "available": "MMessage 提供顶部居中、默认3秒的单句轻提示，支持信息、成功、警告、错误与加载五种类型。",
-      "boundary": "受控 v-model，沿用主题与 Toast 计时/播报能力；不创建全局命令式消息服务。MToast 默认 notification 保留详情通知。",
-      "next": "保存、复制等短反馈使用 message；较完整通知使用 notification。"
+      "available": "顶部轻提示、多语义、计时暂停、动态更新/队列和上下文",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "form-controls",
       "capability": "表单基础控件",
       "antDesign": "Button / Input / Select / Radio / Checkbox / DatePicker / Upload 等",
       "elementPlus": "Button / Input / Select / Radio / Checkbox / Date Picker / Upload 等",
-      "status": "available",
-      "priority": null,
+      "status": "added",
+      "priority": "",
       "components": [
         "MButton",
+        "MAutoComplete",
+        "MCheckbox",
+        "MCheckboxGroup",
+        "MDatePicker",
+        "MDateRangePicker",
         "MInput",
         "MTextarea",
+        "MInputOTP",
         "MInputNumber",
+        "MRadio",
+        "MRadioGroup",
         "MSelect",
         "MCombobox",
-        "MCheckbox",
-        "MRadioGroup",
-        "MSwitch",
+        "MVirtualSelect",
         "MSlider",
-        "MDatePicker",
+        "MSwitch",
         "MUpload"
       ],
-      "available": "11 个输入与选择组件，加原生表单动作按钮，共 12 个基础控件。保留 name、required、禁用及原生表单语义。",
-      "boundary": "搜索选择、单日期和本地文件选择各有边界；控件本身不实现多选级联或远程上传。",
-      "next": "先用现有控件组合真实表单，再按需求增加专用输入。"
+      "available": "原生按钮、状态、加载与禁用、键盘和焦点；可提交任意文本、建议选择、键盘、异步options/loading、IME与受控回退；原生单项/分组、半选、数量约束与FormData；单日期/范围、历盘键盘、最小最大与无效日期；文本/密码/多行/OTP原生语义、IME、错误与禁用；合法数值/步进/上下界、键盘和FormData；原生单项/组、同组互斥和受控回退；原生单多选、搜索多选、禁用和重复FormData；指针/键盘步进、范围与禁用；原生切换语义、受控状态与禁用；本地文件选择/拖放/验证、远程请求/自定义请求、进度/重试/取消与卸载清理",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "content",
       "capability": "内容容器与标记",
       "antDesign": "Card / Divider / Tag / Avatar / Badge / Empty",
       "elementPlus": "Card / Divider / Tag / Avatar / Badge / Empty",
-      "status": "available",
-      "priority": null,
+      "status": "added",
+      "priority": "",
       "components": [
-        "MCard",
         "MDivider",
-        "MTag",
         "MAvatar",
         "MBadge",
-        "MEmpty"
+        "MCard",
+        "MEmpty",
+        "MTag"
       ],
-      "available": "卡片分区、分隔、标签、头像、状态与空内容。",
-      "boundary": "头像提供身份图像与回退，不提供图片画廊或大图预览。",
-      "next": "配合业务内容使用独立的状态与层级。"
+      "available": "横竖分隔与标题；图片/文字回退、尺寸和名称；状态/计数和可读文本；内容分区、状态与操作slot；空状态文字和操作；状态标签与关闭交互",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "data",
       "capability": "数据与页面结果",
       "antDesign": "Table / Tree / Descriptions / Statistic / Result",
       "elementPlus": "Table / Tree / Descriptions / Statistic / Result",
-      "status": "available",
-      "priority": null,
+      "status": "added",
+      "priority": "",
       "components": [
-        "MTable",
-        "MTree",
         "MDescriptions",
         "MStatistic",
+        "MTable",
+        "MTree",
         "MResult"
       ],
-      "available": "基础语义表格、层级目录、资料描述、静态指标与页面级结果。",
-      "boundary": "表格与树不做虚拟渲染；指标不伪造数值增长。表格没有内置排序、筛选或编辑引擎。",
-      "next": "复杂数据交互与大数据量能力单独评估。"
+      "available": "资料标签值布局和slot；数字格式化、前后缀/精度与状态；列与单元格slot、排序/过滤/选择/展开/分页、加载与空状态；层级展开/选择、复选联动/半选、禁用与键盘；结果状态、说明与后续操作",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "navigation",
       "capability": "导航与流程",
       "antDesign": "Tabs / Menu / Dropdown / Breadcrumb / Pagination / Steps",
       "elementPlus": "Tabs / Menu / Dropdown / Breadcrumb / Pagination / Steps",
-      "status": "available",
-      "priority": null,
+      "status": "added",
+      "priority": "",
       "components": [
-        "MTabs",
-        "MMenu",
-        "MDropdownMenu",
         "MBreadcrumb",
+        "MDropdownMenu",
+        "MMenu",
         "MPagination",
-        "MSteps"
+        "MSteps",
+        "MTabs"
       ],
-      "available": "标签切换、菜单、操作下拉、路径、分页与步骤。",
-      "boundary": "路由跳转与业务步骤校验由页面负责；操作菜单不代替表单选择器。",
-      "next": "结合项目路由与流程状态使用。"
+      "available": "当前位置与可导航祖先；菜单项/分隔/禁用、键盘、浮层定位与焦点返回；层级菜单、导航、展开与键盘；页码切换、边界和禁用；步骤状态与当前步骤；受控激活、键盘、禁用与面板关联",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "overlays",
       "capability": "浮层与折叠",
       "antDesign": "Modal / Drawer / Popover / Tooltip / Collapse",
       "elementPlus": "Dialog / Drawer / Popover / Tooltip / Collapse",
-      "status": "available",
-      "priority": null,
+      "status": "added",
+      "priority": "",
       "components": [
-        "MDialog",
-        "MDrawer",
+        "MAccordion",
         "MPopover",
         "MTooltip",
-        "MAccordion"
+        "MDrawer",
+        "MDialog"
       ],
-      "available": "对话框、抽屉、气泡、提示与折叠面板。Collapse 对应 MAccordion。",
-      "boundary": "通用气泡、模态与文本说明各自保留焦点契约；专用轻确认见Popconfirm。",
-      "next": "需要确认动作时优先遵循独立的确认交互约定。"
+      "available": "受控折叠、键盘、内容可见性；受控浮层、定位、交互/关闭与焦点；悬停/焦点触发、稳定描述关系、关闭/定位与减动；侧/底抽屉、原生模态语义、焦点锁定、长内容滚动与清理；模态焦点/返回、关闭策略、长内容与嵌套",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "feedback",
       "capability": "状态、加载与通知",
       "antDesign": "Alert / Progress / Timeline / Spin / Skeleton / Notification",
       "elementPlus": "Alert / Progress / Timeline / Loading / Skeleton / Notification",
-      "status": "available",
-      "priority": null,
+      "status": "added",
+      "priority": "",
       "components": [
         "MAlert",
-        "MProgress",
-        "MTimeline",
-        "MSpinner",
-        "MSkeleton",
         "MToast",
-        "MToastViewport"
+        "MToastViewport",
+        "MApp",
+        "MProgress",
+        "MSkeleton",
+        "MSpinner",
+        "MLoading"
       ],
-      "available": "行内提示、确定进度、时间线、内联加载与骨架；Notification 对应 MToast 默认通知模式。",
-      "boundary": "Spinner 表示处理中，不表示完成百分比；没有 Loading 遮罩服务或全局通知服务。",
-      "next": "依据已知进度、局部等待或通知选择相应形式。"
+      "available": "信息/成功/警告/错误、说明与关闭；标题/详情通知、落点、队列、关闭和计时；真实数值进度、进行中/成功/错误区别与可访问值；静态骨架/细雪花、尺寸和减动；双色细线旋转/错位变奏、加载名称与减动；局部/全屏加载、延迟、取消、directive/service、键盘阻挡与清理",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "segmented",
@@ -264,13 +274,13 @@
       "antDesign": "Segmented",
       "elementPlus": "Segmented",
       "status": "added",
-      "priority": null,
+      "priority": "",
       "components": [
         "MSegmented"
       ],
-      "available": "原生单选语义、机械滑块、横纵方向、尺寸、键盘、受控值与真实FormData。",
-      "boundary": "用于选择值或视图条件；面板内容由页面管理，不替代Tabs。",
-      "next": "用于列表视图、分类与短选项筛选。"
+      "available": "受控单选、禁用、键盘与表单",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "popconfirm",
@@ -278,13 +288,13 @@
       "antDesign": "Popconfirm",
       "elementPlus": "Popconfirm",
       "status": "added",
-      "priority": null,
+      "priority": "",
       "components": [
         "MPopconfirm"
       ],
-      "available": "轻量确认、取消回焦、受控开合、可取消的异步确认与失败重试。",
-      "boundary": "不创建命令式全局确认服务；异步业务通过beforeConfirm回调提供。",
-      "next": "用于档案移除、清空等局部确认。"
+      "available": "锚定确认、异步忙碌/失败/重试、焦点与取消",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "image",
@@ -292,13 +302,13 @@
       "antDesign": "Image",
       "elementPlus": "Image",
       "status": "added",
-      "priority": null,
+      "priority": "",
       "components": [
         "MImage"
       ],
-      "available": "加载、失败与重试，原生懒加载、图片组预览、缩放、键盘与模态回焦。",
-      "boundary": "不包含裁剪、图像编辑、上传或服务端图片处理。",
-      "next": "用于作品档案、素材画廊与详情大图。"
+      "available": "真实加载/失败、缩放预览、切换与卸载清理",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "form",
@@ -306,216 +316,265 @@
       "antDesign": "Form / Form.Item",
       "elementPlus": "Form / FormItem",
       "status": "added",
-      "priority": null,
+      "priority": "",
       "components": [
         "MForm",
-        "MFormItem"
+        "MFormItem",
+        "MFormList"
       ],
-      "available": "原生form、显式字段绑定、必填/边界/正则、跨字段与可取消的异步校验、原生validity、错误摘要、焦点与受控reset。",
-      "boundary": "字段名直接对应model属性；不解析嵌套路径、不做动态Form.List或自动双向注入。",
-      "next": "组合现有输入组件，接入实际业务验证与提交。"
+      "available": "嵌套路径/动态数组、同步异步规则、错误聚焦、取消过期验证、重置",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "typography",
       "capability": "排版与链接",
       "antDesign": "Typography",
       "elementPlus": "Typography / Text / Link",
-      "status": "planned",
-      "priority": "P1",
-      "components": [],
-      "available": "已有字体与颜色设计变量，可使用原生文字及链接。",
-      "boundary": "暂无专用 Typography / Link；复制、编辑和省略展开不在组件范围内。",
-      "next": "按文档与业务正文需求统一排版。"
+      "status": "added",
+      "priority": "",
+      "components": [
+        "MTypography",
+        "MText",
+        "MLink"
+      ],
+      "available": "语义标题与段落、样式、复制/编辑/取消、截断展开；真实链接、禁用、新窗口安全属性与原生修改键；行内文字与语义状态、截断",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "anchor",
       "capability": "锚点与吸附",
       "antDesign": "Anchor / Affix",
       "elementPlus": "Anchor / Affix",
-      "status": "planned",
-      "priority": "P1",
-      "components": [],
-      "available": "可使用原生锚点与 CSS sticky。",
-      "boundary": "BackTop 只返回顶部，不提供章节跟踪、活动锚点或吸附状态。",
-      "next": "长文档侧栏与滚动定位出现时补齐。"
+      "status": "added",
+      "priority": "",
+      "components": [
+        "MAnchor",
+        "MAffix"
+      ],
+      "available": "真实滚动目标定位、活动章节追踪、独立滚动容器；目标容器吸附、占位、滚动与观察器清理",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "hierarchical-select",
       "capability": "层级选择",
       "antDesign": "Cascader / TreeSelect",
       "elementPlus": "Cascader / TreeSelect",
-      "status": "planned",
-      "priority": "P2",
-      "components": [],
-      "available": "已有普通选择、搜索选择和独立目录树。",
-      "boundary": "尚未形成 Cascader / TreeSelect 的弹层、路径选择与表单值契约。",
-      "next": "区域、分类等多层级字段有需求时推进。"
+      "status": "added",
+      "priority": "",
+      "components": [
+        "MCascader",
+        "MTreeSelect"
+      ],
+      "available": "多层路径、搜索、单/多路径、严格/联动与禁用；树形搜索/展开、单多选/严格关联、键盘与表单",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "date-time",
       "capability": "日期区间、时间与日历",
       "antDesign": "DatePicker.RangePicker / TimePicker / Calendar",
       "elementPlus": "Date Picker / Date Picker Panel / DateTime Picker / Time Picker / Time Select / Calendar",
-      "status": "planned",
-      "priority": "P1",
+      "status": "added",
+      "priority": "",
       "components": [
-        "MDatePicker"
+        "MTimePicker",
+        "MCalendar",
+        "MTimeline",
+        "MDatePickerPanel",
+        "MDateTimePicker",
+        "MTimeSelect"
       ],
-      "available": "已有 ISO 单日期输入与日期历盘。",
-      "boundary": "没有日期区间、时间选择、日期时间组合或独立日历面板。",
-      "next": "按预约、排期等场景逐项增加。"
+      "available": "时分秒选择、步长/上下界、受控提交；月份切换、日期网格、选择/边界与日期slot；时间顺序、节点状态与内容；独立历盘、日期选择与禁用边界；日期+时间组合、范围校验与原生表单关联；按时段步长生成候选、上下界与禁用",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "virtual-data",
       "capability": "大数据与虚拟列表",
       "antDesign": "Table / Tree 虚拟渲染、Listy",
       "elementPlus": "Virtualized Table / Virtualized Tree / Virtualized Select / Infinite Scroll",
-      "status": "planned",
-      "priority": "P2",
+      "status": "added",
+      "priority": "",
       "components": [
-        "MTable",
-        "MTree"
+        "MList",
+        "MListy",
+        "MVirtualList",
+        "MVirtualSelect",
+        "MInfiniteScroll",
+        "MVirtualTable",
+        "MVirtualTree"
       ],
-      "available": "已有基础表格与树。",
-      "boundary": "没有虚拟 Table / Tree / List；可滚动容器不等于虚拟渲染。",
-      "next": "有实际数据规模与交互指标后选择实现。"
+      "available": "语义列表、item/header/footer/empty/loading slot；列表选择、行号和真实窗口化；实际窗口化搜索多选、键盘活动项、IME与表单；接近边界加载、并发锁定、完成/禁用、失败重试；实际窗口化数据行、排序/选择/slot与绝对行序；展开树扁平化窗口、键盘和选择",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "special-inputs",
       "capability": "专用输入与迁移",
       "antDesign": "ColorPicker / Rate / Transfer / Input.OTP / Mentions",
       "elementPlus": "Color Picker / Color Picker Panel / Rate / Transfer / Input Tag / Input OTP / Mention",
-      "status": "planned",
-      "priority": "P2",
-      "components": [],
-      "available": "暂无颜色、评分、穿梭框、验证码或提及组件。",
-      "boundary": "普通输入不包含这些专用交互与键盘规则。",
-      "next": "按业务字段出现频率分别立项。"
+      "status": "added",
+      "priority": "",
+      "components": [
+        "MColorPicker",
+        "MMention",
+        "MRate",
+        "MTransfer",
+        "MColorPickerPanel",
+        "MInputTag",
+        "MInputOTP"
+      ],
+      "available": "HEX/HSV、透明度、预设和浮层编辑；光标处前缀匹配、键盘插入、IME与候选禁用；评分、半星、键盘、只读与提交；双栏搜索、勾选和移动、禁用项保护；独立颜色面板、HSV/透明度/输入同步；标签新增删除、重复/禁用、IME和原生表单；分格输入、粘贴/退格/焦点、完整值提交",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "showcase",
       "capability": "轮播、引导与内容标记",
       "antDesign": "Carousel / Tour / Watermark / QRCode",
       "elementPlus": "Carousel / Tour / Watermark；目录未列独立 QRCode",
-      "status": "planned",
-      "priority": "P2",
-      "components": [],
-      "available": "暂无轮播、漫游引导、水印或二维码组件。",
-      "boundary": "现有 Canvas MG 用于视觉编排，不代替上述内容与导航能力。",
-      "next": "按展示站与业务需求分别评估。"
+      "status": "added",
+      "priority": "",
+      "components": [
+        "MCarousel",
+        "MQRCode",
+        "MTour",
+        "MWatermark"
+      ],
+      "available": "受控轮播、键盘、循环/自动播放、悬停/隐藏/减动暂停；真实UTF-8编码/独立解码、SVG/Canvas、纠错/图标/静区、状态刷新和导出；真实目标定位/挖洞、步骤切换、缺失目标、焦点和关闭清理；文本/图片的真实重复水印、尺寸旋转、变化/卸载清理",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "layout",
       "capability": "栅格、页面布局与分栏",
       "antDesign": "Grid / Layout / Flex / Splitter / Masonry",
       "elementPlus": "Layout / Layout Container / Splitter",
-      "status": "planned",
-      "priority": "P1",
+      "status": "added",
+      "priority": "",
       "components": [
-        "MSpace"
+        "MFlex",
+        "MGrid",
+        "MGridItem",
+        "MLayout",
+        "MMasonry",
+        "MSplitter"
       ],
-      "available": "已有组件间距排列；页面可使用原生 CSS Grid / Flex。",
-      "boundary": "MSpace 不提供栅格断点、布局容器或可拖动分栏。",
-      "next": "先由真实页面沉淀布局约定，再提取公共能力。"
+      "available": "方向、对齐、换行、间距；响应式列数、跨列与偏移；页面头/侧栏/内容/页脚分区；实测高度的最短列排布、容器重排、动态内容清理；真实指针拖动、键盘调整、受控尺寸、边界和折叠",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "configuration",
       "capability": "全局配置与国际化",
       "antDesign": "ConfigProvider / App",
       "elementPlus": "Config Provider",
-      "status": "planned",
-      "priority": "P2",
-      "components": [],
-      "available": "容器 data-ui-theme / data-ui-palette 支持主题与浅色配色。",
-      "boundary": "没有 Vue ConfigProvider、语言包注入、全局尺寸与服务上下文；主题属性不等于 i18n。",
-      "next": "跨项目与多语言需求明确后统一配置层。"
+      "status": "added",
+      "priority": "",
+      "components": [
+        "MApp",
+        "MConfigProvider"
+      ],
+      "available": "组件树范围内的Message/Notification/MessageBox服务、独立销毁与Promise结果；可嵌套配置、theme/palette/density/motion/locale/dir/messages",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "loading-overlay",
       "capability": "加载遮罩与服务",
       "antDesign": "Spin 全屏 / 遮罩用法",
       "elementPlus": "Loading directive / service",
-      "status": "planned",
-      "priority": "P2",
-      "components": [
-        "MSpinner",
-        "MSkeleton"
-      ],
-      "available": "已有内联等待与内容占位。",
-      "boundary": "没有区域遮罩指令、页面滚动锁定或命令式 Loading 服务。",
-      "next": "遮罩需求出现时，明确阻挡范围、取消和焦点策略。"
+      "status": "added",
+      "priority": "",
+      "components": [],
+      "available": "",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "icons",
       "capability": "图标入口",
       "antDesign": "Icon",
       "elementPlus": "Icon",
-      "status": "planned",
-      "priority": "P2",
-      "components": [],
-      "available": "暂无独立图标组件与图标包。",
-      "boundary": "组件内部使用轻量SVG；不将内部图形误计为公共图标系统。",
-      "next": "按文档站和实际业务需要进一步收敛。"
+      "status": "added",
+      "priority": "",
+      "components": [
+        "MIcon"
+      ],
+      "available": "SVG图标、尺寸颜色、自定义图形slot、可访问名称、减动",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "scrollbar",
       "capability": "滚动条容器",
       "antDesign": "无独立Scrollbar条目",
       "elementPlus": "Scrollbar",
-      "status": "planned",
-      "priority": "P2",
-      "components": [],
-      "available": "当前使用原生滚动与局部overflow容器。",
-      "boundary": "没有统一Scrollbar或滚动API，保留系统滚动体验。",
-      "next": "按文档站和实际业务需要进一步收敛。"
+      "status": "added",
+      "priority": "",
+      "components": [
+        "MScrollbar"
+      ],
+      "available": "原生内容滚动、真实双轴拖动/键盘、RTL/动态尺寸、可访问与原生回退",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "page-header",
       "capability": "页面头部",
       "antDesign": "由布局与排版组合",
       "elementPlus": "Page Header",
-      "status": "planned",
-      "priority": "P2",
-      "components": [],
-      "available": "已有原生页面头部样板。",
-      "boundary": "暂无独立PageHeader，返回、标题与附属动作由页面组织。",
-      "next": "按文档站和实际业务需要进一步收敛。"
+      "status": "added",
+      "priority": "",
+      "components": [
+        "MPageHeader"
+      ],
+      "available": "返回事件、标题/副标题与操作slot",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "message-box",
       "capability": "命令式确认与输入",
       "antDesign": "Modal确认服务",
       "elementPlus": "Message Box",
-      "status": "planned",
-      "priority": "P2",
-      "components": [],
-      "available": "可用MDialog与原生控件组合。",
-      "boundary": "没有全局alert/confirm/prompt服务或命令式输入确认。",
-      "next": "按文档站和实际业务需要进一步收敛。"
+      "status": "added",
+      "priority": "",
+      "components": [
+        "MMessageBox"
+      ],
+      "available": "alert/confirm/prompt、输入验证/异步取消、Promise结果与焦点",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "border-beam",
       "capability": "装饰流光边框",
       "antDesign": "BorderBeam",
       "elementPlus": "目录未列独立BorderBeam",
-      "status": "planned",
-      "priority": "P2",
-      "components": [],
-      "available": "现有MG提供独立Canvas与DOM编排。",
-      "boundary": "尚无BorderBeam组件；MG工厂不等于边框组件。",
-      "next": "按文档站和实际业务需要进一步收敛。"
+      "status": "added",
+      "priority": "",
+      "components": [
+        "MBorderBeam"
+      ],
+      "available": "多条边框流光、速度/色彩可调、减动静态",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     },
     {
       "id": "design-primitives",
       "capability": "设计变量与辅助入口",
       "antDesign": "Icon / Util及设计变量",
       "elementPlus": "Border / Color",
-      "status": "planned",
-      "priority": "P2",
+      "status": "added",
+      "priority": "",
       "components": [],
-      "available": "已有色彩、边界与动效设计变量及独立纯工具。",
-      "boundary": "设计文档和工具入口不作为Vue组件计数，也不表示Ant Util API兼容。",
-      "next": "按文档站和实际业务需要进一步收敛。"
+      "available": "Vue props/prop/ref类型提取以及纯TS防抖/节流/异步锁；边框宽度/材质/焦点的设计变量与组件示例；四套材质主题、品牌/状态分离与对比度验证",
+      "boundary": "采用MaLang公开API，核心能力与验收依据见逐项对照；非第三方全部属性名兼容。",
+      "next": "在对应Story查看状态和用法；持续反馈真实业务边界。"
     }
   ],
   "referenceVersions": {
@@ -537,28 +596,35 @@
               "components": [
                 "MButton"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "FloatButton",
               "capability": "backtop",
               "components": [
+                "MFloatButton",
+                "MFloatButtonGroup",
                 "MBackTop"
               ],
-              "coverage": "basic",
-              "note": "当前只支持BackTop用途。"
+              "coverage": "verified"
             },
             {
               "name": "Icon",
               "capability": "icons",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MIcon"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Typography",
               "capability": "typography",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MTypography",
+                "MText",
+                "MLink"
+              ],
+              "coverage": "verified"
             }
           ]
         },
@@ -571,31 +637,40 @@
               "components": [
                 "MDivider"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Flex",
               "capability": "layout",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MFlex"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Grid",
               "capability": "layout",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MGrid",
+                "MGridItem"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Layout",
               "capability": "layout",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MLayout"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Masonry",
               "capability": "layout",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MMasonry"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Space",
@@ -603,13 +678,15 @@
               "components": [
                 "MSpace"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Splitter",
               "capability": "layout",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MSplitter"
+              ],
+              "coverage": "verified"
             }
           ]
         },
@@ -619,8 +696,10 @@
             {
               "name": "Anchor",
               "capability": "anchor",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MAnchor"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Breadcrumb",
@@ -628,7 +707,7 @@
               "components": [
                 "MBreadcrumb"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Dropdown",
@@ -636,7 +715,7 @@
               "components": [
                 "MDropdownMenu"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Menu",
@@ -644,7 +723,7 @@
               "components": [
                 "MMenu"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Pagination",
@@ -652,7 +731,7 @@
               "components": [
                 "MPagination"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Steps",
@@ -660,7 +739,7 @@
               "components": [
                 "MSteps"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Tabs",
@@ -668,7 +747,7 @@
               "components": [
                 "MTabs"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             }
           ]
         },
@@ -679,55 +758,63 @@
               "name": "AutoComplete",
               "capability": "form-controls",
               "components": [
-                "MCombobox"
+                "MAutoComplete"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Cascader",
               "capability": "hierarchical-select",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MCascader"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Checkbox",
               "capability": "form-controls",
               "components": [
-                "MCheckbox"
+                "MCheckbox",
+                "MCheckboxGroup"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "ColorPicker",
               "capability": "special-inputs",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MColorPicker"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "DatePicker",
               "capability": "form-controls",
               "components": [
-                "MDatePicker"
+                "MDatePicker",
+                "MDateRangePicker"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Form",
               "capability": "form",
               "components": [
                 "MForm",
-                "MFormItem"
+                "MFormItem",
+                "MFormList"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Input",
               "capability": "form-controls",
               "components": [
                 "MInput",
-                "MTextarea"
+                "MTextarea",
+                "MInputOTP"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "InputNumber",
@@ -735,35 +822,42 @@
               "components": [
                 "MInputNumber"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Mentions",
               "capability": "special-inputs",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MMention"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Radio",
               "capability": "form-controls",
               "components": [
+                "MRadio",
                 "MRadioGroup"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Rate",
               "capability": "special-inputs",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MRate"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Select",
               "capability": "form-controls",
               "components": [
-                "MSelect"
+                "MSelect",
+                "MCombobox",
+                "MVirtualSelect"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Slider",
@@ -771,7 +865,7 @@
               "components": [
                 "MSlider"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Switch",
@@ -779,25 +873,31 @@
               "components": [
                 "MSwitch"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "TimePicker",
               "capability": "date-time",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MTimePicker"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Transfer",
               "capability": "special-inputs",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MTransfer"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "TreeSelect",
               "capability": "hierarchical-select",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MTreeSelect"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Upload",
@@ -805,7 +905,7 @@
               "components": [
                 "MUpload"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             }
           ]
         },
@@ -818,7 +918,7 @@
               "components": [
                 "MAvatar"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Badge",
@@ -826,13 +926,15 @@
               "components": [
                 "MBadge"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Calendar",
               "capability": "date-time",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MCalendar"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Card",
@@ -840,13 +942,15 @@
               "components": [
                 "MCard"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Carousel",
               "capability": "showcase",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MCarousel"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Collapse",
@@ -854,7 +958,7 @@
               "components": [
                 "MAccordion"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Descriptions",
@@ -862,7 +966,7 @@
               "components": [
                 "MDescriptions"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Empty",
@@ -870,7 +974,7 @@
               "components": [
                 "MEmpty"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Image",
@@ -878,20 +982,25 @@
               "components": [
                 "MImage"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "List",
               "capability": "virtual-data",
-              "components": [],
-              "coverage": "planned",
+              "components": [
+                "MList"
+              ],
+              "coverage": "verified",
               "note": "官方目录标记Deprecated，后续新列表参考Listy。"
             },
             {
               "name": "Listy",
               "capability": "virtual-data",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MListy",
+                "MVirtualList"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Popover",
@@ -899,13 +1008,15 @@
               "components": [
                 "MPopover"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "QRCode",
               "capability": "showcase",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MQRCode"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Segmented",
@@ -913,7 +1024,7 @@
               "components": [
                 "MSegmented"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Statistic",
@@ -921,7 +1032,7 @@
               "components": [
                 "MStatistic"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Table",
@@ -929,7 +1040,7 @@
               "components": [
                 "MTable"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Tag",
@@ -937,7 +1048,7 @@
               "components": [
                 "MTag"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Timeline",
@@ -945,7 +1056,7 @@
               "components": [
                 "MTimeline"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Tooltip",
@@ -953,13 +1064,15 @@
               "components": [
                 "MTooltip"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Tour",
               "capability": "showcase",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MTour"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Tree",
@@ -967,7 +1080,7 @@
               "components": [
                 "MTree"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             }
           ]
         },
@@ -980,7 +1093,7 @@
               "components": [
                 "MAlert"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Drawer",
@@ -988,15 +1101,16 @@
               "components": [
                 "MDrawer"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Message",
               "capability": "message",
               "components": [
-                "MMessage"
+                "MMessage",
+                "MApp"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Modal",
@@ -1004,16 +1118,17 @@
               "components": [
                 "MDialog"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Notification",
               "capability": "feedback",
               "components": [
                 "MToast",
-                "MToastViewport"
+                "MToastViewport",
+                "MApp"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Popconfirm",
@@ -1021,7 +1136,7 @@
               "components": [
                 "MPopconfirm"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Progress",
@@ -1029,7 +1144,7 @@
               "components": [
                 "MProgress"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Result",
@@ -1037,7 +1152,7 @@
               "components": [
                 "MResult"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Skeleton",
@@ -1045,7 +1160,7 @@
               "components": [
                 "MSkeleton"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Spin",
@@ -1053,13 +1168,15 @@
               "components": [
                 "MSpinner"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Watermark",
               "capability": "showcase",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MWatermark"
+              ],
+              "coverage": "verified"
             }
           ]
         },
@@ -1069,32 +1186,40 @@
             {
               "name": "Affix",
               "capability": "anchor",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MAffix"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "App",
               "capability": "configuration",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MApp"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "BorderBeam",
               "capability": "border-beam",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MBorderBeam"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "ConfigProvider",
               "capability": "configuration",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MConfigProvider"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Util",
               "capability": "design-primitives",
               "components": [],
-              "coverage": "planned"
+              "coverage": "verified"
             }
           ]
         }
@@ -1114,7 +1239,7 @@
               "components": [
                 "MButton"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Border",
@@ -1131,38 +1256,51 @@
             {
               "name": "Layout Container",
               "capability": "layout",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MLayout"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Icon",
               "capability": "icons",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MIcon"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Layout",
               "capability": "layout",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MGrid",
+                "MGridItem"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Link",
               "capability": "typography",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MLink"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Text",
               "capability": "typography",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MText"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Scrollbar",
               "capability": "scrollbar",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MScrollbar"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Space",
@@ -1170,19 +1308,25 @@
               "components": [
                 "MSpace"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Splitter",
               "capability": "layout",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MSplitter"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Typography",
               "capability": "typography",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MTypography",
+                "MText",
+                "MLink"
+              ],
+              "coverage": "verified"
             }
           ]
         },
@@ -1192,8 +1336,10 @@
             {
               "name": "Config Provider",
               "capability": "configuration",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MConfigProvider"
+              ],
+              "coverage": "verified"
             }
           ]
         },
@@ -1204,73 +1350,87 @@
               "name": "Autocomplete",
               "capability": "form-controls",
               "components": [
-                "MCombobox"
+                "MAutoComplete"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Cascader",
               "capability": "hierarchical-select",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MCascader"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Checkbox",
               "capability": "form-controls",
               "components": [
-                "MCheckbox"
+                "MCheckbox",
+                "MCheckboxGroup"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Color Picker Panel",
               "capability": "special-inputs",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MColorPickerPanel"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Color Picker",
               "capability": "special-inputs",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MColorPicker"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Date Picker Panel",
               "capability": "date-time",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MDatePickerPanel"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Date Picker",
               "capability": "form-controls",
               "components": [
-                "MDatePicker"
+                "MDatePicker",
+                "MDateRangePicker"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "DateTime Picker",
               "capability": "date-time",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MDateTimePicker"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Form",
               "capability": "form",
               "components": [
                 "MForm",
-                "MFormItem"
+                "MFormItem",
+                "MFormList"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Input",
               "capability": "form-controls",
               "components": [
                 "MInput",
-                "MTextarea"
+                "MTextarea",
+                "MInputOTP"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Input Number",
@@ -1278,53 +1438,66 @@
               "components": [
                 "MInputNumber"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Input Tag",
               "capability": "special-inputs",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MInputTag"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Input OTP",
               "capability": "special-inputs",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MInputOTP"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Mention",
               "capability": "special-inputs",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MMention"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Radio",
               "capability": "form-controls",
               "components": [
+                "MRadio",
                 "MRadioGroup"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Rate",
               "capability": "special-inputs",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MRate"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Select",
               "capability": "form-controls",
               "components": [
-                "MSelect"
+                "MSelect",
+                "MCombobox",
+                "MVirtualSelect"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Virtualized Select",
               "capability": "virtual-data",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MVirtualSelect"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Slider",
@@ -1332,7 +1505,7 @@
               "components": [
                 "MSlider"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Switch",
@@ -1340,31 +1513,39 @@
               "components": [
                 "MSwitch"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Time Picker",
               "capability": "date-time",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MTimePicker"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Time Select",
               "capability": "date-time",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MTimeSelect"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Transfer",
               "capability": "special-inputs",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MTransfer"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "TreeSelect",
               "capability": "hierarchical-select",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MTreeSelect"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Upload",
@@ -1372,7 +1553,7 @@
               "components": [
                 "MUpload"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             }
           ]
         },
@@ -1385,7 +1566,7 @@
               "components": [
                 "MAvatar"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Badge",
@@ -1393,13 +1574,15 @@
               "components": [
                 "MBadge"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Calendar",
               "capability": "date-time",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MCalendar"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Card",
@@ -1407,13 +1590,15 @@
               "components": [
                 "MCard"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Carousel",
               "capability": "showcase",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MCarousel"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Collapse",
@@ -1421,7 +1606,7 @@
               "components": [
                 "MAccordion"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Descriptions",
@@ -1429,7 +1614,7 @@
               "components": [
                 "MDescriptions"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Empty",
@@ -1437,7 +1622,7 @@
               "components": [
                 "MEmpty"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Image",
@@ -1445,13 +1630,15 @@
               "components": [
                 "MImage"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Infinite Scroll",
               "capability": "virtual-data",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MInfiniteScroll"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Pagination",
@@ -1459,7 +1646,7 @@
               "components": [
                 "MPagination"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Progress",
@@ -1467,7 +1654,7 @@
               "components": [
                 "MProgress"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Result",
@@ -1475,7 +1662,7 @@
               "components": [
                 "MResult"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Skeleton",
@@ -1483,7 +1670,7 @@
               "components": [
                 "MSkeleton"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Table",
@@ -1491,13 +1678,15 @@
               "components": [
                 "MTable"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Virtualized Table",
               "capability": "virtual-data",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MVirtualTable"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Tag",
@@ -1505,7 +1694,7 @@
               "components": [
                 "MTag"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Timeline",
@@ -1513,13 +1702,15 @@
               "components": [
                 "MTimeline"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Tour",
               "capability": "showcase",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MTour"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Tree",
@@ -1527,13 +1718,15 @@
               "components": [
                 "MTree"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Virtualized Tree",
               "capability": "virtual-data",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MVirtualTree"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Statistic",
@@ -1541,7 +1734,7 @@
               "components": [
                 "MStatistic"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Segmented",
@@ -1549,7 +1742,7 @@
               "components": [
                 "MSegmented"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             }
           ]
         },
@@ -1559,14 +1752,18 @@
             {
               "name": "Affix",
               "capability": "anchor",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MAffix"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Anchor",
               "capability": "anchor",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MAnchor"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Backtop",
@@ -1574,7 +1771,7 @@
               "components": [
                 "MBackTop"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Breadcrumb",
@@ -1582,7 +1779,7 @@
               "components": [
                 "MBreadcrumb"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Dropdown",
@@ -1590,7 +1787,7 @@
               "components": [
                 "MDropdownMenu"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Menu",
@@ -1598,13 +1795,15 @@
               "components": [
                 "MMenu"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Page Header",
               "capability": "page-header",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MPageHeader"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Steps",
@@ -1612,7 +1811,7 @@
               "components": [
                 "MSteps"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Tabs",
@@ -1620,7 +1819,7 @@
               "components": [
                 "MTabs"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             }
           ]
         },
@@ -1633,7 +1832,7 @@
               "components": [
                 "MAlert"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Dialog",
@@ -1641,7 +1840,7 @@
               "components": [
                 "MDialog"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Drawer",
@@ -1649,38 +1848,42 @@
               "components": [
                 "MDrawer"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Loading",
               "capability": "feedback",
               "components": [
-                "MSpinner"
+                "MLoading"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Message",
               "capability": "message",
               "components": [
-                "MMessage"
+                "MMessage",
+                "MApp"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Message Box",
               "capability": "message-box",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MMessageBox"
+              ],
+              "coverage": "verified"
             },
             {
               "name": "Notification",
               "capability": "feedback",
               "components": [
                 "MToast",
-                "MToastViewport"
+                "MToastViewport",
+                "MApp"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Popconfirm",
@@ -1688,7 +1891,7 @@
               "components": [
                 "MPopconfirm"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Popover",
@@ -1696,7 +1899,7 @@
               "components": [
                 "MPopover"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Tooltip",
@@ -1704,7 +1907,7 @@
               "components": [
                 "MTooltip"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             }
           ]
         },
@@ -1717,13 +1920,15 @@
               "components": [
                 "MDivider"
               ],
-              "coverage": "basic"
+              "coverage": "verified"
             },
             {
               "name": "Watermark",
               "capability": "showcase",
-              "components": [],
-              "coverage": "planned"
+              "components": [
+                "MWatermark"
+              ],
+              "coverage": "verified"
             }
           ]
         }

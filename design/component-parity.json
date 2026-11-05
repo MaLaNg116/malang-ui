@@ -1,0 +1,2394 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-05",
+  "scope": "Ant Design与Element Plus正式核心目录并集；Pro、Charts、X、Mobile等独立产品不在两份核心目录内。Border/Color为设计参考，Util为类型工具，List保留实际列表实现。",
+  "verification": "pnpm check; pnpm test:browser; SSR与四主题/窄屏实机检查",
+  "entries": [
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "General",
+      "name": "Button",
+      "kind": "component",
+      "components": [
+        "MButton"
+      ],
+      "sources": [
+        "src/components/MButton.vue"
+      ],
+      "acceptance": "原生按钮、状态、加载与禁用、键盘和焦点",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "General",
+      "name": "FloatButton",
+      "kind": "component",
+      "components": [
+        "MFloatButton",
+        "MFloatButtonGroup",
+        "MBackTop"
+      ],
+      "sources": [
+        "src/components/reference-layout/MFloatButton.vue",
+        "src/components/reference-layout/MFloatButtonGroup.vue",
+        "src/components/MBackTop.vue"
+      ],
+      "acceptance": "浮动操作与分组展开、点击/悬停触发、返回顶部",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "General",
+      "name": "Icon",
+      "kind": "component",
+      "components": [
+        "MIcon"
+      ],
+      "sources": [
+        "src/components/reference-common/MIcon.vue"
+      ],
+      "acceptance": "SVG图标、尺寸颜色、自定义图形slot、可访问名称、减动",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "General",
+      "name": "Typography",
+      "kind": "component",
+      "components": [
+        "MTypography",
+        "MText",
+        "MLink"
+      ],
+      "sources": [
+        "src/components/reference-common/MTypography.vue",
+        "src/components/reference-common/MText.vue",
+        "src/components/reference-common/MLink.vue"
+      ],
+      "acceptance": "语义标题与段落、样式、复制/编辑/取消、截断展开",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Layout",
+      "name": "Divider",
+      "kind": "component",
+      "components": [
+        "MDivider"
+      ],
+      "sources": [
+        "src/components/MDivider.vue"
+      ],
+      "acceptance": "横竖分隔与标题",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Layout",
+      "name": "Flex",
+      "kind": "component",
+      "components": [
+        "MFlex"
+      ],
+      "sources": [
+        "src/components/reference-layout/MFlex.vue"
+      ],
+      "acceptance": "方向、对齐、换行、间距",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Layout",
+      "name": "Grid",
+      "kind": "component",
+      "components": [
+        "MGrid",
+        "MGridItem"
+      ],
+      "sources": [
+        "src/components/reference-layout/MGrid.vue",
+        "src/components/reference-layout/MGridItem.vue"
+      ],
+      "acceptance": "响应式列数、跨列与偏移",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Layout",
+      "name": "Layout",
+      "kind": "component",
+      "components": [
+        "MLayout"
+      ],
+      "sources": [
+        "src/components/reference-layout/MLayout.vue"
+      ],
+      "acceptance": "页面头/侧栏/内容/页脚分区",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Layout",
+      "name": "Masonry",
+      "kind": "component",
+      "components": [
+        "MMasonry"
+      ],
+      "sources": [
+        "src/components/reference-layout/MMasonry.vue"
+      ],
+      "acceptance": "实测高度的最短列排布、容器重排、动态内容清理",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Layout",
+      "name": "Space",
+      "kind": "component",
+      "components": [
+        "MSpace"
+      ],
+      "sources": [
+        "src/components/MSpace.vue"
+      ],
+      "acceptance": "布局方向、间距、换行、分隔符",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Layout",
+      "name": "Splitter",
+      "kind": "component",
+      "components": [
+        "MSplitter"
+      ],
+      "sources": [
+        "src/components/reference-layout/MSplitter.vue"
+      ],
+      "acceptance": "真实指针拖动、键盘调整、受控尺寸、边界和折叠",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Navigation",
+      "name": "Anchor",
+      "kind": "component",
+      "components": [
+        "MAnchor"
+      ],
+      "sources": [
+        "src/components/reference-layout/MAnchor.vue"
+      ],
+      "acceptance": "真实滚动目标定位、活动章节追踪、独立滚动容器",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Navigation",
+      "name": "Breadcrumb",
+      "kind": "component",
+      "components": [
+        "MBreadcrumb"
+      ],
+      "sources": [
+        "src/components/MBreadcrumb.vue"
+      ],
+      "acceptance": "当前位置与可导航祖先",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Navigation",
+      "name": "Dropdown",
+      "kind": "component",
+      "components": [
+        "MDropdownMenu"
+      ],
+      "sources": [
+        "src/components/MDropdownMenu.vue"
+      ],
+      "acceptance": "菜单项/分隔/禁用、键盘、浮层定位与焦点返回",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Navigation",
+      "name": "Menu",
+      "kind": "component",
+      "components": [
+        "MMenu"
+      ],
+      "sources": [
+        "src/components/MMenu.vue"
+      ],
+      "acceptance": "层级菜单、导航、展开与键盘",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Navigation",
+      "name": "Pagination",
+      "kind": "component",
+      "components": [
+        "MPagination"
+      ],
+      "sources": [
+        "src/components/MPagination.vue"
+      ],
+      "acceptance": "页码切换、边界和禁用",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Navigation",
+      "name": "Steps",
+      "kind": "component",
+      "components": [
+        "MSteps"
+      ],
+      "sources": [
+        "src/components/MSteps.vue"
+      ],
+      "acceptance": "步骤状态与当前步骤",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Navigation",
+      "name": "Tabs",
+      "kind": "component",
+      "components": [
+        "MTabs"
+      ],
+      "sources": [
+        "src/components/MTabs.vue"
+      ],
+      "acceptance": "受控激活、键盘、禁用与面板关联",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "AutoComplete",
+      "kind": "component",
+      "components": [
+        "MAutoComplete"
+      ],
+      "sources": [
+        "src/components/reference-data/MAutoComplete.vue"
+      ],
+      "acceptance": "可提交任意文本、建议选择、键盘、异步options/loading、IME与受控回退",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "Cascader",
+      "kind": "component",
+      "components": [
+        "MCascader"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MCascader.vue"
+      ],
+      "acceptance": "多层路径、搜索、单/多路径、严格/联动与禁用",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "Checkbox",
+      "kind": "component",
+      "components": [
+        "MCheckbox",
+        "MCheckboxGroup"
+      ],
+      "sources": [
+        "src/components/MCheckbox.vue",
+        "src/components/reference-common/MCheckboxGroup.vue"
+      ],
+      "acceptance": "原生单项/分组、半选、数量约束与FormData",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "ColorPicker",
+      "kind": "component",
+      "components": [
+        "MColorPicker"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MColorPicker.vue"
+      ],
+      "acceptance": "HEX/HSV、透明度、预设和浮层编辑",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "DatePicker",
+      "kind": "component",
+      "components": [
+        "MDatePicker",
+        "MDateRangePicker"
+      ],
+      "sources": [
+        "src/components/MDatePicker.vue",
+        "src/components/reference-inputs/MDateRangePicker.vue"
+      ],
+      "acceptance": "单日期/范围、历盘键盘、最小最大与无效日期",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "Form",
+      "kind": "component",
+      "components": [
+        "MForm",
+        "MFormItem",
+        "MFormList"
+      ],
+      "sources": [
+        "src/components/MForm.vue",
+        "src/components/MFormItem.vue",
+        "src/components/reference-common/MFormList.vue"
+      ],
+      "acceptance": "嵌套路径/动态数组、同步异步规则、错误聚焦、取消过期验证、重置",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "Input",
+      "kind": "component",
+      "components": [
+        "MInput",
+        "MTextarea",
+        "MInputOTP"
+      ],
+      "sources": [
+        "src/components/MInput.vue",
+        "src/components/MTextarea.vue",
+        "src/components/reference-inputs/MInputOTP.vue"
+      ],
+      "acceptance": "文本/密码/多行/OTP原生语义、IME、错误与禁用",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "InputNumber",
+      "kind": "component",
+      "components": [
+        "MInputNumber"
+      ],
+      "sources": [
+        "src/components/MInputNumber.vue"
+      ],
+      "acceptance": "合法数值/步进/上下界、键盘和FormData",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "Mentions",
+      "kind": "component",
+      "components": [
+        "MMention"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MMention.vue"
+      ],
+      "acceptance": "光标处前缀匹配、键盘插入、IME与候选禁用",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "Radio",
+      "kind": "component",
+      "components": [
+        "MRadio",
+        "MRadioGroup"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MRadio.vue",
+        "src/components/MRadioGroup.vue"
+      ],
+      "acceptance": "原生单项/组、同组互斥和受控回退",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "Rate",
+      "kind": "component",
+      "components": [
+        "MRate"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MRate.vue"
+      ],
+      "acceptance": "评分、半星、键盘、只读与提交",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "Select",
+      "kind": "component",
+      "components": [
+        "MSelect",
+        "MCombobox",
+        "MVirtualSelect"
+      ],
+      "sources": [
+        "src/components/MSelect.vue",
+        "src/components/MCombobox.vue",
+        "src/components/reference-data/MVirtualSelect.vue"
+      ],
+      "acceptance": "原生单多选、搜索多选、禁用和重复FormData",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "Slider",
+      "kind": "component",
+      "components": [
+        "MSlider"
+      ],
+      "sources": [
+        "src/components/MSlider.vue"
+      ],
+      "acceptance": "指针/键盘步进、范围与禁用",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "Switch",
+      "kind": "component",
+      "components": [
+        "MSwitch"
+      ],
+      "sources": [
+        "src/components/MSwitch.vue"
+      ],
+      "acceptance": "原生切换语义、受控状态与禁用",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "TimePicker",
+      "kind": "component",
+      "components": [
+        "MTimePicker"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MTimePicker.vue"
+      ],
+      "acceptance": "时分秒选择、步长/上下界、受控提交",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "Transfer",
+      "kind": "component",
+      "components": [
+        "MTransfer"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MTransfer.vue"
+      ],
+      "acceptance": "双栏搜索、勾选和移动、禁用项保护",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "TreeSelect",
+      "kind": "component",
+      "components": [
+        "MTreeSelect"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MTreeSelect.vue"
+      ],
+      "acceptance": "树形搜索/展开、单多选/严格关联、键盘与表单",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Entry",
+      "name": "Upload",
+      "kind": "component",
+      "components": [
+        "MUpload"
+      ],
+      "sources": [
+        "src/components/MUpload.vue"
+      ],
+      "acceptance": "本地文件选择/拖放/验证、远程请求/自定义请求、进度/重试/取消与卸载清理",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Avatar",
+      "kind": "component",
+      "components": [
+        "MAvatar"
+      ],
+      "sources": [
+        "src/components/MAvatar.vue"
+      ],
+      "acceptance": "图片/文字回退、尺寸和名称",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Badge",
+      "kind": "component",
+      "components": [
+        "MBadge"
+      ],
+      "sources": [
+        "src/components/MBadge.vue"
+      ],
+      "acceptance": "状态/计数和可读文本",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Calendar",
+      "kind": "component",
+      "components": [
+        "MCalendar"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MCalendar.vue"
+      ],
+      "acceptance": "月份切换、日期网格、选择/边界与日期slot",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Card",
+      "kind": "component",
+      "components": [
+        "MCard"
+      ],
+      "sources": [
+        "src/components/MCard.vue"
+      ],
+      "acceptance": "内容分区、状态与操作slot",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Carousel",
+      "kind": "component",
+      "components": [
+        "MCarousel"
+      ],
+      "sources": [
+        "src/components/reference-layout/MCarousel.vue"
+      ],
+      "acceptance": "受控轮播、键盘、循环/自动播放、悬停/隐藏/减动暂停",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Collapse",
+      "kind": "component",
+      "components": [
+        "MAccordion"
+      ],
+      "sources": [
+        "src/components/MAccordion.vue"
+      ],
+      "acceptance": "受控折叠、键盘、内容可见性",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Descriptions",
+      "kind": "component",
+      "components": [
+        "MDescriptions"
+      ],
+      "sources": [
+        "src/components/MDescriptions.vue"
+      ],
+      "acceptance": "资料标签值布局和slot",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Empty",
+      "kind": "component",
+      "components": [
+        "MEmpty"
+      ],
+      "sources": [
+        "src/components/MEmpty.vue"
+      ],
+      "acceptance": "空状态文字和操作",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Image",
+      "kind": "component",
+      "components": [
+        "MImage"
+      ],
+      "sources": [
+        "src/components/MImage.vue"
+      ],
+      "acceptance": "真实加载/失败、缩放预览、切换与卸载清理",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "List",
+      "kind": "deprecated-reference",
+      "components": [
+        "MList"
+      ],
+      "sources": [
+        "src/components/reference-data/MList.vue"
+      ],
+      "acceptance": "语义列表、item/header/footer/empty/loading slot",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Listy",
+      "kind": "component",
+      "components": [
+        "MListy",
+        "MVirtualList"
+      ],
+      "sources": [
+        "src/components/reference-data/MListy.vue",
+        "src/components/reference-data/MVirtualList.vue"
+      ],
+      "acceptance": "列表选择、行号和真实窗口化",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Popover",
+      "kind": "component",
+      "components": [
+        "MPopover"
+      ],
+      "sources": [
+        "src/components/MPopover.vue"
+      ],
+      "acceptance": "受控浮层、定位、交互/关闭与焦点",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "QRCode",
+      "kind": "component",
+      "components": [
+        "MQRCode"
+      ],
+      "sources": [
+        "src/components/reference-common/MQRCode.vue"
+      ],
+      "acceptance": "真实UTF-8编码/独立解码、SVG/Canvas、纠错/图标/静区、状态刷新和导出",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Segmented",
+      "kind": "component",
+      "components": [
+        "MSegmented"
+      ],
+      "sources": [
+        "src/components/MSegmented.vue"
+      ],
+      "acceptance": "受控单选、禁用、键盘与表单",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Statistic",
+      "kind": "component",
+      "components": [
+        "MStatistic"
+      ],
+      "sources": [
+        "src/components/MStatistic.vue"
+      ],
+      "acceptance": "数字格式化、前后缀/精度与状态",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Table",
+      "kind": "component",
+      "components": [
+        "MTable"
+      ],
+      "sources": [
+        "src/components/MTable.vue"
+      ],
+      "acceptance": "列与单元格slot、排序/过滤/选择/展开/分页、加载与空状态",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Tag",
+      "kind": "component",
+      "components": [
+        "MTag"
+      ],
+      "sources": [
+        "src/components/MTag.vue"
+      ],
+      "acceptance": "状态标签与关闭交互",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Timeline",
+      "kind": "component",
+      "components": [
+        "MTimeline"
+      ],
+      "sources": [
+        "src/components/MTimeline.vue"
+      ],
+      "acceptance": "时间顺序、节点状态与内容",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Tooltip",
+      "kind": "component",
+      "components": [
+        "MTooltip"
+      ],
+      "sources": [
+        "src/components/MTooltip.vue"
+      ],
+      "acceptance": "悬停/焦点触发、稳定描述关系、关闭/定位与减动",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Tour",
+      "kind": "component",
+      "components": [
+        "MTour"
+      ],
+      "sources": [
+        "src/components/reference-layout/MTour.vue"
+      ],
+      "acceptance": "真实目标定位/挖洞、步骤切换、缺失目标、焦点和关闭清理",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Data Display",
+      "name": "Tree",
+      "kind": "component",
+      "components": [
+        "MTree"
+      ],
+      "sources": [
+        "src/components/MTree.vue"
+      ],
+      "acceptance": "层级展开/选择、复选联动/半选、禁用与键盘",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Feedback",
+      "name": "Alert",
+      "kind": "component",
+      "components": [
+        "MAlert"
+      ],
+      "sources": [
+        "src/components/MAlert.vue"
+      ],
+      "acceptance": "信息/成功/警告/错误、说明与关闭",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Feedback",
+      "name": "Drawer",
+      "kind": "component",
+      "components": [
+        "MDrawer"
+      ],
+      "sources": [
+        "src/components/MDrawer.vue"
+      ],
+      "acceptance": "侧/底抽屉、原生模态语义、焦点锁定、长内容滚动与清理",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Feedback",
+      "name": "Message",
+      "kind": "component",
+      "components": [
+        "MMessage",
+        "MApp"
+      ],
+      "sources": [
+        "src/components/MMessage.vue",
+        "src/components/reference-common/MApp.vue"
+      ],
+      "acceptance": "顶部轻提示、多语义、计时暂停、动态更新/队列和上下文",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Feedback",
+      "name": "Modal",
+      "kind": "component",
+      "components": [
+        "MDialog"
+      ],
+      "sources": [
+        "src/components/MDialog.vue"
+      ],
+      "acceptance": "模态焦点/返回、关闭策略、长内容与嵌套",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Feedback",
+      "name": "Notification",
+      "kind": "component",
+      "components": [
+        "MToast",
+        "MToastViewport",
+        "MApp"
+      ],
+      "sources": [
+        "src/components/MToast.vue",
+        "src/components/MToastViewport.vue",
+        "src/components/reference-common/MApp.vue"
+      ],
+      "acceptance": "标题/详情通知、落点、队列、关闭和计时",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Feedback",
+      "name": "Popconfirm",
+      "kind": "component",
+      "components": [
+        "MPopconfirm"
+      ],
+      "sources": [
+        "src/components/MPopconfirm.vue"
+      ],
+      "acceptance": "锚定确认、异步忙碌/失败/重试、焦点与取消",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Feedback",
+      "name": "Progress",
+      "kind": "component",
+      "components": [
+        "MProgress"
+      ],
+      "sources": [
+        "src/components/MProgress.vue"
+      ],
+      "acceptance": "真实数值进度、进行中/成功/错误区别与可访问值",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Feedback",
+      "name": "Result",
+      "kind": "component",
+      "components": [
+        "MResult"
+      ],
+      "sources": [
+        "src/components/MResult.vue"
+      ],
+      "acceptance": "结果状态、说明与后续操作",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Feedback",
+      "name": "Skeleton",
+      "kind": "component",
+      "components": [
+        "MSkeleton"
+      ],
+      "sources": [
+        "src/components/MSkeleton.vue"
+      ],
+      "acceptance": "静态骨架/细雪花、尺寸和减动",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Feedback",
+      "name": "Spin",
+      "kind": "component",
+      "components": [
+        "MSpinner"
+      ],
+      "sources": [
+        "src/components/MSpinner.vue"
+      ],
+      "acceptance": "双色细线旋转/错位变奏、加载名称与减动",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Feedback",
+      "name": "Watermark",
+      "kind": "component",
+      "components": [
+        "MWatermark"
+      ],
+      "sources": [
+        "src/components/reference-layout/MWatermark.vue"
+      ],
+      "acceptance": "文本/图片的真实重复水印、尺寸旋转、变化/卸载清理",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Other",
+      "name": "Affix",
+      "kind": "component",
+      "components": [
+        "MAffix"
+      ],
+      "sources": [
+        "src/components/reference-layout/MAffix.vue"
+      ],
+      "acceptance": "目标容器吸附、占位、滚动与观察器清理",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Other",
+      "name": "App",
+      "kind": "component",
+      "components": [
+        "MApp"
+      ],
+      "sources": [
+        "src/components/reference-common/MApp.vue"
+      ],
+      "acceptance": "组件树范围内的Message/Notification/MessageBox服务、独立销毁与Promise结果",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Other",
+      "name": "BorderBeam",
+      "kind": "component",
+      "components": [
+        "MBorderBeam"
+      ],
+      "sources": [
+        "src/components/reference-layout/MBorderBeam.vue"
+      ],
+      "acceptance": "多条边框流光、速度/色彩可调、减动静态",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Other",
+      "name": "ConfigProvider",
+      "kind": "component",
+      "components": [
+        "MConfigProvider"
+      ],
+      "sources": [
+        "src/components/reference-common/MConfigProvider.vue"
+      ],
+      "acceptance": "可嵌套配置、theme/palette/density/motion/locale/dir/messages",
+      "status": "verified"
+    },
+    {
+      "library": "ant-design",
+      "version": "6.7.0",
+      "category": "Other",
+      "name": "Util",
+      "kind": "type-utility",
+      "components": [],
+      "sources": [
+        "src/utils/component-types.ts",
+        "src/utils/index.ts"
+      ],
+      "acceptance": "Vue props/prop/ref类型提取以及纯TS防抖/节流/异步锁",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Basic",
+      "name": "Button",
+      "kind": "component",
+      "components": [
+        "MButton"
+      ],
+      "sources": [
+        "src/components/MButton.vue"
+      ],
+      "acceptance": "原生按钮、状态、加载与禁用、键盘和焦点",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Basic",
+      "name": "Border",
+      "kind": "design-reference",
+      "components": [],
+      "sources": [
+        "design/tokens.json"
+      ],
+      "acceptance": "边框宽度/材质/焦点的设计变量与组件示例",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Basic",
+      "name": "Color",
+      "kind": "design-reference",
+      "components": [],
+      "sources": [
+        "design/tokens.json"
+      ],
+      "acceptance": "四套材质主题、品牌/状态分离与对比度验证",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Basic",
+      "name": "Layout Container",
+      "kind": "component",
+      "components": [
+        "MLayout"
+      ],
+      "sources": [
+        "src/components/reference-layout/MLayout.vue"
+      ],
+      "acceptance": "页面头/侧栏/内容/页脚分区",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Basic",
+      "name": "Icon",
+      "kind": "component",
+      "components": [
+        "MIcon"
+      ],
+      "sources": [
+        "src/components/reference-common/MIcon.vue"
+      ],
+      "acceptance": "SVG图标、尺寸颜色、自定义图形slot、可访问名称、减动",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Basic",
+      "name": "Layout",
+      "kind": "component",
+      "components": [
+        "MGrid",
+        "MGridItem"
+      ],
+      "sources": [
+        "src/components/reference-layout/MGrid.vue",
+        "src/components/reference-layout/MGridItem.vue"
+      ],
+      "acceptance": "页面头/侧栏/内容/页脚分区",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Basic",
+      "name": "Link",
+      "kind": "component",
+      "components": [
+        "MLink"
+      ],
+      "sources": [
+        "src/components/reference-common/MLink.vue"
+      ],
+      "acceptance": "真实链接、禁用、新窗口安全属性与原生修改键",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Basic",
+      "name": "Text",
+      "kind": "component",
+      "components": [
+        "MText"
+      ],
+      "sources": [
+        "src/components/reference-common/MText.vue"
+      ],
+      "acceptance": "行内文字与语义状态、截断",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Basic",
+      "name": "Scrollbar",
+      "kind": "component",
+      "components": [
+        "MScrollbar"
+      ],
+      "sources": [
+        "src/components/reference-data/MScrollbar.vue"
+      ],
+      "acceptance": "原生内容滚动、真实双轴拖动/键盘、RTL/动态尺寸、可访问与原生回退",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Basic",
+      "name": "Space",
+      "kind": "component",
+      "components": [
+        "MSpace"
+      ],
+      "sources": [
+        "src/components/MSpace.vue"
+      ],
+      "acceptance": "布局方向、间距、换行、分隔符",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Basic",
+      "name": "Splitter",
+      "kind": "component",
+      "components": [
+        "MSplitter"
+      ],
+      "sources": [
+        "src/components/reference-layout/MSplitter.vue"
+      ],
+      "acceptance": "真实指针拖动、键盘调整、受控尺寸、边界和折叠",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Basic",
+      "name": "Typography",
+      "kind": "component",
+      "components": [
+        "MTypography",
+        "MText",
+        "MLink"
+      ],
+      "sources": [
+        "src/components/reference-common/MTypography.vue",
+        "src/components/reference-common/MText.vue",
+        "src/components/reference-common/MLink.vue"
+      ],
+      "acceptance": "语义标题与段落、样式、复制/编辑/取消、截断展开",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Configuration",
+      "name": "Config Provider",
+      "kind": "component",
+      "components": [
+        "MConfigProvider"
+      ],
+      "sources": [
+        "src/components/reference-common/MConfigProvider.vue"
+      ],
+      "acceptance": "可嵌套配置、theme/palette/density/motion/locale/dir/messages",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Autocomplete",
+      "kind": "component",
+      "components": [
+        "MAutoComplete"
+      ],
+      "sources": [
+        "src/components/reference-data/MAutoComplete.vue"
+      ],
+      "acceptance": "可提交任意文本、建议选择、键盘、异步options/loading、IME与受控回退",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Cascader",
+      "kind": "component",
+      "components": [
+        "MCascader"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MCascader.vue"
+      ],
+      "acceptance": "多层路径、搜索、单/多路径、严格/联动与禁用",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Checkbox",
+      "kind": "component",
+      "components": [
+        "MCheckbox",
+        "MCheckboxGroup"
+      ],
+      "sources": [
+        "src/components/MCheckbox.vue",
+        "src/components/reference-common/MCheckboxGroup.vue"
+      ],
+      "acceptance": "原生单项/分组、半选、数量约束与FormData",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Color Picker Panel",
+      "kind": "component",
+      "components": [
+        "MColorPickerPanel"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MColorPickerPanel.vue"
+      ],
+      "acceptance": "独立颜色面板、HSV/透明度/输入同步",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Color Picker",
+      "kind": "component",
+      "components": [
+        "MColorPicker"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MColorPicker.vue"
+      ],
+      "acceptance": "HEX/HSV、透明度、预设和浮层编辑",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Date Picker Panel",
+      "kind": "component",
+      "components": [
+        "MDatePickerPanel"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MDatePickerPanel.vue"
+      ],
+      "acceptance": "独立历盘、日期选择与禁用边界",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Date Picker",
+      "kind": "component",
+      "components": [
+        "MDatePicker",
+        "MDateRangePicker"
+      ],
+      "sources": [
+        "src/components/MDatePicker.vue",
+        "src/components/reference-inputs/MDateRangePicker.vue"
+      ],
+      "acceptance": "单日期/范围、历盘键盘、最小最大与无效日期",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "DateTime Picker",
+      "kind": "component",
+      "components": [
+        "MDateTimePicker"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MDateTimePicker.vue"
+      ],
+      "acceptance": "日期+时间组合、范围校验与原生表单关联",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Form",
+      "kind": "component",
+      "components": [
+        "MForm",
+        "MFormItem",
+        "MFormList"
+      ],
+      "sources": [
+        "src/components/MForm.vue",
+        "src/components/MFormItem.vue",
+        "src/components/reference-common/MFormList.vue"
+      ],
+      "acceptance": "嵌套路径/动态数组、同步异步规则、错误聚焦、取消过期验证、重置",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Input",
+      "kind": "component",
+      "components": [
+        "MInput",
+        "MTextarea",
+        "MInputOTP"
+      ],
+      "sources": [
+        "src/components/MInput.vue",
+        "src/components/MTextarea.vue",
+        "src/components/reference-inputs/MInputOTP.vue"
+      ],
+      "acceptance": "文本/密码/多行/OTP原生语义、IME、错误与禁用",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Input Number",
+      "kind": "component",
+      "components": [
+        "MInputNumber"
+      ],
+      "sources": [
+        "src/components/MInputNumber.vue"
+      ],
+      "acceptance": "合法数值/步进/上下界、键盘和FormData",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Input Tag",
+      "kind": "component",
+      "components": [
+        "MInputTag"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MInputTag.vue"
+      ],
+      "acceptance": "标签新增删除、重复/禁用、IME和原生表单",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Input OTP",
+      "kind": "component",
+      "components": [
+        "MInputOTP"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MInputOTP.vue"
+      ],
+      "acceptance": "分格输入、粘贴/退格/焦点、完整值提交",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Mention",
+      "kind": "component",
+      "components": [
+        "MMention"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MMention.vue"
+      ],
+      "acceptance": "光标处前缀匹配、键盘插入、IME与候选禁用",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Radio",
+      "kind": "component",
+      "components": [
+        "MRadio",
+        "MRadioGroup"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MRadio.vue",
+        "src/components/MRadioGroup.vue"
+      ],
+      "acceptance": "原生单项/组、同组互斥和受控回退",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Rate",
+      "kind": "component",
+      "components": [
+        "MRate"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MRate.vue"
+      ],
+      "acceptance": "评分、半星、键盘、只读与提交",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Select",
+      "kind": "component",
+      "components": [
+        "MSelect",
+        "MCombobox",
+        "MVirtualSelect"
+      ],
+      "sources": [
+        "src/components/MSelect.vue",
+        "src/components/MCombobox.vue",
+        "src/components/reference-data/MVirtualSelect.vue"
+      ],
+      "acceptance": "原生单多选、搜索多选、禁用和重复FormData",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Virtualized Select",
+      "kind": "component",
+      "components": [
+        "MVirtualSelect"
+      ],
+      "sources": [
+        "src/components/reference-data/MVirtualSelect.vue"
+      ],
+      "acceptance": "实际窗口化搜索多选、键盘活动项、IME与表单",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Slider",
+      "kind": "component",
+      "components": [
+        "MSlider"
+      ],
+      "sources": [
+        "src/components/MSlider.vue"
+      ],
+      "acceptance": "指针/键盘步进、范围与禁用",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Switch",
+      "kind": "component",
+      "components": [
+        "MSwitch"
+      ],
+      "sources": [
+        "src/components/MSwitch.vue"
+      ],
+      "acceptance": "原生切换语义、受控状态与禁用",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Time Picker",
+      "kind": "component",
+      "components": [
+        "MTimePicker"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MTimePicker.vue"
+      ],
+      "acceptance": "时分秒选择、步长/上下界、受控提交",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Time Select",
+      "kind": "component",
+      "components": [
+        "MTimeSelect"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MTimeSelect.vue"
+      ],
+      "acceptance": "按时段步长生成候选、上下界与禁用",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Transfer",
+      "kind": "component",
+      "components": [
+        "MTransfer"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MTransfer.vue"
+      ],
+      "acceptance": "双栏搜索、勾选和移动、禁用项保护",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "TreeSelect",
+      "kind": "component",
+      "components": [
+        "MTreeSelect"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MTreeSelect.vue"
+      ],
+      "acceptance": "树形搜索/展开、单多选/严格关联、键盘与表单",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Form",
+      "name": "Upload",
+      "kind": "component",
+      "components": [
+        "MUpload"
+      ],
+      "sources": [
+        "src/components/MUpload.vue"
+      ],
+      "acceptance": "本地文件选择/拖放/验证、远程请求/自定义请求、进度/重试/取消与卸载清理",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Avatar",
+      "kind": "component",
+      "components": [
+        "MAvatar"
+      ],
+      "sources": [
+        "src/components/MAvatar.vue"
+      ],
+      "acceptance": "图片/文字回退、尺寸和名称",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Badge",
+      "kind": "component",
+      "components": [
+        "MBadge"
+      ],
+      "sources": [
+        "src/components/MBadge.vue"
+      ],
+      "acceptance": "状态/计数和可读文本",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Calendar",
+      "kind": "component",
+      "components": [
+        "MCalendar"
+      ],
+      "sources": [
+        "src/components/reference-inputs/MCalendar.vue"
+      ],
+      "acceptance": "月份切换、日期网格、选择/边界与日期slot",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Card",
+      "kind": "component",
+      "components": [
+        "MCard"
+      ],
+      "sources": [
+        "src/components/MCard.vue"
+      ],
+      "acceptance": "内容分区、状态与操作slot",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Carousel",
+      "kind": "component",
+      "components": [
+        "MCarousel"
+      ],
+      "sources": [
+        "src/components/reference-layout/MCarousel.vue"
+      ],
+      "acceptance": "受控轮播、键盘、循环/自动播放、悬停/隐藏/减动暂停",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Collapse",
+      "kind": "component",
+      "components": [
+        "MAccordion"
+      ],
+      "sources": [
+        "src/components/MAccordion.vue"
+      ],
+      "acceptance": "受控折叠、键盘、内容可见性",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Descriptions",
+      "kind": "component",
+      "components": [
+        "MDescriptions"
+      ],
+      "sources": [
+        "src/components/MDescriptions.vue"
+      ],
+      "acceptance": "资料标签值布局和slot",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Empty",
+      "kind": "component",
+      "components": [
+        "MEmpty"
+      ],
+      "sources": [
+        "src/components/MEmpty.vue"
+      ],
+      "acceptance": "空状态文字和操作",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Image",
+      "kind": "component",
+      "components": [
+        "MImage"
+      ],
+      "sources": [
+        "src/components/MImage.vue"
+      ],
+      "acceptance": "真实加载/失败、缩放预览、切换与卸载清理",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Infinite Scroll",
+      "kind": "component",
+      "components": [
+        "MInfiniteScroll"
+      ],
+      "sources": [
+        "src/components/reference-data/MInfiniteScroll.vue"
+      ],
+      "acceptance": "接近边界加载、并发锁定、完成/禁用、失败重试",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Pagination",
+      "kind": "component",
+      "components": [
+        "MPagination"
+      ],
+      "sources": [
+        "src/components/MPagination.vue"
+      ],
+      "acceptance": "页码切换、边界和禁用",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Progress",
+      "kind": "component",
+      "components": [
+        "MProgress"
+      ],
+      "sources": [
+        "src/components/MProgress.vue"
+      ],
+      "acceptance": "真实数值进度、进行中/成功/错误区别与可访问值",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Result",
+      "kind": "component",
+      "components": [
+        "MResult"
+      ],
+      "sources": [
+        "src/components/MResult.vue"
+      ],
+      "acceptance": "结果状态、说明与后续操作",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Skeleton",
+      "kind": "component",
+      "components": [
+        "MSkeleton"
+      ],
+      "sources": [
+        "src/components/MSkeleton.vue"
+      ],
+      "acceptance": "静态骨架/细雪花、尺寸和减动",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Table",
+      "kind": "component",
+      "components": [
+        "MTable"
+      ],
+      "sources": [
+        "src/components/MTable.vue"
+      ],
+      "acceptance": "列与单元格slot、排序/过滤/选择/展开/分页、加载与空状态",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Virtualized Table",
+      "kind": "component",
+      "components": [
+        "MVirtualTable"
+      ],
+      "sources": [
+        "src/components/reference-data/MVirtualTable.vue"
+      ],
+      "acceptance": "实际窗口化数据行、排序/选择/slot与绝对行序",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Tag",
+      "kind": "component",
+      "components": [
+        "MTag"
+      ],
+      "sources": [
+        "src/components/MTag.vue"
+      ],
+      "acceptance": "状态标签与关闭交互",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Timeline",
+      "kind": "component",
+      "components": [
+        "MTimeline"
+      ],
+      "sources": [
+        "src/components/MTimeline.vue"
+      ],
+      "acceptance": "时间顺序、节点状态与内容",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Tour",
+      "kind": "component",
+      "components": [
+        "MTour"
+      ],
+      "sources": [
+        "src/components/reference-layout/MTour.vue"
+      ],
+      "acceptance": "真实目标定位/挖洞、步骤切换、缺失目标、焦点和关闭清理",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Tree",
+      "kind": "component",
+      "components": [
+        "MTree"
+      ],
+      "sources": [
+        "src/components/MTree.vue"
+      ],
+      "acceptance": "层级展开/选择、复选联动/半选、禁用与键盘",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Virtualized Tree",
+      "kind": "component",
+      "components": [
+        "MVirtualTree"
+      ],
+      "sources": [
+        "src/components/reference-data/MVirtualTree.vue"
+      ],
+      "acceptance": "展开树扁平化窗口、键盘和选择",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Statistic",
+      "kind": "component",
+      "components": [
+        "MStatistic"
+      ],
+      "sources": [
+        "src/components/MStatistic.vue"
+      ],
+      "acceptance": "数字格式化、前后缀/精度与状态",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Data",
+      "name": "Segmented",
+      "kind": "component",
+      "components": [
+        "MSegmented"
+      ],
+      "sources": [
+        "src/components/MSegmented.vue"
+      ],
+      "acceptance": "受控单选、禁用、键盘与表单",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Navigation",
+      "name": "Affix",
+      "kind": "component",
+      "components": [
+        "MAffix"
+      ],
+      "sources": [
+        "src/components/reference-layout/MAffix.vue"
+      ],
+      "acceptance": "目标容器吸附、占位、滚动与观察器清理",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Navigation",
+      "name": "Anchor",
+      "kind": "component",
+      "components": [
+        "MAnchor"
+      ],
+      "sources": [
+        "src/components/reference-layout/MAnchor.vue"
+      ],
+      "acceptance": "真实滚动目标定位、活动章节追踪、独立滚动容器",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Navigation",
+      "name": "Backtop",
+      "kind": "component",
+      "components": [
+        "MBackTop"
+      ],
+      "sources": [
+        "src/components/MBackTop.vue"
+      ],
+      "acceptance": "可配置滚动目标、出现阈值、返回顶部与减动",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Navigation",
+      "name": "Breadcrumb",
+      "kind": "component",
+      "components": [
+        "MBreadcrumb"
+      ],
+      "sources": [
+        "src/components/MBreadcrumb.vue"
+      ],
+      "acceptance": "当前位置与可导航祖先",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Navigation",
+      "name": "Dropdown",
+      "kind": "component",
+      "components": [
+        "MDropdownMenu"
+      ],
+      "sources": [
+        "src/components/MDropdownMenu.vue"
+      ],
+      "acceptance": "菜单项/分隔/禁用、键盘、浮层定位与焦点返回",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Navigation",
+      "name": "Menu",
+      "kind": "component",
+      "components": [
+        "MMenu"
+      ],
+      "sources": [
+        "src/components/MMenu.vue"
+      ],
+      "acceptance": "层级菜单、导航、展开与键盘",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Navigation",
+      "name": "Page Header",
+      "kind": "component",
+      "components": [
+        "MPageHeader"
+      ],
+      "sources": [
+        "src/components/reference-layout/MPageHeader.vue"
+      ],
+      "acceptance": "返回事件、标题/副标题与操作slot",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Navigation",
+      "name": "Steps",
+      "kind": "component",
+      "components": [
+        "MSteps"
+      ],
+      "sources": [
+        "src/components/MSteps.vue"
+      ],
+      "acceptance": "步骤状态与当前步骤",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Navigation",
+      "name": "Tabs",
+      "kind": "component",
+      "components": [
+        "MTabs"
+      ],
+      "sources": [
+        "src/components/MTabs.vue"
+      ],
+      "acceptance": "受控激活、键盘、禁用与面板关联",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Feedback",
+      "name": "Alert",
+      "kind": "component",
+      "components": [
+        "MAlert"
+      ],
+      "sources": [
+        "src/components/MAlert.vue"
+      ],
+      "acceptance": "信息/成功/警告/错误、说明与关闭",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Feedback",
+      "name": "Dialog",
+      "kind": "component",
+      "components": [
+        "MDialog"
+      ],
+      "sources": [
+        "src/components/MDialog.vue"
+      ],
+      "acceptance": "模态焦点/返回、关闭策略、长内容与嵌套",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Feedback",
+      "name": "Drawer",
+      "kind": "component",
+      "components": [
+        "MDrawer"
+      ],
+      "sources": [
+        "src/components/MDrawer.vue"
+      ],
+      "acceptance": "侧/底抽屉、原生模态语义、焦点锁定、长内容滚动与清理",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Feedback",
+      "name": "Loading",
+      "kind": "component",
+      "components": [
+        "MLoading"
+      ],
+      "sources": [
+        "src/components/reference-common/MLoading.vue"
+      ],
+      "acceptance": "局部/全屏加载、延迟、取消、directive/service、键盘阻挡与清理",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Feedback",
+      "name": "Message",
+      "kind": "component",
+      "components": [
+        "MMessage",
+        "MApp"
+      ],
+      "sources": [
+        "src/components/MMessage.vue",
+        "src/components/reference-common/MApp.vue"
+      ],
+      "acceptance": "顶部轻提示、多语义、计时暂停、动态更新/队列和上下文",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Feedback",
+      "name": "Message Box",
+      "kind": "component",
+      "components": [
+        "MMessageBox"
+      ],
+      "sources": [
+        "src/components/reference-common/MMessageBox.vue"
+      ],
+      "acceptance": "alert/confirm/prompt、输入验证/异步取消、Promise结果与焦点",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Feedback",
+      "name": "Notification",
+      "kind": "component",
+      "components": [
+        "MToast",
+        "MToastViewport",
+        "MApp"
+      ],
+      "sources": [
+        "src/components/MToast.vue",
+        "src/components/MToastViewport.vue",
+        "src/components/reference-common/MApp.vue"
+      ],
+      "acceptance": "标题/详情通知、落点、队列、关闭和计时",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Feedback",
+      "name": "Popconfirm",
+      "kind": "component",
+      "components": [
+        "MPopconfirm"
+      ],
+      "sources": [
+        "src/components/MPopconfirm.vue"
+      ],
+      "acceptance": "锚定确认、异步忙碌/失败/重试、焦点与取消",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Feedback",
+      "name": "Popover",
+      "kind": "component",
+      "components": [
+        "MPopover"
+      ],
+      "sources": [
+        "src/components/MPopover.vue"
+      ],
+      "acceptance": "受控浮层、定位、交互/关闭与焦点",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Feedback",
+      "name": "Tooltip",
+      "kind": "component",
+      "components": [
+        "MTooltip"
+      ],
+      "sources": [
+        "src/components/MTooltip.vue"
+      ],
+      "acceptance": "悬停/焦点触发、稳定描述关系、关闭/定位与减动",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Others",
+      "name": "Divider",
+      "kind": "component",
+      "components": [
+        "MDivider"
+      ],
+      "sources": [
+        "src/components/MDivider.vue"
+      ],
+      "acceptance": "横竖分隔与标题",
+      "status": "verified"
+    },
+    {
+      "library": "element-plus",
+      "version": "2.14.7",
+      "category": "Others",
+      "name": "Watermark",
+      "kind": "component",
+      "components": [
+        "MWatermark"
+      ],
+      "sources": [
+        "src/components/reference-layout/MWatermark.vue"
+      ],
+      "acceptance": "文本/图片的真实重复水印、尺寸旋转、变化/卸载清理",
+      "status": "verified"
+    }
+  ]
+}

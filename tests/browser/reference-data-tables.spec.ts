@@ -1,0 +1,21 @@
+import { expect,test } from '@playwright/test';
+import type { Page } from '@playwright/test';
+async function open(page:Page,title:string,story='default'){const entries=Object.values((await(await page.request.get('/index.json')).json()).entries) as {type:string;title:string;id:string}[];const entry=entries.find(item=>item.type==='story'&&item.title===title&&item.id.endsWith(`--${story}`));expect(entry).toBeDefined();await page.goto(`/iframe.html?id=${encodeURIComponent(entry!.id)}&viewMode=story&globals=theme:dark;motion:reduced`);await page.locator('#storybook-root .kit-story-surface').waitFor();}
+test('virtual table sorts 10k rows, renders bounded rows and selects the actual absolute row',async({page})=>{
+  await open(page,'数据组件/VirtualTable 虚拟表格');const table=page.getByRole('table',{name:'万行卷宗',exact:true});await expect(table).toHaveAttribute('aria-rowcount','10001');expect(await table.getByRole('row').count()).toBeLessThan(40);
+  const sort=table.getByRole('button',{name:'序号',exact:true});await sort.click();await sort.click();await expect(table.getByRole('columnheader',{name:'序号',exact:true})).toHaveAttribute('aria-sort','descending');await expect(table.locator('tbody tr[data-virtual-index]').first()).toContainText('卷宗 10000');
+  await page.getByRole('button',{name:'定位末行',exact:true}).click();const row=table.locator('tr[aria-rowindex="10001"]');await expect(row).toContainText('卷宗 00001');await expect(row).toContainText('行10000');await expect(row).toBeInViewport();
+  const checkbox=row.getByRole('checkbox',{name:'选择第10000行',exact:true});await checkbox.check();await expect(page.locator('[data-table-selected]')).toHaveText('选择：record-0');await expect(checkbox).toBeFocused();
+  const viewport=page.getByRole('region',{name:'万行卷宗',exact:true});await viewport.evaluate(element=>{element.scrollTop=0;element.dispatchEvent(new Event('scroll'));});await expect(checkbox).toBeFocused();expect(await table.getByRole('row').count()).toBeLessThan(45);
+});
+test('static table sorting filtering selection expansion and pagination alter real rows',async({page})=>{
+  await open(page,'数据组件/Table 表格增强');const table=page.getByRole('table',{name:'可交互卷宗',exact:true});await expect(table.locator('tbody > tr')).toHaveCount(4);
+  await table.getByRole('button',{name:'序号',exact:true}).click();await table.getByRole('button',{name:'序号',exact:true}).click();await expect(table.locator('tbody > tr').first()).toContainText('卷宗 00012');
+  await table.getByRole('combobox',{name:'筛选印色',exact:true}).selectOption('朱砂');await expect(table.locator('tbody > tr').first()).toContainText('卷宗 00011');await expect(table.locator('tbody > tr')).toHaveCount(4);
+  await table.getByRole('checkbox',{name:'选择第1行',exact:true}).check();await expect(page.locator('[data-static-selection]')).toHaveText('选择：record-10');await table.getByRole('button',{name:'展开第1行详情',exact:true}).click();await expect(table.getByText('卷宗详情：卷宗 00011 · 朱砂 · 编号record-10',{exact:true})).toBeVisible();
+  await page.getByRole('navigation',{name:'可交互卷宗分页',exact:true}).getByRole('button',{name:'下一页 →',exact:true}).click();await expect(table.locator('tbody > tr')).toHaveCount(2);await expect(table.locator('tbody > tr').first()).toContainText('卷宗 00003');await expect(page.locator('[data-static-selection]')).toHaveText('选择：record-10');
+});
+test('declined controlled table requests keep the owner value and can be repeated',async({page})=>{
+  await open(page,'数据组件/Table 表格增强','declined-owner');const table=page.getByRole('table',{name:'受控卷宗',exact:true}), selection=table.getByRole('checkbox',{name:'选择第1行',exact:true});await selection.click();await expect(selection).not.toBeChecked();await selection.click();await expect(selection).not.toBeChecked();
+  await table.getByRole('button',{name:'序号',exact:true}).click();await expect(table.getByRole('columnheader',{name:'序号',exact:true})).toHaveAttribute('aria-sort','none');await table.getByRole('combobox',{name:'筛选印色',exact:true}).selectOption('青玉');await expect(table.getByRole('combobox',{name:'筛选印色',exact:true})).toHaveValue('');await table.getByRole('button',{name:'展开第1行详情',exact:true}).click();await expect(table.locator('tbody > tr')).toHaveCount(2);await expect(page.locator('[data-table-requests]')).toContainText('请求：');await expect(table.locator('tbody > tr').first()).toContainText('卷宗 00001');
+});

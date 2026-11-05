@@ -14,7 +14,11 @@ concurrency:
 
 jobs:
   check:
-    name: Check
+    name: Check / Chromium ${{ matrix.shard }}
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2]
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -45,3 +49,5 @@ jobs:
 
       - name: Check browser interactions
         run: pnpm test:browser
+        env:
+          MALANG_BROWSER_SHARD: ${{ matrix.shard }}

@@ -16,5 +16,5 @@
       "malang-ui/all": ["../../dist/all.d.ts"]
     }
   },
-  "include": ["App.vue", "entrypoints.ts"]
+  "include": ["*.vue", "entrypoints.ts"]
 }

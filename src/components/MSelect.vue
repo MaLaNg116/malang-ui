@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, useAttrs, useId, watch } from 'vue';
+import { computed, nextTick, onBeforeUnmount, onMounted, onUpdated, ref, useAttrs, useId, watch } from 'vue';
 import type { MSelectProps } from './types';
 import './nativeField.css';
 
 defineOptions({ inheritAttrs: false });
 const props = withDefaults(defineProps<MSelectProps>(), { disabled: false });
-const emit = defineEmits<{ 'update:modelValue': [value: string] }>();
+const emit = defineEmits<{ 'update:modelValue': [value: string]; 'update:selectedValues': [values: string[]] }>();
 const attrs = useAttrs();
 const control = ref<HTMLSelectElement>();
 const identity = `ui-select-${useId()}`;
@@ -16,15 +16,25 @@ function describedBy() {
   return [...new Set([attrs['aria-describedby'], props.hint && hintId.value, props.error && errorId.value]
     .filter(Boolean).join(' ').split(/\s+/))].filter(Boolean).join(' ') || undefined;
 }
-function sync() { if (control.value) control.value.value = props.modelValue ?? ''; }
+function sync() {
+  if (!control.value) return;
+  if (props.multiple) { const selected = new Set(props.selectedValues ?? []); for (const option of control.value.options) option.selected = selected.has(option.value); }
+  else control.value.value = props.modelValue ?? '';
+}
 function change(event: Event) {
   const value = (event.target as HTMLSelectElement).value;
-  if (!props.disabled && value !== props.modelValue) emit('update:modelValue', value);
+  if (!props.disabled) {
+    if (props.multiple) emit('update:selectedValues', Array.from((event.target as HTMLSelectElement).selectedOptions).map(option => option.value));
+    else if (value !== props.modelValue) emit('update:modelValue', value);
+  }
   // Native controls change before the owner confirms a controlled value.
   void nextTick(sync);
 }
-onMounted(sync);
-watch(() => [props.modelValue, props.options], sync, { deep: true, flush: 'post' });
+let form: HTMLFormElement | null | undefined;
+function reset() { void nextTick(sync); }
+function owner() { const next = control.value?.form; if (next !== form) { form?.removeEventListener('reset', reset); form = next; form?.addEventListener('reset', reset); } }
+onMounted(() => { sync(); owner(); }); onUpdated(owner); onBeforeUnmount(() => form?.removeEventListener('reset', reset));
+watch(() => [props.modelValue, props.selectedValues, props.multiple, props.options], sync, { deep: true, flush: 'post' });
 </script>
 
 <template>
@@ -32,14 +42,14 @@ watch(() => [props.modelValue, props.options], sync, { deep: true, flush: 'post'
     <label v-if="label" class="ui-native-field__label" :for="id">{{ label }}</label>
     <div class="ui-native-field__control">
       <select
-        v-bind="attrs" :id="id" ref="control" class="ui-native-control ui-select" :value="modelValue" :multiple="false" :disabled="disabled"
+        v-bind="attrs" :id="id" ref="control" class="ui-native-control ui-select" :value="multiple ? undefined : modelValue" :multiple="multiple" :disabled="disabled"
         :aria-invalid="error ? true : attrs['aria-invalid'] as boolean | 'true' | 'false' | 'grammar' | 'spelling' | undefined"
         :aria-describedby="describedBy()" @change="change"
       >
-        <option v-if="placeholder" value="" disabled>{{ placeholder }}</option>
+        <option v-if="placeholder && !multiple" value="" disabled>{{ placeholder }}</option>
         <option v-for="option in options" :key="option.value" :value="option.value" :disabled="option.disabled">{{ option.label }}</option>
       </select>
-      <svg class="ui-select__chevron" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.5" /></svg>
+      <svg v-if="!multiple" class="ui-select__chevron" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.5" /></svg>
       <span class="ui-native-field__registration" aria-hidden="true" />
     </div>
     <p v-if="hint" :id="hintId" class="ui-native-field__hint">{{ hint }}</p>
@@ -50,6 +60,9 @@ watch(() => [props.modelValue, props.options], sync, { deep: true, flush: 'post'
 <style scoped>
 .ui-select { height: var(--ui-control-height); appearance: none; padding-inline-end: calc(var(--ui-control-padding-inline) + 24px); cursor: pointer; }
 .ui-select option { color: var(--ui-color-text); background: var(--ui-color-surface); }
+.ui-select[multiple] { height: auto; min-height: 100px; padding: 8px; }
+.ui-select[multiple] option { padding: 6px 8px; }
+.ui-select[multiple] option:checked { color: var(--ui-color-on-accent); background: var(--ui-color-accent); }
 .ui-select__chevron { position: absolute; inset-inline-end: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--ui-color-text-secondary); }
 .ui-native-field--disabled .ui-select__chevron { opacity: .45; }
 @media (forced-colors: active) { .ui-select { appearance: auto; } .ui-select__chevron { display: none; } }

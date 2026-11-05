@@ -2,7 +2,7 @@
 
 一套以水墨与科技融合为视觉方向的前端组件库，包含 UI 组件、GSAP 动效、MG 编排和实用工具。首发使用 Vue 3 + TypeScript，先在自己的项目中验证，再逐步扩展与开源。
 
-当前提供 49 个公开组件、纯 TypeScript 工具、六套 Canvas / MG 编排和 DOM 错峰动效，共七个动效工厂。浅色提供宣纸朱砂、青瓷冷玉与绢素鎏金三种材质配色，深色保留浓墨；朱砂刻印独立于主题主色。
+公开组件与对应能力由[逐项目录](design/component-parity.json)记录，另提供纯 TypeScript 工具、六套 Canvas / MG 编排和 DOM 错峰动效，共七个动效工厂。浅色提供宣纸朱砂、青瓷冷玉与绢素鎏金三种材质配色，深色保留浓墨；朱砂刻印独立于主题主色。
 
 组件统一使用 **M 前缀**，例如 `MInput`、`MButton`、`MDrawer`；Vue 模板也可以写成 `<m-input>`、`<m-button>`、`<m-drawer>`。M 代表 MaLang，公开类型对应 `MInputProps` 等。当前私有验证阶段已统一迁移命名。
 
@@ -127,15 +127,21 @@ const name = ref('');
 
 | 模块 | 当前内容 |
 | --- | --- |
-| 表单验证（2） | `MForm`、`MFormItem` |
-| 动作与输入（13） | `MButton`、`MSegmented`、`MInput`、`MInputNumber`、`MSlider`、`MCombobox`、`MDatePicker`、`MUpload`、`MTextarea`、`MSelect`、`MCheckbox`、`MRadioGroup`、`MSwitch` |
-| 内容与数据（8） | `MCard`、`MTable`、`MDivider`、`MTag`、`MAvatar`、`MImage`、`MDescriptions`、`MStatistic` |
-| 页面导航（6） | `MTabs`、`MPagination`、`MBreadcrumb`、`MMenu`、`MTree`、`MBackTop` |
-| 布局间距（1） | `MSpace` |
-| 浮层与说明（3） | `MDialog`、`MPopover`、`MTooltip` |
-| 状态与反馈（10） | `MBadge`、`MAlert`、`MResult`、`MSpinner`、`MSkeleton`、`MEmpty`、`MMessage`、`MPopconfirm`、`MToast`、`MToastViewport` |
-| 二级流程（6） | `MDrawer`、`MDropdownMenu`、`MAccordion`、`MSteps`、`MProgress`、`MTimeline` |
-| 工具 | `debounce`、`throttle`、`asyncLock` |
+| 表单验证 | `MForm`、`MFormItem`、`MFormList` |
+| 动作与输入 | `MButton`、`MSegmented`、`MInput`、`MInputNumber`、`MSlider`、`MCombobox`、`MAutoComplete`、`MUpload`、`MTextarea`、`MSelect`、`MCheckbox`、`MCheckboxGroup`、`MRadio`、`MRadioGroup`、`MSwitch` |
+| 日期与时间 | `MDatePicker`、`MDateRangePicker`、`MDateTimePicker`、`MDatePickerPanel`、`MTimePicker`、`MTimeSelect`、`MCalendar` |
+| 复合输入 | `MCascader`、`MTreeSelect`、`MColorPicker`、`MColorPickerPanel`、`MRate`、`MTransfer`、`MInputOTP`、`MInputTag`、`MMention` |
+| 内容与数据 | `MCard`、`MTable`、`MDivider`、`MTag`、`MAvatar`、`MImage`、`MDescriptions`、`MStatistic`、`MQRCode` |
+| 列表与窗口化 | `MList`、`MListy`、`MVirtualList`、`MVirtualTable`、`MVirtualTree`、`MVirtualSelect`、`MInfiniteScroll`、`MScrollbar` |
+| 页面导航 | `MTabs`、`MPagination`、`MBreadcrumb`、`MMenu`、`MTree`、`MBackTop`、`MAnchor`、`MAffix`、`MPageHeader`、`MFloatButton`、`MFloatButtonGroup` |
+| 页面布局 | `MSpace`、`MGrid`、`MGridItem`、`MFlex`、`MLayout`、`MSplitter`、`MMasonry` |
+| 展示与引导 | `MCarousel`、`MTour`、`MWatermark`、`MBorderBeam` |
+| 排版与图标 | `MTypography`、`MText`、`MLink`、`MIcon` |
+| 浮层与说明 | `MDialog`、`MPopover`、`MTooltip` |
+| 状态与反馈 | `MBadge`、`MAlert`、`MResult`、`MSpinner`、`MSkeleton`、`MEmpty`、`MMessage`、`MPopconfirm`、`MToast`、`MToastViewport`、`MLoading`、`MMessageBox` |
+| 二级流程 | `MDrawer`、`MDropdownMenu`、`MAccordion`、`MSteps`、`MProgress`、`MTimeline` |
+| 配置与服务 | `MConfigProvider`、`MApp`、`useMConfig`、`useMApp`、`vMLoading`、`createMLoading` |
+| 工具 | `debounce`、`throttle`、`asyncLock`、`MGetProps`、`MGetProp`、`MGetRef` |
 | 动效与 MG | 六套 Canvas：轨道构形、墨迹切面、成功落印、品牌开场、双轨等待、经纬织光；另有 DOM 错峰，均提供可控生命周期 |
 | Vue 适配 | `useReducedMotion`，以及示例中的生命周期清理 |
 | 设计基础 | 三种浅色材质配色、浓墨深色、密度、排版、间距与动效变量 |
@@ -189,9 +195,9 @@ function restore(initial: MFormModel) { Object.assign(model, initial); }
 
 规则支持 `required/min/max/pattern/message` 与 `validator(value, modelSnapshot, signal)`。`min/max` 检查数值本身或字符串、数组长度；校验器可返回 `void/true`、表示未通过的 `false` 或错误文字，也可返回 Promise。模型变化、新一轮校验、重置或卸载会取消旧校验结果；异步请求应把 `signal` 继续传给支持取消的操作。跨字段规则从第二个参数读取本轮模型快照。注册字段还会合并对应原生控件的 `validity`，提交失败聚焦首个错误，摘要按钮可回到字段。
 
-`MForm` 只校验已注册的 `MFormItem`；模型采用平铺属性，`name="title"` 对应 `model.title`，不会把 `user.name` 当作嵌套路径，也不提供字段数组或布局栅格引擎。`submit(modelCopy, SubmitEvent)` 提交模型副本，`invalid(errors)` 报告错误；它不代替 `FormData`、上传或网络请求。`reset(initialModel)` 发出挂载时的初始模型快照并清除校验，由父级决定是否接受，组件不会直接修改 `model`。实例公开 `validate(names?)`（返回 `{ valid, errors, cancelled }` 的 Promise）、`clearValidation(names?)`、`reset()` 与 `focusField(name)`；默认插槽也提供 `{ errors, validating, validate, reset }`。自定义控件需自行转发 `field` 的标签、错误、原生属性与失焦事件。
+`MForm` 只校验已注册的 `MFormItem`；`name="title"` 对应 `model.title`，也支持 `user.name`、`members[0].name` 与 `members.0.name` 嵌套路径；同名字面平铺键优先，兼容已有模型。规则可写 `members.*.name`。`MFormList` 接收数组 `v-model`、`name`、可选 `itemKey/min/max/disabled`，通过插槽提供稳定 `fields` 与 `add/remove/move`；`field.name` 可直接组成 `MFormItem` 路径。`submit(modelCopy, SubmitEvent)` 提交模型副本，`invalid(errors)` 报告错误；它不代替 `FormData` 或网络请求。`reset(initialModel)` 发出挂载时的初始模型快照并清除校验，由父级决定是否接受，组件不会直接修改 `model`。实例公开 `validate(names?)`（返回 `{ valid, errors, cancelled }` 的 Promise）、`clearValidation(names?)`、`reset()` 与 `focusField(name)`；默认插槽也提供 `{ errors, validating, validate, reset }`。自定义控件需自行转发 `field` 的标签、错误、原生属性与失焦事件。
 
-`MSelect` 使用字符串 `v-model` 与 `options`（同 `MChoiceOption`）；`placeholder` 提供不可选的空值提示。它保留原生单选下拉框与系统键盘行为，选项描述用于 RadioGroup。上述表单控件的禁用、错误、帮助信息和模型变化通过原生语义呈现；受控模型由父级决定是否接受更新。
+`MSelect` 单选使用字符串 `v-model` 与 `options`（同 `MChoiceOption`）；`placeholder` 提供不可选的空值提示。设置 `multiple` 后使用数组 `v-model:selectedValues`，提交同名的多项 FormData。两种模式都保留原生 select 与系统键盘行为。上述表单控件的禁用、错误、帮助信息和模型变化通过原生语义呈现；受控模型由父级决定是否接受更新。
 
 `MInputNumber` 使用 `number | null` 模型，清空表示 `null`；`min/max/step` 作用于原生数字控件和增减拨片。输入不会发出 `NaN`，组合输入保留草稿，失焦时规范化格式与边界。手输不强制四舍五入到步长，原生 `stepMismatch` 仍参与表单验证；`readonly` 同时阻止拨片，`name/required/form` 等属性提交到原生输入框。
 
@@ -299,11 +305,11 @@ const sliderAmount = computed({
 
 `MUpload` 使用 `readonly File[]` 模型和必填 `label`。单选替换，多选追加；`accept/maxCount/maxSize` 分别约束本地文件类型、数量和每个文件的字节数。选择与拖放共用校验，合法文件可部分接受；`reject` 事件返回 `MUploadRejection[]`，原因为 `type/size/count/duplicate`，重复判定依据文件元数据。`accept` 是客户端选择约束，正式应用仍需按自己的保存流程验证文件。
 
-附件由真实 file input 承载，`name/form/required` 对应真实 File 对象；只读保留已选文件的提交，禁用时不提交。取消选择保留原内容；父级可拒绝添加和移除请求。组件仅管理本地选择，界面不虚构上传完成或网络进度；正式上传由应用接管。长文件名换行，移除被接受后将焦点交给相邻项或选择入口。
+附件由真实 file input 承载，`name/form/required` 对应真实 File 对象；只读保留已选文件的提交，禁用时不提交。取消选择保留原内容；父级可拒绝添加和移除请求。未配置远端时只管理本地选择；设置 `action`（或 `url`）后通过 XMLHttpRequest 上传，支持 `method/headers/data/withCredentials/fieldName`、原生上传进度、失败重试与取消。`customRequest` 可接入业务请求；`autoUpload=false` 时调用实例的 `submit()`，`retry()/abort()` 控制单个文件或队列。移除、卸载和真实请求配置变化会取消对应请求，过期回调不覆盖新状态。长文件名换行，移除被接受后将焦点交给相邻项或选择入口。
 
 `MMenu` 使用 `v-model`（`string | null`）、`v-model:expandedValues`、`items` 和 `label`。条目包含全局唯一 `value`、`label` 与可选 `href/disabled/children`；带子项的节点作为展开分组，其 `href` 不参与导航。它使用原生导航链接和按钮，保留 Tab 顺序与修改键、新标签页操作；普通激活才请求当前项更新。`select(value, event)` 提供原始鼠标事件，路由适配可在调用方阻止默认导航。命令操作继续使用 `MDropdownMenu`。
 
-`MTree` 使用同样的两个受控模型、`items` 和 `label`，节点为递归的 `MTreeNode`。首版提供单选与展开，不含勾选、拖拽或虚拟滚动。方向键和 Home/End 移动焦点，Enter 或空格才选择；右键展开或进入子级，左键收起或返回父级，字符前缀可定位节点。仅一个节点进入 Tab 顺序；禁用节点可以被浏览，但不能请求选择或展开，已展开后代仍按各自状态操作。删除、重排与外部收起仅修复必要的内部焦点，不清洗父模型或抢走组件外的焦点。
+`MTree` 使用同样的两个受控模型、`items` 和 `label`，节点为递归的 `MTreeNode`。`multiple` 配合 `v-model:selectedValues` 提供多选；`checkable` 配合 `v-model:checkedValues` 提供父子联动勾选与半选，`checkStrictly` 可切换独立勾选。方向键和 Home/End 移动焦点，Enter 选择，空格在复选模式下勾选、其他模式下选择；右键展开或进入子级，左键收起或返回父级，字符前缀可定位节点。仅一个节点进入 Tab 顺序；禁用节点阻断批量勾选，启用的后代仍可独立操作。外部父节点勾选值只做显示投影，用户操作后输出归一后的已选节点；删除、重排与外部收起不清洗父模型或抢走组件外的焦点。大数据窗口渲染使用独立的 `MVirtualTree`。
 
 交互语义参考 [W3C 菜单按钮模式](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/) 与 [折叠面板模式](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/)。视觉与验收约定见 [design/quality-contract.json](design/quality-contract.json)。
 
@@ -346,7 +352,21 @@ scripts/         Token 生成与构建辅助脚本
 
 「开始 / 组件覆盖对照」按能力搜索和筛选，映射本库组件与 [Ant Design 目录](https://ant.design/components/overview/)、[Element Plus 目录](https://element-plus.org/en-US/component/overview.html)。[design/component-coverage.json](design/component-coverage.json) 保存 2026-11-05 的版本快照：[Ant Design 6.7.0](https://github.com/ant-design/ant-design/releases/tag/6.7.0)、[Element Plus 2.14.7](https://github.com/element-plus/element-plus/releases/tag/2.14.7)，归并为 29 类能力，并保留 155 条官方组件逐项记录。记录同时标明基础支持、可组合与缺项，组件数量与目录条数不能直接视为覆盖比例。
 
-本轮提供分段选择、轻量确认、图片预览和表单字段验证四类 P1；能力参考分别见 [Segmented](https://ant.design/components/segmented/)、[Popconfirm](https://ant.design/components/popconfirm/)、[Image](https://element-plus.org/en-US/component/image.html) 与 [Form](https://element-plus.org/en-US/component/form.html)。对照基于使用能力，不承诺第三方全部 API 兼容。后续 P1 转向排版与链接、锚点与吸附、日期区间/时间/日历及栅格/布局/分栏，其余按实际项目需要推进；完整组件库与跨框架支持仍将继续迭代。
+本轮按两份正式核心目录逐项补实现与核心交互，覆盖二维码、颜色/时间/日期/层级输入、虚拟列表/表格/树/选择器、布局与导航、排版、轮播/引导/水印、配置与反馈服务。对应实现、来源文件、核心验收内容与当前验证阶段见[design/component-parity.json](design/component-parity.json)。Border/Color属于设计参考，Util属于类型工具；外部Pro、X、Mobile等独立产品不计入核心目录。组件采用MaLang公开API，不承诺第三方所有属性名兼容。不得把实现数量当作已经完成全部验证的证明。
+
+## 滚动条、配色与新增能力
+
+`MScrollbar` 使用原生滚动内容和独立双轴细轨，支持拖动、轨道点击、方向键/PageUp/PageDown/Home/End、RTL、动态内容与强制颜色回退。`height/maxHeight` 接收数字或CSS长度，`viewportClass` 指定实际滚动元素；实例提供 `viewport/scrollTo/update`。无溢出时不增加无用Tab停靠点，Message、Dialog与Drawer的长内容复用它。其余原生滚动区域使用限定在`ui-*`上的轻量皮肤，可通过`--ui-scrollbar-thumb/active/track`覆盖。
+
+配色复核参考高星设计技能中的暖中性色、灰绿/象牙白与暖金关系，具体取舍见[design/palette-review.json](design/palette-review.json)。仅将宣纸和青瓷浮层底调整为带少量材质倾向的白色，保留朱砂/青玉品牌双色与独立状态语义；滚动条使用金属灰与青灰，避免与错误状态混淆。
+
+`MQRCode` 编码真实UTF-8文本，支持SVG/Canvas、四档纠错、受限中心图标、至少4模块静区、`active/loading/expired/scanned`状态与`refresh`事件。实例`toDataURL('svg'|'png')/download(filename,format)`返回可导出的图像；颜色使用不透明六位HEX并检查对比度。编码/图标读取失败通过`error`报告，外部图标导出需允许跨域读取。默认固定高对比浅色码体，主题装饰位于静区之外。
+
+`MConfigProvider` 的`theme/palette/density/motion/locale/dir/messages`配置在子树内继承；`useMConfig()`提供响应式配置和文案。`MApp` 为后代`useMApp()`提供独立的`message/notification/messageBox/alert/confirm/prompt/destroyAll`，不建立进程级全局队列。Message支持同key更新和返回句柄`update/close`，MessageBox返回`{action:'confirm'|'cancel'|'close',value}`并取消过期校验；卸载会结束本实例待处理请求。
+
+`MLoading` 支持局部/模态全屏、延迟与取消；`vMLoading`和`createMLoading({target,text,...})`用于现有区域，返回句柄需在所属任务或组件结束时`close()`。独立实例只恢复自己管理的样式、busy状态与交互锁；不要将真实上传进度用虚构计时器替代。
+
+`MTypography/MText/MLink/MIcon` 提供正文、标题、编辑复制、截断展开、真实链接和SVG图形。`MCheckboxGroup`提供原生复选数组与数量约束，只统计当前存在、启用且唯一的选项；在`MForm`中通过`MFormItem`注册字段，`error`用于呈现，业务校验由表单规则负责。`MSelect multiple`使用`v-model:selectedValues`，保持原单选`v-model`的字符串契约。需要搜索和标签多选时使用`MVirtualSelect`。
 
 ## 后续方向
 

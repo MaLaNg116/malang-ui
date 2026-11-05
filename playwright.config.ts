@@ -24,7 +24,7 @@ export default defineConfig({
     use: { ...devices['Desktop Chrome'], channel: process.env.PLAYWRIGHT_CHANNEL || undefined },
   }],
   webServer: {
-    command: process.env.CI
+    command: process.env.CI || process.env.MALANG_BROWSER_STATIC
       ? 'pnpm exec vite preview --outDir storybook-static --port 6007 --host 127.0.0.1 --strictPort'
       : 'pnpm exec storybook dev --port 6007 --ci --no-open',
     url: `${baseURL}/index.json`,

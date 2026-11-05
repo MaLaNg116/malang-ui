@@ -19,6 +19,7 @@ describe('material palette contracts', () => {
     for (const background of backgrounds) {
       expect(contrast(palette['color-border']!, palette[background]!)).toBeGreaterThanOrEqual(3);
       expect(contrast(palette['color-focus']!, palette[background]!)).toBeGreaterThanOrEqual(3);
+      expect(contrast(palette['color-metal']!, palette[background]!), 'scrollbar thumb').toBeGreaterThanOrEqual(3);
     }
   });
   it('provides complete nested-theme resets and distinct material roles', () => {

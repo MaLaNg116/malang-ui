@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import MScrollbar from './reference-data/MScrollbar.vue';
 import { nextTick, onBeforeUnmount, onMounted, ref, useAttrs, useId, watch } from 'vue';
 import type { MDialogProps } from './types';
 import { lockDialogScroll } from '../composables/dialogScrollLock';
@@ -193,7 +194,7 @@ onBeforeUnmount(() => {
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8m0-8-8 8" stroke="currentColor" stroke-width="1.5" /></svg>
       </button>
     </header>
-    <div class="ui-dialog__body"><slot /></div>
+    <MScrollbar class="ui-dialog__scroller" viewport-class="ui-dialog__body" :label="title"><slot /></MScrollbar>
     <footer v-if="$slots.footer" class="ui-dialog__footer"><slot name="footer" :close="close" /></footer>
     <span class="ui-dialog__focus-guard" data-ui-dialog-focus-guard tabindex="0" aria-hidden="true" @focus="focusFirst" />
   </dialog>
@@ -263,7 +264,8 @@ onBeforeUnmount(() => {
 }
 .ui-dialog__close:hover { color: var(--ui-color-accent); background: var(--ui-color-accent-soft); }
 .ui-dialog__close:focus-visible { outline: var(--ui-focus-width) solid var(--ui-color-focus); outline-offset: var(--ui-focus-offset); }
-.ui-dialog__body { min-height: 0; padding: var(--ui-space-6); overflow: auto; overscroll-behavior: contain; overflow-wrap: anywhere; }
+.ui-dialog__scroller { display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; overflow: hidden; }
+.ui-dialog :deep(.ui-dialog__body) { flex: 1 1 auto; min-height: 0; padding: var(--ui-space-6); overflow-wrap: anywhere; }
 .ui-dialog__footer { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--ui-space-3); padding: var(--ui-space-5) var(--ui-space-6); border-top: 1px solid var(--ui-color-rule); flex: none; }
 /* This final stop catches the browser's real slot/UA-control Tab order before
    focus can leave for browser chrome. It never participates in visual layout. */
@@ -272,5 +274,5 @@ onBeforeUnmount(() => {
 :global([data-ui-motion='reduced'] .ui-dialog[open]) { animation: none; }
 @media (prefers-reduced-motion: reduce) { .ui-dialog[open] { animation: none; } .ui-dialog__close { transition: none; } }
 @media (pointer: coarse) { .ui-dialog__close { width: 44px; height: 44px; } }
-@media (max-width: 480px) { .ui-dialog__header, .ui-dialog__body { padding: var(--ui-space-5); } .ui-dialog__footer { padding: var(--ui-space-4) var(--ui-space-5); } }
+@media (max-width: 480px) { .ui-dialog__header, .ui-dialog :deep(.ui-dialog__body) { padding: var(--ui-space-5); } .ui-dialog__footer { padding: var(--ui-space-4) var(--ui-space-5); } }
 </style>

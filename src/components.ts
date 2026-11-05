@@ -1,4 +1,8 @@
 export { default as MButton } from './components/MButton.vue';
+export * from './components/reference-common';
+export * from './components/reference-inputs';
+export * from './components/reference-layout';
+export * from './components/reference-data';
 export { default as MInput } from './components/MInput.vue';
 export { default as MSwitch } from './components/MSwitch.vue';
 export { default as MTabs } from './components/MTabs.vue';
@@ -117,6 +121,12 @@ export type {
   MDatePickerProps,
   MUploadProps,
   MUploadRejection,
+  MUploadStatus,
+  MUploadProgress,
+  MUploadFileState,
+  MUploadRequestData,
+  MUploadRequestOptions,
+  MUploadCustomRequest,
   MMenuItem,
   MMenuProps,
   MTreeNode,

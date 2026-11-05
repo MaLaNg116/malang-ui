@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-05",
+  "timezone": "Asia/Shanghai",
+  "scope": "长内容滚动条与浮层阅读层次；保持已认可品牌、状态色、Spinner双色",
+  "referenceOnly": true,
+  "references": [
+    { "source": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill", "stars": 145304, "resource": "src/ui-ux-pro-max/data/colors.csv", "schemes": ["Notes & Writing App", "Luxury/Premium Brand", "Museum/Gallery"], "decision": "参考暖中性底、有限金属色和阅读留白。库分类给出的靛蓝模板不适合本项目，不整套套用。" },
+    { "source": "https://github.com/pbakaus/impeccable", "stars": 102999, "resource": "skill/reference/colorize.md", "decision": "保持已确认的视觉身份，按背景、文字、操作、焦点与状态分别评审；深色独立设计，检查实际前景背景组合。" },
+    { "source": "https://github.com/anthropics/skills", "stars": 187467, "resource": "skills/theme-factory/themes", "schemes": ["Forest Canopy", "Golden Hour", "Desert Rose"], "decision": "Forest Canopy的灰绿/象牙白适合材质参考；Golden Hour可参考暖金关系，原始黄不适合小字；Desert Rose偏柔和，不替换功夫朋克的墨骨与朱砂。" }
+  ],
+  "starScope": "仓库累计星标，只说明关注度，不代表单个skill或配色质量。2026-11-05通过GitHub API复核。",
+  "changes": [
+    { "role": "宣纸浮层底色", "before": "#ffffff", "after": "#fffdf7", "reason": "弱化弹窗/提示突然跳到纯白的割裂感，仍高于纸色底，保持文字和状态可读。" },
+    { "role": "青瓷浮层底色", "before": "#ffffff", "after": "#fbfefc", "reason": "保留极轻冷玉倾向，减少中性纯白与瓷色背景的跳变。" },
+    { "role": "滚动条", "before": "操作系统默认灰色与箭头", "after": "金属灰细轨，交互青灰，透明轨道", "reason": "滚动表示位置与操作，不跟随警告或错误的内容色；缩减视觉重量，同时保留拖动、触控与键盘入口。" }
+  ],
+  "preserved": ["朱砂与青玉主副色", "独立的成功、警告、错误、信息颜色", "Spinner原有品牌双色", "浓墨和绢素主题配色"],
+  "verification": "tests/palette.test.ts 检查四套主题文字4.5:1与控件/焦点3:1；另检验真实长内容、浮层和滚动条。"
+}

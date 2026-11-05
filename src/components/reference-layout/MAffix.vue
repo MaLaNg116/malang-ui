@@ -1,0 +1,17 @@
+<script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import type { MAffixProps } from './types';
+import { bounded, browserOf, resolveScroll } from './_shared';
+const props = withDefaults(defineProps<MAffixProps>(), { offset: 0, position: 'top' });
+const emit = defineEmits<{ change: [affixed: boolean] }>();
+const host = ref<HTMLElement>(), content = ref<HTMLElement>(), pinned = ref(false), size = ref({ width: 0, height: 0, left: 0, top: 0 });
+let target: HTMLElement | Window | null = null, observer: ResizeObserver | undefined, frame = 0, mounted = false;
+function measure() { if (!host.value || !content.value || !target) { pinned.value = false; return; } const box = host.value.getBoundingClientRect(), height = content.value.getBoundingClientRect().height, browser = browserOf(host.value)!; const bounds = 'window' in target ? { top: 0, bottom: browser.innerHeight } : { top: target.getBoundingClientRect().top + target.clientTop, bottom: target.getBoundingClientRect().top + target.clientTop + target.clientHeight }; const offset = bounded(props.offset,0,10000,0); const top = props.position === 'top' ? bounds.top + offset : bounds.bottom - offset - height; size.value = { width: box.width, height, left: box.left, top }; pinned.value = height <= bounds.bottom - bounds.top - offset && (props.position === 'top' ? box.top < top : box.bottom > bounds.bottom - offset); }
+function schedule() { const browser = browserOf(host.value); if (!browser || frame) return; frame = browser.requestAnimationFrame(() => { frame = 0; measure(); }); }
+function cleanup() { target?.removeEventListener('scroll',schedule); browserOf(host.value)?.removeEventListener('scroll',schedule,true); browserOf(host.value)?.removeEventListener('resize',schedule); observer?.disconnect(); }
+function bind() { cleanup(); if (!mounted) return; target = resolveScroll(props.target,host.value); target?.addEventListener('scroll',schedule,{passive:true}); const browser = browserOf(host.value); browser?.addEventListener('scroll',schedule,{capture:true,passive:true}); browser?.addEventListener('resize',schedule,{passive:true}); if (browser) { observer = new browser.ResizeObserver(schedule); if (host.value) observer.observe(host.value); if (content.value) observer.observe(content.value); if (target && !('window' in target)) observer.observe(target); } schedule(); }
+watch(pinned,value => emit('change',value)); watch(() => [props.target,props.position,props.offset],bind,{flush:'post'});
+onMounted(() => { mounted = true; bind(); }); onBeforeUnmount(() => { mounted = false; cleanup(); if (frame) browserOf(host.value)?.cancelAnimationFrame(frame); });
+</script>
+<template><div ref="host" class="ui-affix" :data-affixed="pinned || undefined" :style="{ height: pinned ? `${size.height}px` : undefined }"><div ref="content" class="ui-affix__content" :style="pinned ? { position: 'fixed', width: `${size.width}px`, left: `${size.left}px`, top: `${size.top}px`, zIndex: 50 } : undefined"><slot :affixed="pinned" /></div></div></template>
+<style scoped>.ui-affix{min-width:0;width:100%}.ui-affix__content{box-sizing:border-box;min-width:0}.ui-affix[data-affixed] .ui-affix__content{background:var(--ui-color-surface);box-shadow:var(--ui-shadow-panel);border-block-end:1px solid var(--ui-color-metal)}@media(forced-colors:active){.ui-affix[data-affixed] .ui-affix__content{background:Canvas;border-color:CanvasText;box-shadow:none}}</style>

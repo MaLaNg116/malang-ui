@@ -11,7 +11,7 @@ async function openStory(page: Page, title = publisherTitle, globals = 'theme:li
   const entries = Object.values((await response.json()).entries) as { id: string; title: string; type: string }[];
   const story = entries.find(item => item.type === 'story' && item.title === title && item.id.endsWith('--default')); expect(story).toBeDefined();
   await page.goto(`/iframe.html?id=${encodeURIComponent(story!.id)}&viewMode=story&globals=${globals}`); await page.locator('#storybook-root .kit-story-surface').waitFor();
-  await expect(page.getByRole('heading', { name: title === publisherTitle ? '作品入册，核验成章。' : '补齐常用，再逐层深入。', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: title === publisherTitle ? '作品入册，核验成章。' : '逐项核对，让能力有据可查。', exact: true })).toBeVisible();
 }
 async function clockPublisher(page: Page) { await page.clock.install({ time: new Date('2030-01-01T00:00:00Z') }); await openStory(page); await page.clock.pauseAt(new Date('2030-01-01T01:00:00Z')); }
 const collection = (page: Page) => page.getByRole('region', { name: '档案列表', exact: true });
@@ -93,12 +93,13 @@ test.describe('Coverage directory and narrow archive layouts', () => {
     const ant = page.locator('details').filter({ has: page.locator('summary').filter({ hasText: /^Ant Design/ }) }), element = page.locator('details').filter({ has: page.locator('summary').filter({ hasText: /^Element Plus/ }) });
     await ant.locator('summary').click(); await expect(ant.getByRole('listitem')).toHaveCount(73); await expect(ant.locator('summary')).toContainText('73 / 73 项');
     await element.locator('summary').click(); await expect(element.getByRole('listitem')).toHaveCount(82); await expect(element.locator('summary')).toContainText('82 / 82 项');
-    await query.fill('Masonry'); await expect(count).toHaveText('显示 1 / 29 项能力'); await expect(table.getByRole('row')).toHaveCount(2); await expect(table.getByText('栅格、页面布局与分栏', { exact: true })).toBeVisible(); await expect(table.getByText('后续规划', { exact: true })).toBeVisible(); await expect(ant.getByText('Masonry', { exact: true })).toBeVisible();
-    await query.fill('InputTag'); await expect(count).toHaveText('显示 1 / 29 项能力'); await expect(element.getByText('Input Tag', { exact: true })).toBeVisible(); await expect(table.getByText('后续规划', { exact: true })).toBeVisible();
+    await query.fill('Masonry'); await expect(count).toHaveText('显示 1 / 29 项能力'); await expect(table.getByRole('row')).toHaveCount(2); await expect(table.getByText('栅格、页面布局与分栏', { exact: true })).toBeVisible(); await expect(table.getByText('新增实现', { exact: true })).toBeVisible(); await expect(ant.getByText('Masonry', { exact: true })).toBeVisible();
+    await query.fill('InputTag'); await expect(count).toHaveText('显示 1 / 29 项能力'); await expect(element.getByText('Input Tag', { exact: true })).toBeVisible(); await expect(table.getByText('新增实现', { exact: true })).toBeVisible();
     for (const component of ['MSegmented', 'MPopconfirm', 'MImage', 'MFormItem']) {
-      await query.fill(component); await expect(count).toHaveText('显示 1 / 29 项能力'); await expect(table.getByRole('row')).toHaveCount(2); await expect(table.getByText(component, { exact: true })).toBeVisible(); await expect(table.getByText('本轮补齐', { exact: true })).toBeVisible();
+      await query.fill(component); await expect(count).toHaveText('显示 1 / 29 项能力'); await expect(table.getByRole('row')).toHaveCount(2); await expect(table.getByText(component, { exact: true })).toBeVisible(); await expect(table.getByText('新增实现', { exact: true })).toBeVisible();
     }
-    await query.fill('Masonry'); await state.selectOption('added'); await expect(count).toHaveText('显示 0 / 29 项能力'); await expect(table.getByRole('heading', { name: '暂无数据', exact: true })).toBeVisible();
+    await query.fill('QRCode'); await state.selectOption('added'); await expect(count).toHaveText('显示 1 / 29 项能力'); await expect(table.getByText('MQRCode', { exact: true })).toBeVisible();
+    await query.fill('Masonry'); await state.selectOption('planned'); await expect(count).toHaveText('显示 0 / 29 项能力'); await expect(table.getByRole('heading', { name: '暂无数据', exact: true })).toBeVisible();
     await expect(ant.getByRole('listitem')).toHaveCount(0); await expect(element.getByRole('listitem')).toHaveCount(0); await expect(ant.getByText('没有匹配的目录条目。', { exact: true })).toBeVisible(); await expect(element.getByText('没有匹配的目录条目。', { exact: true })).toBeVisible();
     const backgrounds: string[] = [];
     for (const profile of ['theme:light;palette:paper', 'theme:light;palette:celadon', 'theme:light;palette:gilt', 'theme:dark;palette:paper']) {

@@ -1,0 +1,3 @@
+import type{Meta,StoryObj}from'@storybook/vue3-vite';import MTreeSelect from'../../src/components/reference-inputs/MTreeSelect.vue';import{referenceStory,hierarchy}from'./storyHelpers';const meta={title:'表单组件/输入日期/TreeSelect 树选择',component:MTreeSelect,args:{modelValue:null,options:hierarchy,label:'归档目录'},render:args=>referenceStory(MTreeSelect,args)}satisfies Meta<typeof MTreeSelect>;export default meta;type Story=StoryObj<typeof meta>;export const Default:Story={};export const Boundary:Story={args:{modelValue:['ink'],multiple:true,required:true}};export const Strict:Story={args:{modelValue:['paper'],multiple:true,checkStrictly:true}};
+
+export const ParentKeys:Story={name:'父级值投影与半选',args:{modelValue:['cloth'],multiple:true,required:true}};

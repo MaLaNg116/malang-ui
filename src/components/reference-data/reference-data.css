@@ -1,0 +1,18 @@
+.ui-data { box-sizing: border-box; min-width: 0; max-width: 100%; color: var(--ui-color-text); background: var(--ui-color-surface); font: var(--ui-font-size-body)/var(--ui-line-height-body) var(--ui-font-family); }
+.ui-data *, .ui-data *::before, .ui-data *::after { box-sizing: border-box; }
+.ui-data__heading { margin: 0; padding: 12px 16px; border-block-end: 1px solid var(--ui-color-rule); font-family: var(--ui-font-family-display); font-size: var(--ui-font-size-heading); overflow-wrap: anywhere; }
+.ui-data__empty { margin: 0; padding: 28px 16px; color: var(--ui-color-text-secondary); overflow-wrap: anywhere; }
+.ui-data__footer { padding: 12px 16px; border-top: 1px solid var(--ui-color-rule); }
+.ui-data__state { display: flex; justify-content: center; align-items: center; gap: 10px; padding: 24px 16px; }
+.ui-virtual__canvas { position: relative; min-width: 100%; margin: 0; padding: 0; list-style: none; }
+.ui-virtual__row { position: absolute; inset-inline: 0; display: flex; align-items: center; gap: 12px; padding: 8px 16px; border-bottom: 1px solid var(--ui-color-rule); overflow: hidden; }
+.ui-virtual__row > .ui-virtual__copy { min-width: 0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ui-virtual__row[data-selectable] { cursor: pointer; }.ui-virtual__row[data-selected], .ui-virtual__row[data-active] { background: var(--ui-color-accent-soft); }
+.ui-virtual__row[data-active] { box-shadow: inset 2px 0 var(--ui-color-accent); }
+.ui-virtual__row[data-selectable]:hover { background: var(--ui-color-surface-muted); }
+.ui-virtual__number { flex: none; width: 4ch; color: var(--ui-color-text-secondary); font: var(--ui-font-size-caption)/1 var(--ui-font-family-mono); text-align: end; }
+.ui-data input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--ui-color-accent); }
+.ui-data input[type=checkbox]:focus-visible, .ui-data button:focus-visible { outline: 2px solid var(--ui-color-focus); outline-offset: 2px; }
+.ui-data__button { min-height: 44px; padding: 6px 12px; border: 1px solid var(--ui-color-border); border-radius: 0; color: var(--ui-color-text); background: var(--ui-color-surface); font: inherit; cursor: pointer; }
+.ui-data__button:disabled { opacity: .5; cursor: not-allowed; }
+@media (forced-colors: active) { .ui-virtual__row[data-active], .ui-virtual__row[data-selected] { outline: 1px solid Highlight; outline-offset: -1px; }.ui-data input[type=checkbox] { forced-color-adjust: auto; } }

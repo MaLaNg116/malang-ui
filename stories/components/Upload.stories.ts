@@ -2,13 +2,14 @@ import { defineComponent, ref, useId, watch } from 'vue';
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import MUpload from '../../src/components/MUpload.vue';
 import MButton from '../../src/components/MButton.vue';
-import type { MUploadRejection } from '../../src/components/types';
+import type { MUploadCustomRequest, MUploadProgress, MUploadRejection } from '../../src/components/types';
+import MSwitch from '../../src/components/MSwitch.vue';
 
 function sample(name: string, type = 'text/plain', text = '本地交付资料') { return new File([text], name, { type, lastModified: 1700000000000 }); }
 const meta = {
   title: '二级组件/Upload 本地文件', component: MUpload, tags: ['autodocs'],
   args: { modelValue: [], label: '归档附件', accept: '.pdf,image/*', multiple: false, maxSize: 5 * 1024 * 1024, disabled: false, readonly: false, hint: '仅管理本地清单，提交到服务器由使用方负责。' },
-  parameters: { docs: { description: { component: '本地文件收件槽，原生 file input 是唯一选择入口和 Tab 停靠点。v-model 接收真正的 File[]；不会发起网络请求、读取文件内容或伪造上传进度。单选替换，多选追加，按选择顺序部分接收合法文件并逐项发出 reject；name/size/type/lastModified 相同视作元数据重复，不比较文件内容。accept 仅做扩展名与已知 MIME 检查；空 MIME 只在扩展名明确允许时通过，不代表内容安全验证。限制包含端点，maxSize 单位为 bytes，maxCount 为非负整数。取消选择保留列表，父级拒绝更新后恢复 FileList 并可重试。真实 input.files 与父模型保持同步，name/form/required/disabled 支持原生 FormData 与校验；readonly 为组件语义，阻止选择、拖放及移除，但保留表单值。原生 reset 后重新同步当前父模型，使用方可以在 reset 事件中更新模型。无文件预览 URL，无后台上传协议。' } } },
+  parameters: { docs: { description: { component: '文件收件槽，原生file input是选择入口，v-model始终接收真正的File[]。默认不配置action/url/customRequest时只管理本地文件；配置远程地址后以XHR multipart上传，fieldName/name决定文件字段，支持method/headers/data/withCredentials。autoUpload默认true，false时手动提交；进度只来自真实transport，HTTP 2xx或customRequest成功完成才标为成功。customRequest接收file/action/method/headers/data/fieldName/withCredentials/signal/onProgress并返回Promise；取消后迟到的进度、成功与失败均被隔离。实例公开submit(file?)/retry(file)/abort(file?)与states；upload/progress/success/error/abort/status-change事件反映真实状态。父级先接受File[]才会启动请求；接受移除、禁用、只读、配置改变和卸载会中止独立请求。FileList、原生FormData、required、只读和reset仍遵循受控模型。类型/大小/数量/元数据重复校验继续生效，accept不代表文件内容安全验证。示例地址未连接后端时会明确失败，不生成虚构成功。' } } },
   render: args => defineComponent({
     components: { MUpload },
     setup() { const files = ref<readonly File[]>(args.modelValue); watch(() => args.modelValue, value => { files.value = value; }); return { args, files }; },
@@ -70,5 +71,50 @@ export const UnmountCleanup: Story = {
     components: { MUpload, MButton },
     setup() { const visible = ref(true), files = ref<readonly File[]>([sample('保留的草稿.txt')]), formId = `cleanup-form-${useId()}`; return { visible, files, formId }; },
     template: '<main class="kit-stack" style="width:min(100%,520px)"><MUpload v-if="visible" v-model="files" :form="formId" label="可卸载附件" multiple /><div><MButton variant="secondary" @click="visible = !visible">{{ visible ? \'卸载文件组件\' : \'重新挂载文件组件\' }}</MButton></div><form :id="formId"><MButton type="reset" variant="ghost">原生重置草稿</MButton></form></main>',
+  }),
+};
+
+export const RemoteManual: Story = {
+  name: '远程上传与重试',
+  render: () => defineComponent({
+    components: { MUpload },
+    setup() {
+      const files = ref<File[]>([]), started = ref(0), completed = ref(0), failed = ref(0), progress = ref(0), last = ref('尚未请求');
+      function success(file: File, response: unknown) { completed.value++; last.value = file.name + ' · ' + JSON.stringify(response); }
+      function onProgress(_file: File, value: MUploadProgress) { progress.value++; last.value = value.total ? `已传输 ${value.loaded} / ${value.total} bytes` : `已传输 ${value.loaded} bytes，总量未知`; }
+      return { files, started, completed, failed, progress, last, success, onProgress };
+    },
+    template: `<main class="kit-stack" style="width:min(100%,640px);grid-template-columns:minmax(0,1fr);overflow-wrap:anywhere"><h1>真实传输，每一步有据。</h1><p>选择后手动上传。预览地址未连接后端时会明确失败，可取消并重试；原始File与表单值继续保留。</p><MUpload v-model="files" label="服务器附件" multiple action="/__malang-upload__/manual" method="PUT" field-name="asset" with-credentials :headers="{'X-Archive':'manual'}" :data="{collection:'demo',tags:['paper','ink']}" :auto-upload="false" name="attachments" @upload="started++" @progress="onProgress" @success="success" @error="failed++"/><p data-remote-result>开始 {{started}} · 成功 {{completed}} · 失败 {{failed}} · 进度事件 {{progress}}</p><output data-remote-response style="overflow-wrap:anywhere">{{last}}</output><p data-owner-files>父模型：{{files.map(file=>file.name).join('、')||'空'}}</p></main>`,
+  }),
+};
+export const RemoteAutomatic: Story = {
+  name: '自动上传与独立取消',
+  render: () => defineComponent({
+    components: { MUpload, MButton, MSwitch },
+    setup() { return { files: ref<File[]>([]), mounted: ref(true), disabled: ref(false), readonly: ref(false), completed: ref(0), aborted: ref(0) }; },
+    template: `<main class="kit-stack" style="width:min(100%,640px);grid-template-columns:minmax(0,1fr);overflow-wrap:anywhere"><h1>逐份发送，各自归位。</h1><div class="kit-row"><MButton @click="mounted=!mounted">{{mounted?'卸载远程上传':'恢复远程上传'}}</MButton><MButton variant="secondary" @click="files=[]">程序移除全部附件</MButton></div><MSwitch v-model="disabled" label="禁用远程上传"/><MSwitch v-model="readonly" label="远程附件只读"/><MUpload v-if="mounted" v-model="files" label="自动远程附件" multiple action="/__malang-upload__/automatic" :disabled="disabled" :readonly="readonly" @success="completed++" @abort="aborted++"/><p data-remote-result>成功 {{completed}} · 取消 {{aborted}}</p><p data-owner-files>父模型：{{files.map(file=>file.name).join('、')||'空'}}</p></main>`,
+  }),
+};
+export const CustomTransport: Story = {
+  name: '自定义传输与迟到隔离',
+  render: () => defineComponent({
+    components: { MUpload, MSwitch },
+    setup() {
+      const files=ref<File[]>([]), ignore=ref(false), completed=ref(0), failed=ref(0), aborted=ref(0);
+      const request: MUploadCustomRequest = async options => {
+        const response=await fetch(options.action,{method:options.method,headers:options.headers,body:options.file,signal:ignore.value?undefined:options.signal,credentials:options.withCredentials?'include':'same-origin'});
+        if(!response.ok)throw new globalThis.Error(`自定义传输失败（HTTP ${response.status}）。`);return response.json();
+      };
+      return{files,ignore,request,completed,failed,aborted};
+    },
+    template: `<main class="kit-stack" style="width:min(100%,640px);grid-template-columns:minmax(0,1fr);overflow-wrap:anywhere"><h1>协议可换，边界依旧。</h1><p>此示例用fetch发送原始文件，不提供可测的上传进度，因此等待响应时显示不确定进度。取消即隔离本轮结果。</p><MSwitch v-model="ignore" label="传输故意忽略取消信号"/><MUpload v-model="files" label="自定义远程附件" action="/__malang-upload__/custom" method="POST" :custom-request="request" :auto-upload="false" @success="completed++" @error="failed++" @abort="aborted++"/><p data-remote-result>成功 {{completed}} · 失败 {{failed}} · 取消 {{aborted}}</p></main>`,
+  }),
+};
+export const RemoteControlled: Story = {
+  name: '远程受控确认',
+  render: () => defineComponent({
+    components: { MUpload, MSwitch },
+    setup(){const files=ref<File[]>([]),accepts=ref(false),requests=ref(0),started=ref(0);function update(next:File[]){requests.value++;if(accepts.value)files.value=next;}return{files,accepts,requests,started,update};},
+    template: `<main class="kit-stack" style="width:min(100%,640px);grid-template-columns:minmax(0,1fr);overflow-wrap:anywhere"><MSwitch v-model="accepts" label="接受远程文件更新"/><MUpload :model-value="files" label="受控远程附件" action="/__malang-upload__/controlled" @update:model-value="update" @upload="started++"/><p data-remote-result>父级请求 {{requests}} · 启动上传 {{started}}</p><p data-owner-files>父模型：{{files.map(file=>file.name).join('、')||'空'}}</p></main>`,
   }),
 };

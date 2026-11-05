@@ -1,0 +1,19 @@
+.ui-ri { position: relative; display: grid; gap: 10px; min-width: 0; max-width: 100%; color: var(--ui-color-text); font: var(--ui-font-size-body)/1.6 var(--ui-font-family); }
+.ui-ri *, .ui-ri *::before, .ui-ri *::after { box-sizing: border-box; }
+.ui-ri__label { font-size: var(--ui-font-size-caption); font-weight: var(--ui-font-weight-emphasis); overflow-wrap: anywhere; }
+.ui-ri__row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-width: 0; }
+.ui-ri__grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,150px),1fr)); gap: 12px; min-width: 0; }
+.ui-ri__control { box-sizing: border-box; width: 100%; min-width: 0; min-height: 40px; padding: 8px 12px; border: 0; border-bottom: 1px solid var(--ui-color-border); background: var(--ui-color-surface); color: var(--ui-color-text); border-radius: 0; font: inherit; }
+.ui-ri__control:focus-visible { outline: 2px solid var(--ui-color-focus); outline-offset: 2px; border-bottom-color: var(--ui-color-focus); }
+.ui-ri__button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 36px; min-height: 36px; max-width: 100%; padding: 6px 12px; border: 1px solid var(--ui-color-rule); border-radius: 0; color: var(--ui-color-text); background: var(--ui-color-surface); cursor: pointer; font: inherit; overflow-wrap: anywhere; }
+.ui-ri__button:hover:not(:disabled), .ui-ri__button[aria-pressed=true], .ui-ri__button[aria-selected=true] { color: var(--ui-color-accent); border-color: var(--ui-color-accent); background: var(--ui-color-accent-soft); }
+.ui-ri__button:focus-visible, .ui-ri input[type=range]:focus-visible { outline: 2px solid var(--ui-color-focus); outline-offset: 2px; }
+.ui-ri button:disabled, .ui-ri input:disabled, .ui-ri select:disabled, .ui-ri textarea:disabled { cursor: not-allowed; opacity: .5; }
+.ui-ri__panel { min-width: 0; padding: 14px; border: 1px solid var(--ui-color-rule); border-block-start: 2px solid var(--ui-color-metal); background: var(--ui-color-surface); }
+.ui-ri__list { display: grid; gap: 4px; max-height: 280px; overflow: auto; list-style: none; padding: 0; margin: 0; min-width: 0; }
+.ui-ri__muted { font-size: 12px; color: var(--ui-color-text-secondary); margin: 0; overflow-wrap: anywhere; }
+.ui-ri__error { color: var(--ui-color-danger); font-size: 12px; margin: 0; overflow-wrap: anywhere; }
+.ui-ri input[type=checkbox] { accent-color: var(--ui-color-accent); width: 20px; height: 20px; flex: none; }
+.ui-ri__bridge { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; inset-inline-start: 0; bottom: 0; }
+@media(pointer:coarse) { .ui-ri__button, .ui-ri__control { min-height: 44px; }.ui-ri__button { min-width: 44px; } }
+@media(forced-colors:active) { .ui-ri__button, .ui-ri__panel, .ui-ri__control { border: 1px solid CanvasText; }.ui-ri__button[aria-selected=true], .ui-ri__button[aria-pressed=true] { color: HighlightText; background: Highlight; } }

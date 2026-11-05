@@ -1,0 +1,7 @@
+import { defineComponent } from 'vue';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
+import { MGrid, MGridItem } from '../../src/components/reference-layout';
+import './reference-layout.css';
+const meta={title:'布局组件/Grid 栅格',component:MGrid,tags:['autodocs'],parameters:{docs:{description:{component:'CSS Grid响应式列与间距；xs/sm/md/lg/xl分别从0/576/768/992/1200px生效。MGridItem控制跨列与列起点偏移，DOM顺序保持不变。'}}},render:()=>defineComponent({components:{MGrid,MGridItem},template:`<main class="reference-story"><h1>刻线成格，内容有序。</h1><MGrid :columns="12" :gap="16" data-testid="grid"><MGridItem :span="8"><div class="reference-tile">主体 · 8 / 12</div></MGridItem><MGridItem :span="4"><div class="reference-tile">侧记 · 4 / 12</div></MGridItem><MGridItem :span="6"><div class="reference-tile">资料 · 6 / 12</div></MGridItem><MGridItem :span="6"><div class="reference-tile">索引 · 6 / 12</div></MGridItem></MGrid></main>`})} satisfies Meta<typeof MGrid>;
+export default meta;type Story=StoryObj<typeof meta>;export const Default:Story={};
+export const Boundary:Story={render:()=>defineComponent({components:{MGrid,MGridItem},template:`<main class="reference-story"><h1>窄处收束，宽处展开。</h1><MGrid :columns="{xs:1,md:6,lg:12}" :gap="{xs:8,md:20}" data-testid="responsive-grid"><MGridItem :span="{xs:1,md:4,lg:8}"><div class="reference-tile">长内容 ArchiveWithoutArtificialClippingOrTruncation 与响应式跨列。</div></MGridItem><MGridItem :span="{xs:1,md:2,lg:4}"><div class="reference-tile">侧记</div></MGridItem><MGridItem :span="99"><div class="reference-tile">超出列数时按当前总列数夹取。</div></MGridItem></MGrid></main>`})};

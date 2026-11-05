@@ -1,5 +1,6 @@
 import { test as base, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
+import coverage from '../../design/component-coverage.json' with { type: 'json' };
 
 const test = base.extend<{ browserErrors: string[] }>({
   browserErrors: [async ({ page }, use) => {
@@ -43,7 +44,7 @@ test.describe('Paper and pigment studio', () => {
     await expect(page.getByRole('switch', { name: '显示材质说明', exact: true })).not.toBeChecked();
     await expect(page.getByRole('checkbox', { name: '记录时保留备注', exact: true })).not.toBeChecked();
     await expect(slider).toHaveValue('2.4'); await expect(page.getByRole('button', { name: '播放织光', exact: true })).toBeVisible();
-    await expect(page.getByRole('group', { name: '公开组件', exact: true }).getByRole('definition')).toHaveText(/49\s*个/);
+    await expect(page.getByRole('group', { name: '公开组件', exact: true }).getByRole('definition')).toHaveText(new RegExp(`${coverage.publicComponentCount}\\s*个`));
     await expect(page.getByRole('group', { name: 'Canvas MG', exact: true }).getByRole('definition')).toHaveText(/6\s*套/); await expect(recordCount(page)).toHaveText(/0\s*份/);
   });
 
