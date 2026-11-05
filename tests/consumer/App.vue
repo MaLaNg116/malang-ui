@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import {
   MButton, MInput, MSwitch, MCard, MTabs, MDialog, MToast, MToastViewport,
   MCheckbox, MRadioGroup, MSelect, MTextarea, MPopover, MTooltip, MTable,
@@ -7,9 +7,9 @@ import {
   MDrawer, MDropdownMenu, MAccordion, MSteps, MProgress, MTimeline,
   MInputNumber, MSlider, MCombobox, MTag, MAvatar, MDescriptions,
   MDatePicker, MUpload, MMenu, MTree,
-  MStatistic, MResult, MSpace, MBackTop, MMessage,
+  MStatistic, MResult, MSpace, MBackTop, MMessage, MSegmented, MPopconfirm, MImage, MForm, MFormItem,
 } from 'malang-ui';
-import type { MChoiceOption, MTableColumn, MTabItem, MMenuItem, MTreeNode, MUploadRejection } from 'malang-ui';
+import type { MChoiceOption, MTableColumn, MTabItem, MMenuItem, MTreeNode, MUploadRejection, MFormRules, MFormModel } from 'malang-ui';
 
 // A normal business interface has no dictionary index signature.
 interface Project { id: number; name: string; description: string }
@@ -23,6 +23,11 @@ const amount = ref<number | null>(1); const intensity = ref(1);
 const date = ref('2026-11-04'); const attachments = ref<File[]>([]);
 const selected = ref<string | null>('one'); const expanded = ref<string[]>(['group']);
 const scrollHost = ref<HTMLElement | null>(null);
+interface RegistryDraft { name: string; code: string }
+const registry = reactive<RegistryDraft>({ name: '声明消费', code: 'archive' });
+const consumerImageSrc = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40'%3E%3Cpath d='M0 0h80v40H0z' fill='%23356e64'/%3E%3C/svg%3E";
+const registryRules: MFormRules = { name: [{ required: true }], code: [{ validator: async (value, model, signal) => signal.aborted || typeof value === 'string' && typeof model.name === 'string' }] };
+const resetRegistry = (initial: MFormModel) => Object.assign(registry, initial);
 const menuItems: readonly MMenuItem[] = [{value:'group',label:'分组',children:[{value:'one',label:'第一项',href:'#one'}]}];
 const treeItems: readonly MTreeNode[] = [{value:'group',label:'目录',children:[{value:'one',label:'第一项'}]}];
 function rejected(items: MUploadRejection[]) { value.value = items[0]?.reason || ''; }
@@ -30,6 +35,10 @@ function navigate(_value: string, event: MouseEvent) { event.preventDefault(); }
 </script>
 <template>
   <MBreadcrumb :items="[{ label: '组件', href: '/' }, { label: '验证' }]" />
+  <MSegmented v-model="value" :options="options" label="视图" name="view" block required />
+  <MPopconfirm v-model="popup" title="确认移除？" trigger-label="移除" :before-confirm="async () => true" danger />
+  <MImage :src="consumerImageSrc" alt="声明消费图片" :width="80" :height="40" preview />
+  <MForm :model="registry" :rules="registryRules" @reset="resetRegistry" v-slot="{validating}"><MFormItem name="name" label="登记名称" v-slot="{field}"><MInput v-model="registry.name" v-bind="field" /></MFormItem><MButton type="submit" :loading="validating">登记</MButton></MForm>
   <MSpace direction="horizontal" :size="8" align="center" wrap inline><MButton>第一项</MButton><MButton variant="secondary">第二项</MButton></MSpace>
   <div ref="scrollHost"><MBackTop :target="() => scrollHost" :visibility-height="100" behavior="instant" label="回到消费页顶部" @click="navigate('top', $event)" /></div>
   <MToastViewport placement="top-center"><MToast v-model="checked" presentation="message" title="轻提示已就绪" :closable="false" :duration="3000" /></MToastViewport>

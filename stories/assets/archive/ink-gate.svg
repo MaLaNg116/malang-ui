@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+  <defs><linearGradient id="paper" x2="1" y2="1"><stop stop-color="#f4eee0"/><stop offset="1" stop-color="#dedbca"/></linearGradient><linearGradient id="ink" x2="0" y2="1"><stop stop-color="#273b36"/><stop offset="1" stop-color="#6c7b6d"/></linearGradient></defs>
+  <path fill="url(#paper)" d="M0 0h960v600H0z"/>
+  <g fill="none" stroke="#a4ad98" stroke-width="1" opacity=".4"><path d="M48 70h864M48 530h864M80 40v520m800-520v520"/><path d="M48 94h16m832 0h16M48 506h16m832 0h16"/></g>
+  <path fill="#bdc9b6" d="m0 360 140-148 110 110 93-140 150 190 122-105 130 108 102-162 113 125v262H0z"/>
+  <path fill="url(#ink)" d="m0 440 158-188 64 98 98-89 96 172 117-72 106 78 136-167 185 141v187H0z"/>
+  <path fill="#f0ebdc" opacity=".8" d="m90 510 202-20 180-39 177 16 218-39-144 52-244-3-154 40z"/>
+  <g fill="none" stroke="#436f60" stroke-width="8"><path d="M594 390V162h188v228M622 390V190h132v200"/><path d="M574 161h228M584 147h208"/></g>
+  <g fill="none" stroke="#bc9356" stroke-width="3"><path d="M588 390h200M630 183l45-29h28l44 29"/><circle cx="688" cy="280" r="47"/><circle cx="688" cy="280" r="34"/><path d="M688 225v23m0 64v23m-55-55h23m64 0h23m-94-39 17 17m45 45 17 17m0-79-17 17m-45 45-17 17"/></g>
+  <path fill="#d4c8a6" d="M684 254h8v20h20v12h-20v20h-8v-20h-20v-12h20z"/>
+  <g fill="#243a33"><path d="m449 381 10-23 17 12-4 28-13 29-13-6 9-19z"/><path d="m459 421-22 42-13 1 17-44m18 6 22 26-3 12-14-7-20-28"/><path d="m464 394 44-25 3 7-43 29"/></g>
+  <g fill="#a33e31"><path d="M102 110h58v58h-58z"/><path fill="#f4eee0" d="M113 122h34v5h-12v23h-5v-23h-17zm-1 31h35v5h-35z"/></g>
+  <text x="102" y="207" font-family="serif" font-size="23" fill="#31473e" letter-spacing="5">墨关</text>
+  <text x="80" y="566" font-family="monospace" font-size="11" fill="#4f675a" letter-spacing="3">MALANG ARCHIVE / INK GATE / 001</text>
+</svg>

@@ -2,7 +2,7 @@
 
 一套以水墨与科技融合为视觉方向的前端组件库，包含 UI 组件、GSAP 动效、MG 编排和实用工具。首发使用 Vue 3 + TypeScript，先在自己的项目中验证，再逐步扩展与开源。
 
-当前提供 44 个公开组件、纯 TypeScript 工具、六套 Canvas / MG 编排和 DOM 错峰动效，共七个动效工厂。浅色提供宣纸朱砂、青瓷冷玉与绢素鎏金三种材质配色，深色保留浓墨；朱砂刻印独立于主题主色。
+当前提供 49 个公开组件、纯 TypeScript 工具、六套 Canvas / MG 编排和 DOM 错峰动效，共七个动效工厂。浅色提供宣纸朱砂、青瓷冷玉与绢素鎏金三种材质配色，深色保留浓墨；朱砂刻印独立于主题主色。
 
 组件统一使用 **M 前缀**，例如 `MInput`、`MButton`、`MDrawer`；Vue 模板也可以写成 `<m-input>`、`<m-button>`、`<m-drawer>`。M 代表 MaLang，公开类型对应 `MInputProps` 等。当前私有验证阶段已统一迁移命名。
 
@@ -15,6 +15,8 @@
 「开始 / 归印调校台」把搜索预设、数字与滑杆、可移除关键词和资料描述连接到真实的成功落印控制器。草稿在应用前保持独立，应用后可播放、暂停、定位与重播；减少动态效果直接呈现完成态。
 
 「开始 / 藏品归档台」组合侧栏导航、目录树、日期选择与文件选择，演示本地素材登记、资料查看、移除和操作记录。目录焦点与选择分开，切换导航保留编辑草稿；附件不会自动发送到服务器。
+
+「开始 / 档案发布台」把表单规则、分段筛选、图片组预览和可取消的异步确认接入同一份本页档案。登记成功后可核对大图，再确认归档；取消或过期校验不会提交结果。数据与等待均为本地演练，不执行服务器发布；见[组合示例源码](stories/ArchivePublisher.stories.ts)。
 
 「开始 / 纸墨试色台」把三种浅色配色、深色、纸面层次、静态指标和页面结果放在同一个局部容器中。切色保留输入与选项；「记录并验印」保存本页实际方案并播放经纬织光，还原会清空本页草稿与记录。
 
@@ -125,12 +127,13 @@ const name = ref('');
 
 | 模块 | 当前内容 |
 | --- | --- |
-| 动作与输入（12） | `MButton`、`MInput`、`MInputNumber`、`MSlider`、`MCombobox`、`MDatePicker`、`MUpload`、`MTextarea`、`MSelect`、`MCheckbox`、`MRadioGroup`、`MSwitch` |
-| 内容与数据（7） | `MCard`、`MTable`、`MDivider`、`MTag`、`MAvatar`、`MDescriptions`、`MStatistic` |
+| 表单验证（2） | `MForm`、`MFormItem` |
+| 动作与输入（13） | `MButton`、`MSegmented`、`MInput`、`MInputNumber`、`MSlider`、`MCombobox`、`MDatePicker`、`MUpload`、`MTextarea`、`MSelect`、`MCheckbox`、`MRadioGroup`、`MSwitch` |
+| 内容与数据（8） | `MCard`、`MTable`、`MDivider`、`MTag`、`MAvatar`、`MImage`、`MDescriptions`、`MStatistic` |
 | 页面导航（6） | `MTabs`、`MPagination`、`MBreadcrumb`、`MMenu`、`MTree`、`MBackTop` |
 | 布局间距（1） | `MSpace` |
 | 浮层与说明（3） | `MDialog`、`MPopover`、`MTooltip` |
-| 状态与反馈（9） | `MBadge`、`MAlert`、`MResult`、`MSpinner`、`MSkeleton`、`MEmpty`、`MMessage`、`MToast`、`MToastViewport` |
+| 状态与反馈（10） | `MBadge`、`MAlert`、`MResult`、`MSpinner`、`MSkeleton`、`MEmpty`、`MMessage`、`MPopconfirm`、`MToast`、`MToastViewport` |
 | 二级流程（6） | `MDrawer`、`MDropdownMenu`、`MAccordion`、`MSteps`、`MProgress`、`MTimeline` |
 | 工具 | `debounce`、`throttle`、`asyncLock` |
 | 动效与 MG | 六套 Canvas：轨道构形、墨迹切面、成功落印、品牌开场、双轨等待、经纬织光；另有 DOM 错峰，均提供可控生命周期 |
@@ -149,6 +152,44 @@ const name = ref('');
 `MInput` / `MTextarea` 使用字符串 `v-model`，支持 `label/hint/error/disabled`。`name/required/maxlength/autocomplete` 等原生属性与事件传给实际控件；中文组合输入期间保留未提交文本，结束后同步模型。Textarea 默认 4 行，可设置 `rows`。用可见 `label` 或 `aria-label` 为控件命名。
 
 `MCheckbox` 使用布尔 `v-model`，支持 `indeterminate`。`MRadioGroup` 使用字符串 `v-model`、必填 `label` 和 `options`；每个选项提供唯一 `value`、`label`、可选 `disabled/description`，原生方向键会跳过禁用项。每个组默认独立的表单名称，传 `name` 时同一表单内保持唯一。
+
+`MSegmented` 将同一组选择放进机械滑轨，必填字符串 `v-model`、`label` 与 `options: readonly MChoiceOption[]`。它使用原生 `fieldset/legend/radio`，提供 `name`、`disabled`、`size="sm|md|lg"`（默认 `md`）、`block` 与 `orientation="horizontal|vertical"`（默认横向）；原生 `required/form` 作用于每个单选控件。方向键跳过禁用项，左右遵循实际阅读方向，空格选择；描述通过辅助说明关联。滑块随标签、字体与容器尺寸更新，超长内容自然折行，必要滚动留在轨道内。父级拒绝更新后仍可重试，未匹配的模型保持无选中。原生表单 reset 后恢复当前父模型；需要恢复初值或清空时，父页面应明确更新模型。分段选择表达单值，不使用 Tabs 的面板语义。
+
+`MForm` 使用真实 `form`，接收受控 `model` 与按字段名组织的 `rules: MFormRules`；默认 `label="表单"`、`validateOn="submit"`、`showSummary=true`、`disabled=false`。`validateOn` 还支持 `blur/change`。`MFormItem` 的 `name/label` 必填，可传 `hint/required/disabled`；它注册字段并通过 `#default="{ field, error, validating }"` 提供绑定。将 `field` 显式传给一个控件，同时自行绑定其 `v-model`：`field` 包含 `id/name/label/hint/error/required/disabled/onBlur`，不会自动查找或改写子组件。
+
+```vue
+<script setup lang="ts">
+import { reactive } from 'vue';
+import { MButton, MForm, MFormItem, MInput, MTextarea } from 'malang-ui';
+import type { MFormModel, MFormRules } from 'malang-ui';
+import 'malang-ui/style.css';
+
+const model = reactive({ title: '', note: '' });
+const rules: MFormRules = {
+  title: [{ required: true, message: '请填写作品名称。' }, { max: 40 }],
+};
+function save(values: MFormModel) { console.log(values.title); }
+function restore(initial: MFormModel) { Object.assign(model, initial); }
+</script>
+
+<template>
+  <MForm :model="model" :rules="rules" label="作品登记"
+    @submit="save" @reset="restore" v-slot="{ validating }">
+    <MFormItem name="title" label="作品名称" v-slot="{ field }">
+      <MInput v-model="model.title" v-bind="field" />
+    </MFormItem>
+    <MFormItem name="note" label="作品说明" v-slot="{ field }">
+      <MTextarea v-model="model.note" v-bind="field" />
+    </MFormItem>
+    <MButton type="submit" :loading="validating">核对并登记</MButton>
+    <MButton type="reset" variant="secondary">恢复初始资料</MButton>
+  </MForm>
+</template>
+```
+
+规则支持 `required/min/max/pattern/message` 与 `validator(value, modelSnapshot, signal)`。`min/max` 检查数值本身或字符串、数组长度；校验器可返回 `void/true`、表示未通过的 `false` 或错误文字，也可返回 Promise。模型变化、新一轮校验、重置或卸载会取消旧校验结果；异步请求应把 `signal` 继续传给支持取消的操作。跨字段规则从第二个参数读取本轮模型快照。注册字段还会合并对应原生控件的 `validity`，提交失败聚焦首个错误，摘要按钮可回到字段。
+
+`MForm` 只校验已注册的 `MFormItem`；模型采用平铺属性，`name="title"` 对应 `model.title`，不会把 `user.name` 当作嵌套路径，也不提供字段数组或布局栅格引擎。`submit(modelCopy, SubmitEvent)` 提交模型副本，`invalid(errors)` 报告错误；它不代替 `FormData`、上传或网络请求。`reset(initialModel)` 发出挂载时的初始模型快照并清除校验，由父级决定是否接受，组件不会直接修改 `model`。实例公开 `validate(names?)`（返回 `{ valid, errors, cancelled }` 的 Promise）、`clearValidation(names?)`、`reset()` 与 `focusField(name)`；默认插槽也提供 `{ errors, validating, validate, reset }`。自定义控件需自行转发 `field` 的标签、错误、原生属性与失焦事件。
 
 `MSelect` 使用字符串 `v-model` 与 `options`（同 `MChoiceOption`）；`placeholder` 提供不可选的空值提示。它保留原生单选下拉框与系统键盘行为，选项描述用于 RadioGroup。上述表单控件的禁用、错误、帮助信息和模型变化通过原生语义呈现；受控模型由父级决定是否接受更新。
 
@@ -172,6 +213,10 @@ const sliderAmount = computed({
 
 `MAvatar` 的 `alt` 必填，提供单一的图像名称；相邻文字已经表达身份时可传空字符串，作为装饰。`name` 提供最多两个字素的缩略，图片加载或失败时保留文字回退，更换 `src` 后重新尝试。`size` 支持 `sm/md/lg`，`tone` 支持 `ink/seal/jade`。
 
+`MImage` 必填 `src/alt`，默认 `fit="cover"`、`loading="lazy"`、`preview=true`；`fit` 支持原生五种 `object-fit`。空 `alt` 表示装饰图，内容图片应给出实际说明。它提供载入占位、失败重试和换源隔离；`class/style` 作用于外框，其余原生图片属性传给缩略图，正数 `width/height` 同时确定外框尺寸比例。`load(Event)`、`error(Event)` 对应缩略图，原图另行管理加载与失败状态。
+
+载入完成后，预览按钮打开原生模态 Dialog；`previewSources: readonly string[]` 提供 URL 列表，`initialIndex` 为从 0 开始的初始索引，省略时优先定位当前 `src`。上一张/下一张与左右方向键在列表边界停止，缩放支持 1–3 倍，图片区独立滚动，Escape 关闭并回到安全的触发位置。打开或切换预览时发出 `preview-change(index, src)`。URL 列表不包含逐图说明，其他 URL 使用「图片组第 N 张」的名称；需要每张图片各自的 `alt` 时，用多个 `MImage` 构成画廊，示例见 Image / Gallery。
+
 `MDescriptions` 使用原生 `dl/dt/dd` 展示资料，必填 `label/items`；条目包含唯一 `key`、`label`、可选简单值 `value` 和跨列 `span`。`columns` 支持 1–3 列，窄屏自动单列；复杂内容通过同名插槽 `{ item }` 渲染，无资料时有明确空说明。
 
 `MStatistic` 用原生 `dl/dt/dd` 展示静态指标，必填 `label`，`value` 接收数值或已格式化字符串。`prefix/suffix/unit/description` 补充读数；`tone` 使用现有语义色。`null`、空字符串与非有限数值显示 `placeholder`（默认 `—`），省略前后缀与单位，数值 `0` 保留。格式化由应用负责，组件不自动跳数或播报。
@@ -193,6 +238,20 @@ const sliderAmount = computed({
 ```
 
 `MPopover` 使用布尔 `v-model`、必填 `label` 与可选 `triggerLabel/placement/disabled`。它自带触发按钮，`#trigger` 只放文字或图标；默认插槽读取 `{ close }`。键盘打开会聚焦内容，Escape、关闭按钮或外部点击可请求关闭；它是非模态浮层，不锁定背景或循环焦点。
+
+`MPopconfirm` 提供专用的非模态确认气泡，必填布尔 `v-model` 与 `title`，支持 `description/triggerLabel/confirmText/cancelText/placement/disabled/danger`。确认、取消文字默认「确认 / 取消」，默认向上定位并自动避让；`#trigger` 只放文字或图标，组件自带原生触发按钮。键盘开启时先聚焦取消；Tab 可离开，Escape 与外部点击可取消，外部焦点不会被拉回。`danger` 只改变危险确认动作的语义色。
+
+异步守卫使用 `beforeConfirm(signal): void | boolean | Promise<void | boolean>`：返回 `false` 保留气泡；抛出或拒绝会显示错误并发出 `confirm-error(error)`，可以原处重试。等待期间合并重复确认，取消仍可操作；取消、关闭、禁用或卸载会中止本轮信号，并忽略不响应信号的迟到结果。仅守卫通过后发出 `confirm(MouseEvent)` 并请求关闭，业务结果在该事件中更新；`cancel(event?)` 报告用户退出，`update:modelValue` 的最终接受与否仍由父级决定。
+
+```vue
+<MPopconfirm v-model="confirmOpen" title="确认归档这份卷宗？"
+  trigger-label="归档卷宗" confirm-text="确认归档" cancel-text="保留草稿"
+  :before-confirm="verifyArchive" @confirm="archive" @confirm-error="showError">
+  <template #trigger>归档本页卷宗</template>
+</MPopconfirm>
+```
+
+其中 `verifyArchive` 接收 `AbortSignal` 并返回上述守卫结果；`archive` 更新已确认的业务状态。`AsyncConfirmation` Story 与档案发布台提供完整的取消、失败和迟到响应处理。
 
 `MTooltip` 必填 `text` 与 `label`，自带可聚焦触发按钮，默认插槽只放文字或图标。悬停默认等待 300ms，聚焦立即出现，Escape 可关闭；`placement` 和 `delay` 可调整。提示只承载补充文本，需要按钮和表单时使用 Popover。
 
@@ -285,7 +344,9 @@ scripts/         Token 生成与构建辅助脚本
 
 ## 组件覆盖对照
 
-「开始 / 组件覆盖对照」按能力搜索和筛选，映射本库组件与 [Ant Design 目录](https://ant.design/components/overview/)、[Element Plus 目录](https://element-plus.org/en-US/component/overview.html)。记录见 [design/component-coverage.json](design/component-coverage.json)；按能力对照，不承诺第三方 API 兼容。Space、BackTop 与轻 Message 已补齐，Segmented、Popconfirm、Image 和 Form 容器列为优先方向，其余按实际项目需要推进。
+「开始 / 组件覆盖对照」按能力搜索和筛选，映射本库组件与 [Ant Design 目录](https://ant.design/components/overview/)、[Element Plus 目录](https://element-plus.org/en-US/component/overview.html)。[design/component-coverage.json](design/component-coverage.json) 保存 2026-11-05 的版本快照：[Ant Design 6.7.0](https://github.com/ant-design/ant-design/releases/tag/6.7.0)、[Element Plus 2.14.7](https://github.com/element-plus/element-plus/releases/tag/2.14.7)，归并为 29 类能力，并保留 155 条官方组件逐项记录。记录同时标明基础支持、可组合与缺项，组件数量与目录条数不能直接视为覆盖比例。
+
+本轮提供分段选择、轻量确认、图片预览和表单字段验证四类 P1；能力参考分别见 [Segmented](https://ant.design/components/segmented/)、[Popconfirm](https://ant.design/components/popconfirm/)、[Image](https://element-plus.org/en-US/component/image.html) 与 [Form](https://element-plus.org/en-US/component/form.html)。对照基于使用能力，不承诺第三方全部 API 兼容。后续 P1 转向排版与链接、锚点与吸附、日期区间/时间/日历及栅格/布局/分栏，其余按实际项目需要推进；完整组件库与跨框架支持仍将继续迭代。
 
 ## 后续方向
 

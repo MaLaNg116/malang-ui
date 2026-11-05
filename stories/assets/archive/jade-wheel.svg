@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+  <defs><linearGradient id="jade" x2="1" y2="1"><stop stop-color="#dfebe1"/><stop offset="1" stop-color="#b8ccbf"/></linearGradient></defs>
+  <path fill="url(#jade)" d="M0 0h960v600H0z"/>
+  <g fill="none" stroke="#7d9a86" stroke-width="1" opacity=".35"><path d="M48 80h864M48 520h864M80 40v520m800-520v520M48 300h864M480 40v520"/><circle cx="480" cy="300" r="236"/></g>
+  <g fill="#234d42"><path d="M452 99h56v48l-28 20-28-20zM452 501h56v-48l-28-20-28 20zM279 272v56h48l20-28-20-28zM681 272v56h-48l-20 28 20 28z"/><path d="m324 166 39-39 35 35-5 34-34 5zm312 268-39 39-35-35 5-34 34-5zM614 166l39 39-35 35-34-5-5-34zM346 434l-39-39 35-35 34 5 5 34z"/></g>
+  <g fill="none" stroke="#315f4f"><circle cx="480" cy="300" r="173" stroke-width="20" stroke-dasharray="220 20 80 40"/><circle cx="480" cy="300" r="131" stroke-width="6"/><circle cx="480" cy="300" r="108" stroke-width="2"/></g>
+  <g fill="none" stroke="#b18c4e" stroke-width="5"><path d="M480 176v73m0 102v73M356 300h73m102 0h73"/><path d="m393 213 52 52m70 70 52 52m0-174-52 52m-70 70-52 52"/></g>
+  <path fill="#234d42" d="m480 234 66 66-66 66-66-66z"/><path fill="#dce7d9" d="m480 260 40 40-40 40-40-40z"/><path fill="#a34434" d="m480 282 18 18-18 18-18-18z"/>
+  <g fill="none" stroke="#315f4f" stroke-width="2"><path d="M122 206h126v188H122m592-188h126v188H714M138 226h94m-94 148h94m496-148h94m-94 148h94"/><path d="M149 246h60v22h-36v45h36v38h-60m602-105h44v105h-44v-44h23v-22h-23z"/></g>
+  <text x="80" y="566" font-family="monospace" font-size="11" fill="#315e4f" letter-spacing="3">MALANG ARCHIVE / JADE MECHANISM / 002</text>
+</svg>

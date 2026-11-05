@@ -13,6 +13,16 @@
 .component-coverage__summary dd span { font: 12px/1.6 var(--ui-font-family); color: var(--ui-color-text-secondary); }
 .component-coverage__summary .component-coverage__summary-note { margin: 0; font: 12px/1.8 var(--ui-font-family); color: var(--ui-color-text-secondary); overflow-wrap: anywhere; }
 .component-coverage h2 { margin: 0; font: 500 24px/1.5 var(--ui-font-family-display); overflow-wrap: anywhere; }
+.component-coverage__references { margin-top: 40px; }
+.component-coverage__references > p { color: var(--ui-color-text-secondary); }
+.component-coverage__references details { margin-top: 16px; border: 1px solid var(--ui-color-rule); background: var(--ui-color-surface); }
+.component-coverage__references summary { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; padding: 12px 16px; cursor: pointer; border-bottom: 1px solid var(--ui-color-rule); }
+.component-coverage__references summary:focus-visible { outline: 2px solid var(--ui-color-focus); outline-offset: -3px; }
+.component-coverage__references summary span { color: var(--ui-color-text-secondary); font: 12px/1.5 var(--ui-font-family-mono); }
+.component-coverage__references ul { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,240px),1fr)); gap: 12px; margin: 0; padding: 16px; list-style: none; }
+.component-coverage__references li { display: grid; align-content: start; min-width: 0; gap: 6px; padding: 8px 12px; border-left: 2px solid var(--ui-color-rule); overflow-wrap: anywhere; }
+.component-coverage__references li span { color: var(--ui-color-text-secondary); font-size: 12px; }
+.component-coverage__references code { color: var(--ui-color-info); font-size: 11px; white-space: normal; }
 .component-coverage__section-head > p { margin: 8px 0 20px; color: var(--ui-color-text-secondary); }
 .component-coverage__filters { display: grid; grid-template-columns: minmax(0, 1fr) minmax(160px, 220px); gap: 24px; padding: 20px; background: var(--ui-color-surface-muted); border-block: 1px solid var(--ui-color-rule); }
 .component-coverage__filters > * { min-width: 0; }

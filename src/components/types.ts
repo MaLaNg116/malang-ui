@@ -465,3 +465,69 @@ export interface MBackTopProps {
   label?: string;
   behavior?: 'smooth' | 'instant';
 }
+
+export interface MSegmentedProps {
+  modelValue: string;
+  options: readonly MChoiceOption[];
+  label: string;
+  name?: string;
+  disabled?: boolean;
+  size?: MControlSize;
+  block?: boolean;
+  orientation?: 'horizontal' | 'vertical';
+}
+
+export interface MPopconfirmProps {
+  modelValue: boolean;
+  title: string;
+  description?: string;
+  triggerLabel?: string;
+  confirmText?: string;
+  cancelText?: string;
+  placement?: MFloatingPlacement;
+  disabled?: boolean;
+  danger?: boolean;
+  beforeConfirm?: (signal: AbortSignal) => void | boolean | Promise<void | boolean>;
+}
+
+export interface MImageProps {
+  src: string;
+  alt: string;
+  fit?: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down';
+  loading?: 'eager' | 'lazy';
+  preview?: boolean;
+  previewSources?: readonly string[];
+  initialIndex?: number;
+}
+
+export type MFormModel = Record<string, unknown>;
+export type MFormErrors = Record<string, string>;
+export interface MFormRule {
+  required?: boolean;
+  min?: number;
+  max?: number;
+  pattern?: RegExp;
+  message?: string;
+  validator?: (value: unknown, model: Readonly<MFormModel>, signal: AbortSignal) => void | boolean | string | Promise<void | boolean | string>;
+}
+export type MFormRules = Readonly<Record<string, readonly MFormRule[]>>;
+export interface MFormValidation {
+  valid: boolean;
+  errors: Readonly<MFormErrors>;
+  cancelled: boolean;
+}
+export interface MFormProps {
+  model: object;
+  rules?: MFormRules;
+  label?: string;
+  disabled?: boolean;
+  validateOn?: 'submit' | 'blur' | 'change';
+  showSummary?: boolean;
+}
+export interface MFormItemProps {
+  name: string;
+  label: string;
+  hint?: string;
+  required?: boolean;
+  disabled?: boolean;
+}

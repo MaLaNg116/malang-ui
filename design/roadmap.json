@@ -1,9 +1,10 @@
 {
   "version": "0.1.0",
-  "status": "feedback-and-coverage-locally-verified",
+  "status": "p1-flow-components-locally-verified",
   "project": "malang-ui",
   "continuousRefinement": {
-    "status": "locally-verified",
+    "activeCoverageIteration": {"name":"最新目录逐项对照与高频流程组件","status":"locally-verified","referenceVersions":{"antDesign":"6.7.0","elementPlus":"2.14.7"},"referenceItems":{"antDesign":73,"elementPlus":82},"capabilityGroups":29,"componentCount":49,"scope":["MSegmented","MPopconfirm","MImage","MForm","MFormItem","档案发布台","逐项目录检索与状态边界"],"remaining":["排版与链接","锚点与吸附","日期时间与区间","页面布局与分栏","其余缺口见component-coverage.json"],"verification":{"artifactStories":27,"artifactDocs":4,"geometryChecks":26,"visualCaptures":28,"ssr":"49公开M组件入口；新增5组件无DOM/File SSR与纯工具/UI/Motion传递依赖隔离。","consumer":"最终dist、skipLibCheck:false、普通reactive业务接口和显式field绑定，原生组件与所有49标签严格消费。","interaction":"原生radio/FormData/RTL与受控重试，图片HTTP错误重试/迟到隔离/组图缩放回焦，确认AbortSignal/取消/外部焦点，表单跨字段/异步/原生validity/IME/受控reset与实际归档状态。"},"unitCases":60,"browserCases":179,"storyCount":330,"docsCount":47},
+    "status": "in-progress",
     "objective": "持续优化并制作二级组件，保持功夫朋克主题，同时提升美观度、华丽度、炫酷度、区分度、舒适度、易用度、流畅度，持续迭代直到组件库趋于完善。",
     "publicNaming": {"component": "MInput", "template": "m-input", "types": "MInputProps", "brand": "MaLang"},
     "qualityContract": "design/quality-contract.json",
@@ -14,7 +15,7 @@
       {"name":"MG与动效家族","status":"locally-verified","delivered":["轨道构形","墨迹切面","机械合轨与朱砂成章","MALANG UI可跳过与重播品牌开场","双轨等待与真实结果落印组合","DOM列表错峰与四向空间归位","共用公开MButton与MSlider控件","独立生命周期、焦点保护与减少动效","4.2秒经纬织光与独立seal配色"],"followups":["更多原创MG","真实网格排序需求下再设计FLIP布局过渡"]},
       {"name":"文档与工程成熟度","status":"locally-verified","delivered":["41个公开M组件与类型命名","功夫朋克七项品质与设计状态","使用指南、组件API与可运行示例","组件库展示首页和四个完整组合流程","独立真实tgz的UI与Motion生产消费","无DOM与File的SSR和传递依赖隔离","构建后工作台与153条交互浏览器回归","以自己的文档展示与组合页作为首个自用验证项目"],"followups":["随新项目继续验证","React适配","高级数据组件与正式发布策略"]}
     ],
-    "currentRefinement": {"name":"三拍变奏、语义配色与轻反馈能力","status":"locally-verified","scope":["MSpace","MBackTop","MMessage","23项组件覆盖对照","Spinner连续变奏与原主副双色","Skeleton细雪花与平滑短断片","四主题状态色对照"]},
+    "currentRefinement": {"name":"最新目录逐项对照与高频档案流程","status":"locally-verified","scope":["MSegmented","MPopconfirm","MImage","MForm","MFormItem","档案发布台","Ant73项与Element82项逐项对照"]},
     "spinnerRefinement": {"name":"方印离合三拍变奏","status":"locally-verified","scope":["56单位SVG以28为中心，主角厚3.5单位（24px尺寸下为1.5px），保留16/24/32px与现有API","四角5.4秒内三次展开峰为-3.2/-4.8/-3.8单位，分别旋转-8/-14/-10度，中间连续回收、不设置锁合停留","负错相为0/80/160/240ms，舒展、强展与回收组成三拍顺滑变奏","外轨5.4秒连续转三圈，平均每圈1.8秒，三圈采用不同贝塞尔速度曲线，首尾与段间保持约平均三分之一的非零角速度衔接","180度对称双楔内芯每1.8秒相对外轨linear反向半周，循环不跳变","保持默认状态、六层结构、按钮样式钩子与共享图形，以及系统和容器减少动效、强制颜色模式的静态形态"],"validationStatus":"大幅三拍连续离合、细线条、速度衔接与恢复的主题主副双色已通过验证。","previousVerification":{"unitCases":60,"browserCases":153,"visualProfiles":["dark","paper"],"sampledPhases":6,"sizes":[16,24,32,144],"buttons":["primary","secondary","ghost"],"checks":["完整类型、公开声明消费、库与Storybook构建","双周期关键帧根盒稳定与路径边界、四角错相、共同锁合及反向机芯","明暗与360px、三种按钮单色继承和装饰语义","系统及容器减少动效、强制颜色静态、卸载无动画","单一加载名称、SSR确定性与同一SVG"],"ciMode":"沿用构建后工作台的完整浏览器回归。"},"verification":{"browserCases":159,"unitCases":60,"visualProfiles":["paper","celadon","gilt","dark"],"checks":["三圈不同转速、非零速度衔接、三峰强弱与双周期路径连续","根盒与路径安全、默认主副双色和三类按钮继承","单一加载语义、减少动效、强制颜色与卸载","严格类型与构建后真实浏览器回归"]}},
     "feedbackExpansion": {"status":"locally-verified","componentCount":44,"newComponents":["MSpace","MBackTop","MMessage"],"feedback":"Message在反馈组件中提供独立顶部轻提示入口，默认8px、3秒和五种类型；MToast保留详情通知及旧示例。","coverageItems":23,"storybookIndex":{"stories":305,"docs":43},"verification":{"unitCases":60,"browserCases":159,"artifactStories":19,"artifactDocs":3,"artifactChecks":24,"geometryChecks":18,"ssr":"44个公开M组件入口；新Space/BackTop/Message无DOM与File渲染；UI无GSAP、utils无框架与样式传递依赖。","consumer":"pnpm check以skipLibCheck:false从dist检查消费，覆盖Space/BackTop/Message。","coverage":"23项能力、44组件映射与4项P1缺口；搜索、筛选、官方链接与窄屏表格。"}},
     "completionEvidence": ["规划能力已实现且有真实场景","七项品质通过明暗和窄屏实机评审","交互、类型、打包与CI覆盖对应公开能力","未完成项与实际限制明确记录并继续推进"],
@@ -22,7 +23,8 @@
     "previousPaletteIteration": {"name":"浅色材质、指标结果与纸墨试色台","status":"locally-verified","componentCount":41,"mgFamilies":6,"motionFactories":7,"newComponents":["MStatistic","MResult"],"newScenarios":["纸墨试色台"],"newMotion":["createWeaveSequence"],"palettes":["paper","celadon","gilt"],"interaction":"局部与工具栏配色同步、切色保留草稿与动画定位、本页真实记录与还原回焦、显式结果播报、六向Toast与RTL","loading":"该轮加载验证记录保留；后续形态、节奏和配色见spinnerRefinement。","verification":{"status":"passed-locally","scope":["源码与公开声明严格类型检查、60项单元测试和库/Storybook构建","153项构建后浏览器回归，290个Story与40份实际文档渲染","22组360px材质与组合几何、Toast六向RTL及预留滚动槽、短屏长文44px关闭","原生switch状态、真实工具栏切色不重建输入、草稿保留与MG定位","Weave自然viewport和DPR变化、暂停定位、BFCache、字体、隐藏及实例隔离","独立真实tgz的41组件无GSAP UI与7工厂GSAP生产消费，strict且无源码paths","无DOM/File的SSR与入口传递依赖隔离","三浅色与深色常用不透明文字4.5:1、必要边界与焦点3:1"],"packageConsumer":"两套工程使用同一最终tgz；原生File只读reset/FormData、零值与缺省、结果显式播报、共享Spinner、Skeleton双reduce、六Canvas同节点切色与Weave销毁隔离均通过。","ciMode":"CI沿用pnpm check后测试storybook-static，保持原有7秒断言和30秒用例超时。"},"storyCount":290,"docsCount":40,"browserCases":153,"unitCases":60,"mobileMaterialCases":22},
     "skeletonRefinement": {"name":"细雪花与局部回声","status":"locally-verified","scope":["固定seed雪花保持不变","稀疏1px断片用低对比连续包络浮现退去，底色恒定","保留减少动效与强制颜色静态纹理"],"verification":"同一最终产物的全量与Skeleton相关复跑覆盖局部透明度、变化率、几何、三浅色与深色、内容替换和卸载；测试定位修复及验证阶段见latestIteration。"},
     "statusColorRefinement": {"name":"纸墨语义配色","status":"locally-verified","info":{"light":"#3d6769","dark":"#8fb2b4"},"principle":"青灰进行中、青玉成功、鎏金警告、朱红错误；Spinner恢复主题主副双色。","verification":"四主题实际状态色与焦点、图形和文本对照、普通不透明文字4.5:1与必要边界/焦点3:1；最终构建后回归。"},
-    "latestIteration": {"name":"三拍变奏、语义配色与轻反馈能力","status":"locally-verified","componentCount":44,"mgFamilies":6,"motionFactories":7,"storyCount":305,"docsCount":43,"unitCases":60,"browserCases":159,"verificationStages":["同一最终构建产物全量159用例中158通过；Skeleton新增测试误用未带scope后缀的动画名，导致1处测试定位失败。","仅修正测试按computed动画名精确定位，重跑4项Skeleton全部通过；源码与构建产物未变。"],"newComponents":["MSpace","MBackTop","MMessage"],"newScenarios":["组件覆盖对照","状态对照"],"evidence":"最终check、构建产物浏览器、严格声明消费与无DOM/File SSR；历史真实安装包证据保持在previousPaletteIteration。"}
+    "previousFeedbackIteration": {"name":"三拍变奏、语义配色与轻反馈能力","status":"locally-verified","componentCount":44,"mgFamilies":6,"motionFactories":7,"storyCount":305,"docsCount":43,"unitCases":60,"browserCases":159,"verificationStages":["同一最终构建产物全量159用例中158通过；Skeleton新增测试误用未带scope后缀的动画名，导致1处测试定位失败。","仅修正测试按computed动画名精确定位，重跑4项Skeleton全部通过；源码与构建产物未变。"],"newComponents":["MSpace","MBackTop","MMessage"],"newScenarios":["组件覆盖对照","状态对照"],"evidence":"最终check、构建产物浏览器、严格声明消费与无DOM/File SSR；历史真实安装包证据保持在previousPaletteIteration。"},
+    "latestIteration": {"name":"最新目录逐项对照与高频档案流程","status":"locally-verified","componentCount":49,"storyCount":330,"docsCount":47,"unitCases":60,"browserCases":179,"mgFamilies":6,"motionFactories":7,"newComponents":["MSegmented","MPopconfirm","MImage","MForm","MFormItem"],"newScenarios":["档案发布台"],"referenceVersions":{"antDesign":"6.7.0","elementPlus":"2.14.7"},"referenceCatalogItems":{"antDesign":73,"elementPlus":82},"capabilityGroups":29,"verification":{"artifactStories":27,"artifactDocs":4,"geometryChecks":26,"visualCaptures":28,"ssr":"49公开M组件入口；新增5组件无DOM/File SSR与纯工具/UI/Motion传递依赖隔离。","consumer":"最终dist、skipLibCheck:false、普通reactive业务接口和显式field绑定，原生组件与所有49标签严格消费。","interaction":"原生radio/FormData/RTL与受控重试，图片HTTP错误重试/迟到隔离/组图缩放回焦，确认AbortSignal/取消/外部焦点，表单跨字段/异步/原生validity/IME/受控reset与实际归档状态。"},"remaining":"覆盖清单仍保留16类待补齐能力；下一轮优先排版与链接、锚点吸附、日期时间、布局分栏，本轮没有把基础支持等同完整第三方API。"}
   },
   "repository": "https://github.com/MaLaNg116/malang-ui",
   "confirmed": {
@@ -87,7 +89,7 @@
     "packageName": "malang-ui",
     "package": "malang-ui-0.1.0.tgz",
     "packageStatus": "private，尚未发布到 npm；构建后通过 pnpm pack 生成本地安装包",
-    "validationStatus": "当前44个M组件、6套Canvas MG与7个动效工厂。最新反馈、配色、Spinner与Skeleton、常用布局导航和覆盖对照已通过最终60项单元、159项构建后浏览器、严格公开声明、构建和SSR检查；历史安装包证据保持原归属。"
+    "validationStatus": "当前49个M组件、330个示例、47份文档，6套Canvas MG与7个动效工厂。最新四项P1流程能力已通过最终60项单元、179项构建后浏览器、严格dist声明消费与无DOM/File SSR；27个重点故事、4份新文档、26项四材质几何和实操均通过。其余缺口继续见component-coverage.json，旧验证记录保留原归属。"
   },
   "designTokens": "design/tokens.json",
   "designReferences": "design/skill-references.json",

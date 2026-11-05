@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+  <defs><linearGradient id="silk" x2="1" y2="1"><stop stop-color="#f6efd9"/><stop offset="1" stop-color="#dfd1ad"/></linearGradient></defs>
+  <path fill="url(#silk)" d="M0 0h960v600H0z"/>
+  <g fill="none" stroke="#c3ae7d" stroke-width="1" opacity=".65"><path d="M48 80h864M48 520h864M80 40v520m800-520v520"/><path d="M200 120v360m80-360v360m80-360v360m80-360v360m80-360v360m80-360v360m80-360v360m80-360v360M160 180h640M160 260h640M160 340h640M160 420h640"/></g>
+  <g fill="none" stroke="#8d733f" stroke-width="16"><path d="m180 456 300-312 300 312M240 456l240-248 240 248M300 456l180-184 180 184"/></g>
+  <g fill="none" stroke="#385a4c" stroke-width="13"><path d="M160 210h640M180 286h600M200 362h560M220 438h520"/></g>
+  <g fill="none" stroke="#ddd0ab" stroke-width="6"><path d="m382 246 28-29m-99 101 29-30m-99 103 28-29M550 216l27 29m42 44 29 30m41 42 29 30"/></g>
+  <g fill="#a13c31"><path d="M457 130h46v46h-46z"/><path fill="#f6efd9" d="M465 138h30v5h-12v24h-5v-24h-13z"/></g>
+  <g fill="#a18a4d"><circle cx="160" cy="210" r="7"/><circle cx="800" cy="210" r="7"/><circle cx="220" cy="438" r="7"/><circle cx="740" cy="438" r="7"/></g>
+  <text x="80" y="566" font-family="monospace" font-size="11" fill="#6f613e" letter-spacing="3">MALANG ARCHIVE / GILT WEAVE / 003</text>
+</svg>

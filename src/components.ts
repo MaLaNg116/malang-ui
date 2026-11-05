@@ -42,6 +42,11 @@ export { default as MResult } from './components/MResult.vue';
 export { default as MSpace } from './components/MSpace.vue';
 export { default as MBackTop } from './components/MBackTop.vue';
 export { default as MMessage } from './components/MMessage.vue';
+export { default as MSegmented } from './components/MSegmented.vue';
+export { default as MPopconfirm } from './components/MPopconfirm.vue';
+export { default as MImage } from './components/MImage.vue';
+export { default as MForm } from './components/MForm.vue';
+export { default as MFormItem } from './components/MFormItem.vue';
 export type {
   MButtonProps,
   MButtonVariant,
@@ -55,6 +60,16 @@ export type {
   MCardProps,
   MToastProps,
   MMessageProps,
+  MSegmentedProps,
+  MPopconfirmProps,
+  MImageProps,
+  MFormProps,
+  MFormItemProps,
+  MFormModel,
+  MFormErrors,
+  MFormRule,
+  MFormRules,
+  MFormValidation,
   MToastVariant,
   MToastPlacement,
   MToastViewportProps,
