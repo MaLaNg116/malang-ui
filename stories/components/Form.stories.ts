@@ -5,11 +5,14 @@ import MFormItem from '../../src/components/MFormItem.vue';
 import { MButton, MInput, MSelect, MTextarea } from '../../src/components';
 import type { MFormModel, MFormRules } from '../../src/components/types';
 
+class RegistryDraft {
+  name = ''; code = ''; confirm = ''; category = 'illustration'; note = ''; contact = '';
+}
 const FormExample = defineComponent({
   components: { MForm, MFormItem, MButton, MInput, MSelect, MTextarea },
-  props: { mode: { type: String, default: 'submit' }, disabled: Boolean, removable: Boolean },
-  setup() {
-    const model = reactive({ name: '', code: '', confirm: '', category: 'illustration', note: '', contact: '' });
+  props: { mode: { type: String, default: 'submit' }, disabled: Boolean, removable: Boolean, classModel: Boolean },
+  setup(props) {
+    const model = reactive(props.classModel ? new RegistryDraft() : { ...new RegistryDraft() });
     const saved = ref(0), submitted = ref(''), validatingSignal = ref('待核对'), visible = ref(true), outside = ref('表单外继续编辑的草稿');
     const rules: MFormRules = {
       name: [{ required: true, message: '请填写档案名称。' }, { min: 2, max: 30, message: '档案名称应为 2–30 个字符。' }],
@@ -56,4 +59,4 @@ export const BlurValidation: Story = { render: () => defineComponent({ component
 export const ChangeValidation: Story = { render: () => defineComponent({ components: { FormExample }, template: '<FormExample mode="change" />' }) };
 export const Disabled: Story = { args: { disabled: true } };
 export const ReducedMotion: Story = { globals: { theme: 'dark', motion: 'reduced' } };
-export const FieldLifecycle: Story = { render: () => defineComponent({ components: { FormExample }, template: '<FormExample removable />' }) };
+export const FieldLifecycle: Story = { render: () => defineComponent({ components: { FormExample }, template: '<FormExample removable class-model />' }) };

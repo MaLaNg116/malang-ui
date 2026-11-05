@@ -58,7 +58,7 @@ test.describe('Form validation and field bindings', () => {
       expect(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)).toBe(0);
     }
   });
-  test('fails closed on empty validator errors, preserves external focus, and releases composition guards when a field is removed or the form resets', async ({page}) => {
+  test('keeps a class model editable after validation, fails closed, preserves external focus and releases composition guards on removal and reset', async ({page}) => {
     await page.clock.install({time:new Date('2030-01-01T00:00Z')}); await open(page,'field-lifecycle'); await page.clock.pauseAt(new Date('2030-01-01T01:00Z'));
     const submit=page.getByRole('button',{name:'核对并登记',exact:true}), outside=page.getByRole('textbox',{name:'表单外的草稿',exact:true});
     await fill(page,'error'); await submit.click(); await outside.focus(); await page.clock.runFor(401);

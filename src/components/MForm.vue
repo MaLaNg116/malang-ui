@@ -23,7 +23,9 @@ function copy(value: unknown, seen = new WeakMap<object, unknown>()): unknown {
   for (const key of Object.keys(value)) result[key] = copy((value as MFormModel)[key], seen);
   return result;
 }
-const initial = copy(props.model) as MFormModel;
+// Always own the outer record, including when the caller uses a class instance.
+const modelCopy = (model: object) => copy({ ...model }) as MFormModel;
+const initial = modelCopy(props.model);
 function invalidate() { version++; controller?.abort(); controller = undefined; validating.value = false; submitting = false; }
 function rulesFor(name: string) { return Object.hasOwn(props.rules, name) ? props.rules[name] : []; }
 function hasComposition() {
@@ -57,7 +59,7 @@ async function validate(names?: readonly string[]): Promise<MFormValidation> {
   invalidate();
   const ticket = version, abort = new AbortController(); controller = abort;
   const selected = [...fields.keys()].filter(name => !names || names.includes(name));
-  const model = Object.freeze(copy(props.model) as MFormModel), next: MFormErrors = Object.assign(Object.create(null), names ? errors.value : {});
+  const model = Object.freeze(modelCopy(props.model)), next: MFormErrors = Object.assign(Object.create(null), names ? errors.value : {});
   validating.value = true;
   for (const name of selected) {
     delete next[name]; const field = fields.get(name)!;
@@ -98,7 +100,7 @@ async function submit(event: SubmitEvent) {
     const result = await pending;
     if (result.cancelled || ticket !== version) return;
     if (result.valid) {
-      emit('submit', copy(props.model) as MFormModel, event);
+      emit('submit', modelCopy(props.model), event);
       await nextTick();
       if (alive && ticket === version && owned && submitter?.isConnected && submitter.ownerDocument.activeElement === submitter.ownerDocument.body && !submitter.matches(':disabled')) submitter.focus({ preventScroll: true });
     }
