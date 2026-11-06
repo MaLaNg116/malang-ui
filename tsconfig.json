@@ -4,6 +4,7 @@
     "useDefineForClassFields": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "paths": { "malang-ui": ["./src/index.ts"] },
     "strict": true,
     "jsx": "preserve",
     "resolveJsonModule": true,

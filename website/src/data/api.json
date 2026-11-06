@@ -49,6 +49,16 @@
       {
         "name": "default"
       }
+    ],
+    "types": [
+      {
+        "name": "MButtonVariant",
+        "source": "export type MButtonVariant = 'primary' | 'secondary' | 'ghost';"
+      },
+      {
+        "name": "MControlSize",
+        "source": "export type MControlSize = 'sm' | 'md' | 'lg';"
+      }
     ]
   },
   "MIcon": {
@@ -61,7 +71,8 @@
       {
         "name": "size",
         "type": "string | number",
-        "required": false
+        "required": false,
+        "description": "组件尺寸。"
       },
       {
         "name": "color",
@@ -71,7 +82,8 @@
       {
         "name": "label",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "spin",
@@ -84,6 +96,12 @@
     "slots": [
       {
         "name": "default"
+      }
+    ],
+    "types": [
+      {
+        "name": "MIconName",
+        "source": "export type MIconName = keyof typeof mIconPaths;"
       }
     ]
   },
@@ -98,7 +116,8 @@
       {
         "name": "modelValue",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "type",
@@ -169,7 +188,8 @@
       {
         "name": "label",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "组件的可访问名称或可见标签。"
       }
     ],
     "events": [
@@ -203,7 +223,8 @@
       {
         "name": "modelValue",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "type",
@@ -273,7 +294,8 @@
       {
         "name": "label",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "组件的可访问名称或可见标签。"
       }
     ],
     "events": [
@@ -307,7 +329,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "underline",
@@ -339,7 +362,8 @@
       {
         "name": "label",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "组件的可访问名称或可见标签。"
       }
     ],
     "events": [],
@@ -406,27 +430,32 @@
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "hint",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "字段的补充说明。"
       },
       {
         "name": "error",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "错误提示内容。"
       },
       {
         "name": "rows",
@@ -438,7 +467,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       }
     ],
     "events": [
@@ -454,17 +484,20 @@
       {
         "name": "modelValue",
         "type": "number | null",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "min",
@@ -486,17 +519,20 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "hint",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "字段的补充说明。"
       },
       {
         "name": "error",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "错误提示内容。"
       }
     ],
     "events": [
@@ -512,17 +548,20 @@
       {
         "name": "modelValue",
         "type": "number",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "min",
@@ -546,17 +585,20 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "hint",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "字段的补充说明。"
       },
       {
         "name": "error",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "错误提示内容。"
       },
       {
         "name": "showValue",
@@ -578,7 +620,8 @@
       {
         "name": "modelValue",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "multiple",
@@ -589,43 +632,51 @@
       {
         "name": "selectedValues",
         "type": "readonly string[]",
-        "required": false
+        "required": false,
+        "description": "受控值，通过 update:selectedValues 事件同步更新。"
       },
       {
         "name": "options",
         "type": "readonly MChoiceOption[]",
-        "required": true
+        "required": true,
+        "description": "可供选择的选项数据。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "placeholder",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "内容为空时显示的占位文字。"
       },
       {
         "name": "hint",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "字段的补充说明。"
       },
       {
         "name": "error",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "错误提示内容。"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       }
     ],
     "events": [
@@ -638,50 +689,64 @@
         "type": "[values: string[]]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MChoiceOption",
+        "source": "export interface MChoiceOption {\n  value: string;\n  label: string;\n  disabled?: boolean;\n  description?: string;\n}"
+      }
+    ]
   },
   "MCombobox": {
     "props": [
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "options",
         "type": "readonly MChoiceOption[]",
-        "required": true
+        "required": true,
+        "description": "可供选择的选项数据。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "placeholder",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "内容为空时显示的占位文字。"
       },
       {
         "name": "hint",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "字段的补充说明。"
       },
       {
         "name": "error",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "错误提示内容。"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "clearable",
@@ -696,44 +761,57 @@
         "type": "[value: string]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MChoiceOption",
+        "source": "export interface MChoiceOption {\n  value: string;\n  label: string;\n  disabled?: boolean;\n  description?: string;\n}"
+      }
+    ]
   },
   "MAutoComplete": {
     "props": [
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "options",
         "type": "readonly MChoiceOption[]",
-        "required": true
+        "required": true,
+        "description": "可供选择的选项数据。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "placeholder",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "内容为空时显示的占位文字。"
       },
       {
         "name": "hint",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "字段的补充说明。"
       },
       {
         "name": "error",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "错误提示内容。"
       },
       {
         "name": "name",
@@ -755,7 +833,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -767,7 +846,8 @@
         "name": "loading",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否显示加载状态。"
       },
       {
         "name": "clearable",
@@ -797,29 +877,39 @@
         "type": "[option: MChoiceOption]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MChoiceOption",
+        "source": "export interface MChoiceOption {\n  value: string;\n  label: string;\n  disabled?: boolean;\n  description?: string;\n}"
+      }
+    ]
   },
   "MVirtualSelect": {
     "props": [
       {
         "name": "modelValue",
         "type": "MVirtualSelectValue<Multiple>",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "options",
         "type": "readonly MChoiceOption[]",
-        "required": true
+        "required": true,
+        "description": "可供选择的选项数据。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "multiple",
@@ -830,13 +920,15 @@
       {
         "name": "placeholder",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "内容为空时显示的占位文字。"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -863,12 +955,14 @@
       {
         "name": "hint",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "字段的补充说明。"
       },
       {
         "name": "error",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "错误提示内容。"
       },
       {
         "name": "height",
@@ -895,14 +989,25 @@
         "type": "[value: MVirtualSelectValue<Multiple>]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MVirtualSelectValue",
+        "source": "export type MVirtualSelectValue<Multiple extends boolean = false> = Multiple extends true ? readonly string[] : string;"
+      },
+      {
+        "name": "MChoiceOption",
+        "source": "export interface MChoiceOption {\n  value: string;\n  label: string;\n  disabled?: boolean;\n  description?: string;\n}"
+      }
+    ]
   },
   "MCheckbox": {
     "props": [
       {
         "name": "modelValue",
         "type": "boolean",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "indeterminate",
@@ -913,28 +1018,33 @@
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "hint",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "字段的补充说明。"
       },
       {
         "name": "error",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "错误提示内容。"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       }
     ],
     "events": [
@@ -950,17 +1060,20 @@
       {
         "name": "modelValue",
         "type": "readonly string[]",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "options",
         "type": "readonly MChoiceOption[]",
-        "required": true
+        "required": true,
+        "description": "可供选择的选项数据。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "name",
@@ -976,7 +1089,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "required",
@@ -997,7 +1111,8 @@
       {
         "name": "error",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "错误提示内容。"
       }
     ],
     "events": [
@@ -1006,14 +1121,21 @@
         "type": "[value: string[]]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MChoiceOption",
+        "source": "export interface MChoiceOption {\n  value: string;\n  label: string;\n  disabled?: boolean;\n  description?: string;\n}"
+      }
+    ]
   },
   "MRadio": {
     "props": [
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "value",
@@ -1023,7 +1145,8 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "name",
@@ -1045,22 +1168,26 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "hint",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "字段的补充说明。"
       },
       {
         "name": "error",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "错误提示内容。"
       }
     ],
     "events": [
@@ -1076,17 +1203,20 @@
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "options",
         "type": "readonly MChoiceOption[]",
-        "required": true
+        "required": true,
+        "description": "可供选择的选项数据。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "name",
@@ -1096,18 +1226,21 @@
       {
         "name": "hint",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "字段的补充说明。"
       },
       {
         "name": "error",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "错误提示内容。"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       }
     ],
     "events": [
@@ -1116,7 +1249,13 @@
         "type": "[value: string]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MChoiceOption",
+        "source": "export interface MChoiceOption {\n  value: string;\n  label: string;\n  disabled?: boolean;\n  description?: string;\n}"
+      }
+    ]
   },
   "MSwitch": {
     "props": [
@@ -1124,28 +1263,33 @@
         "name": "modelValue",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "hint",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "字段的补充说明。"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       }
     ],
     "events": [
@@ -1161,17 +1305,20 @@
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "options",
         "type": "readonly MChoiceOption[]",
-        "required": true
+        "required": true,
+        "description": "可供选择的选项数据。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "name",
@@ -1182,13 +1329,15 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "size",
         "type": "MControlSize",
         "required": false,
         "defaultValue": "'md'",
+        "description": "组件尺寸。",
         "expandedType": "'sm' | 'md' | 'lg'"
       },
       {
@@ -1210,19 +1359,31 @@
         "type": "[value: string]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MChoiceOption",
+        "source": "export interface MChoiceOption {\n  value: string;\n  label: string;\n  disabled?: boolean;\n  description?: string;\n}"
+      },
+      {
+        "name": "MControlSize",
+        "source": "export type MControlSize = 'sm' | 'md' | 'lg';"
+      }
+    ]
   },
   "MCascader": {
     "props": [
       {
         "name": "modelValue",
         "type": "readonly string[]",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "options",
         "type": "readonly MReferenceTreeOption[]",
-        "required": true
+        "required": true,
+        "description": "可供选择的选项数据。"
       },
       {
         "name": "multiple",
@@ -1234,7 +1395,8 @@
         "name": "checkedPaths",
         "type": "readonly (readonly string[])[]",
         "required": false,
-        "defaultValue": "[]"
+        "defaultValue": "[]",
+        "description": "受控值，通过 update:checkedPaths 事件同步更新。"
       },
       {
         "name": "checkStrictly",
@@ -1251,12 +1413,14 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "name",
@@ -1278,7 +1442,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -1297,19 +1462,27 @@
         "type": "[paths:string[][]]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MReferenceTreeOption",
+        "source": "export interface MReferenceTreeOption { value: string; label: string; disabled?: boolean; children?: readonly MReferenceTreeOption[]; }"
+      }
+    ]
   },
   "MTreeSelect": {
     "props": [
       {
         "name": "modelValue",
         "type": "string | readonly string[] | null",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "options",
         "type": "readonly MReferenceTreeOption[]",
-        "required": true
+        "required": true,
+        "description": "可供选择的选项数据。"
       },
       {
         "name": "multiple",
@@ -1332,12 +1505,14 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "name",
@@ -1359,7 +1534,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -1374,14 +1550,21 @@
         "type": "[value:string|string[]|null]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MReferenceTreeOption",
+        "source": "export interface MReferenceTreeOption { value: string; label: string; disabled?: boolean; children?: readonly MReferenceTreeOption[]; }"
+      }
+    ]
   },
   "MColorPicker": {
     "props": [
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "alpha",
@@ -1397,12 +1580,14 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "name",
@@ -1424,7 +1609,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -1446,7 +1632,8 @@
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "alpha",
@@ -1463,12 +1650,14 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "name",
@@ -1490,7 +1679,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -1512,7 +1702,8 @@
       {
         "name": "modelValue",
         "type": "number",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "max",
@@ -1540,12 +1731,14 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "name",
@@ -1567,7 +1760,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -1589,12 +1783,14 @@
       {
         "name": "modelValue",
         "type": "readonly string[]",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "options",
         "type": "readonly MTransferOption[]",
-        "required": true
+        "required": true,
+        "description": "可供选择的选项数据。"
       },
       {
         "name": "titles",
@@ -1610,12 +1806,14 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "name",
@@ -1637,7 +1835,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -1656,14 +1855,21 @@
         "type": "[value: string[], direction: 'left' | 'right', moved: string[]]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MTransferOption",
+        "source": "export interface MTransferOption { value: string; label: string; disabled?: boolean; }"
+      }
+    ]
   },
   "MInputOTP": {
     "props": [
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "length",
@@ -1686,12 +1892,14 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "name",
@@ -1713,7 +1921,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -1739,7 +1948,8 @@
       {
         "name": "modelValue",
         "type": "readonly string[]",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "max",
@@ -1762,12 +1972,14 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "name",
@@ -1789,7 +2001,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -1811,12 +2024,14 @@
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "options",
         "type": "readonly MMentionOption[]",
-        "required": true
+        "required": true,
+        "description": "可供选择的选项数据。"
       },
       {
         "name": "prefixes",
@@ -1833,12 +2048,14 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "name",
@@ -1860,7 +2077,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -1879,24 +2097,33 @@
         "type": "[option:MMentionOption,prefix:string]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MMentionOption",
+        "source": "export interface MMentionOption { value: string; label?: string; disabled?: boolean; }"
+      }
+    ]
   },
   "MUpload": {
     "props": [
       {
         "name": "modelValue",
         "type": "readonly File[]",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "accept",
@@ -1922,18 +2149,21 @@
       {
         "name": "hint",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "字段的补充说明。"
       },
       {
         "name": "error",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "错误提示内容。"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -2024,7 +2254,37 @@
         "type": "[states: readonly MUploadFileState[]]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MUploadRequestData",
+        "source": "export type MUploadRequestData = Readonly<Record<string, string | number | boolean | Blob | null | undefined | readonly (string | number | boolean | Blob)[]>>;"
+      },
+      {
+        "name": "MUploadCustomRequest",
+        "source": "export type MUploadCustomRequest = (options: MUploadRequestOptions) => Promise<unknown>;"
+      },
+      {
+        "name": "MUploadRejection",
+        "source": "export interface MUploadRejection {\n  file: File;\n  reason: 'type' | 'size' | 'count' | 'duplicate';\n}"
+      },
+      {
+        "name": "MUploadFileState",
+        "source": "export interface MUploadFileState extends MUploadProgress { file: File; status: MUploadStatus; response?: unknown; error?: unknown; }"
+      },
+      {
+        "name": "MUploadProgress",
+        "source": "export interface MUploadProgress { loaded: number; total?: number; percent?: number; }"
+      },
+      {
+        "name": "MUploadRequestOptions",
+        "source": "export interface MUploadRequestOptions {\n  file: File;\n  action: string;\n  method: string;\n  headers: Readonly<Record<string, string>>;\n  data: MUploadRequestData;\n  withCredentials: boolean;\n  fieldName: string;\n  signal: AbortSignal;\n  onProgress: (progress: MUploadProgress) => void;\n}"
+      },
+      {
+        "name": "MUploadStatus",
+        "source": "export type MUploadStatus = 'ready' | 'uploading' | 'success' | 'error' | 'aborted';"
+      }
+    ]
   },
   "MForm": {
     "props": [
@@ -2043,13 +2303,15 @@
         "name": "label",
         "type": "string",
         "required": false,
-        "defaultValue": "'表单'"
+        "defaultValue": "'表单'",
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "validateOn",
@@ -2082,6 +2344,24 @@
       {
         "name": "default"
       }
+    ],
+    "types": [
+      {
+        "name": "MFormRules",
+        "source": "export type MFormRules = Readonly<Record<string, readonly MFormRule[]>>;"
+      },
+      {
+        "name": "MFormModel",
+        "source": "export type MFormModel = Record<string, unknown>;"
+      },
+      {
+        "name": "MFormErrors",
+        "source": "export type MFormErrors = Record<string, string>;"
+      },
+      {
+        "name": "MFormRule",
+        "source": "export interface MFormRule {\n  required?: boolean;\n  min?: number;\n  max?: number;\n  pattern?: RegExp;\n  message?: string;\n  validator?: (value: unknown, model: Readonly<MFormModel>, signal: AbortSignal) => void | boolean | string | Promise<void | boolean | string>;\n}"
+      }
     ]
   },
   "MFormItem": {
@@ -2094,12 +2374,14 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "hint",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "字段的补充说明。"
       },
       {
         "name": "required",
@@ -2111,7 +2393,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       }
     ],
     "events": [],
@@ -2126,7 +2409,8 @@
       {
         "name": "modelValue",
         "type": "readonly Item[]",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "name",
@@ -2136,7 +2420,8 @@
       {
         "name": "label",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "itemKey",
@@ -2147,7 +2432,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "min",
@@ -2177,17 +2463,20 @@
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "min",
@@ -2203,23 +2492,27 @@
         "name": "placeholder",
         "type": "string",
         "required": false,
-        "defaultValue": "'YYYY-MM-DD'"
+        "defaultValue": "'YYYY-MM-DD'",
+        "description": "内容为空时显示的占位文字。"
       },
       {
         "name": "hint",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "字段的补充说明。"
       },
       {
         "name": "error",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "错误提示内容。"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "clearable",
@@ -2241,7 +2534,8 @@
       {
         "name": "modelValue",
         "type": "readonly [string, string] | null",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "min",
@@ -2256,12 +2550,14 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "name",
@@ -2283,7 +2579,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -2305,7 +2602,8 @@
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "min",
@@ -2332,12 +2630,14 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "name",
@@ -2359,7 +2659,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -2381,7 +2682,8 @@
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "min",
@@ -2408,12 +2710,14 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "name",
@@ -2435,7 +2739,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -2469,7 +2774,8 @@
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "min",
@@ -2496,12 +2802,14 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "name",
@@ -2523,7 +2831,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -2545,7 +2854,8 @@
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "min",
@@ -2565,12 +2875,14 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "name",
@@ -2592,7 +2904,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -2622,7 +2935,8 @@
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "min",
@@ -2642,12 +2956,14 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "name",
@@ -2669,7 +2985,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "readonly",
@@ -2699,17 +3016,20 @@
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "items",
         "type": "readonly MTabItem[]",
-        "required": true
+        "required": true,
+        "description": "用于渲染的条目数据。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "activationMode",
@@ -2732,6 +3052,16 @@
       {
         "name": "default"
       }
+    ],
+    "types": [
+      {
+        "name": "MTabItem",
+        "source": "export interface MTabItem {\n  value: string;\n  label: string;\n  disabled?: boolean;\n}"
+      },
+      {
+        "name": "MTabsActivationMode",
+        "source": "export type MTabsActivationMode = 'automatic' | 'manual';"
+      }
     ]
   },
   "MMenu": {
@@ -2739,33 +3069,39 @@
       {
         "name": "modelValue",
         "type": "string | null",
-        "required": true
+        "required": true,
+        "description": "当前选中项的 value。与展开分组独立控制。"
       },
       {
         "name": "items",
-        "type": "MMenuProps['items']",
-        "required": true
+        "type": "readonly MMenuItem[]",
+        "required": true,
+        "description": "导航项列表；children 定义子分组，结构见 MMenuItem。"
       },
       {
         "name": "expandedValues",
-        "type": "MMenuProps['expandedValues']",
-        "required": true
+        "type": "readonly string[]",
+        "required": true,
+        "description": "已展开分组的 value 数组，配合 v-model:expanded-values 使用。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "导航区域的可访问名称，同时显示为菜单标题。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "导航根元素的 ID；未设置时自动生成。"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "禁用整组导航，保留当前选择与展开状态。"
       }
     ],
     "events": [
@@ -2782,24 +3118,33 @@
         "type": "[_value: string, _event: MouseEvent]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MMenuItem",
+        "source": "export interface MMenuItem {\n  value: string;\n  label: string;\n  href?: string;\n  disabled?: boolean;\n  children?: readonly MMenuItem[];\n}"
+      }
+    ]
   },
   "MDropdownMenu": {
     "props": [
       {
         "name": "modelValue",
         "type": "boolean",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "items",
         "type": "readonly MDropdownMenuItem[]",
-        "required": true
+        "required": true,
+        "description": "用于渲染的条目数据。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "triggerLabel",
@@ -2817,7 +3162,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       }
     ],
     "events": [
@@ -2834,6 +3180,24 @@
       {
         "name": "trigger"
       }
+    ],
+    "types": [
+      {
+        "name": "MDropdownMenuItem",
+        "source": "export type MDropdownMenuItem = MMenuAction | MMenuSeparator;"
+      },
+      {
+        "name": "MFloatingPlacement",
+        "source": "export type MFloatingPlacement = 'top' | 'bottom' | 'left' | 'right';"
+      },
+      {
+        "name": "MMenuAction",
+        "source": "export interface MMenuAction {\n  type?: 'item';\n  value: string;\n  label: string;\n  disabled?: boolean;\n  danger?: boolean;\n  shortcut?: string;\n}"
+      },
+      {
+        "name": "MMenuSeparator",
+        "source": "export interface MMenuSeparator { type: 'separator'; key: string }"
+      }
     ]
   },
   "MBreadcrumb": {
@@ -2841,24 +3205,33 @@
       {
         "name": "items",
         "type": "readonly MBreadcrumbItem[]",
-        "required": true
+        "required": true,
+        "description": "用于渲染的条目数据。"
       },
       {
         "name": "label",
         "type": "string",
         "required": false,
-        "defaultValue": "'面包屑导航'"
+        "defaultValue": "'面包屑导航'",
+        "description": "组件的可访问名称或可见标签。"
       }
     ],
     "events": [],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MBreadcrumbItem",
+        "source": "export interface MBreadcrumbItem {\n  label: string;\n  href?: string;\n}"
+      }
+    ]
   },
   "MPagination": {
     "props": [
       {
         "name": "modelValue",
         "type": "number",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "total",
@@ -2875,13 +3248,15 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "label",
         "type": "string",
         "required": false,
-        "defaultValue": "'分页导航'"
+        "defaultValue": "'分页导航'",
+        "description": "组件的可访问名称或可见标签。"
       }
     ],
     "events": [
@@ -2897,17 +3272,20 @@
       {
         "name": "modelValue",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "items",
         "type": "readonly MStepItem[]",
-        "required": true
+        "required": true,
+        "description": "用于渲染的条目数据。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "interactive",
@@ -2934,14 +3312,21 @@
         "type": "[value: string]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MStepItem",
+        "source": "export interface MStepItem {\n  value: string;\n  label: string;\n  description?: string;\n  disabled?: boolean;\n}"
+      }
+    ]
   },
   "MAnchor": {
     "props": [
       {
         "name": "items",
         "type": "readonly MAnchorItem[]",
-        "required": true
+        "required": true,
+        "description": "用于渲染的条目数据。"
       },
       {
         "name": "target",
@@ -2958,7 +3343,8 @@
         "name": "label",
         "type": "string",
         "required": false,
-        "defaultValue": "'本页目录'"
+        "defaultValue": "'本页目录'",
+        "description": "组件的可访问名称或可见标签。"
       }
     ],
     "events": [
@@ -2971,7 +3357,17 @@
         "type": "[href: string, event: MouseEvent]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MAnchorItem",
+        "source": "export interface MAnchorItem { href: string; label: string; children?: readonly MAnchorItem[]; }"
+      },
+      {
+        "name": "MLayoutTarget",
+        "source": "export type MLayoutTarget = string | HTMLElement | Window | (() => HTMLElement | Window | null);"
+      }
+    ]
   },
   "MAffix": {
     "props": [
@@ -3003,6 +3399,12 @@
       {
         "name": "default"
       }
+    ],
+    "types": [
+      {
+        "name": "MLayoutTarget",
+        "source": "export type MLayoutTarget = string | HTMLElement | Window | (() => HTMLElement | Window | null);"
+      }
     ]
   },
   "MPageHeader": {
@@ -3010,7 +3412,8 @@
       {
         "name": "title",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "展示的标题。"
       },
       {
         "name": "subtitle",
@@ -3068,7 +3471,8 @@
         "name": "label",
         "type": "string",
         "required": false,
-        "defaultValue": "'返回顶部'"
+        "defaultValue": "'返回顶部'",
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "behavior",
@@ -3094,12 +3498,14 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "description",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "补充说明内容。"
       },
       {
         "name": "badge",
@@ -3110,7 +3516,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "href",
@@ -3136,13 +3543,15 @@
         "name": "modelValue",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "label",
         "type": "string",
         "required": false,
-        "defaultValue": "'浮动操作'"
+        "defaultValue": "'浮动操作'",
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "expandable",
@@ -3171,7 +3580,8 @@
       {
         "name": "modelValue",
         "type": "boolean",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "steps",
@@ -3181,12 +3591,14 @@
       {
         "name": "step",
         "type": "number",
-        "required": false
+        "required": false,
+        "description": "受控值，通过 update:step 事件同步更新。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "组件的可访问名称或可见标签。"
       }
     ],
     "events": [
@@ -3207,24 +3619,37 @@
         "type": "[]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MTourStep",
+        "source": "export interface MTourStep { key: string; title: string; description?: string; target?: MTourTarget; }"
+      },
+      {
+        "name": "MTourTarget",
+        "source": "export type MTourTarget = string | HTMLElement | (() => HTMLElement | null);"
+      }
+    ]
   },
   "MDialog": {
     "props": [
       {
         "name": "modelValue",
         "type": "boolean",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "title",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "展示的标题。"
       },
       {
         "name": "description",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "补充说明内容。"
       },
       {
         "name": "closeOnEscape",
@@ -3273,22 +3698,26 @@
         "type": "MControlSize",
         "required": false,
         "defaultValue": "'md'",
+        "description": "组件尺寸。",
         "expandedType": "'sm' | 'md' | 'lg'"
       },
       {
         "name": "modelValue",
         "type": "boolean",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "title",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "展示的标题。"
       },
       {
         "name": "description",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "补充说明内容。"
       },
       {
         "name": "closeOnEscape",
@@ -3322,6 +3751,12 @@
       {
         "name": "footer"
       }
+    ],
+    "types": [
+      {
+        "name": "MControlSize",
+        "source": "export type MControlSize = 'sm' | 'md' | 'lg';"
+      }
     ]
   },
   "MPopover": {
@@ -3329,12 +3764,14 @@
       {
         "name": "modelValue",
         "type": "boolean",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "triggerLabel",
@@ -3352,7 +3789,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       }
     ],
     "events": [
@@ -3368,6 +3806,12 @@
       {
         "name": "default"
       }
+    ],
+    "types": [
+      {
+        "name": "MFloatingPlacement",
+        "source": "export type MFloatingPlacement = 'top' | 'bottom' | 'left' | 'right';"
+      }
     ]
   },
   "MTooltip": {
@@ -3380,7 +3824,8 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "placement",
@@ -3399,13 +3844,20 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       }
     ],
     "events": [],
     "slots": [
       {
         "name": "default"
+      }
+    ],
+    "types": [
+      {
+        "name": "MFloatingPlacement",
+        "source": "export type MFloatingPlacement = 'top' | 'bottom' | 'left' | 'right';"
       }
     ]
   },
@@ -3414,17 +3866,20 @@
       {
         "name": "modelValue",
         "type": "boolean",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "title",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "展示的标题。"
       },
       {
         "name": "description",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "补充说明内容。"
       },
       {
         "name": "triggerLabel",
@@ -3454,7 +3909,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "danger",
@@ -3490,6 +3946,12 @@
       {
         "name": "trigger"
       }
+    ],
+    "types": [
+      {
+        "name": "MFloatingPlacement",
+        "source": "export type MFloatingPlacement = 'top' | 'bottom' | 'left' | 'right';"
+      }
     ]
   },
   "MMessageBox": {
@@ -3497,7 +3959,8 @@
       {
         "name": "title",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "展示的标题。"
       },
       {
         "name": "message",
@@ -3539,7 +4002,8 @@
       {
         "name": "modelValue",
         "type": "boolean",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       }
     ],
     "events": [
@@ -3552,7 +4016,13 @@
         "type": "[result: MMessageBoxResult]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MMessageBoxResult",
+        "source": "export interface MMessageBoxResult { action: 'confirm' | 'cancel' | 'close'; value: string }"
+      }
+    ]
   },
   "MToast": {
     "props": [
@@ -3571,17 +4041,20 @@
       {
         "name": "modelValue",
         "type": "boolean",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "title",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "展示的标题。"
       },
       {
         "name": "description",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "补充说明内容。"
       },
       {
         "name": "variant",
@@ -3608,7 +4081,13 @@
         "type": "[open: boolean]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MToastVariant",
+        "source": "export type MToastVariant = 'info' | 'success' | 'warning' | 'error' | 'loading';"
+      }
+    ]
   },
   "MToastViewport": {
     "props": [
@@ -3623,13 +4102,20 @@
         "name": "label",
         "type": "string",
         "required": false,
-        "defaultValue": "'消息通知'"
+        "defaultValue": "'消息通知'",
+        "description": "组件的可访问名称或可见标签。"
       }
     ],
     "events": [],
     "slots": [
       {
         "name": "default"
+      }
+    ],
+    "types": [
+      {
+        "name": "MToastPlacement",
+        "source": "export type MToastPlacement = 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end';"
       }
     ]
   },
@@ -3638,7 +4124,8 @@
       {
         "name": "modelValue",
         "type": "boolean",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "content",
@@ -3680,7 +4167,8 @@
         "name": "label",
         "type": "string",
         "required": false,
-        "defaultValue": "'全局提示'"
+        "defaultValue": "'全局提示'",
+        "description": "组件的可访问名称或可见标签。"
       }
     ],
     "events": [
@@ -3689,19 +4177,27 @@
         "type": "[open: boolean]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MToastVariant",
+        "source": "export type MToastVariant = 'info' | 'success' | 'warning' | 'error' | 'loading';"
+      }
+    ]
   },
   "MAlert": {
     "props": [
       {
         "name": "title",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "展示的标题。"
       },
       {
         "name": "description",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "补充说明内容。"
       },
       {
         "name": "tone",
@@ -3722,6 +4218,12 @@
       {
         "name": "default"
       }
+    ],
+    "types": [
+      {
+        "name": "MStatusTone",
+        "source": "export type MStatusTone = 'neutral' | 'info' | 'success' | 'warning' | 'error';"
+      }
     ]
   },
   "MResult": {
@@ -3729,12 +4231,14 @@
       {
         "name": "title",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "展示的标题。"
       },
       {
         "name": "description",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "补充说明内容。"
       },
       {
         "name": "status",
@@ -3771,12 +4275,14 @@
         "name": "title",
         "type": "string",
         "required": false,
-        "defaultValue": "'暂无内容'"
+        "defaultValue": "'暂无内容'",
+        "description": "展示的标题。"
       },
       {
         "name": "description",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "补充说明内容。"
       }
     ],
     "events": [],
@@ -3792,18 +4298,26 @@
         "name": "label",
         "type": "string",
         "required": false,
-        "defaultValue": "'加载中'"
+        "defaultValue": "'加载中'",
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "size",
         "type": "MControlSize",
         "required": false,
         "defaultValue": "'md'",
+        "description": "组件尺寸。",
         "expandedType": "'sm' | 'md' | 'lg'"
       }
     ],
     "events": [],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MControlSize",
+        "source": "export type MControlSize = 'sm' | 'md' | 'lg';"
+      }
+    ]
   },
   "MSkeleton": {
     "props": [
@@ -3882,7 +4396,8 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "indeterminate",
@@ -3921,12 +4436,14 @@
       {
         "name": "title",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "展示的标题。"
       },
       {
         "name": "description",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "补充说明内容。"
       },
       {
         "name": "headingTag",
@@ -3975,7 +4492,8 @@
         "name": "loading",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否显示加载状态。"
       },
       {
         "name": "emptyTitle",
@@ -3992,12 +4510,14 @@
       {
         "name": "sort",
         "type": "{ key: string; order: 'asc' | 'desc' } | null",
-        "required": false
+        "required": false,
+        "description": "受控值，通过 update:sort 事件同步更新。"
       },
       {
         "name": "filters",
         "type": "Readonly<Record<string, string>>",
-        "required": false
+        "required": false,
+        "description": "受控值，通过 update:filters 事件同步更新。"
       },
       {
         "name": "selectable",
@@ -4008,7 +4528,8 @@
       {
         "name": "selectedKeys",
         "type": "readonly (string | number)[]",
-        "required": false
+        "required": false,
+        "description": "受控值，通过 update:selectedKeys 事件同步更新。"
       },
       {
         "name": "expandable",
@@ -4019,12 +4540,14 @@
       {
         "name": "expandedKeys",
         "type": "readonly (string | number)[]",
-        "required": false
+        "required": false,
+        "description": "受控值，通过 update:expandedKeys 事件同步更新。"
       },
       {
         "name": "page",
         "type": "number",
-        "required": false
+        "required": false,
+        "description": "受控值，通过 update:page 事件同步更新。"
       },
       {
         "name": "pageSize",
@@ -4066,6 +4589,12 @@
       },
       {
         "name": "expanded"
+      }
+    ],
+    "types": [
+      {
+        "name": "MTableColumn",
+        "source": "export interface MTableColumn {\n  key: string;\n  label: string;\n  align?: 'start' | 'center' | 'end';\n  sortable?: boolean;\n  filterOptions?: readonly { label: string; value: string }[];\n}"
       }
     ]
   },
@@ -4113,7 +4642,8 @@
       {
         "name": "sort",
         "type": "{ key: string; order: 'asc' | 'desc' } | null",
-        "required": false
+        "required": false,
+        "description": "受控值，通过 update:sort 事件同步更新。"
       },
       {
         "name": "selectable",
@@ -4124,13 +4654,15 @@
       {
         "name": "selectedKeys",
         "type": "readonly MDataKey[]",
-        "required": false
+        "required": false,
+        "description": "受控值，通过 update:selectedKeys 事件同步更新。"
       },
       {
         "name": "loading",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否显示加载状态。"
       }
     ],
     "events": [
@@ -4147,6 +4679,16 @@
       {
         "name": "动态名称（cell-${string}）"
       }
+    ],
+    "types": [
+      {
+        "name": "MTableColumn",
+        "source": "export interface MTableColumn {\n  key: string;\n  label: string;\n  align?: 'start' | 'center' | 'end';\n  sortable?: boolean;\n  filterOptions?: readonly { label: string; value: string }[];\n}"
+      },
+      {
+        "name": "MDataKey",
+        "source": "export type MDataKey = string | number;"
+      }
     ]
   },
   "MTree": {
@@ -4154,33 +4696,39 @@
       {
         "name": "modelValue",
         "type": "string | null",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "items",
-        "type": "MTreeProps['items']",
-        "required": true
+        "type": "readonly MTreeNode[]",
+        "required": true,
+        "description": "用于渲染的条目数据。"
       },
       {
         "name": "expandedValues",
-        "type": "MTreeProps['expandedValues']",
-        "required": true
+        "type": "readonly string[]",
+        "required": true,
+        "description": "受控值，通过 update:expandedValues 事件同步更新。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "id",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "元素标识，用于标签关联或定位。"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "checkable",
@@ -4192,7 +4740,8 @@
         "name": "checkedValues",
         "type": "readonly string[]",
         "required": false,
-        "defaultValue": "[]"
+        "defaultValue": "[]",
+        "description": "受控值，通过 update:checkedValues 事件同步更新。"
       },
       {
         "name": "checkStrictly",
@@ -4210,7 +4759,8 @@
         "name": "selectedValues",
         "type": "readonly string[]",
         "required": false,
-        "defaultValue": "[]"
+        "defaultValue": "[]",
+        "description": "受控值，通过 update:selectedValues 事件同步更新。"
       }
     ],
     "events": [
@@ -4231,29 +4781,39 @@
         "type": "[_values: string[]]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MTreeNode",
+        "source": "export interface MTreeNode {\n  value: string;\n  label: string;\n  disabled?: boolean;\n  children?: readonly MTreeNode[];\n}"
+      }
+    ]
   },
   "MVirtualTree": {
     "props": [
       {
         "name": "items",
         "type": "readonly MTreeNode[]",
-        "required": true
+        "required": true,
+        "description": "用于渲染的条目数据。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "modelValue",
         "type": "string | null",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "expandedValues",
         "type": "readonly string[]",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:expandedValues 事件同步更新。"
       },
       {
         "name": "height",
@@ -4277,7 +4837,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       }
     ],
     "events": [
@@ -4294,6 +4855,12 @@
       {
         "name": "item"
       }
+    ],
+    "types": [
+      {
+        "name": "MTreeNode",
+        "source": "export interface MTreeNode {\n  value: string;\n  label: string;\n  disabled?: boolean;\n  children?: readonly MTreeNode[];\n}"
+      }
     ]
   },
   "MList": {
@@ -4301,12 +4868,14 @@
       {
         "name": "items",
         "type": "readonly Item[]",
-        "required": true
+        "required": true,
+        "description": "用于渲染的条目数据。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "itemKey",
@@ -4317,7 +4886,8 @@
         "name": "loading",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否显示加载状态。"
       },
       {
         "name": "emptyText",
@@ -4341,6 +4911,12 @@
       },
       {
         "name": "footer"
+      }
+    ],
+    "types": [
+      {
+        "name": "MDataKey",
+        "source": "export type MDataKey = string | number;"
       }
     ]
   },
@@ -4377,23 +4953,27 @@
       {
         "name": "modelValue",
         "type": "MDataKey | null",
-        "required": false
+        "required": false,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "items",
         "type": "readonly Item[]",
-        "required": true
+        "required": true,
+        "description": "用于渲染的条目数据。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "itemKey",
@@ -4404,7 +4984,8 @@
         "name": "loading",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否显示加载状态。"
       },
       {
         "name": "emptyText",
@@ -4430,6 +5011,12 @@
       },
       {
         "name": "footer"
+      }
+    ],
+    "types": [
+      {
+        "name": "MDataKey",
+        "source": "export type MDataKey = string | number;"
       }
     ]
   },
@@ -4462,23 +5049,27 @@
       {
         "name": "modelValue",
         "type": "MDataKey | null",
-        "required": false
+        "required": false,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "items",
         "type": "readonly Item[]",
-        "required": true
+        "required": true,
+        "description": "用于渲染的条目数据。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "itemKey",
@@ -4489,7 +5080,8 @@
         "name": "loading",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否显示加载状态。"
       },
       {
         "name": "emptyText",
@@ -4516,6 +5108,12 @@
       {
         "name": "footer"
       }
+    ],
+    "types": [
+      {
+        "name": "MDataKey",
+        "source": "export type MDataKey = string | number;"
+      }
     ]
   },
   "MInfiniteScroll": {
@@ -4524,13 +5122,15 @@
         "name": "loading",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否显示加载状态。"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "finished",
@@ -4541,7 +5141,8 @@
       {
         "name": "error",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "错误提示内容。"
       },
       {
         "name": "distance",
@@ -4558,7 +5159,8 @@
       {
         "name": "label",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "组件的可访问名称或可见标签。"
       }
     ],
     "events": [
@@ -4585,12 +5187,14 @@
       {
         "name": "items",
         "type": "readonly MDescriptionItem[]",
-        "required": true
+        "required": true,
+        "description": "用于渲染的条目数据。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "columns",
@@ -4610,6 +5214,12 @@
       {
         "name": "动态名称（item.key）"
       }
+    ],
+    "types": [
+      {
+        "name": "MDescriptionItem",
+        "source": "export interface MDescriptionItem {\n  key: string;\n  label: string;\n  value?: string | number;\n  span?: 1 | 2 | 3;\n}"
+      }
     ]
   },
   "MStatistic": {
@@ -4617,7 +5227,8 @@
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "value",
@@ -4642,13 +5253,15 @@
       {
         "name": "description",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "补充说明内容。"
       },
       {
         "name": "placeholder",
         "type": "string",
         "required": false,
-        "defaultValue": "'—'"
+        "defaultValue": "'—'",
+        "description": "内容为空时显示的占位文字。"
       },
       {
         "name": "tone",
@@ -4659,19 +5272,27 @@
       }
     ],
     "events": [],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MStatusTone",
+        "source": "export type MStatusTone = 'neutral' | 'info' | 'success' | 'warning' | 'error';"
+      }
+    ]
   },
   "MTimeline": {
     "props": [
       {
         "name": "items",
         "type": "readonly MTimelineItem[]",
-        "required": true
+        "required": true,
+        "description": "用于渲染的条目数据。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "headingTag",
@@ -4687,6 +5308,16 @@
       },
       {
         "name": "default"
+      }
+    ],
+    "types": [
+      {
+        "name": "MTimelineItem",
+        "source": "export interface MTimelineItem {\n  value: string;\n  title: string;\n  description?: string;\n  time?: string;\n  datetime?: string;\n  status?: MTimelineStatus;\n}"
+      },
+      {
+        "name": "MTimelineStatus",
+        "source": "export type MTimelineStatus = 'neutral' | 'pending' | 'active' | 'success' | 'error';"
       }
     ]
   },
@@ -4715,7 +5346,8 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       }
     ],
     "events": [
@@ -4727,6 +5359,12 @@
     "slots": [
       {
         "name": "default"
+      }
+    ],
+    "types": [
+      {
+        "name": "MStatusTone",
+        "source": "export type MStatusTone = 'neutral' | 'info' | 'success' | 'warning' | 'error';"
       }
     ]
   },
@@ -4744,6 +5382,12 @@
     "slots": [
       {
         "name": "default"
+      }
+    ],
+    "types": [
+      {
+        "name": "MStatusTone",
+        "source": "export type MStatusTone = 'neutral' | 'info' | 'success' | 'warning' | 'error';"
       }
     ]
   },
@@ -4769,6 +5413,7 @@
         "type": "MControlSize",
         "required": false,
         "defaultValue": "'md'",
+        "description": "组件尺寸。",
         "expandedType": "'sm' | 'md' | 'lg'"
       },
       {
@@ -4779,7 +5424,13 @@
       }
     ],
     "events": [],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MControlSize",
+        "source": "export type MControlSize = 'sm' | 'md' | 'lg';"
+      }
+    ]
   },
   "MImage": {
     "props": [
@@ -4803,7 +5454,8 @@
         "name": "loading",
         "type": "'eager' | 'lazy'",
         "required": false,
-        "defaultValue": "'lazy'"
+        "defaultValue": "'lazy'",
+        "description": "是否显示加载状态。"
       },
       {
         "name": "preview",
@@ -4855,7 +5507,8 @@
         "name": "size",
         "type": "number",
         "required": false,
-        "defaultValue": "200"
+        "defaultValue": "200",
+        "description": "组件尺寸。"
       },
       {
         "name": "errorLevel",
@@ -4907,7 +5560,8 @@
       {
         "name": "label",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "refreshLabel",
@@ -4925,19 +5579,27 @@
         "type": "[error: Error]"
       }
     ],
-    "slots": []
+    "slots": [],
+    "types": [
+      {
+        "name": "MQRCodeLevel",
+        "source": "export type MQRCodeLevel = 'L' | 'M' | 'Q' | 'H';"
+      }
+    ]
   },
   "MCarousel": {
     "props": [
       {
         "name": "items",
         "type": "readonly MCarouselItem[]",
-        "required": true
+        "required": true,
+        "description": "用于渲染的条目数据。"
       },
       {
         "name": "modelValue",
         "type": "number",
-        "required": false
+        "required": false,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "autoplay",
@@ -4960,7 +5622,8 @@
       {
         "name": "label",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "组件的可访问名称或可见标签。"
       }
     ],
     "events": [
@@ -4980,6 +5643,12 @@
       {
         "name": "default"
       }
+    ],
+    "types": [
+      {
+        "name": "MCarouselItem",
+        "source": "export interface MCarouselItem { key: string; label: string; }"
+      }
     ]
   },
   "MSpace": {
@@ -4994,7 +5663,8 @@
         "name": "size",
         "type": "MControlSize | number",
         "required": false,
-        "defaultValue": "'md'"
+        "defaultValue": "'md'",
+        "description": "组件尺寸。"
       },
       {
         "name": "align",
@@ -5019,6 +5689,12 @@
     "slots": [
       {
         "name": "default"
+      }
+    ],
+    "types": [
+      {
+        "name": "MControlSize",
+        "source": "export type MControlSize = 'sm' | 'md' | 'lg';"
       }
     ]
   },
@@ -5052,6 +5728,20 @@
       {
         "name": "default"
       }
+    ],
+    "types": [
+      {
+        "name": "MLayoutResponsive",
+        "source": "export type MLayoutResponsive<T> = T | Partial<Record<MLayoutBreakpoint, T>>;"
+      },
+      {
+        "name": "MLayoutGap",
+        "source": "export type MLayoutGap = number | string;"
+      },
+      {
+        "name": "MLayoutBreakpoint",
+        "source": "export type MLayoutBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';"
+      }
     ]
   },
   "MGridItem": {
@@ -5073,6 +5763,16 @@
     "slots": [
       {
         "name": "default"
+      }
+    ],
+    "types": [
+      {
+        "name": "MLayoutResponsive",
+        "source": "export type MLayoutResponsive<T> = T | Partial<Record<MLayoutBreakpoint, T>>;"
+      },
+      {
+        "name": "MLayoutBreakpoint",
+        "source": "export type MLayoutBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';"
       }
     ]
   },
@@ -5118,6 +5818,20 @@
       {
         "name": "default"
       }
+    ],
+    "types": [
+      {
+        "name": "MLayoutResponsive",
+        "source": "export type MLayoutResponsive<T> = T | Partial<Record<MLayoutBreakpoint, T>>;"
+      },
+      {
+        "name": "MLayoutGap",
+        "source": "export type MLayoutGap = number | string;"
+      },
+      {
+        "name": "MLayoutBreakpoint",
+        "source": "export type MLayoutBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';"
+      }
     ]
   },
   "MLayout": {
@@ -5139,7 +5853,8 @@
         "name": "label",
         "type": "string",
         "required": false,
-        "defaultValue": "'页面布局'"
+        "defaultValue": "'页面布局'",
+        "description": "组件的可访问名称或可见标签。"
       }
     ],
     "events": [],
@@ -5156,6 +5871,20 @@
       {
         "name": "footer"
       }
+    ],
+    "types": [
+      {
+        "name": "MLayoutResponsive",
+        "source": "export type MLayoutResponsive<T> = T | Partial<Record<MLayoutBreakpoint, T>>;"
+      },
+      {
+        "name": "MLayoutGap",
+        "source": "export type MLayoutGap = number | string;"
+      },
+      {
+        "name": "MLayoutBreakpoint",
+        "source": "export type MLayoutBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';"
+      }
     ]
   },
   "MSplitter": {
@@ -5163,7 +5892,8 @@
       {
         "name": "modelValue",
         "type": "number",
-        "required": false
+        "required": false,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "min",
@@ -5193,13 +5923,15 @@
         "name": "disabled",
         "type": "boolean",
         "required": false,
-        "defaultValue": "false"
+        "defaultValue": "false",
+        "description": "是否禁用当前组件。"
       },
       {
         "name": "label",
         "type": "string",
         "required": false,
-        "defaultValue": "'调整面板尺寸'"
+        "defaultValue": "'调整面板尺寸'",
+        "description": "组件的可访问名称或可见标签。"
       }
     ],
     "events": [
@@ -5226,7 +5958,8 @@
       {
         "name": "items",
         "type": "readonly Item[]",
-        "required": true
+        "required": true,
+        "description": "用于渲染的条目数据。"
       },
       {
         "name": "columns",
@@ -5250,13 +5983,28 @@
         "name": "label",
         "type": "string",
         "required": false,
-        "defaultValue": "'瀑布流内容'"
+        "defaultValue": "'瀑布流内容'",
+        "description": "组件的可访问名称或可见标签。"
       }
     ],
     "events": [],
     "slots": [
       {
         "name": "item"
+      }
+    ],
+    "types": [
+      {
+        "name": "MLayoutResponsive",
+        "source": "export type MLayoutResponsive<T> = T | Partial<Record<MLayoutBreakpoint, T>>;"
+      },
+      {
+        "name": "MLayoutGap",
+        "source": "export type MLayoutGap = number | string;"
+      },
+      {
+        "name": "MLayoutBreakpoint",
+        "source": "export type MLayoutBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';"
       }
     ]
   },
@@ -5265,17 +6013,20 @@
       {
         "name": "modelValue",
         "type": "readonly string[]",
-        "required": true
+        "required": true,
+        "description": "受控值，通过 update:modelValue 事件同步更新。"
       },
       {
         "name": "items",
         "type": "readonly MAccordionItem[]",
-        "required": true
+        "required": true,
+        "description": "用于渲染的条目数据。"
       },
       {
         "name": "label",
         "type": "string",
-        "required": true
+        "required": true,
+        "description": "组件的可访问名称或可见标签。"
       },
       {
         "name": "multiple",
@@ -5303,6 +6054,12 @@
       {
         "name": "default"
       }
+    ],
+    "types": [
+      {
+        "name": "MAccordionItem",
+        "source": "export interface MAccordionItem {\n  value: string;\n  label: string;\n  description?: string;\n  disabled?: boolean;\n}"
+      }
     ]
   },
   "MScrollbar": {
@@ -5325,7 +6082,8 @@
       {
         "name": "label",
         "type": "string",
-        "required": false
+        "required": false,
+        "description": "组件的可访问名称或可见标签。"
       }
     ],
     "events": [

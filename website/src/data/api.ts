@@ -13,6 +13,7 @@ export interface ComponentApi {
   props: ComponentApiProp[];
   events: { name: string; type: string }[];
   slots: { name: string }[];
+  types?: { name: string; source: string }[];
 }
 
 export const componentApi: Record<string, ComponentApi> = data;

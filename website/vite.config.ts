@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
+  resolve: { alias: [{ find: /^malang-ui$/, replacement: fileURLToPath(new URL('../src/index.ts', import.meta.url)) }] },
   root: fileURLToPath(new URL('.', import.meta.url)),
   base: './',
   plugins: [vue()],

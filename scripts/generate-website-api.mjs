@@ -31,6 +31,28 @@ const descriptions = {
     type: '原生输入类型',
     disabled: '禁用输入',
   },
+  MMenu: {
+    modelValue: '当前选中项的 value。与展开分组独立控制。',
+    items: '导航项列表；children 定义子分组，结构见 MMenuItem。',
+    expandedValues: '已展开分组的 value 数组，配合 v-model:expanded-values 使用。',
+    label: '导航区域的可访问名称，同时显示为菜单标题。',
+    id: '导航根元素的 ID；未设置时自动生成。',
+    disabled: '禁用整组导航，保留当前选择与展开状态。',
+  },
+};
+const sharedDescriptions = {
+  disabled: '是否禁用当前组件。',
+  label: '组件的可访问名称或可见标签。',
+  id: '元素标识，用于标签关联或定位。',
+  size: '组件尺寸。',
+  items: '用于渲染的条目数据。',
+  options: '可供选择的选项数据。',
+  hint: '字段的补充说明。',
+  error: '错误提示内容。',
+  placeholder: '内容为空时显示的占位文字。',
+  title: '展示的标题。',
+  description: '补充说明内容。',
+  loading: '是否显示加载状态。',
 };
 
 for (const item of catalog) {
@@ -67,6 +89,17 @@ host.getSourceFile = (name, languageVersion, ...args) => {
 };
 const program = ts.createProgram([...virtualFiles.keys()], options, host);
 const checker = program.getTypeChecker();
+const publicTypes = new Map();
+for (const source of program.getSourceFiles()) {
+  if (!portablePath(source.fileName).startsWith(portablePath(resolve(root, 'src')) + '/') || source.fileName.endsWith('.api.ts')) continue;
+  for (const statement of source.statements) {
+    if ((ts.isInterfaceDeclaration(statement) || ts.isTypeAliasDeclaration(statement))
+      && /^M[A-Z]/.test(statement.name.text)
+      && statement.modifiers?.some(modifier => modifier.kind === ts.SyntaxKind.ExportKeyword)) {
+      publicTypes.set(statement.name.text, statement);
+    }
+  }
+}
 
 function unwrap(node) {
   while (node && ts.isParenthesizedExpression(node)) node = node.expression;
@@ -167,7 +200,10 @@ function formatDefault(node, acceptsFunction) {
 
 function readProps(optionsNode, source, componentName) {
   const typedNode = macro(source, 'defineProps')?.typeArguments?.[0];
-  const typed = new Map(getTypedMembers(typedNode).map(symbol => [symbol.getName(), symbol]));
+  const runtimeContract = publicTypes.get(`${componentName}Props`);
+  const members = typedNode ? getTypedMembers(typedNode)
+    : runtimeContract ? checker.getPropertiesOfType(checker.getTypeAtLocation(runtimeContract)) : [];
+  const typed = new Map(members.map(symbol => [symbol.getName(), symbol]));
   const runtime = property(optionsNode, 'props');
   if (!runtime) {
     if (typed.size) throw new Error('类型声明存在，但 Vue 未生成 Props');
@@ -199,7 +235,7 @@ function readProps(optionsNode, source, componentName) {
       ? formatDefault(declaredDefault, keepDefaultFunction)
       : !required && runtimeConstructors.includes('Boolean') ? 'false' : undefined;
     const sourceDescription = symbol ? ts.displayPartsToString(symbol.getDocumentationComment(checker)).trim() : '';
-    const description = sourceDescription || descriptions[componentName]?.[name];
+    const description = sourceDescription || descriptions[componentName]?.[name] || sharedDescriptions[name];
     const expandedType = simpleUnion(annotation);
     if (typedNode && !annotation) throw new Error(`无法解析 ${name} 的 TypeScript 类型`);
     return {
@@ -308,6 +344,23 @@ for (const [name, entry] of entries) {
   } catch (error) {
     throw new Error(`${name} (${entry.source}): ${error.message}`, { cause: error });
   }
+}
+for (const api of Object.values(result)) {
+  for (const prop of api.props) {
+    if (!prop.description && api.events.some(event => event.name === `update:${prop.name}`)) {
+      prop.description = `受控值，通过 update:${prop.name} 事件同步更新。`;
+    }
+  }
+  const names = new Set([...api.props, ...api.events].flatMap(row => row.type.match(/\bM[A-Z]\w+\b/g) ?? []));
+  const types = [];
+  for (const name of names) {
+    const definition = publicTypes.get(name);
+    if (!definition || name.endsWith('Props')) continue;
+    const source = definition.getText();
+    types.push({ name, source });
+    for (const child of source.match(/\bM[A-Z]\w+\b/g) ?? []) if (!names.has(child)) names.add(child);
+  }
+  if (types.length) api.types = types;
 }
 writeFileSync(target, JSON.stringify(result, null, 2) + '\n');
 console.log(`Generated source API metadata for ${Object.keys(result).length} components.`);

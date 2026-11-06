@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useId, watch } from 'vue';
 import CodeBlock from '../components/CodeBlock.vue';
-import ComponentExamples from '../components/ComponentExamples.vue';
+import DocDemo from '../components/DocDemo.vue';
 import { componentApi } from '../data/api';
-import { componentCatalog, componentCategories, workbenchUrl } from '../data/catalog';
+import { componentCatalog, componentCategories } from '../data/catalog';
+import { getComponentExamples } from '../data/examples';
 import '../styles/components-view.css';
 
 const props = defineProps<{
@@ -16,8 +17,12 @@ const props = defineProps<{
 const query = ref('');
 const category = ref('');
 const heading = ref<HTMLHeadingElement | null>(null);
+const navigationOpen = ref(false);
+const navigation = ref<HTMLElement | null>(null);
+const navigationToggle = ref<HTMLButtonElement | null>(null);
+const toc = ref<HTMLElement | null>(null);
 const searchId = useId();
-const storySelectorId = useId();
+const navigationId = useId();
 const active = computed(() => componentCatalog.find((item) => item.name === props.componentName));
 const normalize = (value: string) => value.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
 const searchIndex = componentCatalog.map((item) => ({
@@ -25,30 +30,37 @@ const searchIndex = componentCatalog.map((item) => ({
   terms: [item.name, item.label, item.category, item.description, ...item.keywords].map(normalize),
 }));
 const searchTerms = computed(() => query.value.trim().split(/\s+/).map(normalize).filter(Boolean));
-const matches = computed(() => searchIndex.filter(({ item, terms }) => (
-  (!category.value || item.category === category.value)
-  && searchTerms.value.every((term) => terms.some((word) => word.includes(term)))
+const matches = computed(() => searchIndex.filter(({ terms }) => searchTerms.value.every(
+  (term) => terms.some((word) => word.includes(term)),
 )).map(({ item }) => item));
-const sections = computed(() => componentCategories.map((name) => ({
+const groups = computed(() => componentCategories.map((name) => ({
   name,
   items: matches.value.filter((item) => item.category === name),
 })).filter((section) => section.items.length));
-const sidebarItems = computed(() => active.value && !category.value && !searchTerms.value.length
-  ? matches.value.filter((item) => item.category === active.value?.category)
-  : matches.value);
+const overviewGroups = computed(() => groups.value.filter((group) => !category.value || group.name === category.value));
+const overviewCount = computed(() => overviewGroups.value.reduce((count, group) => count + group.items.length, 0));
 
 const href = (name: string) => `#/components/${name}`;
 const sourceUrl = computed(() => active.value ? `https://github.com/MaLaNg116/malang-ui/blob/main/${active.value.source}` : '');
-const docsUrl = computed(() => active.value?.docsId
-  ? workbenchUrl(active.value.docsId, 'docs', props.theme, props.palette, props.motion)
-  : '');
+const workbenchUrl = computed(() => {
+  if (!active.value) return '';
+  const { docsId, storyId } = active.value;
+  const base = import.meta.env.DEV ? 'http://127.0.0.1:6006/' : './workbench/';
+  const params = new URLSearchParams({
+    path: docsId ? `/docs/${docsId}` : `/story/${storyId}`,
+    globals: `theme:${props.theme};palette:${props.palette};motion:${props.motion}`,
+  });
+  return `${base}?${params}`;
+});
 const api = computed(() => active.value && componentApi[active.value.name]);
-const hasExamples = computed(() => active.value?.name === 'MButton' || active.value?.name === 'MInput');
+const examples = computed(() => active.value ? getComponentExamples(active.value.name) : []);
+const demoHeading = (id: string) => `catalog-demo-${id}`;
 const docSections = computed(() => [
-  ...(hasExamples.value ? [{ id: 'catalog-examples', label: '常用示例' }] : []),
-  { id: 'catalog-story', label: '更多示例' },
-  { id: 'catalog-api', label: 'API 参考' },
-  { id: 'catalog-related', label: '相关组件' },
+  { id: 'catalog-examples', label: '示例', nested: false },
+  ...examples.value.map(({ id, title }) => ({ id: demoHeading(id), label: title, nested: true })),
+  { id: 'catalog-api', label: 'API 参考', nested: false },
+  ...(api.value?.types?.length ? [{ id: 'catalog-api-types', label: '关联类型', nested: true }] : []),
+  { id: 'catalog-related', label: '相关组件', nested: false },
 ]);
 const currentSection = ref(docSections.value[0]?.id);
 let sectionFrame: number | undefined;
@@ -60,6 +72,7 @@ const nextComponent = computed(() => componentCatalog[activeIndex.value + 1]);
 const relatedNames: Record<string, string[]> = {
   MButton: ['MIcon', 'MInput', 'MFloatButton'],
   MInput: ['MTextarea', 'MInputNumber', 'MForm'],
+  MMenu: ['MTabs', 'MAnchor', 'MDropdownMenu'],
 };
 const relatedComponents = computed(() => {
   if (!active.value) return [];
@@ -67,6 +80,34 @@ const relatedComponents = computed(() => {
   if (names) return names.flatMap((name) => componentCatalog.filter((item) => item.name === name));
   return componentCatalog.filter((item) => item.category === active.value?.category && item !== active.value).slice(0, 3);
 });
+
+function keepActiveNavigationVisible() {
+  const list = navigation.value;
+  const link = list?.querySelector('[aria-current="page"]');
+  if (!list || !link || !list.clientHeight) return;
+  const bounds = list.getBoundingClientRect();
+  const item = link.getBoundingClientRect();
+  if (item.top < bounds.top || item.bottom > bounds.bottom) {
+    list.scrollTop += item.top + item.height / 2 - bounds.top - bounds.height / 2;
+  }
+}
+
+function closeNavigation(restoreFocus = false) {
+  navigationOpen.value = false;
+  if (restoreFocus) navigationToggle.value?.focus({ preventScroll: true });
+}
+
+function navigate(event: MouseEvent, name: string) {
+  if (!navigationOpen.value || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
+  closeNavigation(active.value?.name === name);
+}
+
+function dismissNavigation(event: KeyboardEvent) {
+  if (!navigationOpen.value) return;
+  event.preventDefault();
+  event.stopPropagation();
+  closeNavigation(true);
+}
 
 function jumpTo(id: string) {
   const target = document.getElementById(id);
@@ -101,56 +142,13 @@ function scheduleSectionUpdate() {
   });
 }
 
-const storyId = ref('');
-const previewUrl = computed(() => storyId.value
-  ? workbenchUrl(storyId.value, 'story', props.theme, props.palette, props.motion)
-  : '');
-const previewSize = computed(() => {
-  if (active.value?.name === 'MInput') return 'field';
-  if (active.value?.name === 'MButton') return storyId.value.endsWith('--variants-and-sizes') ? 'matrix' : 'compact';
-  return 'regular';
-});
-const stage = ref<HTMLElement | null>(null);
-const frame = ref<HTMLIFrameElement | null>(null);
-const nearViewport = ref(false);
-const attempt = ref(0);
-const frameState = ref<'loading' | 'ready' | 'error'>('loading');
-let observer: IntersectionObserver | undefined;
-let readinessTimer: number | undefined;
-
-function clearReadinessTimer() {
-  if (readinessTimer !== undefined) window.clearTimeout(readinessTimer);
-  readinessTimer = undefined;
+function handleResize() {
+  keepActiveNavigationVisible();
+  scheduleSectionUpdate();
 }
-
-function finishPreview(state: 'ready' | 'error') {
-  clearReadinessTimer();
-  frameState.value = state;
-}
-
-function receivePreviewMessage(message: MessageEvent) {
-  if (!previewUrl.value || message.source !== frame.value?.contentWindow
-    || message.origin !== new URL(previewUrl.value, document.baseURI).origin) return;
-  let channel: { key?: string; event?: { type?: string; args?: unknown[] } };
-  try {
-    channel = typeof message.data === 'string' ? JSON.parse(message.data) : message.data;
-  } catch {
-    return;
-  }
-  if (channel?.key !== 'storybook-channel') return;
-  const event = channel.event;
-  if (event?.type === 'storyRendered' && event.args?.[0] === storyId.value) {
-    finishPreview('ready');
-  } else if (['storyMissing', 'storyErrored', 'storyThrewException'].includes(event?.type ?? '')) {
-    finishPreview('error');
-  }
-}
-
-watch(active, (item) => {
-  storyId.value = item?.storyId ?? '';
-}, { immediate: true });
 
 watch(() => props.componentName, async () => {
+  closeNavigation();
   jumpPosition = undefined;
   currentSection.value = docSections.value[0]?.id;
   await nextTick();
@@ -158,71 +156,71 @@ watch(() => props.componentName, async () => {
   scheduleSectionUpdate();
 });
 
-watch(stage, (element) => {
-  observer?.disconnect();
-  nearViewport.value = false;
-  if (!element) return;
-  if (!('IntersectionObserver' in window)) {
-    nearViewport.value = true;
-    return;
-  }
-  observer = new IntersectionObserver((entries, current) => {
-    if (!entries.some((entry) => entry.isIntersecting)) return;
-    nearViewport.value = true;
-    current.disconnect();
-  }, { rootMargin: '180px' });
-  observer.observe(element);
-});
+watch([active, matches, navigationOpen], keepActiveNavigationVisible, { flush: 'post' });
 
-watch([nearViewport, previewUrl, attempt], ([near, url]) => {
-  clearReadinessTimer();
-  frameState.value = 'loading';
-  if (near && url) readinessTimer = window.setTimeout(() => finishPreview('error'), 20_000);
-});
+watch(currentSection, () => {
+  const list = toc.value;
+  const item = list?.querySelector('[aria-current="location"]');
+  if (!list || !item || list.scrollWidth <= list.clientWidth) return;
+  const bounds = list.getBoundingClientRect();
+  const selected = item.getBoundingClientRect();
+  if (selected.left < bounds.left) list.scrollLeft += selected.left - bounds.left;
+  else if (selected.right > bounds.right) list.scrollLeft += selected.right - bounds.right;
+}, { flush: 'post' });
 
 onMounted(() => {
-  window.addEventListener('message', receivePreviewMessage);
+  keepActiveNavigationVisible();
   window.addEventListener('scroll', scheduleSectionUpdate, { passive: true });
-  window.addEventListener('resize', scheduleSectionUpdate);
+  window.addEventListener('resize', handleResize);
   scheduleSectionUpdate();
 });
 onBeforeUnmount(() => {
-  observer?.disconnect();
-  clearReadinessTimer();
   if (sectionFrame !== undefined) cancelAnimationFrame(sectionFrame);
   window.removeEventListener('scroll', scheduleSectionUpdate);
-  window.removeEventListener('resize', scheduleSectionUpdate);
-  window.removeEventListener('message', receivePreviewMessage);
+  window.removeEventListener('resize', handleResize);
 });
 </script>
 
 <template>
   <section class="catalog-view" aria-labelledby="component-page-heading">
-    <aside class="catalog-view__sidebar" aria-label="组件筛选">
-      <p class="catalog-view__eyebrow">CATALOG / 组件索引</p>
-      <label :for="searchId" class="catalog-view__search-label">搜索组件</label>
-      <div class="catalog-view__search">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" aria-hidden="true">
-          <circle cx="6.5" cy="6.5" r="4" /><path d="m9.5 9.5 4 4" />
-        </svg>
-        <input :id="searchId" v-model="query" type="search" placeholder="名称、分类或用途" autocomplete="off" />
-      </div>
-      <nav class="catalog-view__categories" aria-label="组件分类">
-        <button type="button" :aria-pressed="!category" @click="category = ''">全部组件</button>
-        <button v-for="name in componentCategories" :key="name" type="button" :aria-pressed="category === name" @click="category = name">{{ name }}</button>
-      </nav>
-      <nav
-        v-if="active"
-        class="catalog-view__side-results"
-        :class="{ 'catalog-view__side-results--filtered': query.trim() || category }"
-        aria-label="相关组件"
+    <aside class="catalog-view__sidebar" :class="{ 'catalog-view__sidebar--open': navigationOpen }" aria-label="组件目录侧栏" @keydown.esc="dismissNavigation">
+      <button
+        ref="navigationToggle"
+        type="button"
+        class="catalog-view__navigation-toggle"
+        :aria-expanded="navigationOpen"
+        :aria-controls="navigationId"
+        @click="navigationOpen = !navigationOpen"
       >
-        <p class="catalog-view__eyebrow">{{ query.trim() || category ? `筛选结果 / ${sidebarItems.length}` : '同类组件' }}</p>
-        <p v-if="!sidebarItems.length" class="catalog-view__empty-side">没有匹配的组件。</p>
-        <a v-for="item in sidebarItems" :key="item.name" :href="href(item.name)" :aria-current="item.name === active.name ? 'page' : undefined">
-          <span>{{ item.label }}</span><code>{{ item.name }}</code>
-        </a>
-      </nav>
+        {{ navigationOpen ? '关闭组件导航' : '打开组件导航' }}
+        <span aria-hidden="true">{{ navigationOpen ? '−' : '+' }}</span>
+      </button>
+      <div :id="navigationId" class="catalog-view__side-content">
+        <div class="catalog-view__side-header">
+          <p class="catalog-view__eyebrow">COMPONENTS <span>{{ componentCatalog.length }}</span></p>
+          <label :for="searchId" class="catalog-view__search-label">搜索组件</label>
+          <div class="catalog-view__search">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" aria-hidden="true">
+              <circle cx="6.5" cy="6.5" r="4" /><path d="m9.5 9.5 4 4" />
+            </svg>
+            <input :id="searchId" v-model="query" type="search" placeholder="名称、分类或用途" autocomplete="off" />
+          </div>
+          <p v-if="active && searchTerms.length" class="catalog-view__search-count" role="status">{{ matches.length }} 个匹配</p>
+        </div>
+        <nav ref="navigation" class="catalog-view__navigation" aria-label="组件导航">
+          <p v-if="!groups.length" class="catalog-view__empty-side">没有匹配的组件。</p>
+          <div v-for="group in groups" :key="group.name" class="catalog-view__nav-group">
+            <p>{{ group.name }}</p>
+            <ul>
+              <li v-for="item in group.items" :key="item.name">
+                <a :href="href(item.name)" :aria-current="item.name === active?.name ? 'page' : undefined" @click="navigate($event, item.name)">
+                  <span>{{ item.label }}</span><code>{{ item.name.slice(1) }}</code>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
     </aside>
 
     <article v-if="active" class="catalog-view__main catalog-view__document">
@@ -237,73 +235,32 @@ onBeforeUnmount(() => {
         </div>
         <p class="catalog-view__description">{{ active.description }}</p>
         <div class="catalog-view__metadata">
-          <span>VUE 3</span><span>{{ active.stories.length }} 个交互示例</span>
+          <span>VUE 3</span>
           <a class="catalog-view__source" :href="sourceUrl" target="_blank" rel="noopener noreferrer">查看源码 <span aria-hidden="true">↗</span></a>
+          <a class="catalog-view__source" :href="workbenchUrl" target="_blank" rel="noopener noreferrer">在 Storybook 查看 <span aria-hidden="true">↗</span></a>
         </div>
         <CodeBlock :key="active.name" :code="`import { ${active.name} } from 'malang-ui';`" language="typescript" filename="导入组件" />
+        <p class="catalog-view__style-note">在应用入口导入 <code>malang-ui/style.css</code>，加载组件样式和主题变量。</p>
       </header>
 
-      <nav class="catalog-view__toc" aria-label="本页目录">
+      <nav ref="toc" class="catalog-view__toc" aria-label="本页目录">
         <p>本页目录</p>
-        <button v-for="section in docSections" :key="section.id" type="button" :aria-controls="section.id" :aria-current="currentSection === section.id ? 'location' : undefined" @click="jumpTo(section.id)">{{ section.label }}</button>
+        <button v-for="section in docSections" :key="section.id" type="button" :class="{ 'catalog-view__toc-subitem': section.nested }" :aria-controls="section.id" :aria-current="currentSection === section.id ? 'location' : undefined" @click="jumpTo(section.id)">{{ section.label }}</button>
       </nav>
 
       <div class="catalog-view__doc-body">
-        <section v-if="hasExamples" class="catalog-view__chapter" aria-labelledby="catalog-examples">
-          <h2 id="catalog-examples" tabindex="-1">常用示例</h2>
-          <ComponentExamples :key="active.name" :name="active.name" />
-        </section>
-
-        <section class="catalog-view__chapter" aria-labelledby="catalog-story">
-          <h2 id="catalog-story" tabindex="-1">更多示例</h2>
-          <section class="catalog-view__demo" aria-label="组件预览">
-            <div class="catalog-view__demo-bar">
-              <div class="catalog-view__tabs" role="group" aria-label="示例和文档">
-                <button type="button" class="catalog-view__tab-current" @click="jumpTo('catalog-story')">交互示例</button>
-                <button type="button" @click="jumpTo('catalog-api')">API 文档</button>
-              </div>
-              <div v-if="active.stories.length > 1" class="catalog-view__story-choice">
-                <label :for="storySelectorId">示例</label>
-                <select :id="storySelectorId" v-model="storyId">
-                  <option v-for="story in active.stories" :key="story.id" :value="story.id">{{ story.label }}</option>
-                </select>
-              </div>
-              <p v-else class="catalog-view__single-story">{{ active.stories[0]?.label }}</p>
-            </div>
-
-            <div ref="stage" class="catalog-view__stage" :data-preview-size="previewSize" :aria-busy="frameState === 'loading'">
-              <iframe
-                v-if="nearViewport && previewUrl"
-                :key="`${previewUrl}#${attempt}`"
-                ref="frame"
-                :src="previewUrl"
-                :title="`${active.label} · 交互示例`"
-                :class="{ 'catalog-view__frame--ready': frameState === 'ready' }"
-                :aria-hidden="frameState !== 'ready' ? true : undefined"
-                :tabindex="frameState !== 'ready' ? -1 : undefined"
-                loading="lazy"
-                @error="finishPreview('error')"
-              />
-              <div v-if="frameState !== 'ready'" class="catalog-view__preview-note">
-                <p v-if="frameState === 'loading'" role="status">正在载入交互示例…</p>
-                <template v-else>
-                  <p role="status">预览暂未就绪。</p>
-                  <button type="button" @click="attempt += 1">重新载入</button>
-                </template>
-              </div>
-            </div>
-            <div class="catalog-view__demo-footer">
-              <span>STORYBOOK / 组件工作台</span>
-              <a :href="previewUrl" target="_blank" rel="noopener noreferrer">在新窗口打开 <span aria-hidden="true">↗</span></a>
-            </div>
-          </section>
+        <section class="catalog-view__chapter" aria-labelledby="catalog-examples">
+          <h2 id="catalog-examples" tabindex="-1">示例</h2>
+          <DocDemo
+            v-for="example in examples"
+            :key="`${active.name}-${example.id}`"
+            :heading-id="demoHeading(example.id)"
+            :example="example"
+          />
         </section>
 
         <section class="catalog-view__chapter catalog-view__api" aria-labelledby="catalog-api">
-          <div class="catalog-view__chapter-head">
-            <h2 id="catalog-api" tabindex="-1">API 参考</h2>
-            <a v-if="docsUrl" :href="docsUrl" target="_blank" rel="noopener noreferrer">在 Storybook 查看完整文档 <span aria-hidden="true">↗</span></a>
-          </div>
+          <h2 id="catalog-api" tabindex="-1">API 参考</h2>
           <template v-if="api">
             <h3 id="catalog-api-props">Props</h3>
             <div v-if="api.props.length" class="catalog-view__table-wrap" role="region" aria-label="Props 表格" tabindex="0">
@@ -338,6 +295,14 @@ onBeforeUnmount(() => {
               </table>
             </div>
             <p v-else class="catalog-view__api-empty">没有独立声明的插槽。</p>
+
+            <template v-if="api.types?.length">
+              <h3 id="catalog-api-types" tabindex="-1">关联类型</h3>
+              <details v-for="type in api.types" :key="type.name" class="catalog-view__related-type">
+                <summary><code>{{ type.name }}</code></summary>
+                <CodeBlock :code="type.source" :filename="`${type.name}.ts`" language="typescript" />
+              </details>
+            </template>
           </template>
           <p v-else class="catalog-view__api-empty">当前没有可展示的 API 声明。</p>
         </section>
@@ -365,12 +330,16 @@ onBeforeUnmount(() => {
           {{ componentName ? `目录中没有 ${componentName}，可以按名称或用途查找。` : '从基础操作到完整业务流程。打开任意组件，查看使用场景和可操作的状态。' }}
         </p>
       </header>
-      <p class="catalog-view__count" role="status">{{ matches.length }} / {{ componentCatalog.length }} 个组件</p>
-      <div v-if="!sections.length" class="catalog-view__empty">
+      <nav class="catalog-view__categories" aria-label="组件分类">
+        <button type="button" :aria-pressed="!category" @click="category = ''">全部组件</button>
+        <button v-for="name in componentCategories" :key="name" type="button" :aria-pressed="category === name" @click="category = name">{{ name }}</button>
+      </nav>
+      <p class="catalog-view__count" role="status">{{ overviewCount }} / {{ componentCatalog.length }} 个组件</p>
+      <div v-if="!overviewGroups.length" class="catalog-view__empty">
         <p>没有匹配的组件。</p>
         <button type="button" @click="query = ''; category = ''">清空筛选</button>
       </div>
-      <section v-for="group in sections" :key="group.name" class="catalog-view__group" :aria-label="group.name">
+      <section v-for="group in overviewGroups" :key="group.name" class="catalog-view__group" :aria-label="group.name">
         <h2>{{ group.name }} <span>{{ group.items.length }}</span></h2>
         <ul class="catalog-view__items">
           <li v-for="item in group.items" :key="item.name">

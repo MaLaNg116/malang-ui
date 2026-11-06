@@ -48,7 +48,7 @@
     "storybook": "storybook dev -p 6006 --no-open",
     "build:storybook": "storybook build",
     "dev:website": "vite --config website/vite.config.ts",
-    "build:website": "pnpm build:storybook && node scripts/generate-website-catalog.mjs && node scripts/generate-website-api.mjs && vite build --config website/vite.config.ts && node scripts/package-website.mjs",
+    "build:website": "pnpm build:storybook && node scripts/generate-website-catalog.mjs && node scripts/generate-website-api.mjs && node scripts/check-website-examples.mjs && vite build --config website/vite.config.ts && node scripts/package-website.mjs",
     "test:website": "playwright test --config playwright.website.config.ts",
     "typecheck": "vue-tsc --noEmit",
     "typecheck:package": "vue-tsc -p tests/consumer/tsconfig.json",

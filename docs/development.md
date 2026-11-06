@@ -8,7 +8,7 @@
 pnpm dev
 ```
 
-Storybook 使用 6006。另开一个终端运行 `pnpm dev:website`，在 5173 浏览官网。官网开发模式从 6006 加载交互预览。可以只启动 Storybook 开发组件，也可以同时启动两个服务检查官网目录、示例和文档。 [本地官网](http://127.0.0.1:5173/) · [Storybook](http://127.0.0.1:6006/)
+Storybook 使用 6006。运行 `pnpm dev:website`，在 5173 浏览官网。官网直接渲染 `website/src/examples/` 中的 Vue 示例，可独立运行；示例代码从同一份 SFC 读取。需要检查更多参数和业务组合时，再启动 Storybook。 [本地官网](http://127.0.0.1:5173/) · [Storybook](http://127.0.0.1:6006/)
 
 官网静态产物在 `website/dist/`，完整 Storybook 位于其中的 `workbench/`。构建后可用独立预览服务检查本地产物。
 

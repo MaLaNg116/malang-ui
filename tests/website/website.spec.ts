@@ -1,97 +1,139 @@
 import { expect, test as base } from '@playwright/test';
 import type { Locator, Page } from '@playwright/test';
+import { readFileSync } from 'node:fs';
+const catalog = JSON.parse(readFileSync(new URL('../../website/src/data/components.json', import.meta.url), 'utf8')) as { name: string; label: string }[];
 
 const test = base.extend<{ browserErrors: void }>({
   browserErrors: [async ({ page }, use) => {
     const errors: string[] = [];
     page.on('pageerror', error => errors.push(error.message));
+    page.on('console', message => {
+      if (message.type() === 'warning' && message.text().includes('[Vue warn]')) errors.push(message.text());
+    });
     await use();
     expect(errors).toEqual([]);
   }, { auto: true }],
 });
 
-const componentLinks = 'a[href^="#/components/"]';
-
-test('opens the complete component catalog from the homepage CTA', async ({ page }) => {
-  await page.goto('/#/');
-  await expect(page.locator('main[data-site-page="home"]')).toBeVisible();
-  await page.getByRole('link', { name: /^浏览组件/ }).click();
-  await expect(page).toHaveURL(/#\/components$/);
-  const catalog = page.locator('main[data-site-page="components"]');
-  await expect(catalog.locator(componentLinks)).toHaveCount(100);
-  await expect(catalog.locator('a[href="#/components/MInput"]')).toBeVisible();
-});
-
-test('searches component names in English and Chinese and clears a conflicting category', async ({ page }) => {
+test('finds every component in the grouped navigation and preserves search across pages', async ({ page }) => {
   await page.goto('/#/components');
-  const catalog = page.locator('main[data-site-page="components"]');
-  const search = catalog.getByRole('searchbox', { name: '搜索组件', exact: true });
-  const dates = catalog.getByRole('navigation', { name: '组件分类', exact: true })
-    .getByRole('button', { name: '日期与时间', exact: true });
-  const input = catalog.locator('a[href="#/components/MInput"]');
-  const qr = catalog.locator('a[href="#/components/MQRCode"]');
-
+  const navigation = page.getByRole('navigation', { name: '组件导航', exact: true });
+  await expect(navigation.locator('a')).toHaveCount(100);
+  const search = page.getByRole('searchbox', { name: '搜索组件', exact: true });
   await search.fill('m-input');
-  await expect(input).toBeVisible();
-  await expect(qr).toHaveCount(0);
-  await search.fill('二维码');
-  await expect(qr).toBeVisible();
-  await expect(input).toHaveCount(0);
-
-  await dates.click();
-  await expect(dates).toHaveAttribute('aria-pressed', 'true');
-  await expect(catalog.getByText('没有匹配的组件。', { exact: true })).toBeVisible();
-  await expect(catalog.locator(componentLinks)).toHaveCount(0);
-  await catalog.getByRole('button', { name: '清空筛选', exact: true }).click();
-  await expect(search).toHaveValue('');
-  await expect(catalog.locator(componentLinks)).toHaveCount(100);
-
-  await dates.click();
-  await expect(catalog.locator('a[href="#/components/MCalendar"]')).toBeVisible();
-  await expect(input).toHaveCount(0);
+  await expect(navigation.locator('a[href="#/components/MInput"]')).toBeVisible();
+  await expect(navigation.locator('a[href="#/components/MMenu"]')).toHaveCount(0);
+  await search.fill('菜单');
+  await navigation.locator('a[href="#/components/MMenu"]').click();
+  await expect(page.getByRole('heading', { name: '导航菜单', level: 1 })).toBeVisible();
+  await expect(search).toHaveValue('菜单');
+  await expect(navigation.locator('[aria-current="page"]')).toHaveAttribute('href', '#/components/MMenu');
+  await search.fill('不存在的组件xyz');
+  await expect(navigation.getByText('没有匹配的组件。')).toBeVisible();
+  await search.fill('');
+  await expect(navigation.locator('a')).toHaveCount(100);
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.setViewportSize({ width: 1440, height: 520 });
+  await expect.poll(() => navigation.evaluate(element => {
+    const active = element.querySelector('[aria-current="page"]')!.getBoundingClientRect();
+    const bounds = element.getBoundingClientRect();
+    return active.top >= bounds.top && active.bottom <= bounds.bottom;
+  })).toBe(true);
 });
 
-test('runs real MInput stories and opens its native API and full Storybook docs', async ({ page }) => {
+for (const item of catalog) {
+  test(`renders native ${item.name} documentation with a working source example`, async ({ page }) => {
+    await page.goto(`/#/components/${item.name}`);
+    await expect(page.getByRole('heading', { name: item.label, level: 1, exact: true })).toBeVisible();
+    const demo = page.locator('[data-demo-id]').first();
+    await expect(demo).toHaveAttribute('data-demo-state', 'ready');
+    await expect(page.locator('main iframe')).toHaveCount(0);
+    await expect(demo.locator('.doc-demo__stage')).not.toBeEmpty();
+    await demo.getByText('查看代码', { exact: true }).click();
+    const code = await demo.locator('pre code').textContent();
+    expect(code).toContain(item.name);
+    expect(code).toMatch(/from ['"]malang-ui['"]/);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+  });
+}
+
+test('uses native Menu selection, controlled groups, keyboard semantics and readable item types', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await page.goto('/#/components/MMenu');
+  const basic = page.locator('[data-demo-id="MMenu-basic"]');
+  await expect(basic).toHaveAttribute('data-demo-state', 'ready');
+  await basic.getByRole('button', { name: '我的项目', exact: true }).click();
+  await expect(basic.getByText('当前选中：projects', { exact: true })).toBeVisible();
+  const group = basic.getByRole('button', { name: '创作空间', exact: true });
+  await group.focus();
+  await group.press('Escape');
+  await expect(group).toHaveAttribute('aria-expanded', 'false');
+  await group.press('Enter');
+  await expect(group).toHaveAttribute('aria-expanded', 'true');
+  await basic.getByRole('button', { name: '重置示例', exact: true }).click();
+  await expect(basic.getByText('当前选中：overview', { exact: true })).toBeVisible();
+  await basic.getByText('查看代码', { exact: true }).click();
+  const code = await basic.locator('pre code').textContent();
+  expect(code).toContain('v-model:expanded-values');
+  await basic.getByRole('button', { name: /^复制 .* 代码$/ }).click();
+  await expect.poll(async () => (await page.evaluate(() => navigator.clipboard.readText())).replace(/\r\n?/g, '\n')).toBe(code);
+  const controlled = page.locator('[data-demo-id="MMenu-controlled"]');
+  await controlled.getByRole('button', { name: '全部展开', exact: true }).click();
+  await expect(controlled.getByRole('button', { name: '作品管理' })).toHaveAttribute('aria-expanded', 'true');
+  await expect(controlled.getByRole('button', { name: '协作空间' })).toHaveAttribute('aria-expanded', 'true');
+  await controlled.getByRole('switch', { name: '只展开一个分组' }).check();
+  await expect(controlled.getByRole('button', { name: '作品管理' })).toHaveAttribute('aria-expanded', 'false');
+  const disabled = page.locator('[data-demo-id="MMenu-disabled"]');
+  await expect(disabled.getByRole('button', { name: '私密素材（无权限）' })).toBeDisabled();
+  await disabled.getByRole('switch', { name: '禁用整组菜单' }).check();
+  await expect(disabled.getByRole('button', { name: '素材管理' })).toBeDisabled();
+  await page.getByRole('navigation', { name: '本页目录' }).getByRole('button', { name: 'API 参考', exact: true }).click();
+  const props = page.getByRole('region', { name: 'Props 表格', exact: true });
+  await expect(props.getByRole('row', { name: /expandedValues/ })).toContainText('展开');
+  await expect(page.getByText('MMenuItem', { exact: true }).first()).toBeVisible();
+});
+
+test('keeps native Input drafts and Button loading local to each example and supports reset', async ({ page }) => {
   await page.goto('/#/components/MInput');
-  await expect(page.getByRole('heading', { name: '输入框', level: 1, exact: true })).toBeVisible();
-  await expect(page.getByRole('link', { name: '查看源码', exact: true }))
-    .toHaveAttribute('href', 'https://github.com/MaLaNg116/malang-ui/blob/main/src/components/MInput.vue');
-  const sample = page.getByRole('region', { name: '让注意力留在文字里', exact: true });
-  await sample.getByRole('textbox', { name: '项目名称', exact: true }).fill('墨色成章');
-  await expect(sample.getByText('当前值：墨色成章', { exact: true })).toBeVisible();
-  const preview = page.getByRole('region', { name: '组件预览', exact: true });
-  await preview.scrollIntoViewIfNeeded();
-  const story = preview.getByTitle('输入框 · 交互示例', { exact: true });
-  const frame = story.contentFrame();
-  const input = frame.getByRole('textbox', { name: '工作空间名称', exact: true });
-  await expect(input).toBeEditable();
-  await expect(story).not.toHaveAttribute('aria-hidden', 'true');
-  await input.fill('清风铸印');
-  await expect(frame.getByText('当前输入：清风铸印', { exact: true })).toBeVisible();
-
-  await preview.getByRole('combobox', { name: '示例', exact: true }).selectOption({ label: '禁用' });
-  await expect(input).toBeDisabled();
-  await expect(input).toHaveValue('只读预览空间');
-  await expect(story).not.toHaveAttribute('aria-hidden', 'true');
-
-  await preview.getByRole('button', { name: 'API 文档', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'API 参考', level: 2, exact: true })).toBeFocused();
-  await expect(page).toHaveURL(/#\/components\/MInput$/);
-  const props = page.getByRole('table', { name: 'Props', exact: true });
-  const model = props.getByRole('row').filter({ has: page.getByText('modelValue', { exact: true }) });
-  await expect(model.getByRole('cell', { name: 'string', exact: true })).toBeVisible();
-  await expect(model.getByRole('cell', { name: /^(?:''|"")$/ })).toBeVisible();
-  const type = props.getByRole('row').filter({ has: page.getByText('type', { exact: true }) });
-  await expect(type.getByRole('cell', { name: /^(?:'text'|"text"|text)$/ })).toBeVisible();
-
-  const opened = page.waitForEvent('popup');
-  await page.getByRole('link', { name: '在 Storybook 查看完整文档', exact: true }).click();
-  const docs = await opened;
-  await expect(docs).toHaveURL(url => url.pathname === '/workbench/iframe.html'
-    && url.searchParams.get('viewMode') === 'docs'
-    && url.searchParams.get('id') === '基础组件-input-输入框--文档');
-  await expect(docs.getByRole('heading', { name: 'Input 输入框', exact: true })).toBeVisible();
+  const demo = page.locator('[data-demo-id="MInput-basic"]');
+  await demo.getByRole('textbox', { name: '项目名称', exact: true }).fill('纸上山河');
+  await expect(demo.getByText('当前值：纸上山河', { exact: true })).toBeVisible();
+  await demo.getByRole('button', { name: '重置示例' }).click();
+  await expect(demo.getByRole('textbox', { name: '项目名称' })).toHaveValue('山海之间');
+  await page.getByRole('navigation', { name: '组件导航' }).locator('a[href="#/components/MButton"]').click();
+  const sizes = page.locator('[data-demo-id="MButton-sizes"]');
+  const button = sizes.getByRole('button', { name: '创建项目', exact: true });
+  const medium = await button.boundingBox();
+  await sizes.getByRole('radio', { name: '大尺寸', exact: true }).check();
+  await expect.poll(async () => (await button.boundingBox())!.height).toBeGreaterThan(medium!.height);
+  const loading = page.locator('[data-demo-id="MButton-loading"]');
+  await loading.getByRole('button', { name: '模拟保存', exact: true }).click();
+  await expect(loading.getByRole('button', { name: '正在保存…', exact: true })).toBeDisabled();
+  await expect(loading.getByText('模拟保存完成', { exact: true })).toBeVisible();
+  await expect(loading.getByRole('button', { name: '模拟保存', exact: true })).toBeEnabled();
 });
+
+test('opens component navigation on a small screen and keeps source and API scrolling within the document', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await page.goto('/#/components/MMenu');
+  const navigation = page.getByRole('navigation', { name: '组件导航', exact: true });
+  await expect(navigation).toBeHidden();
+  await page.getByRole('button', { name: '打开组件导航', exact: true }).click();
+  await expect(navigation).toBeVisible();
+  await page.getByRole('searchbox', { name: '搜索组件', exact: true }).fill('Input');
+  await navigation.locator('a[href="#/components/MInput"]').click();
+  await expect(navigation).toBeHidden();
+  await expect(page.getByRole('heading', { name: '输入框', level: 1 })).toBeVisible();
+  const toc = page.getByRole('navigation', { name: '本页目录' });
+  await toc.getByRole('button', { name: 'API 参考', exact: true }).click();
+  await expect(page.locator('#catalog-api')).toBeFocused();
+  const table = page.getByRole('region', { name: 'Props 表格', exact: true });
+  expect(await table.evaluate(element => element.scrollWidth > element.clientWidth)).toBe(true);
+  await table.focus(); await table.press('ArrowRight');
+  await expect.poll(() => table.evaluate(element => element.scrollLeft)).toBeGreaterThan(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+});
+
 
 test('applies and remembers the selected theme, paper and reduced motion', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
@@ -175,81 +217,24 @@ test('opens component search by keyboard and selects a result without a pointer'
   await expect(dialog).toBeHidden();
 });
 
-async function copySnippet(page: Page, block: Locator, filename: string) {
+test('offers selected manual source when the browser clipboard is unavailable', async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText: () => Promise.reject(new DOMException('Clipboard unavailable', 'NotAllowedError')) },
+    });
+  });
+  await page.goto('/#/guide');
+  const block = page.getByRole('region', { name: 'FirstCanvas.vue', exact: true });
   const code = await block.locator('pre code').textContent() ?? '';
-  await block.getByRole('button', { name: `复制 ${filename} 代码`, exact: true }).click();
-  await expect(block.getByRole('status')).toHaveText('代码已复制');
-  await expect.poll(async () => {
-    const clipboard = await page.evaluate(() => navigator.clipboard.readText());
-    return clipboard.replace(/\r\n?/g, '\n');
-  }).toBe(code);
-  return code;
-}
-
-test.describe('copying real code samples', () => {
-  // Keep native clipboard operations from these two tests from overlapping.
-  test.describe.configure({ mode: 'default' });
-
-  test('copies the actual guide snippet and selects it for manual copying when permission fails', async ({ page, context }) => {
-    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
-    await page.goto('/#/guide');
-    const block = page.getByRole('region', { name: 'FirstCanvas.vue', exact: true });
-    const code = await copySnippet(page, block, 'FirstCanvas.vue');
-    expect(code).toContain('MInput');
-
-    await page.addInitScript(() => {
-      Object.defineProperty(navigator.clipboard, 'writeText', {
-        value: () => Promise.reject(new DOMException('Clipboard permission denied', 'NotAllowedError')),
-      });
-    });
-    await page.reload();
-    await block.getByRole('button', { name: '复制 FirstCanvas.vue 代码', exact: true }).click();
-    const manual = block.getByRole('textbox', { name: '可手动复制的代码', exact: true });
-    await expect(block.getByText('复制受限，可选中下方代码手动复制。', { exact: true })).toBeVisible();
-    await expect(manual).toHaveAttribute('readonly', '');
-    await expect(manual).toBeFocused();
-    await expect(manual).toHaveValue(code);
-    const selection = await manual.evaluate(element => {
-      const input = element as HTMLTextAreaElement;
-      return input.value.slice(input.selectionStart, input.selectionEnd);
-    });
-    expect(selection).toBe(code);
-  });
-
-  test('runs the native MButton examples, copies the chosen size and shows public defaults', async ({ page, context }) => {
-    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
-    await page.goto('/#/components/MButton');
-    const levels = page.getByRole('region', { name: '明确操作的轻重', exact: true });
-    await levels.getByRole('button', { name: '主要操作', exact: true }).click();
-    await expect(levels.getByRole('status')).toHaveText('已触发：主要操作');
-
-    const sizes = page.getByRole('region', { name: '与界面的密度相称', exact: true });
-    const create = sizes.getByRole('button', { name: '创建项目', exact: true });
-    const height = () => create.evaluate(button => button.getBoundingClientRect().height);
-    const initialHeight = await height();
-    const large = sizes.getByRole('radio', { name: '大尺寸', exact: true });
-    await large.click();
-    await expect(large).toBeChecked();
-    await expect.poll(height).toBeGreaterThan(initialHeight);
-    await sizes.locator('summary').click();
-    const block = sizes.getByRole('region', { name: 'ButtonSizes.vue', exact: true });
-    const code = await copySnippet(page, block, 'ButtonSizes.vue');
-    expect(code).toContain('<MButton size="lg">创建项目</MButton>');
-    const copy = block.getByRole('button', { name: '复制 ButtonSizes.vue 代码', exact: true });
-    await expect(copy).toHaveText('已复制 ✓');
-    await sizes.getByRole('radio', { name: '小尺寸', exact: true }).click();
-    await expect(block.locator('pre code')).toContainText('<MButton size="sm">创建项目</MButton>');
-    expect(await copy.innerText()).toBe('复制代码');
-
-    await page.getByRole('navigation', { name: '本页目录', exact: true })
-      .getByRole('button', { name: 'API 参考', exact: true }).click();
-    await expect(page.getByRole('heading', { name: 'API 参考', level: 2, exact: true })).toBeFocused();
-    const props = page.getByRole('table', { name: 'Props', exact: true });
-    const variant = props.getByRole('row').filter({ has: page.getByText('variant', { exact: true }) });
-    const size = props.getByRole('row').filter({ has: page.getByText('size', { exact: true }) });
-    await expect(variant.getByRole('cell', { name: /^(?:'primary'|"primary"|primary)$/ })).toBeVisible();
-    await expect(size.getByRole('cell', { name: /^(?:'md'|"md"|md)$/ })).toBeVisible();
-  });
+  await block.getByRole('button', { name: '复制 FirstCanvas.vue 代码', exact: true }).click();
+  const manual = block.getByRole('textbox', { name: '可手动复制的代码', exact: true });
+  await expect(manual).toBeFocused();
+  await expect(manual).toHaveValue(code);
+  expect(await manual.evaluate(element => {
+    const field = element as HTMLTextAreaElement;
+    return [field.selectionStart, field.selectionEnd];
+  })).toEqual([0, code.length]);
 });
 
 test('opens the complete bundled Storybook manager from the guide', async ({ page }) => {
@@ -339,56 +324,4 @@ test('keeps MG artwork available without autoplay under system reduced motion', 
   await waitForFrames(page);
   expect(await motionTime(exhibit)).toEqual(final);
   expect(await canvas.evaluate(element => (element as HTMLCanvasElement).toDataURL())).toBe(staticFrame);
-});
-
-test.describe('360px touch layout', () => {
-  test.use({ viewport: { width: 360, height: 740 }, isMobile: true, hasTouch: true });
-
-  test('navigates the website with the mobile menu and keeps long pages scrollable', async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.goto('/#/');
-    const menu = page.getByRole('button', { name: '打开导航菜单', exact: true });
-    const nav = page.getByRole('navigation', { name: '移动导航', exact: true });
-    const width = () => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-    await expect(menu).toBeVisible();
-    expect(await width()).toBeLessThanOrEqual(1);
-
-    await menu.tap();
-    await expect(page.getByRole('button', { name: '关闭导航菜单', exact: true }))
-      .toHaveAttribute('aria-expanded', 'true');
-    await nav.getByRole('link', { name: /^概览/ }).tap();
-    await expect(nav).toBeHidden();
-    await expect(menu).toBeFocused();
-
-    await menu.tap();
-    await nav.getByRole('link', { name: /^组件/ }).tap();
-    await expect(page.getByRole('heading', { name: '组件目录', exact: true })).toBeVisible();
-    await expect(nav).toBeHidden();
-    expect(await width()).toBeLessThanOrEqual(1);
-
-    await page.mouse.move(180, 560);
-    await page.mouse.wheel(0, 900);
-    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(300);
-    await page.locator('main a[href="#/components/MInput"]').tap();
-    await expect(page.getByRole('heading', { name: '输入框', level: 1, exact: true })).toBeVisible();
-    expect(await width()).toBeLessThanOrEqual(1);
-    await page.getByRole('navigation', { name: '本页目录', exact: true })
-      .getByRole('button', { name: 'API 参考', exact: true }).tap();
-    await expect(page.getByRole('heading', { name: 'API 参考', level: 2, exact: true })).toBeFocused();
-    const api = page.getByRole('region', { name: 'Props 表格', exact: true });
-    await api.press('ArrowRight');
-    await expect.poll(() => api.evaluate(element => element.scrollLeft)).toBeGreaterThan(0);
-    expect(await width()).toBeLessThanOrEqual(1);
-
-    await menu.tap();
-    await nav.getByRole('link', { name: /^动效/ }).tap();
-    await expect(page.locator('[data-motion-exhibit="brand"][data-motion-ready]')).toBeVisible();
-    expect(await width()).toBeLessThanOrEqual(1);
-
-    await menu.tap();
-    await nav.getByRole('link', { name: /^指南/ }).tap();
-    await expect(page.getByRole('region', { name: 'FirstCanvas.vue', exact: true })).toBeVisible();
-    expect(await width()).toBeLessThanOrEqual(1);
-    await expect(menu).toHaveAttribute('aria-expanded', 'false');
-  });
 });
