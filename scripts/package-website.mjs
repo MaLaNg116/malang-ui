@@ -1,0 +1,12 @@
+import { cp, readFile, stat } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+const root = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
+const output = path.resolve(root, 'website/dist');
+const workbench = path.resolve(root, 'storybook-static');
+if (!output.startsWith(root + path.sep)) throw Error('Website output must stay in this checkout.');
+await stat(path.join(output, 'index.html'));
+const index = JSON.parse(await readFile(path.join(workbench, 'index.json'), 'utf8'));
+if (!Object.keys(index.entries ?? {}).length) throw Error('Build Storybook before packaging the website.');
+await cp(workbench, path.join(output, 'workbench'), { recursive: true });
+console.log('Website packaged with its complete local Storybook workbench.');

@@ -1,0 +1,3278 @@
+[
+  {
+    "name": "MButton",
+    "label": "按钮",
+    "category": "基础控件",
+    "description": "触发提交或操作，支持三种强调层级、尺寸和加载状态。",
+    "keywords": [
+      "Button",
+      "m-button",
+      "表单基础控件"
+    ],
+    "source": "src/components/MButton.vue",
+    "storyId": "基础组件-button-按钮--default",
+    "docsId": "基础组件-button-按钮--文档",
+    "stories": [
+      {
+        "id": "基础组件-button-按钮--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-button-按钮--loading",
+        "label": "加载"
+      },
+      {
+        "id": "基础组件-button-按钮--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "基础组件-button-按钮--secondary",
+        "label": "Secondary"
+      },
+      {
+        "id": "基础组件-button-按钮--ghost",
+        "label": "Ghost"
+      },
+      {
+        "id": "基础组件-button-按钮--variants-and-sizes",
+        "label": "Variants And Sizes"
+      },
+      {
+        "id": "基础组件-button-按钮--async-action",
+        "label": "Async Action"
+      }
+    ]
+  },
+  {
+    "name": "MIcon",
+    "label": "图标",
+    "category": "基础控件",
+    "description": "用统一线条的 SVG 图标表达动作，也可提供自定义路径。",
+    "keywords": [
+      "Icon",
+      "m-icon",
+      "图标入口"
+    ],
+    "source": "src/components/reference-common/MIcon.vue",
+    "storyId": "基础组件-typography-文字--icons",
+    "stories": [
+      {
+        "id": "基础组件-typography-文字--icons",
+        "label": "图标列表"
+      }
+    ]
+  },
+  {
+    "name": "MTypography",
+    "label": "文字",
+    "category": "基础控件",
+    "description": "排版标题和段落，支持文本编辑、复制与截断。",
+    "keywords": [
+      "Typography",
+      "m-typography",
+      "排版与链接"
+    ],
+    "source": "src/components/reference-common/MTypography.vue",
+    "storyId": "基础组件-typography-文字--default",
+    "docsId": "基础组件-typography-文字--文档",
+    "stories": [
+      {
+        "id": "基础组件-typography-文字--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-typography-文字--editing",
+        "label": "文本与链接"
+      },
+      {
+        "id": "基础组件-typography-文字--icons",
+        "label": "图标列表"
+      }
+    ]
+  },
+  {
+    "name": "MText",
+    "label": "行内文本",
+    "category": "基础控件",
+    "description": "在行内展示正文、辅助文字或带语义的强调文本。",
+    "keywords": [
+      "Text",
+      "m-text",
+      "排版与链接",
+      "Typography"
+    ],
+    "source": "src/components/reference-common/MText.vue",
+    "storyId": "基础组件-typography-文字--editing",
+    "stories": [
+      {
+        "id": "基础组件-typography-文字--editing",
+        "label": "文本与链接"
+      }
+    ]
+  },
+  {
+    "name": "MLink",
+    "label": "链接",
+    "category": "基础控件",
+    "description": "通过原生链接进入页面或外部资源。",
+    "keywords": [
+      "Link",
+      "m-link",
+      "排版与链接",
+      "Typography"
+    ],
+    "source": "src/components/reference-common/MLink.vue",
+    "storyId": "基础组件-typography-文字--editing",
+    "stories": [
+      {
+        "id": "基础组件-typography-文字--editing",
+        "label": "文本与链接"
+      }
+    ]
+  },
+  {
+    "name": "MDivider",
+    "label": "分隔线",
+    "category": "基础控件",
+    "description": "用横向墨线分隔内容区块，可在分隔线中加入标签。",
+    "keywords": [
+      "Divider",
+      "m-divider",
+      "内容容器与标记"
+    ],
+    "source": "src/components/MDivider.vue",
+    "storyId": "基础组件-divider-分隔线--default",
+    "docsId": "基础组件-divider-分隔线--文档",
+    "stories": [
+      {
+        "id": "基础组件-divider-分隔线--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-divider-分隔线--with-label",
+        "label": "带章节名称"
+      },
+      {
+        "id": "基础组件-divider-分隔线--long-label",
+        "label": "长名称换行"
+      }
+    ]
+  },
+  {
+    "name": "MInput",
+    "label": "输入框",
+    "category": "表单与选择",
+    "description": "录入单行文本，配合标签、提示、错误和原生表单属性。",
+    "keywords": [
+      "Input",
+      "m-input",
+      "表单基础控件"
+    ],
+    "source": "src/components/MInput.vue",
+    "storyId": "基础组件-input-输入框--default",
+    "docsId": "基础组件-input-输入框--文档",
+    "stories": [
+      {
+        "id": "基础组件-input-输入框--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-input-输入框--filled",
+        "label": "Filled"
+      },
+      {
+        "id": "基础组件-input-输入框--error",
+        "label": "Error"
+      },
+      {
+        "id": "基础组件-input-输入框--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "基础组件-input-输入框--form-attributes",
+        "label": "Form Attributes"
+      },
+      {
+        "id": "基础组件-input-输入框--composition-with-changing-hint",
+        "label": "Composition With Changing Hint"
+      }
+    ]
+  },
+  {
+    "name": "MTextarea",
+    "label": "多行输入",
+    "category": "表单与选择",
+    "description": "编辑多行内容，适合备注、说明和较长文本。",
+    "keywords": [
+      "Textarea",
+      "m-textarea",
+      "表单基础控件",
+      "Input"
+    ],
+    "source": "src/components/MTextarea.vue",
+    "storyId": "基础组件-textarea-多行输入--default",
+    "docsId": "基础组件-textarea-多行输入--文档",
+    "stories": [
+      {
+        "id": "基础组件-textarea-多行输入--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-textarea-多行输入--error",
+        "label": "Error"
+      },
+      {
+        "id": "基础组件-textarea-多行输入--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "基础组件-textarea-多行输入--composition-with-changing-hint",
+        "label": "中文组合输入与父级更新"
+      },
+      {
+        "id": "基础组件-textarea-多行输入--form-attributes",
+        "label": "原生表单提交"
+      }
+    ]
+  },
+  {
+    "name": "MInputNumber",
+    "label": "数字输入",
+    "category": "表单与选择",
+    "description": "输入或逐步调节数值，支持边界、小数步长和空值。",
+    "keywords": [
+      "InputNumber",
+      "m-input-number",
+      "表单基础控件",
+      "Input Number"
+    ],
+    "source": "src/components/MInputNumber.vue",
+    "storyId": "二级组件-inputnumber-数字输入--default",
+    "docsId": "二级组件-inputnumber-数字输入--文档",
+    "stories": [
+      {
+        "id": "二级组件-inputnumber-数字输入--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "二级组件-inputnumber-数字输入--decimal",
+        "label": "小数刻度"
+      },
+      {
+        "id": "二级组件-inputnumber-数字输入--empty",
+        "label": "空值"
+      },
+      {
+        "id": "二级组件-inputnumber-数字输入--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "二级组件-inputnumber-数字输入--error",
+        "label": "Error"
+      },
+      {
+        "id": "二级组件-inputnumber-数字输入--controlled",
+        "label": "受控请求与组合输入"
+      },
+      {
+        "id": "二级组件-inputnumber-数字输入--form-attributes",
+        "label": "表单、只读与禁用"
+      }
+    ]
+  },
+  {
+    "name": "MSlider",
+    "label": "刻度滑轨",
+    "category": "表单与选择",
+    "description": "沿刻度调节有范围的数值，支持键盘和触控。",
+    "keywords": [
+      "Slider",
+      "m-slider",
+      "表单基础控件"
+    ],
+    "source": "src/components/MSlider.vue",
+    "storyId": "二级组件-slider-刻度滑轨--default",
+    "docsId": "二级组件-slider-刻度滑轨--文档",
+    "stories": [
+      {
+        "id": "二级组件-slider-刻度滑轨--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "二级组件-slider-刻度滑轨--fractional",
+        "label": "小数倍率"
+      },
+      {
+        "id": "二级组件-slider-刻度滑轨--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "二级组件-slider-刻度滑轨--error",
+        "label": "Error"
+      },
+      {
+        "id": "二级组件-slider-刻度滑轨--long-label",
+        "label": "长标题与窄屏"
+      },
+      {
+        "id": "二级组件-slider-刻度滑轨--controlled",
+        "label": "受控更新"
+      },
+      {
+        "id": "二级组件-slider-刻度滑轨--changing-bounds",
+        "label": "范围变化不改写模型"
+      }
+    ]
+  },
+  {
+    "name": "MSelect",
+    "label": "选择器",
+    "category": "表单与选择",
+    "description": "从固定选项中选择一个值，保留原生表单语义。",
+    "keywords": [
+      "Select",
+      "m-select",
+      "表单基础控件"
+    ],
+    "source": "src/components/MSelect.vue",
+    "storyId": "基础组件-select-选择器--default",
+    "docsId": "基础组件-select-选择器--文档",
+    "stories": [
+      {
+        "id": "基础组件-select-选择器--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-select-选择器--error",
+        "label": "Error"
+      },
+      {
+        "id": "基础组件-select-选择器--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "基础组件-select-选择器--form-attributes",
+        "label": "原生表单提交"
+      },
+      {
+        "id": "基础组件-select-选择器--controlled",
+        "label": "受控更新"
+      }
+    ]
+  },
+  {
+    "name": "MCombobox",
+    "label": "搜索选择",
+    "category": "表单与选择",
+    "description": "输入关键词过滤候选，再用键盘或鼠标选择。",
+    "keywords": [
+      "Combobox",
+      "m-combobox",
+      "表单基础控件",
+      "Select"
+    ],
+    "source": "src/components/MCombobox.vue",
+    "storyId": "二级组件-combobox-搜索选择--default",
+    "docsId": "二级组件-combobox-搜索选择--文档",
+    "stories": [
+      {
+        "id": "二级组件-combobox-搜索选择--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "二级组件-combobox-搜索选择--filled",
+        "label": "Filled"
+      },
+      {
+        "id": "二级组件-combobox-搜索选择--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "二级组件-combobox-搜索选择--error",
+        "label": "Error"
+      },
+      {
+        "id": "二级组件-combobox-搜索选择--empty",
+        "label": "Empty"
+      },
+      {
+        "id": "二级组件-combobox-搜索选择--controlled",
+        "label": "受控请求与程序更新"
+      },
+      {
+        "id": "二级组件-combobox-搜索选择--composition",
+        "label": "中文组合输入与提示更新"
+      },
+      {
+        "id": "二级组件-combobox-搜索选择--form-attributes",
+        "label": "原生表单、只读与禁用"
+      },
+      {
+        "id": "二级组件-combobox-搜索选择--long-content",
+        "label": "长清单与边缘避让"
+      },
+      {
+        "id": "二级组件-combobox-搜索选择--unmount-cleanup",
+        "label": "卸载与重新挂载"
+      }
+    ]
+  },
+  {
+    "name": "MAutoComplete",
+    "label": "输入建议",
+    "category": "表单与选择",
+    "description": "边输入边查看建议，并保留自行填写文本的能力。",
+    "keywords": [
+      "AutoComplete",
+      "m-auto-complete",
+      "表单基础控件",
+      "Autocomplete"
+    ],
+    "source": "src/components/reference-data/MAutoComplete.vue",
+    "storyId": "数据组件-autocomplete-输入建议--default",
+    "docsId": "数据组件-autocomplete-输入建议--文档",
+    "stories": [
+      {
+        "id": "数据组件-autocomplete-输入建议--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "数据组件-autocomplete-输入建议--async-suggestions",
+        "label": "Async Suggestions"
+      },
+      {
+        "id": "数据组件-autocomplete-输入建议--narrow-reduced",
+        "label": "Narrow Reduced"
+      }
+    ]
+  },
+  {
+    "name": "MVirtualSelect",
+    "label": "虚拟选择",
+    "category": "表单与选择",
+    "description": "在较长的选项列表中搜索和选择，支持单选与多选。",
+    "keywords": [
+      "VirtualSelect",
+      "m-virtual-select",
+      "表单基础控件",
+      "大数据与虚拟列表",
+      "Select",
+      "Virtualized Select"
+    ],
+    "source": "src/components/reference-data/MVirtualSelect.vue",
+    "storyId": "数据组件-virtualselect-虚拟选择--default",
+    "docsId": "数据组件-virtualselect-虚拟选择--文档",
+    "stories": [
+      {
+        "id": "数据组件-virtualselect-虚拟选择--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "数据组件-virtualselect-虚拟选择--multiple",
+        "label": "Multiple"
+      },
+      {
+        "id": "数据组件-virtualselect-虚拟选择--narrow-reduced",
+        "label": "Narrow Reduced"
+      }
+    ]
+  },
+  {
+    "name": "MCheckbox",
+    "label": "复选框",
+    "category": "表单与选择",
+    "description": "切换一个独立选项，可展示混合选中状态。",
+    "keywords": [
+      "Checkbox",
+      "m-checkbox",
+      "表单基础控件"
+    ],
+    "source": "src/components/MCheckbox.vue",
+    "storyId": "基础组件-checkbox-复选框--default",
+    "docsId": "基础组件-checkbox-复选框--文档",
+    "stories": [
+      {
+        "id": "基础组件-checkbox-复选框--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-checkbox-复选框--error",
+        "label": "Error"
+      },
+      {
+        "id": "基础组件-checkbox-复选框--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "基础组件-checkbox-复选框--indeterminate",
+        "label": "部分选择"
+      },
+      {
+        "id": "基础组件-checkbox-复选框--form-attributes",
+        "label": "原生表单提交"
+      },
+      {
+        "id": "基础组件-checkbox-复选框--controlled",
+        "label": "受控更新"
+      }
+    ]
+  },
+  {
+    "name": "MCheckboxGroup",
+    "label": "复选组",
+    "category": "表单与选择",
+    "description": "从一组选项中多选，可设最少与最多选择数。",
+    "keywords": [
+      "CheckboxGroup",
+      "m-checkbox-group",
+      "表单基础控件",
+      "Checkbox"
+    ],
+    "source": "src/components/reference-common/MCheckboxGroup.vue",
+    "storyId": "基础组件-checkboxgroup-复选组--default",
+    "docsId": "基础组件-checkboxgroup-复选组--文档",
+    "stories": [
+      {
+        "id": "基础组件-checkboxgroup-复选组--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-checkboxgroup-复选组--unknown-value",
+        "label": "未知值不满足必填也不占上限"
+      },
+      {
+        "id": "基础组件-checkboxgroup-复选组--duplicate-values",
+        "label": "重复值不满足最少项目"
+      },
+      {
+        "id": "基础组件-checkboxgroup-复选组--disabled-selection",
+        "label": "禁用值不参与原生提交"
+      },
+      {
+        "id": "基础组件-checkboxgroup-复选组--empty-options",
+        "label": "无可选项仍保留校验"
+      },
+      {
+        "id": "基础组件-checkboxgroup-复选组--above-maximum",
+        "label": "外部超限可逐项恢复"
+      }
+    ]
+  },
+  {
+    "name": "MRadio",
+    "label": "单选",
+    "category": "表单与选择",
+    "description": "以原生单选控件加入同一表单组。",
+    "keywords": [
+      "Radio",
+      "m-radio",
+      "表单基础控件"
+    ],
+    "source": "src/components/reference-inputs/MRadio.vue",
+    "storyId": "基础组件-radio-单选--default",
+    "docsId": "基础组件-radio-单选--文档",
+    "stories": [
+      {
+        "id": "基础组件-radio-单选--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-radio-单选--boundary",
+        "label": "必填空值与长标签"
+      },
+      {
+        "id": "基础组件-radio-单选--disabled",
+        "label": "禁用"
+      }
+    ]
+  },
+  {
+    "name": "MRadioGroup",
+    "label": "单选组",
+    "category": "表单与选择",
+    "description": "在互斥选项中确认单一值，可随表单提交。",
+    "keywords": [
+      "RadioGroup",
+      "m-radio-group",
+      "表单基础控件",
+      "Radio"
+    ],
+    "source": "src/components/MRadioGroup.vue",
+    "storyId": "基础组件-radiogroup-单选组--default",
+    "docsId": "基础组件-radiogroup-单选组--文档",
+    "stories": [
+      {
+        "id": "基础组件-radiogroup-单选组--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-radiogroup-单选组--error",
+        "label": "Error"
+      },
+      {
+        "id": "基础组件-radiogroup-单选组--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "基础组件-radiogroup-单选组--form-attributes",
+        "label": "原生表单提交"
+      },
+      {
+        "id": "基础组件-radiogroup-单选组--controlled",
+        "label": "受控更新"
+      },
+      {
+        "id": "基础组件-radiogroup-单选组--independent-groups",
+        "label": "多个独立分组"
+      }
+    ]
+  },
+  {
+    "name": "MSwitch",
+    "label": "开关",
+    "category": "表单与选择",
+    "description": "开启或关闭一项设置，保留原生开关交互。",
+    "keywords": [
+      "Switch",
+      "m-switch",
+      "表单基础控件"
+    ],
+    "source": "src/components/MSwitch.vue",
+    "storyId": "基础组件-switch-开关--default",
+    "docsId": "基础组件-switch-开关--文档",
+    "stories": [
+      {
+        "id": "基础组件-switch-开关--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-switch-开关--off",
+        "label": "Off"
+      },
+      {
+        "id": "基础组件-switch-开关--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "基础组件-switch-开关--disabled-off",
+        "label": "Disabled Off"
+      },
+      {
+        "id": "基础组件-switch-开关--workspace-form",
+        "label": "Workspace Form"
+      }
+    ]
+  },
+  {
+    "name": "MSegmented",
+    "label": "分段选择",
+    "category": "表单与选择",
+    "description": "在少量互斥模式间切换，滑轨跟随已选项。",
+    "keywords": [
+      "Segmented",
+      "m-segmented",
+      "分段选择"
+    ],
+    "source": "src/components/MSegmented.vue",
+    "storyId": "基础组件-segmented-分段选择--default",
+    "docsId": "基础组件-segmented-分段选择--文档",
+    "stories": [
+      {
+        "id": "基础组件-segmented-分段选择--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-segmented-分段选择--sizes-and-orientation",
+        "label": "Sizes And Orientation"
+      },
+      {
+        "id": "基础组件-segmented-分段选择--controlled",
+        "label": "Controlled"
+      },
+      {
+        "id": "基础组件-segmented-分段选择--form-attributes",
+        "label": "Form Attributes"
+      },
+      {
+        "id": "基础组件-segmented-分段选择--responsive",
+        "label": "Responsive"
+      },
+      {
+        "id": "基础组件-segmented-分段选择--reduced-motion",
+        "label": "Reduced Motion"
+      }
+    ]
+  },
+  {
+    "name": "MCascader",
+    "label": "级联选择",
+    "category": "表单与选择",
+    "description": "沿分级选项选择完整路径，支持搜索和多路径。",
+    "keywords": [
+      "Cascader",
+      "m-cascader",
+      "层级选择"
+    ],
+    "source": "src/components/reference-inputs/MCascader.vue",
+    "storyId": "表单组件-输入日期-cascader-级联选择--default",
+    "stories": [
+      {
+        "id": "表单组件-输入日期-cascader-级联选择--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "表单组件-输入日期-cascader-级联选择--boundary",
+        "label": "边界状态"
+      },
+      {
+        "id": "表单组件-输入日期-cascader-级联选择--strict",
+        "label": "Strict"
+      }
+    ]
+  },
+  {
+    "name": "MTreeSelect",
+    "label": "树选择",
+    "category": "表单与选择",
+    "description": "在可筛选的树中选择节点，适合层级目录和归属字段。",
+    "keywords": [
+      "TreeSelect",
+      "m-tree-select",
+      "层级选择"
+    ],
+    "source": "src/components/reference-inputs/MTreeSelect.vue",
+    "storyId": "表单组件-输入日期-treeselect-树选择--default",
+    "stories": [
+      {
+        "id": "表单组件-输入日期-treeselect-树选择--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "表单组件-输入日期-treeselect-树选择--boundary",
+        "label": "边界状态"
+      },
+      {
+        "id": "表单组件-输入日期-treeselect-树选择--strict",
+        "label": "Strict"
+      },
+      {
+        "id": "表单组件-输入日期-treeselect-树选择--parent-keys",
+        "label": "父级值投影与半选"
+      }
+    ]
+  },
+  {
+    "name": "MColorPicker",
+    "label": "颜色选择",
+    "category": "表单与选择",
+    "description": "从弹出面板调色，支持十六进制、透明度和预设。",
+    "keywords": [
+      "ColorPicker",
+      "m-color-picker",
+      "专用输入与迁移",
+      "Color Picker"
+    ],
+    "source": "src/components/reference-inputs/MColorPicker.vue",
+    "storyId": "表单组件-输入日期-colorpicker-颜色选择--default",
+    "stories": [
+      {
+        "id": "表单组件-输入日期-colorpicker-颜色选择--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "表单组件-输入日期-colorpicker-颜色选择--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MColorPickerPanel",
+    "label": "颜色面板",
+    "category": "表单与选择",
+    "description": "将调色区域和预设色板嵌入页面，直接编辑颜色。",
+    "keywords": [
+      "ColorPickerPanel",
+      "m-color-picker-panel",
+      "专用输入与迁移",
+      "Color Picker Panel"
+    ],
+    "source": "src/components/reference-inputs/MColorPickerPanel.vue",
+    "storyId": "表单组件-输入日期-colorpickerpanel-颜色面板--default",
+    "stories": [
+      {
+        "id": "表单组件-输入日期-colorpickerpanel-颜色面板--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "表单组件-输入日期-colorpickerpanel-颜色面板--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MRate",
+    "label": "评分",
+    "category": "表单与选择",
+    "description": "按整格或半格评分，支持键盘调整。",
+    "keywords": [
+      "Rate",
+      "m-rate",
+      "专用输入与迁移"
+    ],
+    "source": "src/components/reference-inputs/MRate.vue",
+    "storyId": "表单组件-输入日期-rate-评分--default",
+    "stories": [
+      {
+        "id": "表单组件-输入日期-rate-评分--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "表单组件-输入日期-rate-评分--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MTransfer",
+    "label": "穿梭选择",
+    "category": "表单与选择",
+    "description": "在可搜索的左右清单间移动选中项。",
+    "keywords": [
+      "Transfer",
+      "m-transfer",
+      "专用输入与迁移"
+    ],
+    "source": "src/components/reference-inputs/MTransfer.vue",
+    "storyId": "表单组件-输入日期-transfer-穿梭选择--default",
+    "stories": [
+      {
+        "id": "表单组件-输入日期-transfer-穿梭选择--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "表单组件-输入日期-transfer-穿梭选择--boundary",
+        "label": "边界状态"
+      },
+      {
+        "id": "表单组件-输入日期-transfer-穿梭选择--operation-motion",
+        "label": "调卷与筛选"
+      }
+    ]
+  },
+  {
+    "name": "MInputOTP",
+    "label": "验证码",
+    "category": "表单与选择",
+    "description": "分格录入短验证码，支持整体粘贴和退格编辑。",
+    "keywords": [
+      "InputOTP",
+      "m-input-otp",
+      "表单基础控件",
+      "专用输入与迁移",
+      "Input",
+      "Input OTP"
+    ],
+    "source": "src/components/reference-inputs/MInputOTP.vue",
+    "storyId": "表单组件-输入日期-inputotp-验证码--default",
+    "stories": [
+      {
+        "id": "表单组件-输入日期-inputotp-验证码--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "表单组件-输入日期-inputotp-验证码--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MInputTag",
+    "label": "标签输入",
+    "category": "表单与选择",
+    "description": "把输入转成可移除标签，可限制数量或重复项。",
+    "keywords": [
+      "InputTag",
+      "m-input-tag",
+      "专用输入与迁移",
+      "Input Tag"
+    ],
+    "source": "src/components/reference-inputs/MInputTag.vue",
+    "storyId": "表单组件-输入日期-inputtag-标签输入--default",
+    "stories": [
+      {
+        "id": "表单组件-输入日期-inputtag-标签输入--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "表单组件-输入日期-inputtag-标签输入--boundary",
+        "label": "边界状态"
+      },
+      {
+        "id": "表单组件-输入日期-inputtag-标签输入--operation-motion",
+        "label": "增删与归位"
+      }
+    ]
+  },
+  {
+    "name": "MMention",
+    "label": "提及",
+    "category": "表单与选择",
+    "description": "用 @ 等前缀唤起候选，把选中项插入当前文本。",
+    "keywords": [
+      "Mention",
+      "m-mention",
+      "专用输入与迁移",
+      "Mentions"
+    ],
+    "source": "src/components/reference-inputs/MMention.vue",
+    "storyId": "表单组件-输入日期-mention-提及--default",
+    "stories": [
+      {
+        "id": "表单组件-输入日期-mention-提及--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "表单组件-输入日期-mention-提及--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MUpload",
+    "label": "本地文件",
+    "category": "表单与选择",
+    "description": "选择或拖入附件，管理文件约束、上传进度和取消。",
+    "keywords": [
+      "Upload",
+      "m-upload",
+      "表单基础控件"
+    ],
+    "source": "src/components/MUpload.vue",
+    "storyId": "二级组件-upload-本地文件--default",
+    "docsId": "二级组件-upload-本地文件--文档",
+    "stories": [
+      {
+        "id": "二级组件-upload-本地文件--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "二级组件-upload-本地文件--multiple",
+        "label": "多文件追加"
+      },
+      {
+        "id": "二级组件-upload-本地文件--limited",
+        "label": "限制与逐项拒绝"
+      },
+      {
+        "id": "二级组件-upload-本地文件--controlled",
+        "label": "受控拒绝与程序更新"
+      },
+      {
+        "id": "二级组件-upload-本地文件--form-attributes",
+        "label": "原生表单、动态只读与禁用"
+      },
+      {
+        "id": "二级组件-upload-本地文件--long-content",
+        "label": "长文件名与字节清单"
+      },
+      {
+        "id": "二级组件-upload-本地文件--error",
+        "label": "Error"
+      },
+      {
+        "id": "二级组件-upload-本地文件--unmount-cleanup",
+        "label": "卸载与原生重置清理"
+      },
+      {
+        "id": "二级组件-upload-本地文件--remote-manual",
+        "label": "远程上传与重试"
+      },
+      {
+        "id": "二级组件-upload-本地文件--remote-automatic",
+        "label": "自动上传与独立取消"
+      },
+      {
+        "id": "二级组件-upload-本地文件--custom-transport",
+        "label": "自定义传输与迟到隔离"
+      },
+      {
+        "id": "二级组件-upload-本地文件--remote-controlled",
+        "label": "远程受控确认"
+      }
+    ]
+  },
+  {
+    "name": "MForm",
+    "label": "表单",
+    "category": "表单与选择",
+    "description": "组织受控字段，提供规则校验、错误定位和重置。",
+    "keywords": [
+      "Form",
+      "m-form",
+      "表单布局与验证"
+    ],
+    "source": "src/components/MForm.vue",
+    "storyId": "基础组件-form-表单--default",
+    "docsId": "基础组件-form-表单--文档",
+    "stories": [
+      {
+        "id": "基础组件-form-表单--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-form-表单--blur-validation",
+        "label": "Blur Validation"
+      },
+      {
+        "id": "基础组件-form-表单--change-validation",
+        "label": "Change Validation"
+      },
+      {
+        "id": "基础组件-form-表单--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "基础组件-form-表单--reduced-motion",
+        "label": "Reduced Motion"
+      },
+      {
+        "id": "基础组件-form-表单--field-lifecycle",
+        "label": "Field Lifecycle"
+      }
+    ]
+  },
+  {
+    "name": "MFormItem",
+    "label": "表单字段",
+    "category": "表单与选择",
+    "description": "把字段名、标签和验证状态接到表单控件上。",
+    "keywords": [
+      "FormItem",
+      "m-form-item",
+      "表单布局与验证",
+      "Form"
+    ],
+    "source": "src/components/MFormItem.vue",
+    "storyId": "基础组件-form-表单--default",
+    "stories": [
+      {
+        "id": "基础组件-form-表单--default",
+        "label": "基础用法"
+      }
+    ]
+  },
+  {
+    "name": "MFormList",
+    "label": "动态字段",
+    "category": "表单与选择",
+    "description": "增删、重排表单数组项，管理动态字段路径。",
+    "keywords": [
+      "FormList",
+      "m-form-list",
+      "表单布局与验证",
+      "Form"
+    ],
+    "source": "src/components/reference-common/MFormList.vue",
+    "storyId": "基础组件-form-动态字段--default",
+    "docsId": "基础组件-form-动态字段--文档",
+    "stories": [
+      {
+        "id": "基础组件-form-动态字段--default",
+        "label": "基础用法"
+      }
+    ]
+  },
+  {
+    "name": "MDatePicker",
+    "label": "日期历盘",
+    "category": "日期与时间",
+    "description": "输入 ISO 日期或打开历盘选择日期，支持可选范围。",
+    "keywords": [
+      "DatePicker",
+      "m-date-picker",
+      "表单基础控件",
+      "Date Picker"
+    ],
+    "source": "src/components/MDatePicker.vue",
+    "storyId": "二级组件-datepicker-日期历盘--default",
+    "docsId": "二级组件-datepicker-日期历盘--文档",
+    "stories": [
+      {
+        "id": "二级组件-datepicker-日期历盘--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "二级组件-datepicker-日期历盘--range",
+        "label": "日期边界"
+      },
+      {
+        "id": "二级组件-datepicker-日期历盘--boundary-years",
+        "label": "首末年份"
+      },
+      {
+        "id": "二级组件-datepicker-日期历盘--invalid-range",
+        "label": "配置错误"
+      },
+      {
+        "id": "二级组件-datepicker-日期历盘--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "二级组件-datepicker-日期历盘--error",
+        "label": "Error"
+      },
+      {
+        "id": "二级组件-datepicker-日期历盘--controlled",
+        "label": "受控更新"
+      },
+      {
+        "id": "二级组件-datepicker-日期历盘--form-attributes",
+        "label": "原生表单"
+      },
+      {
+        "id": "二级组件-datepicker-日期历盘--composition-and-lifecycle",
+        "label": "中文草稿与卸载"
+      }
+    ]
+  },
+  {
+    "name": "MDateRangePicker",
+    "label": "日期区间",
+    "category": "日期与时间",
+    "description": "选择起止日期，校验先后顺序与可选边界。",
+    "keywords": [
+      "DateRangePicker",
+      "m-date-range-picker",
+      "表单基础控件",
+      "DatePicker",
+      "Date Picker"
+    ],
+    "source": "src/components/reference-inputs/MDateRangePicker.vue",
+    "storyId": "表单组件-输入日期-daterangepicker-日期区间--default",
+    "stories": [
+      {
+        "id": "表单组件-输入日期-daterangepicker-日期区间--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "表单组件-输入日期-daterangepicker-日期区间--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MDateTimePicker",
+    "label": "日期时间",
+    "category": "日期与时间",
+    "description": "在同一字段中编辑日期与时间，支持范围和时间步长。",
+    "keywords": [
+      "DateTimePicker",
+      "m-date-time-picker",
+      "日期区间、时间与日历",
+      "DateTime Picker"
+    ],
+    "source": "src/components/reference-inputs/MDateTimePicker.vue",
+    "storyId": "表单组件-输入日期-datetimepicker-日期时间--default",
+    "stories": [
+      {
+        "id": "表单组件-输入日期-datetimepicker-日期时间--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "表单组件-输入日期-datetimepicker-日期时间--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MTimePicker",
+    "label": "时间选择",
+    "category": "日期与时间",
+    "description": "输入时间或从时分选项中选取符合步长的值。",
+    "keywords": [
+      "TimePicker",
+      "m-time-picker",
+      "日期区间、时间与日历",
+      "Time Picker"
+    ],
+    "source": "src/components/reference-inputs/MTimePicker.vue",
+    "storyId": "表单组件-输入日期-timepicker-时间选择--default",
+    "stories": [
+      {
+        "id": "表单组件-输入日期-timepicker-时间选择--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "表单组件-输入日期-timepicker-时间选择--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MTimeSelect",
+    "label": "时间列表",
+    "category": "日期与时间",
+    "description": "根据起止时间和步长提供固定时间选项。",
+    "keywords": [
+      "TimeSelect",
+      "m-time-select",
+      "日期区间、时间与日历",
+      "Time Select"
+    ],
+    "source": "src/components/reference-inputs/MTimeSelect.vue",
+    "storyId": "表单组件-输入日期-timeselect-时间列表--default",
+    "stories": [
+      {
+        "id": "表单组件-输入日期-timeselect-时间列表--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "表单组件-输入日期-timeselect-时间列表--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MDatePickerPanel",
+    "label": "日期面板",
+    "category": "日期与时间",
+    "description": "在页面内直接使用可键盘操作的月份日期网格。",
+    "keywords": [
+      "DatePickerPanel",
+      "m-date-picker-panel",
+      "日期区间、时间与日历",
+      "Date Picker Panel"
+    ],
+    "source": "src/components/reference-inputs/MDatePickerPanel.vue",
+    "storyId": "表单组件-输入日期-datepickerpanel-日期面板--default",
+    "stories": [
+      {
+        "id": "表单组件-输入日期-datepickerpanel-日期面板--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "表单组件-输入日期-datepickerpanel-日期面板--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MCalendar",
+    "label": "日历",
+    "category": "日期与时间",
+    "description": "按月展示日期，支持选日和自定义日期单元内容。",
+    "keywords": [
+      "Calendar",
+      "m-calendar",
+      "日期区间、时间与日历"
+    ],
+    "source": "src/components/reference-inputs/MCalendar.vue",
+    "storyId": "表单组件-输入日期-calendar-日历--default",
+    "stories": [
+      {
+        "id": "表单组件-输入日期-calendar-日历--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "表单组件-输入日期-calendar-日历--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MTabs",
+    "label": "标签页",
+    "category": "导航",
+    "description": "在并列内容面板间切换，支持键盘和手动激活。",
+    "keywords": [
+      "Tabs",
+      "m-tabs",
+      "导航与流程"
+    ],
+    "source": "src/components/MTabs.vue",
+    "storyId": "基础组件-tabs-标签页--default",
+    "docsId": "基础组件-tabs-标签页--文档",
+    "stories": [
+      {
+        "id": "基础组件-tabs-标签页--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-tabs-标签页--manual",
+        "label": "Manual"
+      },
+      {
+        "id": "基础组件-tabs-标签页--disabled-and-long-labels",
+        "label": "Disabled And Long Labels"
+      },
+      {
+        "id": "基础组件-tabs-标签页--dynamic-items",
+        "label": "Dynamic Items"
+      },
+      {
+        "id": "基础组件-tabs-标签页--all-disabled",
+        "label": "All Disabled"
+      },
+      {
+        "id": "基础组件-tabs-标签页--controlled",
+        "label": "受控更新请求"
+      }
+    ]
+  },
+  {
+    "name": "MMenu",
+    "label": "导航菜单",
+    "category": "导航",
+    "description": "组织可折叠的多级导航，区分焦点与当前选中项。",
+    "keywords": [
+      "Menu",
+      "m-menu",
+      "导航与流程"
+    ],
+    "source": "src/components/MMenu.vue",
+    "storyId": "二级组件-menu-导航菜单--default",
+    "docsId": "二级组件-menu-导航菜单--文档",
+    "stories": [
+      {
+        "id": "二级组件-menu-导航菜单--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "二级组件-menu-导航菜单--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "二级组件-menu-导航菜单--long-labels",
+        "label": "长中文与窄屏"
+      },
+      {
+        "id": "二级组件-menu-导航菜单--empty",
+        "label": "Empty"
+      },
+      {
+        "id": "二级组件-menu-导航菜单--invalid-values",
+        "label": "无效模型与展开值"
+      },
+      {
+        "id": "二级组件-menu-导航菜单--controlled",
+        "label": "父级确认与路由接管"
+      },
+      {
+        "id": "二级组件-menu-导航菜单--dynamic",
+        "label": "数据更新与焦点归位"
+      }
+    ]
+  },
+  {
+    "name": "MDropdownMenu",
+    "label": "操作菜单",
+    "category": "导航",
+    "description": "把次要操作收进可用键盘控制的弹出菜单。",
+    "keywords": [
+      "DropdownMenu",
+      "m-dropdown-menu",
+      "导航与流程",
+      "Dropdown"
+    ],
+    "source": "src/components/MDropdownMenu.vue",
+    "storyId": "二级组件-dropdownmenu-操作菜单--default",
+    "docsId": "二级组件-dropdownmenu-操作菜单--文档",
+    "stories": [
+      {
+        "id": "二级组件-dropdownmenu-操作菜单--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "二级组件-dropdownmenu-操作菜单--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "二级组件-dropdownmenu-操作菜单--all-disabled",
+        "label": "全部禁用"
+      },
+      {
+        "id": "二级组件-dropdownmenu-操作菜单--empty",
+        "label": "空操作列表"
+      },
+      {
+        "id": "二级组件-dropdownmenu-操作菜单--long-content",
+        "label": "长清单与边缘避让"
+      },
+      {
+        "id": "二级组件-dropdownmenu-操作菜单--keyboard-search",
+        "label": "英文前缀定位"
+      },
+      {
+        "id": "二级组件-dropdownmenu-操作菜单--controlled",
+        "label": "拒绝请求与程序控制"
+      },
+      {
+        "id": "二级组件-dropdownmenu-操作菜单--unmount-cleanup",
+        "label": "卸载与重新挂载"
+      }
+    ]
+  },
+  {
+    "name": "MBreadcrumb",
+    "label": "面包屑",
+    "category": "导航",
+    "description": "展示页面所在的层级路径，并链接到上层页面。",
+    "keywords": [
+      "Breadcrumb",
+      "m-breadcrumb",
+      "导航与流程"
+    ],
+    "source": "src/components/MBreadcrumb.vue",
+    "storyId": "基础组件-breadcrumb-面包屑--default",
+    "docsId": "基础组件-breadcrumb-面包屑--文档",
+    "stories": [
+      {
+        "id": "基础组件-breadcrumb-面包屑--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-breadcrumb-面包屑--long-path",
+        "label": "Long Path"
+      }
+    ]
+  },
+  {
+    "name": "MPagination",
+    "label": "分页",
+    "category": "导航",
+    "description": "按记录总量和每页大小提供分页导航。",
+    "keywords": [
+      "Pagination",
+      "m-pagination",
+      "导航与流程"
+    ],
+    "source": "src/components/MPagination.vue",
+    "storyId": "基础组件-pagination-分页--default",
+    "docsId": "基础组件-pagination-分页--文档",
+    "stories": [
+      {
+        "id": "基础组件-pagination-分页--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-pagination-分页--middle",
+        "label": "Middle"
+      },
+      {
+        "id": "基础组件-pagination-分页--large-total",
+        "label": "极大总量"
+      },
+      {
+        "id": "基础组件-pagination-分页--empty",
+        "label": "Empty"
+      },
+      {
+        "id": "基础组件-pagination-分页--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "基础组件-pagination-分页--changing-total",
+        "label": "Changing Total"
+      }
+    ]
+  },
+  {
+    "name": "MSteps",
+    "label": "步骤条",
+    "category": "导航",
+    "description": "标明当前流程步骤以及完成、进行中和异常状态。",
+    "keywords": [
+      "Steps",
+      "m-steps",
+      "导航与流程"
+    ],
+    "source": "src/components/MSteps.vue",
+    "storyId": "二级组件-steps-步骤条--default",
+    "docsId": "二级组件-steps-步骤条--文档",
+    "stories": [
+      {
+        "id": "二级组件-steps-步骤条--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "二级组件-steps-步骤条--interactive",
+        "label": "可选择步骤"
+      },
+      {
+        "id": "二级组件-steps-步骤条--error",
+        "label": "当前步骤异常"
+      },
+      {
+        "id": "二级组件-steps-步骤条--success",
+        "label": "完成落印"
+      },
+      {
+        "id": "二级组件-steps-步骤条--vertical",
+        "label": "纵向流程"
+      },
+      {
+        "id": "二级组件-steps-步骤条--invalid-value",
+        "label": "不可用值兜底"
+      },
+      {
+        "id": "二级组件-steps-步骤条--controlled",
+        "label": "父级确认步骤"
+      }
+    ]
+  },
+  {
+    "name": "MAnchor",
+    "label": "锚点目录",
+    "category": "导航",
+    "description": "构建页内目录，滚动时标记当前章节。",
+    "keywords": [
+      "Anchor",
+      "m-anchor",
+      "锚点与吸附"
+    ],
+    "source": "src/components/reference-layout/MAnchor.vue",
+    "storyId": "导航组件-anchor-锚点目录--default",
+    "docsId": "导航组件-anchor-锚点目录--文档",
+    "stories": [
+      {
+        "id": "导航组件-anchor-锚点目录--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "导航组件-anchor-锚点目录--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MAffix",
+    "label": "固定",
+    "category": "导航",
+    "description": "将工具栏或目录固定在指定滚动范围内。",
+    "keywords": [
+      "Affix",
+      "m-affix",
+      "锚点与吸附"
+    ],
+    "source": "src/components/reference-layout/MAffix.vue",
+    "storyId": "导航组件-affix-固定--default",
+    "docsId": "导航组件-affix-固定--文档",
+    "stories": [
+      {
+        "id": "导航组件-affix-固定--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "导航组件-affix-固定--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MPageHeader",
+    "label": "页头",
+    "category": "导航",
+    "description": "组合页面标题、副标题、返回入口和操作区。",
+    "keywords": [
+      "PageHeader",
+      "m-page-header",
+      "页面头部",
+      "Page Header"
+    ],
+    "source": "src/components/reference-layout/MPageHeader.vue",
+    "storyId": "导航组件-pageheader-页头--default",
+    "docsId": "导航组件-pageheader-页头--文档",
+    "stories": [
+      {
+        "id": "导航组件-pageheader-页头--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "导航组件-pageheader-页头--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MBackTop",
+    "label": "返回顶部",
+    "category": "导航",
+    "description": "在长页或独立滚动容器中提供回顶操作。",
+    "keywords": [
+      "BackTop",
+      "m-back-top",
+      "返回顶部",
+      "FloatButton",
+      "Backtop"
+    ],
+    "source": "src/components/MBackTop.vue",
+    "storyId": "基础组件-backtop-返回顶部--window-default",
+    "docsId": "基础组件-backtop-返回顶部--文档",
+    "stories": [
+      {
+        "id": "基础组件-backtop-返回顶部--window-default",
+        "label": "Window Default"
+      },
+      {
+        "id": "基础组件-backtop-返回顶部--scroll-container",
+        "label": "Scroll Container"
+      },
+      {
+        "id": "基础组件-backtop-返回顶部--reduced-motion",
+        "label": "Reduced Motion"
+      },
+      {
+        "id": "基础组件-backtop-返回顶部--target-lifecycle",
+        "label": "Target Lifecycle"
+      }
+    ]
+  },
+  {
+    "name": "MFloatButton",
+    "label": "浮动按钮",
+    "category": "导航",
+    "description": "在内容旁提供固定的快捷操作或链接。",
+    "keywords": [
+      "FloatButton",
+      "m-float-button",
+      "返回顶部"
+    ],
+    "source": "src/components/reference-layout/MFloatButton.vue",
+    "storyId": "导航组件-floatbutton-浮动按钮--default",
+    "docsId": "导航组件-floatbutton-浮动按钮--文档",
+    "stories": [
+      {
+        "id": "导航组件-floatbutton-浮动按钮--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "导航组件-floatbutton-浮动按钮--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MFloatButtonGroup",
+    "label": "浮动操作组",
+    "category": "导航",
+    "description": "把多项浮动操作组合成可展开的快捷入口。",
+    "keywords": [
+      "FloatButtonGroup",
+      "m-float-button-group",
+      "返回顶部",
+      "FloatButton"
+    ],
+    "source": "src/components/reference-layout/MFloatButtonGroup.vue",
+    "storyId": "导航组件-floatbuttongroup-浮动操作组--default",
+    "docsId": "导航组件-floatbuttongroup-浮动操作组--文档",
+    "stories": [
+      {
+        "id": "导航组件-floatbuttongroup-浮动操作组--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "导航组件-floatbuttongroup-浮动操作组--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MTour",
+    "label": "漫游引导",
+    "category": "导航",
+    "description": "围绕实际界面目标逐步引导用户认识操作。",
+    "keywords": [
+      "Tour",
+      "m-tour",
+      "轮播、引导与内容标记"
+    ],
+    "source": "src/components/reference-layout/MTour.vue",
+    "storyId": "展示组件-tour-漫游引导--default",
+    "docsId": "展示组件-tour-漫游引导--文档",
+    "stories": [
+      {
+        "id": "展示组件-tour-漫游引导--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "展示组件-tour-漫游引导--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MDialog",
+    "label": "对话框",
+    "category": "反馈与浮层",
+    "description": "打开模态内容，管理键盘焦点、取消和关闭。",
+    "keywords": [
+      "Dialog",
+      "m-dialog",
+      "浮层与折叠",
+      "Modal"
+    ],
+    "source": "src/components/MDialog.vue",
+    "storyId": "基础组件-dialog-对话框--default",
+    "docsId": "基础组件-dialog-对话框--文档",
+    "stories": [
+      {
+        "id": "基础组件-dialog-对话框--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-dialog-对话框--backdrop-dismiss",
+        "label": "Backdrop Dismiss"
+      },
+      {
+        "id": "基础组件-dialog-对话框--escape-disabled",
+        "label": "Escape Disabled"
+      },
+      {
+        "id": "基础组件-dialog-对话框--long-content",
+        "label": "Long Content"
+      },
+      {
+        "id": "基础组件-dialog-对话框--nested",
+        "label": "Nested"
+      },
+      {
+        "id": "基础组件-dialog-对话框--unmount-cleanup",
+        "label": "Unmount Cleanup"
+      },
+      {
+        "id": "基础组件-dialog-对话框--native-form-close",
+        "label": "Native Form Close"
+      },
+      {
+        "id": "基础组件-dialog-对话框--rich-content",
+        "label": "Rich Content"
+      }
+    ]
+  },
+  {
+    "name": "MDrawer",
+    "label": "抽屉",
+    "category": "反馈与浮层",
+    "description": "从页面边缘展开详情或编辑流程，关闭后交还焦点。",
+    "keywords": [
+      "Drawer",
+      "m-drawer",
+      "浮层与折叠"
+    ],
+    "source": "src/components/MDrawer.vue",
+    "storyId": "二级组件-drawer-抽屉--default",
+    "docsId": "二级组件-drawer-抽屉--文档",
+    "stories": [
+      {
+        "id": "二级组件-drawer-抽屉--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "二级组件-drawer-抽屉--left",
+        "label": "左侧展开"
+      },
+      {
+        "id": "二级组件-drawer-抽屉--bottom",
+        "label": "底部展开"
+      },
+      {
+        "id": "二级组件-drawer-抽屉--reduced-motion",
+        "label": "静态展开"
+      },
+      {
+        "id": "二级组件-drawer-抽屉--long-content",
+        "label": "长卷与固定操作"
+      },
+      {
+        "id": "二级组件-drawer-抽屉--backdrop-dismiss",
+        "label": "遮罩关闭"
+      },
+      {
+        "id": "二级组件-drawer-抽屉--close-policy",
+        "label": "显式关闭"
+      },
+      {
+        "id": "二级组件-drawer-抽屉--nested-and-unmount",
+        "label": "嵌套与卸载清理"
+      }
+    ]
+  },
+  {
+    "name": "MPopover",
+    "label": "气泡",
+    "category": "反馈与浮层",
+    "description": "在触发元素旁展示可交互的浮层内容。",
+    "keywords": [
+      "Popover",
+      "m-popover",
+      "浮层与折叠"
+    ],
+    "source": "src/components/MPopover.vue",
+    "storyId": "基础组件-popover-气泡--default",
+    "docsId": "基础组件-popover-气泡--文档",
+    "stories": [
+      {
+        "id": "基础组件-popover-气泡--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-popover-气泡--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "基础组件-popover-气泡--edge-and-scroll",
+        "label": "视口边缘与滚动跟随"
+      },
+      {
+        "id": "基础组件-popover-气泡--controlled",
+        "label": "受控关闭请求"
+      },
+      {
+        "id": "基础组件-popover-气泡--in-dialog",
+        "label": "对话框中的气泡"
+      },
+      {
+        "id": "基础组件-popover-气泡--controlled-focus",
+        "label": "拒绝请求后的外部焦点"
+      }
+    ]
+  },
+  {
+    "name": "MTooltip",
+    "label": "提示",
+    "category": "反馈与浮层",
+    "description": "在指针悬停或键盘聚焦时补充简短提示。",
+    "keywords": [
+      "Tooltip",
+      "m-tooltip",
+      "浮层与折叠"
+    ],
+    "source": "src/components/MTooltip.vue",
+    "storyId": "基础组件-tooltip-提示--default",
+    "docsId": "基础组件-tooltip-提示--文档",
+    "stories": [
+      {
+        "id": "基础组件-tooltip-提示--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-tooltip-提示--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "基础组件-tooltip-提示--short-content",
+        "label": "短句铭牌"
+      },
+      {
+        "id": "基础组件-tooltip-提示--long-content",
+        "label": "长文字与边缘避让"
+      },
+      {
+        "id": "基础组件-tooltip-提示--placements",
+        "label": "四向定位"
+      },
+      {
+        "id": "基础组件-tooltip-提示--unmount-cleanup",
+        "label": "卸载与重新挂载"
+      }
+    ]
+  },
+  {
+    "name": "MPopconfirm",
+    "label": "气泡确认",
+    "category": "反馈与浮层",
+    "description": "在操作旁请求确认，可等待异步检查再提交。",
+    "keywords": [
+      "Popconfirm",
+      "m-popconfirm",
+      "轻量操作确认"
+    ],
+    "source": "src/components/MPopconfirm.vue",
+    "storyId": "反馈组件-popconfirm-气泡确认--default",
+    "docsId": "反馈组件-popconfirm-气泡确认--文档",
+    "stories": [
+      {
+        "id": "反馈组件-popconfirm-气泡确认--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "反馈组件-popconfirm-气泡确认--danger",
+        "label": "Danger"
+      },
+      {
+        "id": "反馈组件-popconfirm-气泡确认--async-confirmation",
+        "label": "Async Confirmation"
+      },
+      {
+        "id": "反馈组件-popconfirm-气泡确认--controlled",
+        "label": "Controlled"
+      },
+      {
+        "id": "反馈组件-popconfirm-气泡确认--edge-and-long-content",
+        "label": "Edge And Long Content"
+      },
+      {
+        "id": "反馈组件-popconfirm-气泡确认--reduced-motion",
+        "label": "Reduced Motion"
+      }
+    ]
+  },
+  {
+    "name": "MMessageBox",
+    "label": "消息框",
+    "category": "反馈与浮层",
+    "description": "用对话框呈现提醒、确认或带校验的输入请求。",
+    "keywords": [
+      "MessageBox",
+      "m-message-box",
+      "命令式确认与输入",
+      "Message Box"
+    ],
+    "source": "src/components/reference-common/MMessageBox.vue",
+    "storyId": "配置-app-应用上下文--default",
+    "stories": [
+      {
+        "id": "配置-app-应用上下文--default",
+        "label": "基础用法"
+      }
+    ]
+  },
+  {
+    "name": "MToast",
+    "label": "轻提示",
+    "category": "反馈与浮层",
+    "description": "展示单条通知，可在悬停或聚焦时暂停消失计时。",
+    "keywords": [
+      "Toast",
+      "m-toast",
+      "状态、加载与通知",
+      "Notification"
+    ],
+    "source": "src/components/MToast.vue",
+    "storyId": "基础组件-toast-轻提示--default",
+    "docsId": "基础组件-toast-轻提示--文档",
+    "stories": [
+      {
+        "id": "基础组件-toast-轻提示--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-toast-轻提示--persistent",
+        "label": "Persistent"
+      },
+      {
+        "id": "基础组件-toast-轻提示--variants",
+        "label": "Variants"
+      },
+      {
+        "id": "基础组件-toast-轻提示--pause",
+        "label": "Pause"
+      },
+      {
+        "id": "基础组件-toast-轻提示--replacement",
+        "label": "Replacement"
+      },
+      {
+        "id": "基础组件-toast-轻提示--controlled",
+        "label": "Controlled"
+      },
+      {
+        "id": "基础组件-toast-轻提示--multiple",
+        "label": "Multiple"
+      },
+      {
+        "id": "基础组件-toast-轻提示--unmount-cleanup",
+        "label": "Unmount Cleanup"
+      },
+      {
+        "id": "基础组件-toast-轻提示--long-content",
+        "label": "Long Content"
+      },
+      {
+        "id": "基础组件-toast-轻提示--top-center",
+        "label": "顶部居中"
+      },
+      {
+        "id": "基础组件-toast-轻提示--positions",
+        "label": "六个通知位置"
+      }
+    ]
+  },
+  {
+    "name": "MToastViewport",
+    "label": "通知容器",
+    "category": "反馈与浮层",
+    "description": "为一组通知提供统一摆放位置和主题范围。",
+    "keywords": [
+      "ToastViewport",
+      "m-toast-viewport",
+      "状态、加载与通知",
+      "Notification"
+    ],
+    "source": "src/components/MToastViewport.vue",
+    "storyId": "基础组件-toast-轻提示--positions",
+    "stories": [
+      {
+        "id": "基础组件-toast-轻提示--positions",
+        "label": "六个通知位置"
+      }
+    ]
+  },
+  {
+    "name": "MMessage",
+    "label": "全局提示",
+    "category": "反馈与浮层",
+    "description": "在页面顶部给出短反馈，可从加载切换到结果。",
+    "keywords": [
+      "Message",
+      "m-message",
+      "操作后轻提示"
+    ],
+    "source": "src/components/MMessage.vue",
+    "storyId": "反馈组件-message-全局提示--default",
+    "docsId": "反馈组件-message-全局提示--文档",
+    "stories": [
+      {
+        "id": "反馈组件-message-全局提示--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "反馈组件-message-全局提示--types",
+        "label": "五种反馈"
+      },
+      {
+        "id": "反馈组件-message-全局提示--loading",
+        "label": "等待与完成"
+      },
+      {
+        "id": "反馈组件-message-全局提示--long-content",
+        "label": "长文与关闭确认"
+      },
+      {
+        "id": "反馈组件-message-全局提示--reduced-motion",
+        "label": "减少动态效果"
+      }
+    ]
+  },
+  {
+    "name": "MAlert",
+    "label": "提示块",
+    "category": "反馈与浮层",
+    "description": "在内容流中持续显示信息、成功、警告或错误。",
+    "keywords": [
+      "Alert",
+      "m-alert",
+      "状态、加载与通知"
+    ],
+    "source": "src/components/MAlert.vue",
+    "storyId": "基础组件-alert-提示块--default",
+    "docsId": "基础组件-alert-提示块--文档",
+    "stories": [
+      {
+        "id": "基础组件-alert-提示块--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-alert-提示块--tones",
+        "label": "状态与补充操作"
+      },
+      {
+        "id": "基础组件-alert-提示块--dynamic-announcement",
+        "label": "动态错误播报"
+      }
+    ]
+  },
+  {
+    "name": "MResult",
+    "label": "结果面板",
+    "category": "反馈与浮层",
+    "description": "用页面级标题、状态图形和操作呈现流程结果。",
+    "keywords": [
+      "Result",
+      "m-result",
+      "数据与页面结果"
+    ],
+    "source": "src/components/MResult.vue",
+    "storyId": "二级组件-result-结果面板--default",
+    "docsId": "二级组件-result-结果面板--文档",
+    "stories": [
+      {
+        "id": "二级组件-result-结果面板--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "二级组件-result-结果面板--error",
+        "label": "Error"
+      },
+      {
+        "id": "二级组件-result-结果面板--warning",
+        "label": "Warning"
+      },
+      {
+        "id": "二级组件-result-结果面板--info",
+        "label": "Info"
+      },
+      {
+        "id": "二级组件-result-结果面板--with-actions",
+        "label": "原生动作与显式播报"
+      },
+      {
+        "id": "二级组件-result-结果面板--long-content",
+        "label": "长文与窄屏动作"
+      }
+    ]
+  },
+  {
+    "name": "MEmpty",
+    "label": "空状态",
+    "category": "反馈与浮层",
+    "description": "为暂无数据或搜索无结果提供说明和可选操作。",
+    "keywords": [
+      "Empty",
+      "m-empty",
+      "内容容器与标记"
+    ],
+    "source": "src/components/MEmpty.vue",
+    "storyId": "基础组件-empty-空状态--default",
+    "docsId": "基础组件-empty-空状态--文档",
+    "stories": [
+      {
+        "id": "基础组件-empty-空状态--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-empty-空状态--with-action",
+        "label": "清除筛选操作"
+      },
+      {
+        "id": "基础组件-empty-空状态--long-content",
+        "label": "长标题与说明"
+      }
+    ]
+  },
+  {
+    "name": "MSpinner",
+    "label": "加载标记",
+    "category": "反馈与浮层",
+    "description": "用机械墨刻形态表示等待中的任务。",
+    "keywords": [
+      "Spinner",
+      "m-spinner",
+      "状态、加载与通知",
+      "Spin"
+    ],
+    "source": "src/components/MSpinner.vue",
+    "storyId": "基础组件-spinner-加载标记--default",
+    "docsId": "基础组件-spinner-加载标记--文档",
+    "stories": [
+      {
+        "id": "基础组件-spinner-加载标记--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-spinner-加载标记--sizes",
+        "label": "三个尺寸"
+      },
+      {
+        "id": "基础组件-spinner-加载标记--mechanism-detail",
+        "label": "方印离合细节"
+      },
+      {
+        "id": "基础组件-spinner-加载标记--busy-region",
+        "label": "内容载入状态"
+      },
+      {
+        "id": "基础组件-spinner-加载标记--reduced-motion",
+        "label": "减少动态效果"
+      },
+      {
+        "id": "基础组件-spinner-加载标记--theme-pair",
+        "label": "明暗机械组合"
+      }
+    ]
+  },
+  {
+    "name": "MSkeleton",
+    "label": "骨架屏",
+    "category": "反馈与浮层",
+    "description": "在加载时按内容结构预留空间。",
+    "keywords": [
+      "Skeleton",
+      "m-skeleton",
+      "状态、加载与通知"
+    ],
+    "source": "src/components/MSkeleton.vue",
+    "storyId": "基础组件-skeleton-骨架屏--default",
+    "docsId": "基础组件-skeleton-骨架屏--文档",
+    "stories": [
+      {
+        "id": "基础组件-skeleton-骨架屏--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-skeleton-骨架屏--content-replacement",
+        "label": "内容替换"
+      },
+      {
+        "id": "基础组件-skeleton-骨架屏--reduced-motion",
+        "label": "静态占位"
+      },
+      {
+        "id": "基础组件-skeleton-骨架屏--compositions",
+        "label": "文本、媒体与卡片"
+      },
+      {
+        "id": "基础组件-skeleton-骨架屏--line-counts",
+        "label": "行数边界"
+      },
+      {
+        "id": "基础组件-skeleton-骨架屏--theme-pair",
+        "label": "明暗肌理"
+      }
+    ]
+  },
+  {
+    "name": "MLoading",
+    "label": "加载遮层",
+    "category": "反馈与浮层",
+    "description": "在指定区域或全屏显示等待遮层，支持延迟和取消操作。",
+    "keywords": [
+      "Loading",
+      "m-loading",
+      "状态、加载与通知"
+    ],
+    "source": "src/components/reference-common/MLoading.vue",
+    "storyId": "配置-app-应用上下文--loading",
+    "stories": [
+      {
+        "id": "配置-app-应用上下文--loading",
+        "label": "加载"
+      }
+    ]
+  },
+  {
+    "name": "MProgress",
+    "label": "进度条",
+    "category": "反馈与浮层",
+    "description": "展示任务进度或未知进度，并明确区分错误与完成。",
+    "keywords": [
+      "Progress",
+      "m-progress",
+      "状态、加载与通知"
+    ],
+    "source": "src/components/MProgress.vue",
+    "storyId": "二级组件-progress-进度条--default",
+    "docsId": "二级组件-progress-进度条--文档",
+    "stories": [
+      {
+        "id": "二级组件-progress-进度条--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "二级组件-progress-进度条--interactive",
+        "label": "Interactive"
+      },
+      {
+        "id": "二级组件-progress-进度条--indeterminate",
+        "label": "Indeterminate"
+      },
+      {
+        "id": "二级组件-progress-进度条--error",
+        "label": "Error"
+      },
+      {
+        "id": "二级组件-progress-进度条--complete",
+        "label": "Complete"
+      },
+      {
+        "id": "二级组件-progress-进度条--invalid-values",
+        "label": "Invalid Values"
+      },
+      {
+        "id": "二级组件-progress-进度条--reduced-motion",
+        "label": "Reduced Motion"
+      },
+      {
+        "id": "二级组件-progress-进度条--state-comparison",
+        "label": "State Comparison"
+      }
+    ]
+  },
+  {
+    "name": "MCard",
+    "label": "卡片",
+    "category": "数据展示",
+    "description": "用标题、内容和操作承载一组相关信息。",
+    "keywords": [
+      "Card",
+      "m-card",
+      "内容容器与标记"
+    ],
+    "source": "src/components/MCard.vue",
+    "storyId": "基础组件-card-卡片--default",
+    "docsId": "基础组件-card-卡片--文档",
+    "stories": [
+      {
+        "id": "基础组件-card-卡片--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-card-卡片--with-actions",
+        "label": "自定义标题与独立操作"
+      },
+      {
+        "id": "基础组件-card-卡片--content-only",
+        "label": "仅内容"
+      },
+      {
+        "id": "基础组件-card-卡片--empty-slots",
+        "label": "空插槽不占位"
+      },
+      {
+        "id": "基础组件-card-卡片--long-content",
+        "label": "长内容与标题层级"
+      }
+    ]
+  },
+  {
+    "name": "MTable",
+    "label": "表格",
+    "category": "数据展示",
+    "description": "按列展示结构化记录，支持自定义单元格和空态。",
+    "keywords": [
+      "Table",
+      "m-table",
+      "数据与页面结果"
+    ],
+    "source": "src/components/MTable.vue",
+    "storyId": "基础组件-table-表格--default",
+    "docsId": "基础组件-table-表格--文档",
+    "stories": [
+      {
+        "id": "基础组件-table-表格--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-table-表格--empty",
+        "label": "Empty"
+      },
+      {
+        "id": "基础组件-table-表格--loading",
+        "label": "加载"
+      },
+      {
+        "id": "基础组件-table-表格--no-columns",
+        "label": "No Columns"
+      },
+      {
+        "id": "基础组件-table-表格--long-cells",
+        "label": "Long Cells"
+      }
+    ]
+  },
+  {
+    "name": "MVirtualTable",
+    "label": "虚拟表格",
+    "category": "数据展示",
+    "description": "用虚拟滚动浏览大量表格行。",
+    "keywords": [
+      "VirtualTable",
+      "m-virtual-table",
+      "大数据与虚拟列表",
+      "Virtualized Table"
+    ],
+    "source": "src/components/reference-data/MVirtualTable.vue",
+    "storyId": "数据组件-virtualtable-虚拟表格--default",
+    "docsId": "数据组件-virtualtable-虚拟表格--文档",
+    "stories": [
+      {
+        "id": "数据组件-virtualtable-虚拟表格--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "数据组件-virtualtable-虚拟表格--empty",
+        "label": "Empty"
+      }
+    ]
+  },
+  {
+    "name": "MTree",
+    "label": "层级目录",
+    "category": "数据展示",
+    "description": "浏览多级目录，支持展开、选择与复选联动。",
+    "keywords": [
+      "Tree",
+      "m-tree",
+      "数据与页面结果"
+    ],
+    "source": "src/components/MTree.vue",
+    "storyId": "二级组件-tree-层级目录--default",
+    "docsId": "二级组件-tree-层级目录--文档",
+    "stories": [
+      {
+        "id": "二级组件-tree-层级目录--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "二级组件-tree-层级目录--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "二级组件-tree-层级目录--disabled-parent",
+        "label": "禁用父级与独立子级"
+      },
+      {
+        "id": "二级组件-tree-层级目录--long-labels",
+        "label": "长中文与窄屏"
+      },
+      {
+        "id": "二级组件-tree-层级目录--empty",
+        "label": "Empty"
+      },
+      {
+        "id": "二级组件-tree-层级目录--checkable",
+        "label": "父子联动与半选"
+      },
+      {
+        "id": "二级组件-tree-层级目录--strict-checks",
+        "label": "独立复选与禁用边界"
+      },
+      {
+        "id": "二级组件-tree-层级目录--multiple",
+        "label": "选择与复选分别受控"
+      },
+      {
+        "id": "二级组件-tree-层级目录--controlled-checks",
+        "label": "复选请求可拒绝与重试"
+      },
+      {
+        "id": "二级组件-tree-层级目录--controlled",
+        "label": "父级确认与无效值"
+      },
+      {
+        "id": "二级组件-tree-层级目录--dynamic",
+        "label": "重排删除与隐藏焦点"
+      }
+    ]
+  },
+  {
+    "name": "MVirtualTree",
+    "label": "虚拟树",
+    "category": "数据展示",
+    "description": "在长层级树中按可视范围渲染节点。",
+    "keywords": [
+      "VirtualTree",
+      "m-virtual-tree",
+      "大数据与虚拟列表",
+      "Virtualized Tree"
+    ],
+    "source": "src/components/reference-data/MVirtualTree.vue",
+    "storyId": "数据组件-virtualtree-虚拟树--default",
+    "docsId": "数据组件-virtualtree-虚拟树--文档",
+    "stories": [
+      {
+        "id": "数据组件-virtualtree-虚拟树--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "数据组件-virtualtree-虚拟树--empty",
+        "label": "Empty"
+      }
+    ]
+  },
+  {
+    "name": "MList",
+    "label": "清单",
+    "category": "数据展示",
+    "description": "以插槽定制每项内容，适合普通记录清单。",
+    "keywords": [
+      "List",
+      "m-list",
+      "大数据与虚拟列表"
+    ],
+    "source": "src/components/reference-data/MList.vue",
+    "storyId": "数据组件-list-清单--default",
+    "docsId": "数据组件-list-清单--文档",
+    "stories": [
+      {
+        "id": "数据组件-list-清单--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "数据组件-list-清单--empty-and-loading",
+        "label": "Empty And Loading"
+      }
+    ]
+  },
+  {
+    "name": "MListy",
+    "label": "编号清单",
+    "category": "数据展示",
+    "description": "以编号或原有索引展示清单，支持长列表。",
+    "keywords": [
+      "Listy",
+      "m-listy",
+      "大数据与虚拟列表"
+    ],
+    "source": "src/components/reference-data/MListy.vue",
+    "storyId": "数据组件-listy-编号清单--default",
+    "docsId": "数据组件-listy-编号清单--文档",
+    "stories": [
+      {
+        "id": "数据组件-listy-编号清单--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "数据组件-listy-编号清单--read-only",
+        "label": "Read Only"
+      }
+    ]
+  },
+  {
+    "name": "MVirtualList",
+    "label": "虚拟清单",
+    "category": "数据展示",
+    "description": "在固定或可测高度的视口中渲染长清单。",
+    "keywords": [
+      "VirtualList",
+      "m-virtual-list",
+      "大数据与虚拟列表",
+      "Listy"
+    ],
+    "source": "src/components/reference-data/MVirtualList.vue",
+    "storyId": "数据组件-virtuallist-虚拟清单--default",
+    "docsId": "数据组件-virtuallist-虚拟清单--文档",
+    "stories": [
+      {
+        "id": "数据组件-virtuallist-虚拟清单--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "数据组件-virtuallist-虚拟清单--focus-and-empty",
+        "label": "Focus And Empty"
+      },
+      {
+        "id": "数据组件-virtuallist-虚拟清单--reduced-motion",
+        "label": "Reduced Motion"
+      }
+    ]
+  },
+  {
+    "name": "MInfiniteScroll",
+    "label": "连续加载",
+    "category": "数据展示",
+    "description": "靠近列表末尾时请求下一批记录，并展示加载状态。",
+    "keywords": [
+      "InfiniteScroll",
+      "m-infinite-scroll",
+      "大数据与虚拟列表",
+      "Infinite Scroll"
+    ],
+    "source": "src/components/reference-data/MInfiniteScroll.vue",
+    "storyId": "数据组件-infinitescroll-连续加载--default",
+    "docsId": "数据组件-infinitescroll-连续加载--文档",
+    "stories": [
+      {
+        "id": "数据组件-infinitescroll-连续加载--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "数据组件-infinitescroll-连续加载--finished",
+        "label": "Finished"
+      }
+    ]
+  },
+  {
+    "name": "MDescriptions",
+    "label": "资料描述",
+    "category": "数据展示",
+    "description": "以名称和值对展示档案详情和只读资料。",
+    "keywords": [
+      "Descriptions",
+      "m-descriptions",
+      "数据与页面结果"
+    ],
+    "source": "src/components/MDescriptions.vue",
+    "storyId": "二级组件-descriptions-资料描述--default",
+    "docsId": "二级组件-descriptions-资料描述--文档",
+    "stories": [
+      {
+        "id": "二级组件-descriptions-资料描述--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "二级组件-descriptions-资料描述--with-slots",
+        "label": "With Slots"
+      },
+      {
+        "id": "二级组件-descriptions-资料描述--one-column",
+        "label": "One Column"
+      },
+      {
+        "id": "二级组件-descriptions-资料描述--three-columns",
+        "label": "Three Columns"
+      },
+      {
+        "id": "二级组件-descriptions-资料描述--empty",
+        "label": "Empty"
+      },
+      {
+        "id": "二级组件-descriptions-资料描述--long-content",
+        "label": "Long Content"
+      }
+    ]
+  },
+  {
+    "name": "MStatistic",
+    "label": "指标",
+    "category": "数据展示",
+    "description": "用醒目的值和单位展示指标，支持前后缀和占位。",
+    "keywords": [
+      "Statistic",
+      "m-statistic",
+      "数据与页面结果"
+    ],
+    "source": "src/components/MStatistic.vue",
+    "storyId": "基础组件-statistic-指标--default",
+    "docsId": "基础组件-statistic-指标--文档",
+    "stories": [
+      {
+        "id": "基础组件-statistic-指标--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-statistic-指标--formatted-values",
+        "label": "前后缀与单位"
+      },
+      {
+        "id": "基础组件-statistic-指标--placeholder",
+        "label": "占位与零值"
+      },
+      {
+        "id": "基础组件-statistic-指标--tones",
+        "label": "指标语义"
+      },
+      {
+        "id": "基础组件-statistic-指标--long-content",
+        "label": "长名称与长读数"
+      },
+      {
+        "id": "基础组件-statistic-指标--snapshot-change",
+        "label": "外部快照更新"
+      }
+    ]
+  },
+  {
+    "name": "MTimeline",
+    "label": "时间线",
+    "category": "数据展示",
+    "description": "按时间或执行顺序展示事件及状态。",
+    "keywords": [
+      "Timeline",
+      "m-timeline",
+      "日期区间、时间与日历"
+    ],
+    "source": "src/components/MTimeline.vue",
+    "storyId": "二级组件-timeline-时间线--default",
+    "docsId": "二级组件-timeline-时间线--文档",
+    "stories": [
+      {
+        "id": "二级组件-timeline-时间线--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "二级组件-timeline-时间线--error",
+        "label": "Error"
+      },
+      {
+        "id": "二级组件-timeline-时间线--empty",
+        "label": "Empty"
+      },
+      {
+        "id": "二级组件-timeline-时间线--with-action",
+        "label": "With Action"
+      },
+      {
+        "id": "二级组件-timeline-时间线--long-content",
+        "label": "Long Content"
+      }
+    ]
+  },
+  {
+    "name": "MTag",
+    "label": "标签",
+    "category": "数据展示",
+    "description": "标记分类、属性或已选条件，可提供移除操作。",
+    "keywords": [
+      "Tag",
+      "m-tag",
+      "内容容器与标记"
+    ],
+    "source": "src/components/MTag.vue",
+    "storyId": "基础组件-tag-标签--default",
+    "docsId": "基础组件-tag-标签--文档",
+    "stories": [
+      {
+        "id": "基础组件-tag-标签--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-tag-标签--tones",
+        "label": "Tones"
+      },
+      {
+        "id": "基础组件-tag-标签--closable",
+        "label": "Closable"
+      },
+      {
+        "id": "基础组件-tag-标签--disabled",
+        "label": "禁用"
+      },
+      {
+        "id": "基础组件-tag-标签--long-content",
+        "label": "Long Content"
+      }
+    ]
+  },
+  {
+    "name": "MBadge",
+    "label": "状态标记",
+    "category": "数据展示",
+    "description": "为对象添加带语义色的短状态标记。",
+    "keywords": [
+      "Badge",
+      "m-badge",
+      "内容容器与标记"
+    ],
+    "source": "src/components/MBadge.vue",
+    "storyId": "基础组件-badge-状态标记--default",
+    "docsId": "基础组件-badge-状态标记--文档",
+    "stories": [
+      {
+        "id": "基础组件-badge-状态标记--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-badge-状态标记--tones",
+        "label": "常用状态"
+      },
+      {
+        "id": "基础组件-badge-状态标记--long-content",
+        "label": "长文字自然换行"
+      }
+    ]
+  },
+  {
+    "name": "MAvatar",
+    "label": "头像",
+    "category": "数据展示",
+    "description": "展示用户图像、姓名缩写或缺省头像。",
+    "keywords": [
+      "Avatar",
+      "m-avatar",
+      "内容容器与标记"
+    ],
+    "source": "src/components/MAvatar.vue",
+    "storyId": "基础组件-avatar-头像--default",
+    "docsId": "基础组件-avatar-头像--文档",
+    "stories": [
+      {
+        "id": "基础组件-avatar-头像--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-avatar-头像--sizes",
+        "label": "Sizes"
+      },
+      {
+        "id": "基础组件-avatar-头像--image",
+        "label": "Image"
+      },
+      {
+        "id": "基础组件-avatar-头像--error-fallback",
+        "label": "Error Fallback"
+      },
+      {
+        "id": "基础组件-avatar-头像--source-change",
+        "label": "Source Change"
+      },
+      {
+        "id": "基础组件-avatar-头像--decorative",
+        "label": "Decorative"
+      }
+    ]
+  },
+  {
+    "name": "MImage",
+    "label": "图片",
+    "category": "数据展示",
+    "description": "展示图片和加载回退，并提供可操作的预览。",
+    "keywords": [
+      "Image",
+      "m-image",
+      "图片与大图预览"
+    ],
+    "source": "src/components/MImage.vue",
+    "storyId": "基础组件-image-图片--default",
+    "docsId": "基础组件-image-图片--文档",
+    "stories": [
+      {
+        "id": "基础组件-image-图片--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-image-图片--fits",
+        "label": "五种适配"
+      },
+      {
+        "id": "基础组件-image-图片--source-change",
+        "label": "失败重试与换源"
+      },
+      {
+        "id": "基础组件-image-图片--gallery",
+        "label": "机关图志画廊"
+      },
+      {
+        "id": "基础组件-image-图片--long-alt",
+        "label": "长说明与窄屏"
+      },
+      {
+        "id": "基础组件-image-图片--reduced-motion",
+        "label": "减少动态效果"
+      }
+    ]
+  },
+  {
+    "name": "MQRCode",
+    "label": "二维码",
+    "category": "数据展示",
+    "description": "把文字或链接编码成可扫的墨刻二维码，支持导出。",
+    "keywords": [
+      "QRCode",
+      "m-qrcode",
+      "轮播、引导与内容标记"
+    ],
+    "source": "src/components/reference-common/MQRCode.vue",
+    "storyId": "数据展示-qrcode-二维码--default",
+    "docsId": "数据展示-qrcode-二维码--文档",
+    "stories": [
+      {
+        "id": "数据展示-qrcode-二维码--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "数据展示-qrcode-二维码--editor",
+        "label": "Editor"
+      },
+      {
+        "id": "数据展示-qrcode-二维码--states",
+        "label": "States"
+      },
+      {
+        "id": "数据展示-qrcode-二维码--canvas",
+        "label": "Canvas"
+      },
+      {
+        "id": "数据展示-qrcode-二维码--invalid",
+        "label": "Invalid"
+      },
+      {
+        "id": "数据展示-qrcode-二维码--materials",
+        "label": "四种材质"
+      },
+      {
+        "id": "数据展示-qrcode-二维码--compact",
+        "label": "微型码印与净码"
+      },
+      {
+        "id": "数据展示-qrcode-二维码--icon-export",
+        "label": "中心印记与导出"
+      },
+      {
+        "id": "数据展示-qrcode-二维码--ink-samples",
+        "label": "净码造型与纠错级别"
+      },
+      {
+        "id": "数据展示-qrcode-二维码--dense-code",
+        "label": "长文本与整格码面"
+      }
+    ]
+  },
+  {
+    "name": "MCarousel",
+    "label": "走马灯",
+    "category": "数据展示",
+    "description": "在同一展示区域轮换图片或内容面板。",
+    "keywords": [
+      "Carousel",
+      "m-carousel",
+      "轮播、引导与内容标记"
+    ],
+    "source": "src/components/reference-layout/MCarousel.vue",
+    "storyId": "展示组件-carousel-走马灯--default",
+    "docsId": "展示组件-carousel-走马灯--文档",
+    "stories": [
+      {
+        "id": "展示组件-carousel-走马灯--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "展示组件-carousel-走马灯--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MSpace",
+    "label": "间距",
+    "category": "布局与呈现",
+    "description": "以统一间距排列控件，可换行或插入分隔。",
+    "keywords": [
+      "Space",
+      "m-space",
+      "组件间距"
+    ],
+    "source": "src/components/MSpace.vue",
+    "storyId": "基础组件-space-间距--default",
+    "docsId": "基础组件-space-间距--文档",
+    "stories": [
+      {
+        "id": "基础组件-space-间距--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "基础组件-space-间距--vertical",
+        "label": "Vertical"
+      },
+      {
+        "id": "基础组件-space-间距--gap-and-alignment",
+        "label": "Gap And Alignment"
+      },
+      {
+        "id": "基础组件-space-间距--wrapping",
+        "label": "Wrapping"
+      }
+    ]
+  },
+  {
+    "name": "MGrid",
+    "label": "栅格",
+    "category": "布局与呈现",
+    "description": "按响应式列数和间距排列页面内容。",
+    "keywords": [
+      "Grid",
+      "m-grid",
+      "栅格、页面布局与分栏",
+      "Layout"
+    ],
+    "source": "src/components/reference-layout/MGrid.vue",
+    "storyId": "布局组件-grid-栅格--default",
+    "docsId": "布局组件-grid-栅格--文档",
+    "stories": [
+      {
+        "id": "布局组件-grid-栅格--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "布局组件-grid-栅格--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MGridItem",
+    "label": "栅格项",
+    "category": "布局与呈现",
+    "description": "设置内容占用的网格列数和偏移。",
+    "keywords": [
+      "GridItem",
+      "m-grid-item",
+      "栅格、页面布局与分栏",
+      "Grid",
+      "Layout"
+    ],
+    "source": "src/components/reference-layout/MGridItem.vue",
+    "storyId": "布局组件-griditem-栅格项--default",
+    "docsId": "布局组件-griditem-栅格项--文档",
+    "stories": [
+      {
+        "id": "布局组件-griditem-栅格项--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "布局组件-griditem-栅格项--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MFlex",
+    "label": "弹性布局",
+    "category": "布局与呈现",
+    "description": "沿横向或纵向排列子项，并控制对齐、间距和换行。",
+    "keywords": [
+      "Flex",
+      "m-flex",
+      "栅格、页面布局与分栏"
+    ],
+    "source": "src/components/reference-layout/MFlex.vue",
+    "storyId": "布局组件-flex-弹性布局--default",
+    "docsId": "布局组件-flex-弹性布局--文档",
+    "stories": [
+      {
+        "id": "布局组件-flex-弹性布局--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "布局组件-flex-弹性布局--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MLayout",
+    "label": "页面布局",
+    "category": "布局与呈现",
+    "description": "用头部、侧栏、正文和底部组织页面。",
+    "keywords": [
+      "Layout",
+      "m-layout",
+      "栅格、页面布局与分栏",
+      "Layout Container"
+    ],
+    "source": "src/components/reference-layout/MLayout.vue",
+    "storyId": "布局组件-layout-页面布局--default",
+    "docsId": "布局组件-layout-页面布局--文档",
+    "stories": [
+      {
+        "id": "布局组件-layout-页面布局--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "布局组件-layout-页面布局--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MSplitter",
+    "label": "分隔面板",
+    "category": "布局与呈现",
+    "description": "让用户拖动或用键盘调节相邻面板的尺寸。",
+    "keywords": [
+      "Splitter",
+      "m-splitter",
+      "栅格、页面布局与分栏"
+    ],
+    "source": "src/components/reference-layout/MSplitter.vue",
+    "storyId": "布局组件-splitter-分隔面板--default",
+    "docsId": "布局组件-splitter-分隔面板--文档",
+    "stories": [
+      {
+        "id": "布局组件-splitter-分隔面板--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "布局组件-splitter-分隔面板--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MMasonry",
+    "label": "瀑布流",
+    "category": "布局与呈现",
+    "description": "按列承载高度不同的卡片，可随屏宽调整列数。",
+    "keywords": [
+      "Masonry",
+      "m-masonry",
+      "栅格、页面布局与分栏"
+    ],
+    "source": "src/components/reference-layout/MMasonry.vue",
+    "storyId": "布局组件-masonry-瀑布流--default",
+    "docsId": "布局组件-masonry-瀑布流--文档",
+    "stories": [
+      {
+        "id": "布局组件-masonry-瀑布流--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "布局组件-masonry-瀑布流--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MAccordion",
+    "label": "折叠面板",
+    "category": "布局与呈现",
+    "description": "按需展开分组内容，适合说明、问题或设置项。",
+    "keywords": [
+      "Accordion",
+      "m-accordion",
+      "浮层与折叠",
+      "Collapse"
+    ],
+    "source": "src/components/MAccordion.vue",
+    "storyId": "二级组件-accordion-折叠面板--default",
+    "docsId": "二级组件-accordion-折叠面板--文档",
+    "stories": [
+      {
+        "id": "二级组件-accordion-折叠面板--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "二级组件-accordion-折叠面板--multiple",
+        "label": "多项展开"
+      },
+      {
+        "id": "二级组件-accordion-折叠面板--invalid-values",
+        "label": "无效值与单项兜底"
+      },
+      {
+        "id": "二级组件-accordion-折叠面板--controlled",
+        "label": "父级确认开合"
+      },
+      {
+        "id": "二级组件-accordion-折叠面板--long-labels",
+        "label": "长标题与窄屏"
+      },
+      {
+        "id": "二级组件-accordion-折叠面板--empty",
+        "label": "空目录"
+      }
+    ]
+  },
+  {
+    "name": "MScrollbar",
+    "label": "滚动条",
+    "category": "布局与呈现",
+    "description": "为独立滚动区域提供与主题一致的滚动条。",
+    "keywords": [
+      "Scrollbar",
+      "m-scrollbar",
+      "滚动条容器"
+    ],
+    "source": "src/components/reference-data/MScrollbar.vue",
+    "storyId": "数据组件-scrollbar-滚动条--default",
+    "docsId": "数据组件-scrollbar-滚动条--文档",
+    "stories": [
+      {
+        "id": "数据组件-scrollbar-滚动条--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "数据组件-scrollbar-滚动条--max-height",
+        "label": "Max Height"
+      },
+      {
+        "id": "数据组件-scrollbar-滚动条--reduced-motion",
+        "label": "Reduced Motion"
+      },
+      {
+        "id": "数据组件-scrollbar-滚动条--dynamic-content",
+        "label": "Dynamic Content"
+      }
+    ]
+  },
+  {
+    "name": "MWatermark",
+    "label": "水印",
+    "category": "布局与呈现",
+    "description": "在内容区域重复铺设文字或图片水印。",
+    "keywords": [
+      "Watermark",
+      "m-watermark",
+      "轮播、引导与内容标记"
+    ],
+    "source": "src/components/reference-layout/MWatermark.vue",
+    "storyId": "展示组件-watermark-水印--default",
+    "docsId": "展示组件-watermark-水印--文档",
+    "stories": [
+      {
+        "id": "展示组件-watermark-水印--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "展示组件-watermark-水印--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MBorderBeam",
+    "label": "边框流光",
+    "category": "布局与呈现",
+    "description": "用沿边框移动的光迹强调当前展示区域。",
+    "keywords": [
+      "BorderBeam",
+      "m-border-beam",
+      "装饰流光边框"
+    ],
+    "source": "src/components/reference-layout/MBorderBeam.vue",
+    "storyId": "展示组件-borderbeam-边框流光--default",
+    "docsId": "展示组件-borderbeam-边框流光--文档",
+    "stories": [
+      {
+        "id": "展示组件-borderbeam-边框流光--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "展示组件-borderbeam-边框流光--boundary",
+        "label": "边界状态"
+      }
+    ]
+  },
+  {
+    "name": "MConfigProvider",
+    "label": "配置提供器",
+    "category": "应用配置",
+    "description": "为子树集中配置主题、配色、密度、动效、语言和方向。",
+    "keywords": [
+      "ConfigProvider",
+      "m-config-provider",
+      "全局配置与国际化",
+      "Config Provider"
+    ],
+    "source": "src/components/reference-common/MConfigProvider.vue",
+    "storyId": "配置-app-应用上下文--scoped",
+    "stories": [
+      {
+        "id": "配置-app-应用上下文--scoped",
+        "label": "局部配置"
+      }
+    ]
+  },
+  {
+    "name": "MApp",
+    "label": "应用上下文",
+    "category": "应用配置",
+    "description": "在独立应用范围内统一管理消息、通知和消息框。",
+    "keywords": [
+      "App",
+      "m-app",
+      "操作后轻提示",
+      "状态、加载与通知",
+      "全局配置与国际化",
+      "Message",
+      "Notification"
+    ],
+    "source": "src/components/reference-common/MApp.vue",
+    "storyId": "配置-app-应用上下文--default",
+    "docsId": "配置-app-应用上下文--文档",
+    "stories": [
+      {
+        "id": "配置-app-应用上下文--default",
+        "label": "基础用法"
+      },
+      {
+        "id": "配置-app-应用上下文--scoped",
+        "label": "局部配置"
+      },
+      {
+        "id": "配置-app-应用上下文--loading",
+        "label": "加载"
+      }
+    ]
+  }
+]

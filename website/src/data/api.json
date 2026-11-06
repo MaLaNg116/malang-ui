@@ -1,0 +1,5485 @@
+{
+  "MButton": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "MButtonVariant",
+        "required": false,
+        "defaultValue": "'primary'",
+        "description": "操作强调层级",
+        "expandedType": "'primary' | 'secondary' | 'ghost'"
+      },
+      {
+        "name": "size",
+        "type": "MControlSize",
+        "required": false,
+        "defaultValue": "'md'",
+        "description": "控件尺寸",
+        "expandedType": "'sm' | 'md' | 'lg'"
+      },
+      {
+        "name": "type",
+        "type": "ButtonHTMLAttributes['type']",
+        "required": false,
+        "defaultValue": "'button'",
+        "description": "原生按钮类型"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false",
+        "description": "禁用按钮"
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false",
+        "description": "显示加载标记并阻止重复点击"
+      }
+    ],
+    "events": [
+      {
+        "name": "click",
+        "type": "[event: MouseEvent]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MIcon": {
+    "props": [
+      {
+        "name": "name",
+        "type": "MIconName",
+        "required": false
+      },
+      {
+        "name": "size",
+        "type": "string | number",
+        "required": false
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "spin",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MTypography": {
+    "props": [
+      {
+        "name": "as",
+        "type": "'p' | 'span' | 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'",
+        "required": false,
+        "defaultValue": "'p'"
+      },
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "type",
+        "type": "'default' | 'secondary' | 'success' | 'warning' | 'danger'",
+        "required": false,
+        "defaultValue": "'default'"
+      },
+      {
+        "name": "strong",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "italic",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "underline",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "deleted",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "code",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "mark",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "ellipsis",
+        "type": "boolean | number",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "expandable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "copyable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "editable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string]"
+      },
+      {
+        "name": "copy",
+        "type": "[value: string]"
+      },
+      {
+        "name": "error",
+        "type": "[error: unknown]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MText": {
+    "props": [
+      {
+        "name": "as",
+        "type": "'p' | 'span' | 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'",
+        "required": false,
+        "defaultValue": "'span'"
+      },
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "type",
+        "type": "'default' | 'secondary' | 'success' | 'warning' | 'danger'",
+        "required": false
+      },
+      {
+        "name": "strong",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "italic",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "underline",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "deleted",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "code",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "mark",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "ellipsis",
+        "type": "boolean | number",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "expandable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "copyable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "editable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string]"
+      },
+      {
+        "name": "copy",
+        "type": "[value: string]"
+      },
+      {
+        "name": "error",
+        "type": "[error: unknown]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MLink": {
+    "props": [
+      {
+        "name": "href",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "underline",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "type",
+        "type": "'default' | 'primary' | 'success' | 'warning' | 'danger'",
+        "required": false,
+        "defaultValue": "'primary'"
+      }
+    ],
+    "events": [
+      {
+        "name": "click",
+        "type": "[event: MouseEvent]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MDivider": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [],
+    "slots": []
+  },
+  "MInput": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": false,
+        "defaultValue": "''",
+        "description": "输入框的受控文本"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false,
+        "description": "原生输入框 ID"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "description": "可见字段标签"
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false,
+        "description": "补充说明"
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false,
+        "description": "错误说明并标记输入无效"
+      },
+      {
+        "name": "type",
+        "type": "InputTypeHTMLAttribute",
+        "required": false,
+        "defaultValue": "'text'",
+        "description": "原生输入类型"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false",
+        "description": "禁用输入"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string]"
+      }
+    ],
+    "slots": []
+  },
+  "MTextarea": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "rows",
+        "type": "number",
+        "required": false,
+        "defaultValue": "4"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string]"
+      }
+    ],
+    "slots": []
+  },
+  "MInputNumber": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "number | null",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "min",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "step",
+        "type": "number",
+        "required": false,
+        "defaultValue": "1"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: number | null]"
+      }
+    ],
+    "slots": []
+  },
+  "MSlider": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "number",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "min",
+        "type": "number",
+        "required": false,
+        "defaultValue": "0"
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "defaultValue": "100"
+      },
+      {
+        "name": "step",
+        "type": "number",
+        "required": false,
+        "defaultValue": "1"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "showValue",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: number]"
+      }
+    ],
+    "slots": []
+  },
+  "MSelect": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "selectedValues",
+        "type": "readonly string[]",
+        "required": false
+      },
+      {
+        "name": "options",
+        "type": "readonly MChoiceOption[]",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string]"
+      },
+      {
+        "name": "update:selectedValues",
+        "type": "[values: string[]]"
+      }
+    ],
+    "slots": []
+  },
+  "MCombobox": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "options",
+        "type": "readonly MChoiceOption[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "clearable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string]"
+      }
+    ],
+    "slots": []
+  },
+  "MAutoComplete": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "options",
+        "type": "readonly MChoiceOption[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "clearable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "filter",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true",
+        "description": "Disable local matching when options are already filtered by the application."
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string]"
+      },
+      {
+        "name": "search",
+        "type": "[value: string]"
+      },
+      {
+        "name": "select",
+        "type": "[option: MChoiceOption]"
+      }
+    ],
+    "slots": []
+  },
+  "MVirtualSelect": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "MVirtualSelectValue<Multiple>",
+        "required": true
+      },
+      {
+        "name": "options",
+        "type": "readonly MChoiceOption[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "multiple",
+        "type": "Multiple & boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "required": false,
+        "defaultValue": "264"
+      },
+      {
+        "name": "itemHeight",
+        "type": "number",
+        "required": false,
+        "defaultValue": "44"
+      },
+      {
+        "name": "overscan",
+        "type": "number",
+        "required": false,
+        "defaultValue": "4"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: MVirtualSelectValue<Multiple>]"
+      }
+    ],
+    "slots": []
+  },
+  "MCheckbox": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "boolean",
+        "required": true
+      },
+      {
+        "name": "indeterminate",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: boolean]"
+      }
+    ],
+    "slots": []
+  },
+  "MCheckboxGroup": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "readonly string[]",
+        "required": true
+      },
+      {
+        "name": "options",
+        "type": "readonly MChoiceOption[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "min",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string[]]"
+      }
+    ],
+    "slots": []
+  },
+  "MRadio": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string]"
+      }
+    ],
+    "slots": []
+  },
+  "MRadioGroup": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "options",
+        "type": "readonly MChoiceOption[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string]"
+      }
+    ],
+    "slots": []
+  },
+  "MSwitch": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: boolean]"
+      }
+    ],
+    "slots": []
+  },
+  "MSegmented": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "options",
+        "type": "readonly MChoiceOption[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "size",
+        "type": "MControlSize",
+        "required": false,
+        "defaultValue": "'md'",
+        "expandedType": "'sm' | 'md' | 'lg'"
+      },
+      {
+        "name": "block",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "orientation",
+        "type": "'horizontal' | 'vertical'",
+        "required": false,
+        "defaultValue": "'horizontal'"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string]"
+      }
+    ],
+    "slots": []
+  },
+  "MCascader": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "readonly string[]",
+        "required": true
+      },
+      {
+        "name": "options",
+        "type": "readonly MReferenceTreeOption[]",
+        "required": true
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "checkedPaths",
+        "type": "readonly (readonly string[])[]",
+        "required": false,
+        "defaultValue": "[]"
+      },
+      {
+        "name": "checkStrictly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "filterable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value:string[]]"
+      },
+      {
+        "name": "update:checkedPaths",
+        "type": "[paths:string[][]]"
+      }
+    ],
+    "slots": []
+  },
+  "MTreeSelect": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string | readonly string[] | null",
+        "required": true
+      },
+      {
+        "name": "options",
+        "type": "readonly MReferenceTreeOption[]",
+        "required": true
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "checkStrictly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "filterable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value:string|string[]|null]"
+      }
+    ],
+    "slots": []
+  },
+  "MColorPicker": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "alpha",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "presets",
+        "type": "readonly string[]",
+        "required": false
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value:string]"
+      }
+    ],
+    "slots": []
+  },
+  "MColorPickerPanel": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "alpha",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "presets",
+        "type": "readonly string[]",
+        "required": false,
+        "defaultValue": "['#B32620','#3D6769','#28634E','#825713','#FFFFFF','#000000']"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value:string]"
+      }
+    ],
+    "slots": []
+  },
+  "MRate": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "number",
+        "required": true
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "defaultValue": "5"
+      },
+      {
+        "name": "step",
+        "type": "1 | 0.5",
+        "required": false,
+        "defaultValue": "1"
+      },
+      {
+        "name": "clearable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "texts",
+        "type": "readonly string[]",
+        "required": false
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value:number]"
+      }
+    ],
+    "slots": []
+  },
+  "MTransfer": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "readonly string[]",
+        "required": true
+      },
+      {
+        "name": "options",
+        "type": "readonly MTransferOption[]",
+        "required": true
+      },
+      {
+        "name": "titles",
+        "type": "readonly [string, string]",
+        "required": false
+      },
+      {
+        "name": "filterable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string[]]"
+      },
+      {
+        "name": "change",
+        "type": "[value: string[], direction: 'left' | 'right', moved: string[]]"
+      }
+    ],
+    "slots": []
+  },
+  "MInputOTP": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "length",
+        "type": "number",
+        "required": false,
+        "defaultValue": "6"
+      },
+      {
+        "name": "type",
+        "type": "'numeric' | 'text'",
+        "required": false,
+        "defaultValue": "'numeric'"
+      },
+      {
+        "name": "masked",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value:string]"
+      },
+      {
+        "name": "complete",
+        "type": "[value:string]"
+      }
+    ],
+    "slots": []
+  },
+  "MInputTag": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "readonly string[]",
+        "required": true
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "defaultValue": "Infinity"
+      },
+      {
+        "name": "allowDuplicates",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "separator",
+        "type": "string",
+        "required": false,
+        "defaultValue": "','"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string[]]"
+      }
+    ],
+    "slots": []
+  },
+  "MMention": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "options",
+        "type": "readonly MMentionOption[]",
+        "required": true
+      },
+      {
+        "name": "prefixes",
+        "type": "readonly string[]",
+        "required": false,
+        "defaultValue": "['@']"
+      },
+      {
+        "name": "rows",
+        "type": "number",
+        "required": false,
+        "defaultValue": "3"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value:string]"
+      },
+      {
+        "name": "select",
+        "type": "[option:MMentionOption,prefix:string]"
+      }
+    ],
+    "slots": []
+  },
+  "MUpload": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "readonly File[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "accept",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "maxCount",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "maxSize",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "action",
+        "type": "string | ((file: File) => string | Promise<string>)",
+        "required": false
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "method",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'POST'"
+      },
+      {
+        "name": "headers",
+        "type": "Readonly<Record<string, string>>",
+        "required": false
+      },
+      {
+        "name": "data",
+        "type": "MUploadRequestData | ((file: File) => MUploadRequestData | Promise<MUploadRequestData>)",
+        "required": false
+      },
+      {
+        "name": "withCredentials",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "autoUpload",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "fieldName",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "customRequest",
+        "type": "MUploadCustomRequest",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[files: File[]]"
+      },
+      {
+        "name": "reject",
+        "type": "[items: MUploadRejection[]]"
+      },
+      {
+        "name": "upload",
+        "type": "[file: File, state: MUploadFileState]"
+      },
+      {
+        "name": "progress",
+        "type": "[file: File, progress: MUploadProgress]"
+      },
+      {
+        "name": "success",
+        "type": "[file: File, response: unknown]"
+      },
+      {
+        "name": "error",
+        "type": "[file: File, error: unknown]"
+      },
+      {
+        "name": "abort",
+        "type": "[file: File]"
+      },
+      {
+        "name": "status-change",
+        "type": "[states: readonly MUploadFileState[]]"
+      }
+    ],
+    "slots": []
+  },
+  "MForm": {
+    "props": [
+      {
+        "name": "model",
+        "type": "object",
+        "required": true
+      },
+      {
+        "name": "rules",
+        "type": "MFormRules",
+        "required": false,
+        "defaultValue": "{}"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'表单'"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "validateOn",
+        "type": "'submit' | 'blur' | 'change'",
+        "required": false,
+        "defaultValue": "'submit'"
+      },
+      {
+        "name": "showSummary",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      }
+    ],
+    "events": [
+      {
+        "name": "submit",
+        "type": "[model: MFormModel, event: SubmitEvent]"
+      },
+      {
+        "name": "invalid",
+        "type": "[errors: Readonly<MFormErrors>]"
+      },
+      {
+        "name": "reset",
+        "type": "[initialModel: MFormModel]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MFormItem": {
+    "props": [
+      {
+        "name": "name",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MFormList": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "readonly Item[]",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "itemKey",
+        "type": "keyof Item | ((item: Item, index: number) => string | number)",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "min",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[items: Item[]]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MDatePicker": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "min",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "max",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'YYYY-MM-DD'"
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "clearable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string]"
+      }
+    ],
+    "slots": []
+  },
+  "MDateRangePicker": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "readonly [string, string] | null",
+        "required": true
+      },
+      {
+        "name": "min",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "max",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value:readonly[string,string]|null]"
+      }
+    ],
+    "slots": []
+  },
+  "MDateTimePicker": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "min",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "max",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "step",
+        "type": "number",
+        "required": false,
+        "defaultValue": "60"
+      },
+      {
+        "name": "showSeconds",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value:string]"
+      }
+    ],
+    "slots": []
+  },
+  "MTimePicker": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "min",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "max",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "step",
+        "type": "number",
+        "required": false,
+        "defaultValue": "60"
+      },
+      {
+        "name": "showSeconds",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string]"
+      }
+    ],
+    "slots": []
+  },
+  "MTimeSelect": {
+    "props": [
+      {
+        "name": "start",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'08:00'"
+      },
+      {
+        "name": "end",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'18:00'"
+      },
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "min",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "max",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "step",
+        "type": "number",
+        "required": false,
+        "defaultValue": "1800"
+      },
+      {
+        "name": "showSeconds",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value:string]"
+      }
+    ],
+    "slots": []
+  },
+  "MDatePickerPanel": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "min",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "max",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "disabledDate",
+        "type": "(date: string) => boolean",
+        "required": false
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string]"
+      },
+      {
+        "name": "panel-change",
+        "type": "[month: string]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "date"
+      }
+    ]
+  },
+  "MCalendar": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "min",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "max",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "disabledDate",
+        "type": "(date: string) => boolean",
+        "required": false
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value:string]"
+      },
+      {
+        "name": "panel-change",
+        "type": "[month:string]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "date"
+      }
+    ]
+  },
+  "MTabs": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "items",
+        "type": "readonly MTabItem[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "activationMode",
+        "type": "MTabsActivationMode",
+        "required": false,
+        "defaultValue": "'automatic'",
+        "expandedType": "'automatic' | 'manual'"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "动态名称（item.value）"
+      },
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MMenu": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string | null",
+        "required": true
+      },
+      {
+        "name": "items",
+        "type": "MMenuProps['items']",
+        "required": true
+      },
+      {
+        "name": "expandedValues",
+        "type": "MMenuProps['expandedValues']",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[_value: string]"
+      },
+      {
+        "name": "update:expandedValues",
+        "type": "[_values: string[]]"
+      },
+      {
+        "name": "select",
+        "type": "[_value: string, _event: MouseEvent]"
+      }
+    ],
+    "slots": []
+  },
+  "MDropdownMenu": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "boolean",
+        "required": true
+      },
+      {
+        "name": "items",
+        "type": "readonly MDropdownMenuItem[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "triggerLabel",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "placement",
+        "type": "MFloatingPlacement",
+        "required": false,
+        "defaultValue": "'bottom'",
+        "expandedType": "'top' | 'bottom' | 'left' | 'right'"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[open: boolean]"
+      },
+      {
+        "name": "select",
+        "type": "[value: string]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "trigger"
+      }
+    ]
+  },
+  "MBreadcrumb": {
+    "props": [
+      {
+        "name": "items",
+        "type": "readonly MBreadcrumbItem[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'面包屑导航'"
+      }
+    ],
+    "events": [],
+    "slots": []
+  },
+  "MPagination": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "number",
+        "required": true
+      },
+      {
+        "name": "total",
+        "type": "number",
+        "required": true
+      },
+      {
+        "name": "pageSize",
+        "type": "number",
+        "required": false,
+        "defaultValue": "10"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'分页导航'"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[page: number]"
+      }
+    ],
+    "slots": []
+  },
+  "MSteps": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "items",
+        "type": "readonly MStepItem[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "interactive",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "orientation",
+        "type": "'horizontal' | 'vertical'",
+        "required": false,
+        "defaultValue": "'horizontal'"
+      },
+      {
+        "name": "status",
+        "type": "'process' | 'error' | 'success'",
+        "required": false,
+        "defaultValue": "'process'"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string]"
+      }
+    ],
+    "slots": []
+  },
+  "MAnchor": {
+    "props": [
+      {
+        "name": "items",
+        "type": "readonly MAnchorItem[]",
+        "required": true
+      },
+      {
+        "name": "target",
+        "type": "MLayoutTarget",
+        "required": false
+      },
+      {
+        "name": "offset",
+        "type": "number",
+        "required": false,
+        "defaultValue": "12"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'本页目录'"
+      }
+    ],
+    "events": [
+      {
+        "name": "change",
+        "type": "[href: string]"
+      },
+      {
+        "name": "click",
+        "type": "[href: string, event: MouseEvent]"
+      }
+    ],
+    "slots": []
+  },
+  "MAffix": {
+    "props": [
+      {
+        "name": "target",
+        "type": "MLayoutTarget",
+        "required": false
+      },
+      {
+        "name": "offset",
+        "type": "number",
+        "required": false,
+        "defaultValue": "0"
+      },
+      {
+        "name": "position",
+        "type": "'top' | 'bottom'",
+        "required": false,
+        "defaultValue": "'top'"
+      }
+    ],
+    "events": [
+      {
+        "name": "change",
+        "type": "[affixed: boolean]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MPageHeader": {
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "subtitle",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "back",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "backLabel",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'返回'"
+      }
+    ],
+    "events": [
+      {
+        "name": "back",
+        "type": "[event: MouseEvent]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "breadcrumb"
+      },
+      {
+        "name": "extra"
+      },
+      {
+        "name": "default"
+      },
+      {
+        "name": "footer"
+      }
+    ]
+  },
+  "MBackTop": {
+    "props": [
+      {
+        "name": "target",
+        "type": "HTMLElement | (() => HTMLElement | null | undefined)",
+        "required": false
+      },
+      {
+        "name": "visibilityHeight",
+        "type": "number",
+        "required": false,
+        "defaultValue": "400"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'返回顶部'"
+      },
+      {
+        "name": "behavior",
+        "type": "'smooth' | 'instant'",
+        "required": false,
+        "defaultValue": "'smooth'"
+      }
+    ],
+    "events": [
+      {
+        "name": "click",
+        "type": "[event: MouseEvent]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MFloatButton": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "badge",
+        "type": "string | number",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "click",
+        "type": "[event: MouseEvent]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MFloatButtonGroup": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'浮动操作'"
+      },
+      {
+        "name": "expandable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[open: boolean]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "trigger"
+      },
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MTour": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "boolean",
+        "required": true
+      },
+      {
+        "name": "steps",
+        "type": "readonly MTourStep[]",
+        "required": true
+      },
+      {
+        "name": "step",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[open: boolean]"
+      },
+      {
+        "name": "update:step",
+        "type": "[step: number]"
+      },
+      {
+        "name": "change",
+        "type": "[step: number]"
+      },
+      {
+        "name": "finish",
+        "type": "[]"
+      }
+    ],
+    "slots": []
+  },
+  "MDialog": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "boolean",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "closeOnEscape",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "closeOnBackdrop",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "closeLabel",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'关闭对话框'"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[open: boolean]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default"
+      },
+      {
+        "name": "footer"
+      }
+    ]
+  },
+  "MDrawer": {
+    "props": [
+      {
+        "name": "side",
+        "type": "'left' | 'right' | 'bottom'",
+        "required": false,
+        "defaultValue": "'right'"
+      },
+      {
+        "name": "size",
+        "type": "MControlSize",
+        "required": false,
+        "defaultValue": "'md'",
+        "expandedType": "'sm' | 'md' | 'lg'"
+      },
+      {
+        "name": "modelValue",
+        "type": "boolean",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "closeOnEscape",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "closeOnBackdrop",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "closeLabel",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'关闭抽屉'"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[open: boolean]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default"
+      },
+      {
+        "name": "footer"
+      }
+    ]
+  },
+  "MPopover": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "boolean",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "triggerLabel",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "placement",
+        "type": "MFloatingPlacement",
+        "required": false,
+        "defaultValue": "'bottom'",
+        "expandedType": "'top' | 'bottom' | 'left' | 'right'"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: boolean]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "trigger"
+      },
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MTooltip": {
+    "props": [
+      {
+        "name": "text",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "placement",
+        "type": "MFloatingPlacement",
+        "required": false,
+        "defaultValue": "'top'",
+        "expandedType": "'top' | 'bottom' | 'left' | 'right'"
+      },
+      {
+        "name": "delay",
+        "type": "number",
+        "required": false,
+        "defaultValue": "300"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MPopconfirm": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "boolean",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "triggerLabel",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "confirmText",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'确认'"
+      },
+      {
+        "name": "cancelText",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'取消'"
+      },
+      {
+        "name": "placement",
+        "type": "MFloatingPlacement",
+        "required": false,
+        "defaultValue": "'top'",
+        "expandedType": "'top' | 'bottom' | 'left' | 'right'"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "danger",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "beforeConfirm",
+        "type": "(signal: AbortSignal) => void | boolean | Promise<void | boolean>",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[open: boolean]"
+      },
+      {
+        "name": "confirm",
+        "type": "[event: MouseEvent]"
+      },
+      {
+        "name": "cancel",
+        "type": "[event?: MouseEvent | KeyboardEvent]"
+      },
+      {
+        "name": "confirm-error",
+        "type": "[error: unknown]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "trigger"
+      }
+    ]
+  },
+  "MMessageBox": {
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "kind",
+        "type": "'alert' | 'confirm' | 'prompt'",
+        "required": false,
+        "defaultValue": "'confirm'"
+      },
+      {
+        "name": "inputValue",
+        "type": "string",
+        "required": false,
+        "defaultValue": "''"
+      },
+      {
+        "name": "inputLabel",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "confirmLabel",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "cancelLabel",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "validate",
+        "type": "(value: string, signal: AbortSignal) => boolean | string | void | Promise<boolean | string | void>",
+        "required": false
+      },
+      {
+        "name": "modelValue",
+        "type": "boolean",
+        "required": true
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[open: boolean]"
+      },
+      {
+        "name": "result",
+        "type": "[result: MMessageBoxResult]"
+      }
+    ],
+    "slots": []
+  },
+  "MToast": {
+    "props": [
+      {
+        "name": "presentation",
+        "type": "'message' | 'notification'",
+        "required": false,
+        "defaultValue": "'notification'"
+      },
+      {
+        "name": "closable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "modelValue",
+        "type": "boolean",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "variant",
+        "type": "MToastVariant",
+        "required": false,
+        "defaultValue": "'info'",
+        "expandedType": "'info' | 'success' | 'warning' | 'error' | 'loading'"
+      },
+      {
+        "name": "duration",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "closeLabel",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'关闭通知'"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[open: boolean]"
+      }
+    ],
+    "slots": []
+  },
+  "MToastViewport": {
+    "props": [
+      {
+        "name": "placement",
+        "type": "MToastPlacement",
+        "required": false,
+        "defaultValue": "'bottom-end'",
+        "expandedType": "'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end'"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'消息通知'"
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MMessage": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "boolean",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "type",
+        "type": "MToastVariant",
+        "required": false,
+        "defaultValue": "'info'",
+        "expandedType": "'info' | 'success' | 'warning' | 'error' | 'loading'"
+      },
+      {
+        "name": "duration",
+        "type": "number",
+        "required": false,
+        "defaultValue": "3000"
+      },
+      {
+        "name": "closable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "closeLabel",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'关闭提示'"
+      },
+      {
+        "name": "offset",
+        "type": "number",
+        "required": false,
+        "defaultValue": "8"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'全局提示'"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[open: boolean]"
+      }
+    ],
+    "slots": []
+  },
+  "MAlert": {
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "tone",
+        "type": "MStatusTone",
+        "required": false,
+        "defaultValue": "'info'",
+        "expandedType": "'neutral' | 'info' | 'success' | 'warning' | 'error'"
+      },
+      {
+        "name": "announce",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MResult": {
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "status",
+        "type": "'success' | 'error' | 'warning' | 'info'",
+        "required": false,
+        "defaultValue": "'success'"
+      },
+      {
+        "name": "headingTag",
+        "type": "'h1' | 'h2' | 'h3'",
+        "required": false,
+        "defaultValue": "'h2'"
+      },
+      {
+        "name": "announce",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "default"
+      },
+      {
+        "name": "footer"
+      }
+    ]
+  },
+  "MEmpty": {
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'暂无内容'"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MSpinner": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'加载中'"
+      },
+      {
+        "name": "size",
+        "type": "MControlSize",
+        "required": false,
+        "defaultValue": "'md'",
+        "expandedType": "'sm' | 'md' | 'lg'"
+      }
+    ],
+    "events": [],
+    "slots": []
+  },
+  "MSkeleton": {
+    "props": [
+      {
+        "name": "lines",
+        "type": "number",
+        "required": false,
+        "defaultValue": "3"
+      }
+    ],
+    "events": [],
+    "slots": []
+  },
+  "MLoading": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "boolean",
+        "required": true
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "fullscreen",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "delay",
+        "type": "number",
+        "required": false,
+        "defaultValue": "0"
+      },
+      {
+        "name": "cancelable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "cancelLabel",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "cancel",
+        "type": "[]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MProgress": {
+    "props": [
+      {
+        "name": "value",
+        "type": "number",
+        "required": false,
+        "defaultValue": "0"
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "defaultValue": "100"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "indeterminate",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "status",
+        "type": "'default' | 'success' | 'error'",
+        "required": false,
+        "defaultValue": "'default'"
+      },
+      {
+        "name": "showValue",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MCard": {
+    "props": [
+      {
+        "name": "as",
+        "type": "'article' | 'section' | 'div'",
+        "required": false,
+        "defaultValue": "'article'"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "headingTag",
+        "type": "'h2' | 'h3' | 'h4'",
+        "required": false,
+        "defaultValue": "'h3'"
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "header"
+      },
+      {
+        "name": "default"
+      },
+      {
+        "name": "footer"
+      }
+    ]
+  },
+  "MTable": {
+    "props": [
+      {
+        "name": "columns",
+        "type": "readonly MTableColumn[]",
+        "required": true
+      },
+      {
+        "name": "rows",
+        "type": "readonly Row[]",
+        "required": true
+      },
+      {
+        "name": "caption",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "rowKey",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'id'"
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "emptyTitle",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'暂无数据'"
+      },
+      {
+        "name": "emptyDescription",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'调整筛选条件，或创建第一条记录。'"
+      },
+      {
+        "name": "sort",
+        "type": "{ key: string; order: 'asc' | 'desc' } | null",
+        "required": false
+      },
+      {
+        "name": "filters",
+        "type": "Readonly<Record<string, string>>",
+        "required": false
+      },
+      {
+        "name": "selectable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "selectedKeys",
+        "type": "readonly (string | number)[]",
+        "required": false
+      },
+      {
+        "name": "expandable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "expandedKeys",
+        "type": "readonly (string | number)[]",
+        "required": false
+      },
+      {
+        "name": "page",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "pageSize",
+        "type": "number",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "update:sort",
+        "type": "[value: Sort]"
+      },
+      {
+        "name": "update:filters",
+        "type": "[value: Record<string, string>]"
+      },
+      {
+        "name": "update:selectedKeys",
+        "type": "[value: Key[]]"
+      },
+      {
+        "name": "update:expandedKeys",
+        "type": "[value: Key[]]"
+      },
+      {
+        "name": "update:page",
+        "type": "[value: number]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "loading"
+      },
+      {
+        "name": "empty"
+      },
+      {
+        "name": "动态名称（cell-${string}）"
+      },
+      {
+        "name": "expanded"
+      }
+    ]
+  },
+  "MVirtualTable": {
+    "props": [
+      {
+        "name": "rows",
+        "type": "readonly Row[]",
+        "required": true
+      },
+      {
+        "name": "columns",
+        "type": "readonly MTableColumn[]",
+        "required": true
+      },
+      {
+        "name": "caption",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "rowKey",
+        "type": "string | ((row: Row, index: number) => MDataKey)",
+        "required": false,
+        "defaultValue": "'id'"
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "required": false,
+        "defaultValue": "360"
+      },
+      {
+        "name": "itemHeight",
+        "type": "number",
+        "required": false,
+        "defaultValue": "48"
+      },
+      {
+        "name": "overscan",
+        "type": "number",
+        "required": false,
+        "defaultValue": "4"
+      },
+      {
+        "name": "sort",
+        "type": "{ key: string; order: 'asc' | 'desc' } | null",
+        "required": false
+      },
+      {
+        "name": "selectable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "selectedKeys",
+        "type": "readonly MDataKey[]",
+        "required": false
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:sort",
+        "type": "[value: { key: string; order: 'asc' | 'desc' } | null]"
+      },
+      {
+        "name": "update:selectedKeys",
+        "type": "[value: MDataKey[]]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "动态名称（cell-${string}）"
+      }
+    ]
+  },
+  "MTree": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "string | null",
+        "required": true
+      },
+      {
+        "name": "items",
+        "type": "MTreeProps['items']",
+        "required": true
+      },
+      {
+        "name": "expandedValues",
+        "type": "MTreeProps['expandedValues']",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "checkable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "checkedValues",
+        "type": "readonly string[]",
+        "required": false,
+        "defaultValue": "[]"
+      },
+      {
+        "name": "checkStrictly",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "selectedValues",
+        "type": "readonly string[]",
+        "required": false,
+        "defaultValue": "[]"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[_value: string]"
+      },
+      {
+        "name": "update:expandedValues",
+        "type": "[_values: string[]]"
+      },
+      {
+        "name": "update:checkedValues",
+        "type": "[_values: string[]]"
+      },
+      {
+        "name": "update:selectedValues",
+        "type": "[_values: string[]]"
+      }
+    ],
+    "slots": []
+  },
+  "MVirtualTree": {
+    "props": [
+      {
+        "name": "items",
+        "type": "readonly MTreeNode[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "modelValue",
+        "type": "string | null",
+        "required": true
+      },
+      {
+        "name": "expandedValues",
+        "type": "readonly string[]",
+        "required": true
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "required": false,
+        "defaultValue": "320"
+      },
+      {
+        "name": "itemHeight",
+        "type": "number",
+        "required": false,
+        "defaultValue": "44"
+      },
+      {
+        "name": "overscan",
+        "type": "number",
+        "required": false,
+        "defaultValue": "4"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string]"
+      },
+      {
+        "name": "update:expandedValues",
+        "type": "[values: string[]]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "item"
+      }
+    ]
+  },
+  "MList": {
+    "props": [
+      {
+        "name": "items",
+        "type": "readonly Item[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "itemKey",
+        "type": "string | ((item: Item, index: number) => MDataKey)",
+        "required": false
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "emptyText",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "header"
+      },
+      {
+        "name": "loading"
+      },
+      {
+        "name": "item"
+      },
+      {
+        "name": "empty"
+      },
+      {
+        "name": "footer"
+      }
+    ]
+  },
+  "MListy": {
+    "props": [
+      {
+        "name": "numbered",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true",
+        "description": "Visible row numbers remain absolute when the window moves."
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "itemHeight",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "overscan",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "selectable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "modelValue",
+        "type": "MDataKey | null",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "items",
+        "type": "readonly Item[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "itemKey",
+        "type": "string | ((item: Item, index: number) => MDataKey)",
+        "required": false
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "emptyText",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: MDataKey]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "header"
+      },
+      {
+        "name": "item"
+      },
+      {
+        "name": "empty"
+      },
+      {
+        "name": "footer"
+      }
+    ]
+  },
+  "MVirtualList": {
+    "props": [
+      {
+        "name": "height",
+        "type": "number",
+        "required": false,
+        "defaultValue": "320"
+      },
+      {
+        "name": "itemHeight",
+        "type": "number",
+        "required": false,
+        "defaultValue": "44"
+      },
+      {
+        "name": "overscan",
+        "type": "number",
+        "required": false,
+        "defaultValue": "4"
+      },
+      {
+        "name": "selectable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "modelValue",
+        "type": "MDataKey | null",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "items",
+        "type": "readonly Item[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "itemKey",
+        "type": "string | ((item: Item, index: number) => MDataKey)",
+        "required": false
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "emptyText",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: MDataKey]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "header"
+      },
+      {
+        "name": "empty"
+      },
+      {
+        "name": "item"
+      },
+      {
+        "name": "footer"
+      }
+    ]
+  },
+  "MInfiniteScroll": {
+    "props": [
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "finished",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "distance",
+        "type": "number",
+        "required": false,
+        "defaultValue": "80"
+      },
+      {
+        "name": "height",
+        "type": "string | number",
+        "required": false,
+        "defaultValue": "320"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "load",
+        "type": "[]"
+      },
+      {
+        "name": "retry",
+        "type": "[]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default"
+      },
+      {
+        "name": "finished"
+      }
+    ]
+  },
+  "MDescriptions": {
+    "props": [
+      {
+        "name": "items",
+        "type": "readonly MDescriptionItem[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "columns",
+        "type": "1 | 2 | 3",
+        "required": false,
+        "defaultValue": "2"
+      },
+      {
+        "name": "headingTag",
+        "type": "'h3' | 'h4'",
+        "required": false,
+        "defaultValue": "'h3'"
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "动态名称（item.key）"
+      }
+    ]
+  },
+  "MStatistic": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "value",
+        "type": "string | number | null",
+        "required": false
+      },
+      {
+        "name": "prefix",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "suffix",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "unit",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'—'"
+      },
+      {
+        "name": "tone",
+        "type": "MStatusTone",
+        "required": false,
+        "defaultValue": "'neutral'",
+        "expandedType": "'neutral' | 'info' | 'success' | 'warning' | 'error'"
+      }
+    ],
+    "events": [],
+    "slots": []
+  },
+  "MTimeline": {
+    "props": [
+      {
+        "name": "items",
+        "type": "readonly MTimelineItem[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "headingTag",
+        "type": "'h3' | 'h4'",
+        "required": false,
+        "defaultValue": "'h3'"
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "动态名称（item.value）"
+      },
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MTag": {
+    "props": [
+      {
+        "name": "tone",
+        "type": "MStatusTone",
+        "required": false,
+        "defaultValue": "'neutral'",
+        "expandedType": "'neutral' | 'info' | 'success' | 'warning' | 'error'"
+      },
+      {
+        "name": "closable",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "closeLabel",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'移除标签'"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "close",
+        "type": "[event: MouseEvent]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MBadge": {
+    "props": [
+      {
+        "name": "tone",
+        "type": "MStatusTone",
+        "required": false,
+        "defaultValue": "'neutral'",
+        "expandedType": "'neutral' | 'info' | 'success' | 'warning' | 'error'"
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MAvatar": {
+    "props": [
+      {
+        "name": "src",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "alt",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "size",
+        "type": "MControlSize",
+        "required": false,
+        "defaultValue": "'md'",
+        "expandedType": "'sm' | 'md' | 'lg'"
+      },
+      {
+        "name": "tone",
+        "type": "'ink' | 'seal' | 'jade'",
+        "required": false,
+        "defaultValue": "'ink'"
+      }
+    ],
+    "events": [],
+    "slots": []
+  },
+  "MImage": {
+    "props": [
+      {
+        "name": "src",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "alt",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "fit",
+        "type": "'fill' | 'contain' | 'cover' | 'none' | 'scale-down'",
+        "required": false,
+        "defaultValue": "'cover'"
+      },
+      {
+        "name": "loading",
+        "type": "'eager' | 'lazy'",
+        "required": false,
+        "defaultValue": "'lazy'"
+      },
+      {
+        "name": "preview",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "previewSources",
+        "type": "readonly string[]",
+        "required": false
+      },
+      {
+        "name": "initialIndex",
+        "type": "number",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "load",
+        "type": "[event: Event]"
+      },
+      {
+        "name": "error",
+        "type": "[event: Event]"
+      },
+      {
+        "name": "preview-change",
+        "type": "[index: number, src: string]"
+      }
+    ],
+    "slots": []
+  },
+  "MQRCode": {
+    "props": [
+      {
+        "name": "value",
+        "type": "string | readonly string[]",
+        "required": true
+      },
+      {
+        "name": "type",
+        "type": "'svg' | 'canvas'",
+        "required": false,
+        "defaultValue": "'svg'"
+      },
+      {
+        "name": "size",
+        "type": "number",
+        "required": false,
+        "defaultValue": "200"
+      },
+      {
+        "name": "errorLevel",
+        "type": "MQRCodeLevel",
+        "required": false,
+        "defaultValue": "'M'",
+        "expandedType": "'L' | 'M' | 'Q' | 'H'"
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'#26332e'"
+      },
+      {
+        "name": "bgColor",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'#fffdf7'"
+      },
+      {
+        "name": "quietZone",
+        "type": "number",
+        "required": false,
+        "defaultValue": "4"
+      },
+      {
+        "name": "bordered",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "iconSize",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "status",
+        "type": "'active' | 'loading' | 'expired' | 'scanned'",
+        "required": false,
+        "defaultValue": "'active'"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "refreshLabel",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "refresh",
+        "type": "[]"
+      },
+      {
+        "name": "error",
+        "type": "[error: Error]"
+      }
+    ],
+    "slots": []
+  },
+  "MCarousel": {
+    "props": [
+      {
+        "name": "items",
+        "type": "readonly MCarouselItem[]",
+        "required": true
+      },
+      {
+        "name": "modelValue",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "autoplay",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "interval",
+        "type": "number",
+        "required": false,
+        "defaultValue": "5000"
+      },
+      {
+        "name": "loop",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[index: number]"
+      },
+      {
+        "name": "change",
+        "type": "[index: number]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "动态名称（item.key）"
+      },
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MSpace": {
+    "props": [
+      {
+        "name": "direction",
+        "type": "'horizontal' | 'vertical'",
+        "required": false,
+        "defaultValue": "'horizontal'"
+      },
+      {
+        "name": "size",
+        "type": "MControlSize | number",
+        "required": false,
+        "defaultValue": "'md'"
+      },
+      {
+        "name": "align",
+        "type": "'start' | 'center' | 'end' | 'baseline' | 'stretch'",
+        "required": false,
+        "defaultValue": "'center'"
+      },
+      {
+        "name": "wrap",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "inline",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MGrid": {
+    "props": [
+      {
+        "name": "columns",
+        "type": "MLayoutResponsive<number>",
+        "required": false,
+        "defaultValue": "12"
+      },
+      {
+        "name": "gap",
+        "type": "MLayoutResponsive<MLayoutGap>",
+        "required": false,
+        "defaultValue": "16"
+      },
+      {
+        "name": "rowGap",
+        "type": "MLayoutResponsive<MLayoutGap>",
+        "required": false
+      },
+      {
+        "name": "align",
+        "type": "CSSProperties['alignItems']",
+        "required": false
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MGridItem": {
+    "props": [
+      {
+        "name": "span",
+        "type": "MLayoutResponsive<number>",
+        "required": false,
+        "defaultValue": "1"
+      },
+      {
+        "name": "offset",
+        "type": "MLayoutResponsive<number>",
+        "required": false,
+        "defaultValue": "0"
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MFlex": {
+    "props": [
+      {
+        "name": "direction",
+        "type": "MLayoutResponsive<'row' | 'column' | 'row-reverse' | 'column-reverse'>",
+        "required": false,
+        "defaultValue": "'row'"
+      },
+      {
+        "name": "gap",
+        "type": "MLayoutResponsive<MLayoutGap>",
+        "required": false,
+        "defaultValue": "12"
+      },
+      {
+        "name": "align",
+        "type": "CSSProperties['alignItems']",
+        "required": false
+      },
+      {
+        "name": "justify",
+        "type": "CSSProperties['justifyContent']",
+        "required": false
+      },
+      {
+        "name": "wrap",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "inline",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MLayout": {
+    "props": [
+      {
+        "name": "asideWidth",
+        "type": "MLayoutResponsive<MLayoutGap>",
+        "required": false,
+        "defaultValue": "240"
+      },
+      {
+        "name": "gap",
+        "type": "MLayoutGap",
+        "required": false,
+        "defaultValue": "20",
+        "expandedType": "number | string"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'页面布局'"
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "header"
+      },
+      {
+        "name": "aside"
+      },
+      {
+        "name": "default"
+      },
+      {
+        "name": "footer"
+      }
+    ]
+  },
+  "MSplitter": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "min",
+        "type": "number",
+        "required": false,
+        "defaultValue": "10"
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "defaultValue": "90"
+      },
+      {
+        "name": "orientation",
+        "type": "'horizontal' | 'vertical'",
+        "required": false,
+        "defaultValue": "'horizontal'"
+      },
+      {
+        "name": "collapsible",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'调整面板尺寸'"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: number]"
+      },
+      {
+        "name": "resize-end",
+        "type": "[value: number]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "first"
+      },
+      {
+        "name": "second"
+      }
+    ]
+  },
+  "MMasonry": {
+    "props": [
+      {
+        "name": "items",
+        "type": "readonly Item[]",
+        "required": true
+      },
+      {
+        "name": "columns",
+        "type": "MLayoutResponsive<number>",
+        "required": false,
+        "defaultValue": "{ xs: 1, sm: 2, md: 3, lg: 4 }"
+      },
+      {
+        "name": "gap",
+        "type": "MLayoutGap",
+        "required": false,
+        "defaultValue": "16",
+        "expandedType": "number | string"
+      },
+      {
+        "name": "itemKey",
+        "type": "string | ((item: Item, index: number) => string | number)",
+        "required": false
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'瀑布流内容'"
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "item"
+      }
+    ]
+  },
+  "MAccordion": {
+    "props": [
+      {
+        "name": "modelValue",
+        "type": "readonly string[]",
+        "required": true
+      },
+      {
+        "name": "items",
+        "type": "readonly MAccordionItem[]",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "headingTag",
+        "type": "'h2' | 'h3' | 'h4'",
+        "required": false,
+        "defaultValue": "'h3'"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "type": "[value: string[]]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "动态名称（item.value）"
+      },
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MScrollbar": {
+    "props": [
+      {
+        "name": "height",
+        "type": "string | number",
+        "required": false
+      },
+      {
+        "name": "maxHeight",
+        "type": "string | number",
+        "required": false
+      },
+      {
+        "name": "viewportClass",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "scroll",
+        "type": "[event: Event]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MWatermark": {
+    "props": [
+      {
+        "name": "content",
+        "type": "string | readonly string[]",
+        "required": false,
+        "defaultValue": "'MALANG UI'"
+      },
+      {
+        "name": "image",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "gap",
+        "type": "readonly [number, number]",
+        "required": false,
+        "defaultValue": "[120,90]"
+      },
+      {
+        "name": "rotate",
+        "type": "number",
+        "required": false,
+        "defaultValue": "-22"
+      },
+      {
+        "name": "opacity",
+        "type": "number",
+        "required": false,
+        "defaultValue": ".12"
+      },
+      {
+        "name": "fontSize",
+        "type": "number",
+        "required": false,
+        "defaultValue": "14"
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "required": false
+      }
+    ],
+    "events": [
+      {
+        "name": "error",
+        "type": "[event: Event]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MBorderBeam": {
+    "props": [
+      {
+        "name": "count",
+        "type": "number",
+        "required": false,
+        "defaultValue": "2"
+      },
+      {
+        "name": "duration",
+        "type": "number",
+        "required": false,
+        "defaultValue": "6"
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "required": false,
+        "defaultValue": "2"
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MConfigProvider": {
+    "props": [
+      {
+        "name": "theme",
+        "type": "'light' | 'dark'",
+        "required": false
+      },
+      {
+        "name": "palette",
+        "type": "'paper' | 'celadon' | 'gilt'",
+        "required": false
+      },
+      {
+        "name": "density",
+        "type": "'comfortable' | 'compact'",
+        "required": false
+      },
+      {
+        "name": "motion",
+        "type": "'standard' | 'reduced'",
+        "required": false
+      },
+      {
+        "name": "locale",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "dir",
+        "type": "'ltr' | 'rtl'",
+        "required": false
+      },
+      {
+        "name": "messages",
+        "type": "Readonly<Record<string, string>>",
+        "required": false
+      }
+    ],
+    "events": [],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  },
+  "MApp": {
+    "props": [],
+    "events": [],
+    "slots": [
+      {
+        "name": "default"
+      }
+    ]
+  }
+}

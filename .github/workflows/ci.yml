@@ -51,3 +51,7 @@ jobs:
         run: pnpm test:browser
         env:
           MALANG_BROWSER_SHARD: ${{ matrix.shard }}
+
+      - name: Check website interactions
+        if: matrix.shard == 1
+        run: pnpm test:website

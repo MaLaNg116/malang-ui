@@ -47,13 +47,16 @@
     "dev": "storybook dev -p 6006 --no-open",
     "storybook": "storybook dev -p 6006 --no-open",
     "build:storybook": "storybook build",
+    "dev:website": "vite --config website/vite.config.ts",
+    "build:website": "pnpm build:storybook && node scripts/generate-website-catalog.mjs && node scripts/generate-website-api.mjs && vite build --config website/vite.config.ts && node scripts/package-website.mjs",
+    "test:website": "playwright test --config playwright.website.config.ts",
     "typecheck": "vue-tsc --noEmit",
     "typecheck:package": "vue-tsc -p tests/consumer/tsconfig.json",
     "test": "vitest run",
     "test:browser": "node scripts/test-browser.mjs",
     "tokens": "node scripts/generate-tokens.mjs",
     "build": "pnpm tokens && vite build && vue-tsc -p tsconfig.build.json && node scripts/copy-tokens.mjs",
-    "check": "pnpm typecheck && pnpm test && pnpm build && pnpm typecheck:package && pnpm build:storybook"
+    "check": "pnpm typecheck && pnpm test && pnpm build && pnpm typecheck:package && pnpm build:website"
   },
   "peerDependencies": {
     "gsap": "^3.15.0",

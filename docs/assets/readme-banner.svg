@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 336" role="img" aria-labelledby="title description">
+  <title id="title">MaLang UI 墨浪</title>
+  <desc id="description">浓墨纸面上，青玉刻轨穿过干墨笔势，朱砂小印压在切面上。</desc>
+  <defs>
+    <clipPath id="plate">
+      <path d="M0 0h1172l28 28v308H28L0 308z"/>
+    </clipPath>
+    <radialGradient id="wash" cx=".8" cy=".45" r=".57">
+      <stop stop-color="#31473d"/>
+      <stop offset="1" stop-color="#111816"/>
+    </radialGradient>
+    <linearGradient id="brush" x1="0" y1="1" x2="1" y2="0">
+      <stop stop-color="#507565" stop-opacity=".15"/>
+      <stop offset=".42" stop-color="#75988a" stop-opacity=".65"/>
+      <stop offset="1" stop-color="#293f36" stop-opacity=".15"/>
+    </linearGradient>
+    <filter id="fray" x="-.04" y="-.12" width="1.08" height="1.24">
+      <feTurbulence type="fractalNoise" baseFrequency=".085 .22" numOctaves="2" seed="21" result="grain"/>
+      <feDisplacementMap in="SourceGraphic" in2="grain" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <g clip-path="url(#plate)">
+    <path fill="url(#wash)" d="M0 0h1200v336H0z"/>
+    <path fill="none" stroke="#43554a" d="M22 22h1138l18 18v274H40l-18-18z"/>
+    <path fill="none" stroke="#9cbbb0" d="M22 55V22h35m1082 292h39v-37"/>
+    <path fill="none" stroke="#5f7f71" opacity=".65" d="M652 266h432l57-57V67m-432 0h362m-66-21v244m-62-232v12m-26-12v12m-26-12v12m-26-12v12m-26-12v12m-26-12v12m-26-12v12m-26-12v12"/>
+    <g fill="none" stroke="#83a394">
+      <circle cx="970" cy="165" r="108" opacity=".62"/>
+      <circle cx="970" cy="165" r="92" stroke-dasharray="2 5" opacity=".56"/>
+      <circle cx="970" cy="165" r="64" opacity=".32"/>
+      <path d="M889 236a108 108 0 0 0 163 0m-168-136a108 108 0 0 1 94-43" stroke-width="2"/>
+      <path d="M843 165h253m-126-122v245m-6-123h12m-6-6v12" opacity=".54"/>
+    </g>
+    <g filter="url(#fray)">
+      <path fill="url(#brush)" d="M614 267c43-29 89-47 142-64 76-25 114-72 183-100 71-29 124-25 216-67-40 33-69 43-112 62-57 25-95 57-148 81-54 25-117 38-184 61l-63 23 27-17z"/>
+      <path fill="#0a110e" opacity=".72" d="M653 244c62-31 136-39 202-87 52-36 95-57 149-71l109-30-54 30c-66 27-91 48-151 80-64 32-116 43-173 60l-49 15 21-11z"/>
+      <path fill="none" stroke="#a3bcab" stroke-width="1.4" opacity=".68" d="M659 243c67-24 128-39 187-76 84-54 139-78 241-103m-391 182c93-29 167-49 226-85m26-12c44-23 84-42 130-57"/>
+      <path fill="none" stroke="#779b88" stroke-width="1" opacity=".74" d="M616 269l32-14m52 9 45-15m16-5 31-10m-107 12 17-6m338-170 33-11m-16 32 38-13m-12 15 17-7m-69-29 19-5"/>
+    </g>
+    <path fill="none" stroke="#d27263" stroke-width="1.8" d="m841 197 154-66 31-21m-186 85 3 5m181-91 4 3"/>
+    <path fill="#9cbbb0" d="M843 165h5v5h-5zm230-2h5v5h-5zm-105-108h5v5h-5zm-254 209h6v6h-6z"/>
+    <g transform="rotate(-8 1079 215)">
+      <path fill="#241914" stroke="#d27263" stroke-width="2" d="M1043 182h59l10 10v58h-58l-11-11z"/>
+      <path fill="none" stroke="#b35b4e" d="M1050 189h49l6 6v48h-48l-7-7z"/>
+      <text x="1078" y="229" text-anchor="middle" fill="#e7907c" font-family="KaiTi, STKaiti, Noto Serif CJK SC, serif" font-size="36">墨</text>
+    </g>
+    <g transform="translate(66 48) scale(.72)">
+      <path fill="#bc5440" d="M0 0h36l12 12v36H0z"/>
+      <path fill="none" stroke="#fff8e9" stroke-width="3" stroke-linecap="square" d="M12 34V14l12 12 12-12v20M12 34h8m8 0h8"/>
+    </g>
+    <text x="117" y="70" fill="#9cbbb0" font-family="Consolas, monospace" font-size="17" letter-spacing="3.1">INK &amp; MOTION</text>
+    <text x="62" y="190" fill="#f3f0e8" font-family="Segoe UI, system-ui, sans-serif" font-size="104" font-weight="700" letter-spacing="-3">MaLang<tspan dx="16" fill="#e38b76">UI</tspan></text>
+    <path stroke="#d27263" stroke-width="2" d="M70 218h77"/>
+    <path stroke="#53695b" d="M147 218h415"/>
+    <text x="70" y="263" fill="#c1ccc0" font-family="Consolas, monospace" font-size="17" letter-spacing="2.9">VUE 3 / TYPESCRIPT</text>
+    <text x="1129" y="293" text-anchor="end" fill="#9cbbb0" font-family="Consolas, monospace" font-size="13" letter-spacing="2">INK / RAIL / SEAL</text>
+  </g>
+</svg>
